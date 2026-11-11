@@ -35,4 +35,4 @@ LMG_COMPOSE_ARGS=${LMG_COMPOSE_ARGS:-} scripts/agentops-operational.sh "/packs/$
 
 echo "③ 보통 알람 한 건(M-01)"
 LMG_COMPOSE_ARGS=${LMG_COMPOSE_ARGS:-} scripts/app-alarm.sh M-01
-echo "끝 — AgentOps 화면을 새로 고치면 출발 버전이 '운영'입니다(설치 안내 08-2로)"
+echo "끝 — AgentOps 화면을 새로 고치면 출발 버전이 '운영'입니다 — 다음은 4번"
