@@ -6,7 +6,10 @@
 #   scripts/demo-ready.sh new        AT와 상관없이 새로 만듦(위 둘째 길)
 #   scripts/demo-ready.sh eff-model      효율 ① 출발 상태(문서 08 1 ~ 3 끝: V2 · 운영 · 다음은 화면 '효율 개선 시작')로 — 저장본이 24시간 안이면 되돌림,
 #   scripts/demo-ready.sh eff-structure  효율 ②도 같음      아니면 ready 상태에서 V2 등록 · 묶음 · 평가 · 고정 흐름 · efficiency-start를 자동으로 하고 저장(뒤에 new를 붙이면 늘 새로)
-#                                    메인 · 정확도는 인자 없이(ready) · 시나리오마다 이 한 줄로 시작하면 앞 시나리오가 남긴 것은 사라짐(before-<시각>에 남음)
+#   scripts/demo-ready.sh accuracy       정확도 '자동 개선을 기다린 뒤' 상태(문서 07 1 ~ 5 끝: 'V3 ✦ 자동 · 승인 대기' · 다음은 07 6번 배포 승인)로 — 저장본이 24시간 안이면 되돌림,
+#                                    아니면 ready 상태에서 M-13 알람 → 4.6 정상(헛걸음) → 4.3 이상 → 보고서 확정 → 상급자 승인(앱 API) → 자동 개선 ⑦까지 기다림 → 저장
+#                                    (약 1시간 반 · AWS t3.large · 실제 AI 몇 센트 · 터미널이 끊기면 멈추므로 서버에서는 nohup · tmux로; 뒤에 new를 붙이면 늘 새로)
+#                                    메인 · 정확도를 처음부터 걸려면 인자 없이(ready) · 시나리오마다 이 한 줄로 시작하면 앞 시나리오가 남긴 것은 사라짐(before-<시각>에 남음)
 #   scripts/demo-ready.sh save [이름]     지금 상태를 저장(기본 ready)
 #   scripts/demo-ready.sh restore [이름]  저장본으로 되돌림(AT가 지났으면 멈춤 — 새로 만들려면 인자 없이 또는 new)
 #   scripts/demo-ready.sh list            저장본 · AT · 만든 시각
@@ -17,8 +20,10 @@
 # 저장 자리: demo-snapshots/<이름>/(git이 무시) · 볼륨마다 .tgz + .env.agentops + manifest.txt
 # 같은 컴퓨터 · 같은 .env(비밀번호)에서만 되돌립니다 — DB가 처음 켤 때의 비밀번호로 만들어지므로 다르면 멈춤(값 출력 0 · 지문만 대조).
 # 바꿀 수 있는 값(환경): DEMO_PROJECT(기본 'C1-a15 정비 가이드') · DEMO_DECIDER(고정 흐름 결정자 별명 · 기본 owner-01)
+#   DEMO_ACC_MAX_MIN(accuracy가 자동 개선을 기다리는 최대 분 · 기본 180) · DEMO_ACC_MIN_H(accuracy 바탕 ready가 이 시간 넘게 남았을 때만 되돌려 씀 · 기본 12 · 아니면 새로)
 # 시험용: DEMO_READY_NO_UP=1(save · restore 뒤 켜지 않음) · DEMO_READY_NO_BEFORE=1(되돌리기 전 저장 안 함)
-# 끝 줄(성공): DEMO_READY ok … · 끝 코드: 0 성공 · 2 입력 틀림 · 3 저장본 없음/깨짐/AT 지남 · 4 비밀번호 다름 · 5 서비스가 안 뜸 · 6 문서 04 자동 단계 실패
+#   DEMO_READY_ACC_WALK_ONLY=1(accuracy 새로 만들기에서 agentops를 멈춘 채 앱 길(알람 ~ 승인)만 하고 끝 — 자동 개선 · 저장 0)
+# 끝 줄(성공): DEMO_READY ok … · 끝 코드: 0 성공 · 2 입력 틀림 · 3 저장본 없음/깨짐/AT 지남 · 4 비밀번호 다름 · 5 서비스가 안 뜸 · 6 자동 단계 실패(문서 04 · 07 · 08)
 set -euo pipefail
 cd "$(dirname "$0")/.."
 ROOT=$(pwd)
@@ -97,7 +102,7 @@ ps = s.get("projects", [])
 p = next((x for x in ps if x.get("name") == sys.argv[1]), None)
 if not p:
     print(f"프로젝트 {len(ps)}개 · '{sys.argv[1]}' 없음"); sys.exit(0)
-rels = ", ".join(f"{r.get('name')} {(r.get('version') or {}).get('state', '')} · 고정 흐름 {(r.get('version') or {}).get('fixed_flow', '?')}" for r in p.get("releases", []))
+rels = ", ".join(f"{r.get('name')} {(r.get('version') or {}).get('badge') or (r.get('version') or {}).get('state', '')} · 고정 흐름 {(r.get('version') or {}).get('fixed_flow', '?')}" for r in p.get("releases", []))
 runs = sorted(p.get("runs", []), key=lambda r: r.get("at") or "")
 last = (runs[-1].get("input") or {}) if runs else {}
 print(f"프로젝트 {len(ps)}개 · {rels} · 시험 묶음 {len(p.get('suites', []))} · 평가 Run {len(runs)} · 마지막 {last.get('name') or last.get('id') or '없음'}")
@@ -277,6 +282,133 @@ PY
   wait_up || stop 5 "서비스가 300초 안에 대답하지 않음"
 }
 
+# 문서 07 2 ~ 4를 앱 API로(정비자 tech.kim · 상급자 lead.park) — 비밀번호는 표준 입력 두 줄로만 받음(명령 줄 · 환경 · 출력 0)
+IFS= read -r -d '' ACC_WALK_PY <<'PY' || true
+import json, sys, urllib.request, urllib.error
+TP, LP = sys.stdin.readline().rstrip("\n"), sys.stdin.readline().rstrip("\n")
+EQ = sys.argv[1]
+B = "http://127.0.0.1:8000"   # api 컨테이너 안 — 앱 화면(nginx)이 붙이는 X-App을 직접 붙임
+MEMO = "흡기 필터 표면이 먼지로 막혀 있음"
+class App:
+    def __init__(self, app, user, pw):
+        self.app, self.cookie = app, ""
+        self.call("POST", "/api/login", {"user_id": user, "password": pw}, login=True)
+    def call(self, m, path, body=None, login=False):
+        h = {"content-type": "application/json", "x-app": self.app}
+        if self.cookie:
+            h["cookie"] = self.cookie
+        req = urllib.request.Request(B + path, method=m, data=None if body is None else json.dumps(body).encode(), headers=h)
+        try:
+            with urllib.request.urlopen(req, timeout=180) as r:
+                if login:
+                    self.cookie = "; ".join(c.split(";", 1)[0] for c in r.headers.get_all("set-cookie") or [])
+                return json.loads(r.read() or b"null")
+        except urllib.error.HTTPError as e:
+            sys.exit(f"  {self.app} {m} {path.split('?')[0]} → HTTP {e.code} {e.read()[:300].decode(errors='replace')}")
+tech = App("tech", "tech.kim", TP)
+mine = [a for a in tech.call("GET", "/api/tech/home").get("alarms", []) if a.get("equipment_id") == EQ and a.get("status") == "new" and not a.get("session_id")]
+if not mine:
+    sys.exit(f"  2 정비자 홈에 {EQ} 새 알람이 없음(scripts/app-alarm.sh {EQ}가 등록을 못 함?)")
+aid = max(mine, key=lambda a: a["alarm_id"])["alarm_id"]
+s = tech.call("POST", f"/api/tech/alarms/{aid}/session")
+def ev(**body):
+    global s
+    s = tech.call("POST", f"/api/tech/sessions/{s['session_id']}/events", {"seq": s["last_seq"] + 1, **body})
+def checklist_first():
+    st = s.get("step") or {}
+    if st.get("kind") in ("instruct_after_checklist", "action_after_checklist"):
+        ev(type="b_checklist_done", section=st.get("section"), checked=(s.get("instruction") or {}).get("checklist") or (s.get("action") or {}).get("checklist") or [])
+ev(type="alarm_ack"); ev(type="lock"); ev(type="precheck_done", values="하우징 52 °C")
+path = []
+for _ in range(6):
+    ins = s.get("instruction") or {}
+    sec = ins.get("section")
+    if not sec:
+        sys.exit(f"  3 점검 안내가 없음 — 단계 {(s.get('step') or {}).get('kind')} · 지나온 점검 {path}")
+    checklist_first()
+    if sec == "4.3":
+        ev(type="result", section=sec, value="이상", memo=MEMO); path.append(f"{ins.get('title')}({sec}, 이상)"); break
+    ev(type="result", section=sec, value="정상"); path.append(f"{ins.get('title')}({sec}, 정상)")
+else:
+    sys.exit(f"  3 4.3이 여섯 점검 안에 안 나옴: {path}")
+print(f"  2 알람 {EQ} #{aid} · 첫 점검 {path[0]}", flush=True)
+if len(path) < 2:
+    sys.exit("  3 첫 점검이 바로 4.3 — 헛걸음이 생기지 않음(이미 개선된 버전이 운영 중?) · ready 상태에서 다시")
+checklist_first()
+ev(type="action_done", section=(s.get("action") or {}).get("section"))
+ev(type="restart", checked=(s.get("restart") or {}).get("checklist") or [])
+ev(type="restart_result", outcome="within")
+ev(type="report_confirm")
+print(f"  3 점검 경로 {' → '.join(path)} · 보고서 확정", flush=True)
+lead = App("lead", "lead.park", LP)
+row = next((r for r in lead.call("GET", "/api/lead/overview").get("rows", []) if r.get("session_id") == s["session_id"]), None)
+if not row:
+    sys.exit("  4 상급자 승인 대기에 이 보고서가 없음")
+lead.call("POST", f"/api/lead/reports/{row['report_id']}/decision", {"decision": "approve"})
+print(f"  4 상급자 승인 · 보고서 {row['report_id']} · {row.get('line') or row.get('cause') or ''}", flush=True)
+PY
+
+# 문서 07 4 ~ 5: 승인 뒤 그래프 반영 새 버전 · '사람 체크로 시작' 자동 개선이 '⑦ 승인 · 사람 차례'가 되고 ✦ 버전이 '승인 대기'일 때까지(1분마다 한 번)
+IFS= read -r -d '' ACC_WAIT_PY <<'PY' || true
+import json, sys, time, urllib.request
+NAME, MAXMIN = sys.argv[1], int(sys.argv[2])
+B = "http://127.0.0.1:18868"
+def get(path):
+    for i in range(5):
+        try:
+            return json.loads(urllib.request.urlopen(B + path, timeout=120).read())
+        except Exception as e:   # 서버가 잠깐 바쁨(후보 시험 중) — 다음 분에 다시
+            err = e; time.sleep(30)
+    sys.exit(f"  5 AgentOps {path.split('?')[0]} 대답 없음: {type(err).__name__}")
+def project():
+    return next((x for x in get("/api/state").get("projects", []) if x.get("name") == NAME), None)
+p = project()
+if not p:
+    sys.exit(f"  5 '{NAME}' 프로젝트 없음")
+t0, last = time.time(), None
+while True:
+    mins = int((time.time() - t0) / 60)
+    if mins >= MAXMIN:
+        sys.exit(f"  5 {MAXMIN}분이 지나도 '⑦ 승인 · 사람 차례'가 아님 — 마지막: {last} · 화면 ✦ 자동 개선 · docker compose logs agentops --tail 50")
+    ws = get(f"/api/projects/{p['id']}/auto").get("wheels") or []
+    if not ws:
+        if mins >= 15:
+            sys.exit("  5 승인 뒤 15분이 지나도 자동 개선이 시작되지 않음 — 화면 V1 운영 Run '사람: 헛걸음' 줄 · docker compose logs agentops --tail 50")
+    else:
+        w = ws[0]
+        line = f"{w['name']} · {w.get('status')}"
+        if line != last:
+            print(f"  5 {mins}분 {line}", flush=True); last = line
+        if w.get("outcome") or w.get("cell_state") == "stopped":
+            sys.exit(f"  5 자동 개선이 ⑦ 전에 끝남 · 멈춤: {line}")
+        if w.get("cell") == 7 and w.get("cell_state") == "human":
+            p = project()
+            r = next((r for r in p.get("releases", []) if (r.get("version") or {}).get("badge") == "승인 대기"), None)
+            if r:
+                print(f"  5 {mins}분 {r['name']} ✦ 자동 · 승인 대기 · 바탕 {(w.get('base') or {}).get('name')}", flush=True)
+                break
+    time.sleep(60)
+PY
+
+make_acc() {   # ready 상태(되돌리거나 새로) → 문서 07 2 ~ 4(앱 API) → 5(자동 개선 ⑦까지 기다림) → accuracy로 저장
+  local S="$SNAPS/ready" h="" min=${DEMO_ACC_MIN_H:-12}
+  [ -f "$S/manifest.txt" ] && h=$(hours_left "$(mf "$S" at)")
+  if [ -n "$h" ] && [ "$h" -ge "$min" ]; then say "바탕: 저장본 ready(유효 ${h}시간 남음)로 되돌림 …"; restore_from "$S"; else say "바탕: ready가 없거나 남은 시간이 ${min}시간 아래(${h:-없음}) → 새로 만듦 …"; make_new; fi
+  if [ "${DEMO_READY_ACC_WALK_ONLY:-0}" = 1 ]; then say "시험: agentops 멈춤(자동 개선 0)"; dc stop agentops >/dev/null 2>&1; fi
+  say "문서 07 2 ~ 4(M-13 알람 → 4.6 정상 · 헛걸음 → 4.3 이상 → 보고서 확정 → 상급자 승인) …"
+  bash scripts/app-alarm.sh M-13 >/dev/null || stop 6 "scripts/app-alarm.sh M-13 실패"
+  printf '%s\n%s\n' "${C1A15_TECH_PASSWORD:-}" "${C1A15_LEAD_PASSWORD:-}" | dc exec -T api python -c "$ACC_WALK_PY" M-13 \
+    || stop 6 "문서 07 2 ~ 4 자동 단계 실패(위 줄) — scripts/demo-ready.sh accuracy new로 다시"
+  if [ "${DEMO_READY_ACC_WALK_ONLY:-0}" = 1 ]; then echo "DEMO_READY acc-walk ok(agentops 멈춤 · 저장 0) · 걸린 $(took) — 되돌리려면 scripts/demo-ready.sh"; exit 0; fi
+  say "문서 07 5(자동 개선 — 누름 0 · 약 40분 · AWS t3.large 약 1시간 반 · 최대 ${DEMO_ACC_MAX_MIN:-180}분 기다림) …"
+  dc exec -T agentops python -c "$ACC_WAIT_PY" "$DEMO_PROJECT" "${DEMO_ACC_MAX_MIN:-180}" || stop 6 "문서 07 5 자동 개선 기다림 실패(위 줄)"
+  say "문서 07 5 확인: $(state_line)"
+  if [ -e "$SNAPS/accuracy" ]; then mv "$SNAPS/accuracy" "$SNAPS/accuracy.old-$(date +%Y%m%d-%H%M%S)"; fi
+  say "정확도 '승인 대기' 상태를 accuracy로 저장 …"; dc stop >/dev/null 2>&1; save_to "$SNAPS/accuracy"
+  up_all
+  wait_up || stop 5 "서비스가 300초 안에 대답하지 않음"
+}
+
 CMD=${1:-ready}
 case "$CMD" in
   list)
@@ -334,5 +466,19 @@ case "$CMD" in
       echo "DEMO_READY ok 새로 만듦 $CMD AT=$(mf "$S" at) · $(state_line) · 저장 $CMD · 걸린 $(took) · AgentOps ✦ 자동 개선 → 효율 개선 시작(문서 08 4번)"
     fi
     ;;
-  *) stop 2 "모르는 명령: $CMD — 인자 없이 · new · eff-model · eff-structure · save · restore · list" ;;
+  accuracy)
+    S="$SNAPS/accuracy"; h=""
+    [ -f "$S/manifest.txt" ] && h=$(hours_left "$(mf "$S" at)")
+    NEXT="다음: scripts/app-alarm.sh M-01 → AgentOps V3 ✦ 자동 탭 → 배포 승인 ▶(문서 07 6번)"
+    if [ "${2:-}" != new ] && [ -n "$h" ] && [ "$h" -ge 0 ]; then
+      say "저장본 accuracy · AT $(mf "$S" at) · 유효 ${h}시간 남음 → 되돌림"
+      restore_from "$S"
+      echo "DEMO_READY ok 되돌림 accuracy AT=$(mf "$S" at) (유효 ${h}시간 남음) · $(state_line) · 걸린 $(took) · ${NEXT}"
+    else
+      if [ "${2:-}" = new ]; then say "accuracy new — 새로 만듦"; elif [ -f "$S/manifest.txt" ]; then say "저장본 accuracy의 AT($(mf "$S" at))가 ${VALID_H}시간 지남 → 새로 만듦"; else say "저장본 accuracy 없음 → 새로 만듦"; fi
+      make_acc
+      echo "DEMO_READY ok 새로 만듦 accuracy AT=$(mf "$S" at) · $(state_line) · 저장 accuracy · 걸린 $(took) · ${NEXT}"
+    fi
+    ;;
+  *) stop 2 "모르는 명령: $CMD — 인자 없이 · new · eff-model · eff-structure · accuracy · save · restore · list" ;;
 esac
