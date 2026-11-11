@@ -1,0 +1,579 @@
+{
+ "source_sha256": "d71e029704e60ec9af90c033acddfebc7c7b983854ac4705c58f491f66d73c5b",
+ "rule": "이름표 글자 = allow(허용 목록 항목과 정확히 같음) 또는 그림 자리(place) 절 · 하위 장 글 안에 정확히 든 부분 글(build.py가 검사). 원인 이름 · 원인 코드 꼬리표 0(MG-MM 3.0 관계없음). 풍선 = 1..balloons(그 절 점검 방법 단계 수 · 2.4.6만 0) · 범례 번호 = 1..이름표 수(legend). 그 밖 글자 0.",
+ "caption_rule": "캡션 = '그림 <no>'(no = 새 절 번호를 '-'로) + 그 자리 머리 글 그대로(caption_src) 또는 허용 목록 + 풍선 있으면 '— 번호는 <절> 점검 방법 단계'(4.1은 '— 번호는 4.1 단계'). 표지 그림은 캡션 없음.",
+ "figures": [
+  {
+   "fig": "표지",
+   "place": "표지",
+   "labels": [],
+   "balloons": 0,
+   "caption": null,
+   "no": null
+  },
+  {
+   "fig": "1-1",
+   "place": "1장 머리",
+   "title_line": null,
+   "labels": [
+    {
+     "text": "작업 문",
+     "allow": true
+    },
+    {
+     "text": "조작반",
+     "allow": true
+    },
+    {
+     "text": "화면",
+     "allow": true
+    },
+    {
+     "text": "비상 정지 버튼",
+     "allow": true
+    },
+    {
+     "text": "측면 냉각 커버",
+     "allow": true
+    },
+    {
+     "text": "냉각수 탱크",
+     "allow": true
+    },
+    {
+     "text": "수위계",
+     "allow": true
+    },
+    {
+     "text": "칩 통",
+     "allow": true
+    }
+   ],
+   "legend": true,
+   "balloons": 0,
+   "caption_allow": "설비 정면 부품 위치",
+   "no": "1-1"
+  },
+  {
+   "fig": "1-2",
+   "place": "1장 머리",
+   "labels": [
+    {
+     "text": "주 차단기",
+     "allow": true
+    },
+    {
+     "text": "재기동 시험 스위치",
+     "allow": true
+    },
+    {
+     "text": "전기함",
+     "allow": true
+    },
+    {
+     "text": "인버터",
+     "allow": true
+    },
+    {
+     "text": "스핀들 뒤쪽 커버",
+     "allow": true
+    },
+    {
+     "text": "엔코더 커넥터",
+     "allow": true
+    },
+    {
+     "text": "공압 밸브",
+     "allow": true
+    }
+   ],
+   "legend": true,
+   "balloons": 0,
+   "caption_allow": "설비 뒤 · 옆 부품 위치",
+   "no": "1-2"
+  },
+  {
+   "fig": "1-3",
+   "place": "D.1",
+   "title_line": 850,
+   "labels": [
+    {
+     "text": "준비"
+    },
+    {
+     "text": "정지"
+    },
+    {
+     "text": "차단"
+    },
+    {
+     "text": "자물쇠 · 표지"
+    },
+    {
+     "text": "잔류 에너지 해소"
+    },
+    {
+     "text": "차단 확인"
+    }
+   ],
+   "balloons": 0,
+   "arrows": "원본 목록 차례(775 → 780)",
+   "caption_src": "D.1 에너지 차단 여섯 단계",
+   "no": "1-3"
+  },
+  {
+   "fig": "2-0",
+   "place": "2.1",
+   "labels": [
+    {
+     "text": "가공면"
+    },
+    {
+     "text": "날 끝"
+    },
+    {
+     "text": "마모 카운터"
+    },
+    {
+     "text": "콜릿"
+    }
+   ],
+   "balloons": 0,
+   "title_line": 53,
+   "caption_src": "2.1 공구 마모 경고 (공구 계통)",
+   "no": "2-1"
+  },
+  {
+   "fig": "3-0",
+   "place": "2.2",
+   "labels": [
+    {
+     "text": "회전수·이송 설정값"
+    },
+    {
+     "text": "전원 단자대"
+    },
+    {
+     "text": "엔코더 커넥터·케이블"
+    }
+   ],
+   "balloons": 0,
+   "title_line": 164,
+   "caption_src": "2.2 출력 이탈 (구동·전원 계통)",
+   "no": "2-2"
+  },
+  {
+   "fig": "4-0",
+   "place": "2.3",
+   "labels": [
+    {
+     "text": "흡기 필터"
+    },
+    {
+     "text": "냉각 팬"
+    },
+    {
+     "text": "냉각수 탱크"
+    },
+    {
+     "text": "냉각 설정 화면"
+    }
+   ],
+   "balloons": 0,
+   "title_line": 265,
+   "caption_src": "2.3 온도 차 저하 (냉각 계통)",
+   "no": "2-3"
+  },
+  {
+   "fig": "5-0",
+   "place": "2.4",
+   "labels": [
+    {
+     "text": "노즐"
+    },
+    {
+     "text": "베어링"
+    },
+    {
+     "text": "이송 속도와 절삭 깊이"
+    }
+   ],
+   "balloons": 0,
+   "title_line": 369,
+   "caption_src": "2.4 토크 과부하 (절삭 부하 계통)",
+   "no": "2-4"
+  },
+  {
+   "fig": "2-3",
+   "place": "2.1.3",
+   "title_line": 79,
+   "labels": [
+    {
+     "text": "정비 이력"
+    },
+    {
+     "text": "가공 기록 화면"
+    },
+    {
+     "text": "마모 카운터"
+    },
+    {
+     "text": "누적 가공 시간"
+    }
+   ],
+   "balloons": 3,
+   "caption_src": "2.1.3 교체 기록 대조",
+   "no": "2-1-3"
+  },
+  {
+   "fig": "2-4",
+   "place": "2.1.4",
+   "title_line": 99,
+   "labels": [
+    {
+     "text": "공구"
+    },
+    {
+     "text": "교환 위치"
+    },
+    {
+     "text": "확대경"
+    },
+    {
+     "text": "날 끝"
+    }
+   ],
+   "balloons": 3,
+   "caption_src": "2.1.4 날 끝 확대경 점검",
+   "no": "2-1-4"
+  },
+  {
+   "fig": "2-5",
+   "place": "2.1.5",
+   "title_line": 119,
+   "labels": [
+    {
+     "text": "시험 가공"
+    },
+    {
+     "text": "치수"
+    },
+    {
+     "text": "가공면 거칠기"
+    },
+    {
+     "text": "비교 시편"
+    },
+    {
+     "text": "마이크로미터"
+    }
+   ],
+   "balloons": 3,
+   "caption_src": "2.1.5 시험 가공 치수 확인",
+   "no": "2-1-5"
+  },
+  {
+   "fig": "2-6",
+   "place": "2.1.6",
+   "title_line": 145,
+   "labels": [
+    {
+     "text": "마모 띠 폭"
+    },
+    {
+     "text": "확대경"
+    },
+    {
+     "text": "콜릿"
+    },
+    {
+     "text": "칩·흠집"
+    },
+    {
+     "text": "흔들림"
+    }
+   ],
+   "balloons": 3,
+   "caption_src": "2.1.6 날 마모 띠·콜릿 흔들림 점검",
+   "no": "2-1-6"
+  },
+  {
+   "fig": "3-3",
+   "place": "2.2.3",
+   "title_line": 190,
+   "labels": [
+    {
+     "text": "조작반"
+    },
+    {
+     "text": "가공 프로그램 번호"
+    },
+    {
+     "text": "회전수·이송 설정값"
+    },
+    {
+     "text": "공정 표준표"
+    }
+   ],
+   "balloons": 2,
+   "caption_src": "2.2.3 회전 조건 설정 확인",
+   "no": "2-2-3"
+  },
+  {
+   "fig": "3-4",
+   "place": "2.2.4",
+   "title_line": 209,
+   "labels": [
+    {
+     "text": "스핀들 뒤쪽 커버"
+    },
+    {
+     "text": "엔코더 커넥터"
+    },
+    {
+     "text": "케이블 피복"
+    }
+   ],
+   "balloons": 3,
+   "caption_src": "2.2.4 엔코더 커넥터·케이블 육안 점검",
+   "no": "2-2-4"
+  },
+  {
+   "fig": "3-5",
+   "place": "2.2.5",
+   "title_line": 228,
+   "labels": [
+    {
+     "text": "인버터 이력 화면"
+    },
+    {
+     "text": "저전압·과전류 경고"
+    }
+   ],
+   "balloons": 1,
+   "caption_src": "2.2.5 인버터 경고 이력 확인",
+   "no": "2-2-5"
+  },
+  {
+   "fig": "3-6",
+   "place": "2.2.6",
+   "title_line": 246,
+   "labels": [
+    {
+     "text": "절연 장갑"
+    },
+    {
+     "text": "전기함"
+    },
+    {
+     "text": "전원 단자"
+    }
+   ],
+   "balloons": 2,
+   "caption_src": "2.2.6 전원 단자대 점검",
+   "no": "2-2-6"
+  },
+  {
+   "fig": "4-3",
+   "place": "2.3.3",
+   "title_line": 291,
+   "labels": [
+    {
+     "text": "측면 냉각 커버"
+    },
+    {
+     "text": "고정 나사"
+    },
+    {
+     "text": "필터 표면"
+    }
+   ],
+   "balloons": 4,
+   "caption_src": "2.3.3 흡기 필터 육안 점검",
+   "no": "2-3-3"
+  },
+  {
+   "fig": "4-4",
+   "place": "2.3.4",
+   "title_line": 312,
+   "labels": [
+    {
+     "text": "측면 커버"
+    },
+    {
+     "text": "냉각 팬 모듈"
+    },
+    {
+     "text": "커넥터"
+    },
+    {
+     "text": "고정 나사"
+    },
+    {
+     "text": "팬 축"
+    },
+    {
+     "text": "날개"
+    }
+   ],
+   "balloons": 3,
+   "caption_src": "2.3.4 냉각 팬 분해 점검",
+   "no": "2-3-4"
+  },
+  {
+   "fig": "4-5",
+   "place": "2.3.5",
+   "title_line": 331,
+   "labels": [
+    {
+     "text": "냉각수 탱크"
+    },
+    {
+     "text": "앞 커버"
+    },
+    {
+     "text": "수위계"
+    },
+    {
+     "text": "MIN·MAX 선"
+    },
+    {
+     "text": "현재 수위"
+    },
+    {
+     "text": "누설 흔적"
+    }
+   ],
+   "balloons": 3,
+   "caption_src": "2.3.5 냉각수 수위 확인",
+   "no": "2-3-5"
+  },
+  {
+   "fig": "4-6",
+   "place": "2.3.6",
+   "title_line": 351,
+   "labels": [
+    {
+     "text": "조작반 냉각 설정 화면"
+    },
+    {
+     "text": "냉각 팬 속도"
+    },
+    {
+     "text": "절삭유 펌프 설정"
+    }
+   ],
+   "balloons": 2,
+   "caption_src": "2.3.6 냉각 설정값 확인",
+   "no": "2-3-6"
+  },
+  {
+   "fig": "5-3",
+   "place": "2.4.3",
+   "title_line": 395,
+   "labels": [
+    {
+     "text": "절삭유 펌프"
+    },
+    {
+     "text": "시험 운전 스위치"
+    },
+    {
+     "text": "노즐"
+    },
+    {
+     "text": "분사 줄기"
+    }
+   ],
+   "balloons": 2,
+   "caption_src": "2.4.3 절삭유 노즐 분사 확인",
+   "no": "2-4-3"
+  },
+  {
+   "fig": "5-4",
+   "place": "2.4.4",
+   "title_line": 414,
+   "labels": [
+    {
+     "text": "이송 속도"
+    },
+    {
+     "text": "절삭 깊이"
+    },
+    {
+     "text": "공정 표준표"
+    },
+    {
+     "text": "소재·공구 조건"
+    }
+   ],
+   "balloons": 2,
+   "caption_src": "2.4.4 절삭 조건 대조",
+   "no": "2-4-4"
+  },
+  {
+   "fig": "5-5",
+   "place": "2.4.5",
+   "title_line": 433,
+   "labels": [
+    {
+     "text": "진동계"
+    },
+    {
+     "text": "스핀들 하우징 측정점"
+    },
+    {
+     "text": "무부하"
+    }
+   ],
+   "balloons": 3,
+   "caption_src": "2.4.5 스핀들 진동 측정",
+   "no": "2-4-5"
+  },
+  {
+   "fig": "5-6",
+   "place": "2.4.6",
+   "title_line": 459,
+   "labels": [
+    {
+     "text": "지시하지 않는다"
+    },
+    {
+     "text": "외부 업체 작업"
+    },
+    {
+     "text": "베어링"
+    }
+   ],
+   "balloons": 0,
+   "caption_src": "2.4.6 스핀들 베어링 분해 점검",
+   "balloons_exception": "원본 5.6.1 = 1단계(584행 '지시하지 않는다') → 풍선 0",
+   "no": "2-4-6"
+  },
+  {
+   "fig": "6-1",
+   "place": "4.1",
+   "title_line": 720,
+   "labels": [
+    {
+     "text": "체크리스트"
+    },
+    {
+     "text": "잠금을 푼다"
+    },
+    {
+     "text": "무부하"
+    },
+    {
+     "text": "경계 이내"
+    },
+    {
+     "text": "기록한다"
+    }
+   ],
+   "balloons": 3,
+   "caption_src": "4.1 재가동",
+   "no": "4-1"
+  }
+ ]
+}

@@ -1,0 +1,966 @@
+{
+ "code_revision": "301a12095924ab3107b24b83c1a2e9a9c8ef875f",
+ "tracewriter_version": "0.1.2",
+ "decide_min": {
+  "status": "succeeded",
+  "outcome": "completed",
+  "log": [
+   {
+    "tx": "begin"
+   },
+   {
+    "tx": "begin"
+   },
+   {
+    "sql": "INSERT INTO trace.run (run_id, trace_id, origin, source_kind, evaluation_run_id, deployment_id, pack_id, pack_revision, data_release_id, release_bindings, runtime_version, graph, manifest_sha256, redaction_policy_version, retention_class, started_at) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+    "params": [
+     "run_01JC0000000000000000000000",
+     "0123456789abcdef0123456789abcdef",
+     "deployment",
+     "agent_pack",
+     null,
+     "fb0@test",
+     "decide_min",
+     "sha256:312c38e31be7c7f23f523336b0e37dd30b58f770b7161b79f083a731bd01f297",
+     "drs:44136fa355b3678a",
+     {
+      "jsonb": {}
+     },
+     "0.11.0",
+     "triage",
+     "<MANIFEST_SHA>",
+     "redact-1",
+     "standard",
+     "<TS>"
+    ]
+   },
+   {
+    "tx": "commit"
+   },
+   {
+    "sql": "INSERT INTO trace.event (run_id, seq, span_id, parent_span_id, type, node_id, at, contract, body, body_sha256) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (run_id, seq) DO NOTHING RETURNING seq",
+    "params": [
+     "run_01JC0000000000000000000000",
+     0,
+     "<HEX16>",
+     null,
+     "run_started",
+     null,
+     "<TS>",
+     2,
+     {
+      "jsonb": {
+       "origin": "deployment",
+       "source_kind": "agent_pack",
+       "evaluation_run_id": null,
+       "deployment_id": "fb0@test",
+       "pack_id": "decide_min",
+       "pack_revision": "sha256:312c38e31be7c7f23f523336b0e37dd30b58f770b7161b79f083a731bd01f297",
+       "data_release_id": "drs:44136fa355b3678a",
+       "release_bindings": {},
+       "runtime_version": "0.11.0",
+       "graph": "triage",
+       "manifest": {
+        "pack_revision": "sha256:312c38e31be7c7f23f523336b0e37dd30b58f770b7161b79f083a731bd01f297",
+        "runtime": {
+         "version": "0.11.0"
+        },
+        "execution_config": {
+         "config_version": 1,
+         "entrypoint": "triage",
+         "backends": {}
+        },
+        "model_releases": {},
+        "evidence_index_releases": {},
+        "table_snapshots": {}
+       },
+       "input_ref": {
+        "ref": "sha256:4088359f77b335a0198f38c7bce36d038268ccc650e6d51f24d39d2cdb0c2f72",
+        "size": 65,
+        "media_type": "application/json"
+       },
+       "retention_class": "standard",
+       "redaction_policy_version": "redact-1"
+      }
+     },
+     "<BODY_SHA>"
+    ]
+   },
+   {
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING",
+    "params": [
+     "4088359f77b335a0198f38c7bce36d038268ccc650e6d51f24d39d2cdb0c2f72",
+     "run_01JC0000000000000000000000",
+     "input",
+     65,
+     "application/json",
+     "40/4088359f77b335a0198f38c7bce36d038268ccc650e6d51f24d39d2cdb0c2f72",
+     "standard",
+     "redact-1"
+    ]
+   },
+   {
+    "tx": "commit"
+   },
+   {
+    "tx": "begin"
+   },
+   {
+    "sql": "INSERT INTO trace.event (run_id, seq, span_id, parent_span_id, type, node_id, at, contract, body, body_sha256) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (run_id, seq) DO NOTHING RETURNING seq",
+    "params": [
+     "run_01JC0000000000000000000000",
+     1,
+     "<HEX16>",
+     "<HEX16>",
+     "node_started",
+     "assess",
+     "<TS>",
+     2,
+     {
+      "jsonb": {
+       "node_path": "triage.assess",
+       "iteration": 1,
+       "input_ref": {
+        "ref": "sha256:b50390c235a77b0665f040495d672ccaa72131ed438614e83d073d552cd75fa9",
+        "size": 76,
+        "media_type": "application/json"
+       }
+      }
+     },
+     "<BODY_SHA>"
+    ]
+   },
+   {
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING",
+    "params": [
+     "b50390c235a77b0665f040495d672ccaa72131ed438614e83d073d552cd75fa9",
+     "run_01JC0000000000000000000000",
+     "input",
+     76,
+     "application/json",
+     "b5/b50390c235a77b0665f040495d672ccaa72131ed438614e83d073d552cd75fa9",
+     "standard",
+     "redact-1"
+    ]
+   },
+   {
+    "sql": "INSERT INTO trace.node_event (run_id, seq, node_id, iteration, status, started_at, input_ref) VALUES (%s,%s,%s,%s,%s,%s,%s)",
+    "params": [
+     "run_01JC0000000000000000000000",
+     1,
+     "assess",
+     1,
+     "started",
+     "<TS>",
+     "sha256:b50390c235a77b0665f040495d672ccaa72131ed438614e83d073d552cd75fa9"
+    ]
+   },
+   {
+    "tx": "commit"
+   },
+   {
+    "tx": "begin"
+   },
+   {
+    "sql": "INSERT INTO trace.event (run_id, seq, span_id, parent_span_id, type, node_id, at, contract, body, body_sha256) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (run_id, seq) DO NOTHING RETURNING seq",
+    "params": [
+     "run_01JC0000000000000000000000",
+     2,
+     "<HEX16>",
+     "<HEX16>",
+     "node_ended",
+     "assess",
+     "<TS>",
+     2,
+     {
+      "jsonb": {
+       "node_path": "triage.assess",
+       "iteration": 1,
+       "status": "done",
+       "output_ref": {
+        "ref": "sha256:c374bdd5e203b5018216615f75f59d1801777443b19f9db07330c93836a3a5a8",
+        "size": 477,
+        "media_type": "application/json"
+       },
+       "error": null,
+       "meta": {
+        "kind": "decide@1",
+        "provider": "jev",
+        "model": "jev-1.13.0",
+        "tokens_in": 83,
+        "tokens_out": 3,
+        "questions": {
+         "urgent": {
+          "confidence_source": "runtime_derived",
+          "confidence_method": "max_probability",
+          "type": "noul"
+         },
+         "category": {
+          "confidence_source": "provider",
+          "type": "choice"
+         },
+         "severity": {
+          "confidence_source": "provider",
+          "type": "score"
+         }
+        },
+        "fallback_used": [
+         "urgent"
+        ],
+        "limits": [
+         "fake_decision"
+        ],
+        "state_ref": {
+         "ref": "sha256:05666d25d9ce894fcf1c852bc35aa616cf40ba34e3684429ea7b5d056901e71b",
+         "size": 54,
+         "media_type": "application/json"
+        },
+        "provider_raw_ref": {
+         "ref": "sha256:ba0961e09c9b8d4961d4e6575c8301bc667a07d717f83757e5b4d60fffe9c78a",
+         "size": 448,
+         "media_type": "application/json"
+        }
+       }
+      }
+     },
+     "<BODY_SHA>"
+    ]
+   },
+   {
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING",
+    "params": [
+     "05666d25d9ce894fcf1c852bc35aa616cf40ba34e3684429ea7b5d056901e71b",
+     "run_01JC0000000000000000000000",
+     "decide_state",
+     54,
+     "application/json",
+     "05/05666d25d9ce894fcf1c852bc35aa616cf40ba34e3684429ea7b5d056901e71b",
+     "standard",
+     "redact-1"
+    ]
+   },
+   {
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING",
+    "params": [
+     "ba0961e09c9b8d4961d4e6575c8301bc667a07d717f83757e5b4d60fffe9c78a",
+     "run_01JC0000000000000000000000",
+     "provider_raw",
+     448,
+     "application/json",
+     "ba/ba0961e09c9b8d4961d4e6575c8301bc667a07d717f83757e5b4d60fffe9c78a",
+     "provider_raw",
+     "redact-1"
+    ]
+   },
+   {
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING",
+    "params": [
+     "c374bdd5e203b5018216615f75f59d1801777443b19f9db07330c93836a3a5a8",
+     "run_01JC0000000000000000000000",
+     "output",
+     477,
+     "application/json",
+     "c3/c374bdd5e203b5018216615f75f59d1801777443b19f9db07330c93836a3a5a8",
+     "standard",
+     "redact-1"
+    ]
+   },
+   {
+    "sql": "INSERT INTO trace.node_event (run_id, seq, node_id, iteration, kind, status, ended_at, output_ref, error, provider, model, request_config, tokens_in, tokens_out, prompt_ref, provider_raw_ref, custom_source_hash, expect_checks, route, checks) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+    "params": [
+     "run_01JC0000000000000000000000",
+     2,
+     "assess",
+     1,
+     "decide@1",
+     "done",
+     "<TS>",
+     "sha256:c374bdd5e203b5018216615f75f59d1801777443b19f9db07330c93836a3a5a8",
+     null,
+     "jev",
+     "jev-1.13.0",
+     null,
+     83,
+     3,
+     null,
+     "sha256:ba0961e09c9b8d4961d4e6575c8301bc667a07d717f83757e5b4d60fffe9c78a",
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   {
+    "tx": "commit"
+   },
+   {
+    "tx": "begin"
+   },
+   {
+    "sql": "INSERT INTO trace.event (run_id, seq, span_id, parent_span_id, type, node_id, at, contract, body, body_sha256) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (run_id, seq) DO NOTHING RETURNING seq",
+    "params": [
+     "run_01JC0000000000000000000000",
+     3,
+     "<HEX16>",
+     "<HEX16>",
+     "node_started",
+     "route",
+     "<TS>",
+     2,
+     {
+      "jsonb": {
+       "node_path": "triage.route",
+       "iteration": 1,
+       "input_ref": {
+        "ref": "sha256:c374bdd5e203b5018216615f75f59d1801777443b19f9db07330c93836a3a5a8",
+        "size": 477,
+        "media_type": "application/json"
+       }
+      }
+     },
+     "<BODY_SHA>"
+    ]
+   },
+   {
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING",
+    "params": [
+     "c374bdd5e203b5018216615f75f59d1801777443b19f9db07330c93836a3a5a8",
+     "run_01JC0000000000000000000000",
+     "input",
+     477,
+     "application/json",
+     "c3/c374bdd5e203b5018216615f75f59d1801777443b19f9db07330c93836a3a5a8",
+     "standard",
+     "redact-1"
+    ]
+   },
+   {
+    "sql": "INSERT INTO trace.node_event (run_id, seq, node_id, iteration, status, started_at, input_ref) VALUES (%s,%s,%s,%s,%s,%s,%s)",
+    "params": [
+     "run_01JC0000000000000000000000",
+     3,
+     "route",
+     1,
+     "started",
+     "<TS>",
+     "sha256:c374bdd5e203b5018216615f75f59d1801777443b19f9db07330c93836a3a5a8"
+    ]
+   },
+   {
+    "tx": "commit"
+   },
+   {
+    "tx": "begin"
+   },
+   {
+    "sql": "INSERT INTO trace.event (run_id, seq, span_id, parent_span_id, type, node_id, at, contract, body, body_sha256) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (run_id, seq) DO NOTHING RETURNING seq",
+    "params": [
+     "run_01JC0000000000000000000000",
+     4,
+     "<HEX16>",
+     "<HEX16>",
+     "node_ended",
+     "route",
+     "<TS>",
+     2,
+     {
+      "jsonb": {
+       "node_path": "triage.route",
+       "iteration": 1,
+       "status": "done",
+       "output_ref": {
+        "ref": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "size": 2,
+        "media_type": "application/json"
+       },
+       "error": null,
+       "meta": {
+        "kind": "router@1",
+        "route": {
+         "value": "true",
+         "target": "page_now"
+        }
+       }
+      }
+     },
+     "<BODY_SHA>"
+    ]
+   },
+   {
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING",
+    "params": [
+     "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+     "run_01JC0000000000000000000000",
+     "output",
+     2,
+     "application/json",
+     "44/44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+     "standard",
+     "redact-1"
+    ]
+   },
+   {
+    "sql": "INSERT INTO trace.node_event (run_id, seq, node_id, iteration, kind, status, ended_at, output_ref, error, provider, model, request_config, tokens_in, tokens_out, prompt_ref, provider_raw_ref, custom_source_hash, expect_checks, route, checks) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+    "params": [
+     "run_01JC0000000000000000000000",
+     4,
+     "route",
+     1,
+     "router@1",
+     "done",
+     "<TS>",
+     "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "jsonb": {
+       "value": "true",
+       "target": "page_now"
+      }
+     },
+     null
+    ]
+   },
+   {
+    "tx": "commit"
+   },
+   {
+    "tx": "begin"
+   },
+   {
+    "sql": "INSERT INTO trace.event (run_id, seq, span_id, parent_span_id, type, node_id, at, contract, body, body_sha256) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (run_id, seq) DO NOTHING RETURNING seq",
+    "params": [
+     "run_01JC0000000000000000000000",
+     5,
+     "<HEX16>",
+     "<HEX16>",
+     "node_started",
+     "page_now",
+     "<TS>",
+     2,
+     {
+      "jsonb": {
+       "node_path": "triage.page_now",
+       "iteration": 1,
+       "input_ref": {
+        "ref": "sha256:227862774bad30d5db554288ea6f38b599c0e56e0cdc914ec0bc0903dfad9bea",
+        "size": 552,
+        "media_type": "application/json"
+       }
+      }
+     },
+     "<BODY_SHA>"
+    ]
+   },
+   {
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING",
+    "params": [
+     "227862774bad30d5db554288ea6f38b599c0e56e0cdc914ec0bc0903dfad9bea",
+     "run_01JC0000000000000000000000",
+     "input",
+     552,
+     "application/json",
+     "22/227862774bad30d5db554288ea6f38b599c0e56e0cdc914ec0bc0903dfad9bea",
+     "standard",
+     "redact-1"
+    ]
+   },
+   {
+    "sql": "INSERT INTO trace.node_event (run_id, seq, node_id, iteration, status, started_at, input_ref) VALUES (%s,%s,%s,%s,%s,%s,%s)",
+    "params": [
+     "run_01JC0000000000000000000000",
+     5,
+     "page_now",
+     1,
+     "started",
+     "<TS>",
+     "sha256:227862774bad30d5db554288ea6f38b599c0e56e0cdc914ec0bc0903dfad9bea"
+    ]
+   },
+   {
+    "tx": "commit"
+   },
+   {
+    "tx": "begin"
+   },
+   {
+    "sql": "INSERT INTO trace.event (run_id, seq, span_id, parent_span_id, type, node_id, at, contract, body, body_sha256) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (run_id, seq) DO NOTHING RETURNING seq",
+    "params": [
+     "run_01JC0000000000000000000000",
+     6,
+     "<HEX16>",
+     "<HEX16>",
+     "node_ended",
+     "page_now",
+     "<TS>",
+     2,
+     {
+      "jsonb": {
+       "node_path": "triage.page_now",
+       "iteration": 1,
+       "status": "done",
+       "output_ref": {
+        "ref": "sha256:6bfdf9ba6b0f7a2e9f3601afa3f9f9c76beced39d54bc858a8e3000c47e0cab7",
+        "size": 73,
+        "media_type": "application/json"
+       },
+       "error": null,
+       "meta": {
+        "kind": "render@1",
+        "artifact": {
+         "format": "md",
+         "sha256": "6523634493b36e13452d36b3c560b8a5539787262d0cc60c4d9b71c23c2d0fab"
+        }
+       }
+      }
+     },
+     "<BODY_SHA>"
+    ]
+   },
+   {
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING",
+    "params": [
+     "6bfdf9ba6b0f7a2e9f3601afa3f9f9c76beced39d54bc858a8e3000c47e0cab7",
+     "run_01JC0000000000000000000000",
+     "output",
+     73,
+     "application/json",
+     "6b/6bfdf9ba6b0f7a2e9f3601afa3f9f9c76beced39d54bc858a8e3000c47e0cab7",
+     "standard",
+     "redact-1"
+    ]
+   },
+   {
+    "sql": "INSERT INTO trace.node_event (run_id, seq, node_id, iteration, kind, status, ended_at, output_ref, error, provider, model, request_config, tokens_in, tokens_out, prompt_ref, provider_raw_ref, custom_source_hash, expect_checks, route, checks) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+    "params": [
+     "run_01JC0000000000000000000000",
+     6,
+     "page_now",
+     1,
+     "render@1",
+     "done",
+     "<TS>",
+     "sha256:6bfdf9ba6b0f7a2e9f3601afa3f9f9c76beced39d54bc858a8e3000c47e0cab7",
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   {
+    "tx": "commit"
+   },
+   {
+    "tx": "begin"
+   },
+   {
+    "sql": "INSERT INTO trace.event (run_id, seq, span_id, parent_span_id, type, node_id, at, contract, body, body_sha256) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (run_id, seq) DO NOTHING RETURNING seq",
+    "params": [
+     "run_01JC0000000000000000000000",
+     7,
+     "<HEX16>",
+     null,
+     "run_ended",
+     null,
+     "<TS>",
+     2,
+     {
+      "jsonb": {
+       "status": "succeeded",
+       "outcome": "completed",
+       "output_ref": {
+        "ref": "sha256:40384bf3f74e0df4ad08b0a70f9092fcbec0ed7cd2089b28c7c70dcb7db0582d",
+        "size": 64,
+        "media_type": "application/json"
+       },
+       "error": null,
+       "tokens_in": 83,
+       "tokens_out": 3
+      }
+     },
+     "<BODY_SHA>"
+    ]
+   },
+   {
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING",
+    "params": [
+     "40384bf3f74e0df4ad08b0a70f9092fcbec0ed7cd2089b28c7c70dcb7db0582d",
+     "run_01JC0000000000000000000000",
+     "final",
+     64,
+     "application/json",
+     "40/40384bf3f74e0df4ad08b0a70f9092fcbec0ed7cd2089b28c7c70dcb7db0582d",
+     "standard",
+     "redact-1"
+    ]
+   },
+   {
+    "tx": "commit"
+   }
+  ],
+  "payload_files": {
+   "05/05666d25d9ce894fcf1c852bc35aa616cf40ba34e3684429ea7b5d056901e71b": "05666d25d9ce894fcf1c852bc35aa616cf40ba34e3684429ea7b5d056901e71b",
+   "22/227862774bad30d5db554288ea6f38b599c0e56e0cdc914ec0bc0903dfad9bea": "227862774bad30d5db554288ea6f38b599c0e56e0cdc914ec0bc0903dfad9bea",
+   "40/40384bf3f74e0df4ad08b0a70f9092fcbec0ed7cd2089b28c7c70dcb7db0582d": "40384bf3f74e0df4ad08b0a70f9092fcbec0ed7cd2089b28c7c70dcb7db0582d",
+   "40/4088359f77b335a0198f38c7bce36d038268ccc650e6d51f24d39d2cdb0c2f72": "4088359f77b335a0198f38c7bce36d038268ccc650e6d51f24d39d2cdb0c2f72",
+   "44/44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+   "6b/6bfdf9ba6b0f7a2e9f3601afa3f9f9c76beced39d54bc858a8e3000c47e0cab7": "6bfdf9ba6b0f7a2e9f3601afa3f9f9c76beced39d54bc858a8e3000c47e0cab7",
+   "b5/b50390c235a77b0665f040495d672ccaa72131ed438614e83d073d552cd75fa9": "b50390c235a77b0665f040495d672ccaa72131ed438614e83d073d552cd75fa9",
+   "ba/ba0961e09c9b8d4961d4e6575c8301bc667a07d717f83757e5b4d60fffe9c78a": "ba0961e09c9b8d4961d4e6575c8301bc667a07d717f83757e5b4d60fffe9c78a",
+   "c3/c374bdd5e203b5018216615f75f59d1801777443b19f9db07330c93836a3a5a8": "c374bdd5e203b5018216615f75f59d1801777443b19f9db07330c93836a3a5a8"
+  }
+ },
+ "llm_min": {
+  "status": "succeeded",
+  "outcome": "completed",
+  "log": [
+   {
+    "tx": "begin"
+   },
+   {
+    "tx": "begin"
+   },
+   {
+    "sql": "INSERT INTO trace.run (run_id, trace_id, origin, source_kind, evaluation_run_id, deployment_id, pack_id, pack_revision, data_release_id, release_bindings, runtime_version, graph, manifest_sha256, redaction_policy_version, retention_class, started_at) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+    "params": [
+     "run_01JC0000000000000000000000",
+     "0123456789abcdef0123456789abcdef",
+     "deployment",
+     "agent_pack",
+     null,
+     "fb0@test",
+     "llm_min",
+     "sha256:3836c56828fc1794d4f52869dbadb00b46103588f7f72c3f56bdc9fb4a8cac97",
+     "drs:44136fa355b3678a",
+     {
+      "jsonb": {}
+     },
+     "0.11.0",
+     "ask",
+     "<MANIFEST_SHA>",
+     "redact-1",
+     "standard",
+     "<TS>"
+    ]
+   },
+   {
+    "tx": "commit"
+   },
+   {
+    "sql": "INSERT INTO trace.event (run_id, seq, span_id, parent_span_id, type, node_id, at, contract, body, body_sha256) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (run_id, seq) DO NOTHING RETURNING seq",
+    "params": [
+     "run_01JC0000000000000000000000",
+     0,
+     "<HEX16>",
+     null,
+     "run_started",
+     null,
+     "<TS>",
+     2,
+     {
+      "jsonb": {
+       "origin": "deployment",
+       "source_kind": "agent_pack",
+       "evaluation_run_id": null,
+       "deployment_id": "fb0@test",
+       "pack_id": "llm_min",
+       "pack_revision": "sha256:3836c56828fc1794d4f52869dbadb00b46103588f7f72c3f56bdc9fb4a8cac97",
+       "data_release_id": "drs:44136fa355b3678a",
+       "release_bindings": {},
+       "runtime_version": "0.11.0",
+       "graph": "ask",
+       "manifest": {
+        "pack_revision": "sha256:3836c56828fc1794d4f52869dbadb00b46103588f7f72c3f56bdc9fb4a8cac97",
+        "runtime": {
+         "version": "0.11.0"
+        },
+        "execution_config": {
+         "config_version": 1,
+         "entrypoint": "ask",
+         "backends": {}
+        },
+        "model_releases": {},
+        "evidence_index_releases": {},
+        "table_snapshots": {}
+       },
+       "input_ref": {
+        "ref": "sha256:b24ca4ea2470e8453c4701ce624fadddf37f4fd3ea6ab6870dfb0f02fe3c9ef5",
+        "size": 49,
+        "media_type": "application/json"
+       },
+       "retention_class": "standard",
+       "redaction_policy_version": "redact-1"
+      }
+     },
+     "<BODY_SHA>"
+    ]
+   },
+   {
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING",
+    "params": [
+     "b24ca4ea2470e8453c4701ce624fadddf37f4fd3ea6ab6870dfb0f02fe3c9ef5",
+     "run_01JC0000000000000000000000",
+     "input",
+     49,
+     "application/json",
+     "b2/b24ca4ea2470e8453c4701ce624fadddf37f4fd3ea6ab6870dfb0f02fe3c9ef5",
+     "standard",
+     "redact-1"
+    ]
+   },
+   {
+    "tx": "commit"
+   },
+   {
+    "tx": "begin"
+   },
+   {
+    "sql": "INSERT INTO trace.event (run_id, seq, span_id, parent_span_id, type, node_id, at, contract, body, body_sha256) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (run_id, seq) DO NOTHING RETURNING seq",
+    "params": [
+     "run_01JC0000000000000000000000",
+     1,
+     "<HEX16>",
+     "<HEX16>",
+     "node_started",
+     "draft",
+     "<TS>",
+     2,
+     {
+      "jsonb": {
+       "node_path": "ask.draft",
+       "iteration": 1,
+       "input_ref": {
+        "ref": "sha256:3460e033fe6dfd3b7881d799788eb237aaea2ec55f8a45844eee06fe79b250f4",
+        "size": 60,
+        "media_type": "application/json"
+       }
+      }
+     },
+     "<BODY_SHA>"
+    ]
+   },
+   {
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING",
+    "params": [
+     "3460e033fe6dfd3b7881d799788eb237aaea2ec55f8a45844eee06fe79b250f4",
+     "run_01JC0000000000000000000000",
+     "input",
+     60,
+     "application/json",
+     "34/3460e033fe6dfd3b7881d799788eb237aaea2ec55f8a45844eee06fe79b250f4",
+     "standard",
+     "redact-1"
+    ]
+   },
+   {
+    "sql": "INSERT INTO trace.node_event (run_id, seq, node_id, iteration, status, started_at, input_ref) VALUES (%s,%s,%s,%s,%s,%s,%s)",
+    "params": [
+     "run_01JC0000000000000000000000",
+     1,
+     "draft",
+     1,
+     "started",
+     "<TS>",
+     "sha256:3460e033fe6dfd3b7881d799788eb237aaea2ec55f8a45844eee06fe79b250f4"
+    ]
+   },
+   {
+    "tx": "commit"
+   },
+   {
+    "tx": "begin"
+   },
+   {
+    "sql": "INSERT INTO trace.event (run_id, seq, span_id, parent_span_id, type, node_id, at, contract, body, body_sha256) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (run_id, seq) DO NOTHING RETURNING seq",
+    "params": [
+     "run_01JC0000000000000000000000",
+     2,
+     "<HEX16>",
+     "<HEX16>",
+     "node_ended",
+     "draft",
+     "<TS>",
+     2,
+     {
+      "jsonb": {
+       "node_path": "ask.draft",
+       "iteration": 1,
+       "status": "done",
+       "output_ref": {
+        "ref": "sha256:165666976c76dd82c00471577c41c74939f1614c543b3de8d9e083914d969de9",
+        "size": 77,
+        "media_type": "application/json"
+       },
+       "error": null,
+       "meta": {
+        "kind": "llm@1",
+        "provider": "openai",
+        "model": "gpt-4.1-mini",
+        "request_config": {
+         "temperature": 0,
+         "max_tokens": null
+        },
+        "tokens_in": 11,
+        "tokens_out": 7,
+        "prompt_ref": {
+         "ref": "sha256:a7fc2b61e2c24cf52d62180affd6ecab5e82b64b67ca444ac44ce03fa2a56b28",
+         "size": 89,
+         "media_type": "application/json"
+        },
+        "provider_raw_ref": {
+         "ref": "sha256:8b939e8f648c0d8890c0ce8635942d513ae08f1116368bdac6819a61d17290df",
+         "size": 368,
+         "media_type": "application/json"
+        }
+       }
+      }
+     },
+     "<BODY_SHA>"
+    ]
+   },
+   {
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING",
+    "params": [
+     "a7fc2b61e2c24cf52d62180affd6ecab5e82b64b67ca444ac44ce03fa2a56b28",
+     "run_01JC0000000000000000000000",
+     "prompt",
+     89,
+     "application/json",
+     "a7/a7fc2b61e2c24cf52d62180affd6ecab5e82b64b67ca444ac44ce03fa2a56b28",
+     "standard",
+     "redact-1"
+    ]
+   },
+   {
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING",
+    "params": [
+     "8b939e8f648c0d8890c0ce8635942d513ae08f1116368bdac6819a61d17290df",
+     "run_01JC0000000000000000000000",
+     "provider_raw",
+     368,
+     "application/json",
+     "8b/8b939e8f648c0d8890c0ce8635942d513ae08f1116368bdac6819a61d17290df",
+     "provider_raw",
+     "redact-1"
+    ]
+   },
+   {
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING",
+    "params": [
+     "165666976c76dd82c00471577c41c74939f1614c543b3de8d9e083914d969de9",
+     "run_01JC0000000000000000000000",
+     "output",
+     77,
+     "application/json",
+     "16/165666976c76dd82c00471577c41c74939f1614c543b3de8d9e083914d969de9",
+     "standard",
+     "redact-1"
+    ]
+   },
+   {
+    "sql": "INSERT INTO trace.node_event (run_id, seq, node_id, iteration, kind, status, ended_at, output_ref, error, provider, model, request_config, tokens_in, tokens_out, prompt_ref, provider_raw_ref, custom_source_hash, expect_checks, route, checks) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+    "params": [
+     "run_01JC0000000000000000000000",
+     2,
+     "draft",
+     1,
+     "llm@1",
+     "done",
+     "<TS>",
+     "sha256:165666976c76dd82c00471577c41c74939f1614c543b3de8d9e083914d969de9",
+     null,
+     "openai",
+     "gpt-4.1-mini",
+     {
+      "jsonb": {
+       "temperature": 0,
+       "max_tokens": null
+      }
+     },
+     11,
+     7,
+     "sha256:a7fc2b61e2c24cf52d62180affd6ecab5e82b64b67ca444ac44ce03fa2a56b28",
+     "sha256:8b939e8f648c0d8890c0ce8635942d513ae08f1116368bdac6819a61d17290df",
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   {
+    "tx": "commit"
+   },
+   {
+    "tx": "begin"
+   },
+   {
+    "sql": "INSERT INTO trace.event (run_id, seq, span_id, parent_span_id, type, node_id, at, contract, body, body_sha256) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (run_id, seq) DO NOTHING RETURNING seq",
+    "params": [
+     "run_01JC0000000000000000000000",
+     3,
+     "<HEX16>",
+     null,
+     "run_ended",
+     null,
+     "<TS>",
+     2,
+     {
+      "jsonb": {
+       "status": "succeeded",
+       "outcome": "completed",
+       "output_ref": {
+        "ref": "sha256:58e83eb8980b3397de510fa19e1aa0eb22bf85d5baf9360577f0e36b52e7663b",
+        "size": 66,
+        "media_type": "application/json"
+       },
+       "error": null,
+       "tokens_in": 11,
+       "tokens_out": 7
+      }
+     },
+     "<BODY_SHA>"
+    ]
+   },
+   {
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING",
+    "params": [
+     "58e83eb8980b3397de510fa19e1aa0eb22bf85d5baf9360577f0e36b52e7663b",
+     "run_01JC0000000000000000000000",
+     "final",
+     66,
+     "application/json",
+     "58/58e83eb8980b3397de510fa19e1aa0eb22bf85d5baf9360577f0e36b52e7663b",
+     "standard",
+     "redact-1"
+    ]
+   },
+   {
+    "tx": "commit"
+   }
+  ],
+  "payload_files": {
+   "16/165666976c76dd82c00471577c41c74939f1614c543b3de8d9e083914d969de9": "165666976c76dd82c00471577c41c74939f1614c543b3de8d9e083914d969de9",
+   "34/3460e033fe6dfd3b7881d799788eb237aaea2ec55f8a45844eee06fe79b250f4": "3460e033fe6dfd3b7881d799788eb237aaea2ec55f8a45844eee06fe79b250f4",
+   "58/58e83eb8980b3397de510fa19e1aa0eb22bf85d5baf9360577f0e36b52e7663b": "58e83eb8980b3397de510fa19e1aa0eb22bf85d5baf9360577f0e36b52e7663b",
+   "8b/8b939e8f648c0d8890c0ce8635942d513ae08f1116368bdac6819a61d17290df": "8b939e8f648c0d8890c0ce8635942d513ae08f1116368bdac6819a61d17290df",
+   "a7/a7fc2b61e2c24cf52d62180affd6ecab5e82b64b67ca444ac44ce03fa2a56b28": "a7fc2b61e2c24cf52d62180affd6ecab5e82b64b67ca444ac44ce03fa2a56b28",
+   "b2/b24ca4ea2470e8453c4701ce624fadddf37f4fd3ea6ab6870dfb0f02fe3c9ef5": "b24ca4ea2470e8453c4701ce624fadddf37f4fd3ea6ab6870dfb0f02fe3c9ef5"
+  }
+ }
+}

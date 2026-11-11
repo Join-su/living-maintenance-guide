@@ -1,0 +1,26 @@
+{
+  "name": "c1a15-maint-guide",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*",
+    "tools/*",
+    "e2e"
+  ],
+  "scripts": {
+    "typecheck": "tsc -b packages/ui apps/tech apps/lead",
+    "build": "npm run build -w @c1a15/tech && npm run build -w @c1a15/lead"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.7",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "jsdom": "^30.1.2",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.4"
+  }
+}

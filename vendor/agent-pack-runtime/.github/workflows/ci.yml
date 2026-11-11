@@ -1,0 +1,53 @@
+# agent-pack-runtime CI 초안(지시 005, 10-18) — push · 태그 때 packrt · tracewriter 시험과 정적 망 검사만 돌립니다.
+# 비밀 값 0(secrets · 열쇠 안 씀), 외부 호출은 가짜만(시험이 소켓을 열지 않음 — provider 시험은 urlopen을 바꿔 끼움, 가짜 Jev는 표준 라이브러리).
+# 깊은 시험(실행 · 평가 · trace · DB)은 llmops-lite-v2가 이 저장소의 태그 설치본으로 돌립니다(EV-023 H-4) — 여기서는 하지 않음.
+# "10-20 확인" = 원격 저장소를 만든 뒤 GitHub에서만 확인할 수 있는 줄.
+name: test
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+
+permissions:
+  contents: read                                   # 읽기만 — 이 workflow는 저장소에 쓰지 않음
+
+concurrency:
+  group: test-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04                          # 10-20 확인: 무료 러너 판 · 시간
+    timeout-minutes: 15
+    steps:
+      - name: 받기(태그 포함)
+        uses: actions/checkout@v4                  # 10-20 확인: commit sha로 판 고정
+        with:
+          fetch-depth: 0                           # 태그 검사가 태그 객체 · 메시지를 봄
+          fetch-tags: true
+
+      - name: Python 3.14.2
+        uses: actions/setup-python@v5              # 10-20 확인: commit sha로 판 고정
+        with:
+          python-version: "3.14.2"                 # llmops · 배포단 · 로컬 .venv와 같은 판
+
+      - name: 설치(고정 판 — ci/constraints.txt)
+        run: |
+          python -m venv .venv
+          .venv/bin/pip install -c ci/constraints.txt -e ./packrt -e ./tracewriter pytest
+
+      - name: 시험
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: .venv/bin/pytest -q -p no:cacheprovider   # python -m pytest는 쓰지 않음(README: 맨 위 packrt/ 폴더가 패키지를 가림)
+
+      - name: 정적 망 검사
+        run: .venv/bin/python scripts/static_net_scan.py
+
+      - name: 태그 규칙 검사(태그 push 때만)
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          git fetch --force origin "refs/tags/${GITHUB_REF_NAME}:refs/tags/${GITHUB_REF_NAME}"   # 10-20 확인: checkout이 주석 태그를 가벼운 태그로 받는 경우 대비
+          .venv/bin/python scripts/check_tag.py "${GITHUB_REF_NAME}"

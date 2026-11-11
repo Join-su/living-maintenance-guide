@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# 빠른 결정적 검사(EP-HARNESS-001): 비밀값 · 정답 자료 접근 · 각본 분리 · format · lint · unit · typecheck.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+python3 scripts/secret_scan.py .
+python3 scripts/forbidden_paths_check.py
+python3 scripts/external_call_check.py
+python3 scripts/check_demo_separation.py  # AC-34-C3: 각본 행 ∩ 이력 · 평가 카드 = 0
+out=$(bash scripts/demo/selftest.sh) || { echo "$out"; exit 1; }  # D-480 덧 5: 시연 스택 도구 멈춤 길 · 맥 절대 경로 0
+(cd server && uv run --frozen ruff format --check . && uv run --frozen ruff check . && uv run --frozen pytest -q -m "not db")
+python3 scripts/openapi_check.py  # P-06: OpenAPI 정본 재생성 diff 없음
+npm run --silent typecheck
+npm run --silent test -w @c1a15/tech  # P-08: 화면 component 시험(실제 API 응답 fixture로 Prototype 구조 대조)
+npm run --silent test -w @c1a15/lead  # P-12: 파트장 앱 component 시험(실제 API 응답 fixture)
+echo "check-fast: pass"

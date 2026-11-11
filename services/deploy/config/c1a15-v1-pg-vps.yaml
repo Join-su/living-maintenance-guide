@@ -1,0 +1,36 @@
+# VPS(Compose 서비스 deploy-c1a15-v1-pg) 설정 — C1-a15 운영 배포 단계 A(D-334: 가짜 DB · flat-local · 가짜 provider, C1A15-VPS-E1-E3). 비밀 값 없음.
+# 실행 설정은 c1a15-pack 태그 v6 pack/execution/deploy.yaml을 그대로 옮김(규칙 06 — 다르면 c1a15-pack에 질문). 벡터 DB 폴더는 VPS 호스트 사본(읽기만),
+# R12가 만드는 새 corpus · version은 extra 첫 칸(이 배포 data volume)에 씀. 등록 장부: PG llmops.deployment를 runtime_reader로 읽기만(모델 칸 대조, D-328).
+deployment_id: c1a15@v1-pg-local
+retention_class: standard            # 운영 배포(dev 7일 보존은 *@dev-local만)
+pack:
+  repo: /var/lib/deploy/pack-cache/c1a15-pack   # c1a15-pack 캐시(받는 길은 Q-1 — 사용자 승인 뒤 V-4)
+  ref: v6                            # 태그(c1a15-pack이 만듦, e0c1b01). 응답 pack.tag = "v6"
+  pack_subdir: pack
+  releases_subdir: releases          # 모델 release(mr-ai4i-lgbm-large-v1 ONNX)가 Pack 트리 안에 있음
+  # expect_revision: register가 운영 설정에만 채움(V-17 뒤) — 태그 v6 알림 값
+execution:                           # Pack v6 deploy.yaml 그대로(entrypoint · models · stores)
+  entrypoint: run
+  stores:
+    history: {backend: flat-local, release: ir-history-412ea43e, embedding: {mode: fake}}   # 이력 가짜 DB — 단계 B에서 pgvector(공유 DB 적재 = 사용자 승인)
+    manuals: {backend: flat-local, release: ir-manuals-f8b7fe33, embedding: {mode: fake}}   # 매뉴얼 가짜 DB(v5부터 필수 — 없으면 모든 kind 불러오기 실패)
+  models:
+    failure_classifier: {release: mr-ai4i-lgbm-large-v1}   # 사용자 모델(ONNX) — 이미지에 onnxruntime 필요(V-3, Q-2 승인 뒤). 되돌림 = mr-c1a15-standin-v1
+release_roots_extra:                 # 첫 칸 = R12 쓰기 폴더(이 배포 data volume), 둘째 = 벡터 DB 호스트 사본(읽기만, compose가 같은 경로로 붙임)
+  - /var/lib/deploy/data/releases
+  - /srv/llmopsagent/c1a15-releases
+runtime_db:                          # 실행용 DSN(runtime_reader) — 장부 대조 · 단계 B의 pgvector store가 씀
+  env_file: /run/deploy/deploy.env   # 읽기 전용 비밀 파일(compose가 붙임, 두 이름만)
+data_dir: /var/lib/deploy/data
+packs_dir: /var/lib/deploy/data/packs
+review_policy: auto_approve          # 검토 node 없음
+provider: fake                       # 보고서 문장 node는 가짜 provider(Pack 트리 tools/fake/rule.py) — 실제 provider는 실제 키 승인 뒤(D-334 Q-4)
+registration:
+  mode: llmops_pg                    # 등록 대조: PG llmops.deployment(모델 칸 있으면 모델도, D-328). 등록 줄은 llmops(EV-049 뒤 운영 bootstrap --pack-tag v6)
+trace:                               # 공유 기록기 tracewriter → PostgreSQL trace(trace_writer 계정)
+  dsn_env: LLMOPSAGENT_TRACE_DSN
+  env_file: /run/deploy/deploy.env
+  payload_root: /var/lib/payloads
+outcome_by_node: {}
+grounding_keys: []                   # D-278: 약속 출력 칸은 result.output으로(앱이 읽음)
+secret_env_names: [OPENAI_API_KEY]

@@ -1,0 +1,69 @@
+{
+ "source": {
+  "name": "UCI AI4I 2020 Predictive Maintenance Dataset",
+  "license": "CC BY 4.0",
+  "sha256": "dc6630cd9b1f0f853922fad78a1b6436570d3f1ec863f1dd5c4340ac56bc8a8e",
+  "label_columns_dropped": [
+   "Machine failure",
+   "TWF",
+   "HDF",
+   "PWF",
+   "OSF",
+   "RNF"
+  ]
+ },
+ "seed": 10,
+ "generation_inputs": {
+  "generation/cause_ratio_table.json": "7c6819bb736238117f2f6d13b9e393ed794ee0befd96e4b003fdf4900462fa17",
+  "generation/split/ai4i-split-by-udi.csv": "1929f57ea68b21bbdc90c8532ca27c3014e4ddc32b1b9cfeed68484e9e4bf376"
+ },
+ "history": {
+  "total": 300,
+  "by_symptom_group": {
+   "LD": 34,
+   "PW": 102,
+   "TW": 42,
+   "CL": 122
+  },
+  "by_outcome": {
+   "원인 확정": 258,
+   "이상 없음·감시": 29,
+   "원인 미상·숙련자 인계": 13
+  },
+  "by_cause": {
+   "-": 42,
+   "CL-1": 57,
+   "CL-2": 25,
+   "CL-3": 10,
+   "CL-4": 16,
+   "LD-1": 8,
+   "LD-2": 6,
+   "LD-3": 15,
+   "PW-1": 43,
+   "PW-2": 23,
+   "PW-3": 15,
+   "TW-1": 21,
+   "TW-2": 8,
+   "TW-3": 8,
+   "TW-4": 3
+  },
+  "by_shift": {
+   "야간": 94,
+   "주간": 132,
+   "주말": 74
+  },
+  "with_escalation": 141
+ },
+ "manual": {
+  "sections": 32,
+  "symptom_group_sections": 24,
+  "checks": 16,
+  "causes": 14
+ },
+ "files": {
+  "data/manuals/MG-MM.md": "1f064e23cc4714eabe19c7487922b1c0fc99afdf771f9a76aa0d664605e05536",
+  "data/manuals/manual_sections.json": "f88279a4f06383d46f46a00352e122f5f413f7f150befc69d797a21b21b07c94",
+  "data/history/maintenance_history.jsonl": "48a5b999498e46b9f8d8abfea6884b5e4fb0d4682940510776125b530048c506",
+  "data/alarm_rules.json": "9bebb5d54f5a97d4a3609afdd10008dafa84c70c0bb29f9fa762bf08128815ea"
+ }
+}

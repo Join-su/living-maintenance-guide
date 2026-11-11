@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ModelInput",
+  "description": "모델 입력(custom.features:prepare) — 자리 모델 4칸(경계를 넘은 정도 ÷ train 표준편차) + 사용자 모델 6칸([type_code, air, proc, rpm, torque, wear], D-264). predict@1은 선택한 model release feature_schema.fields 칸만 씀. 정답 칸 없음",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "tw_excess_std",
+    "cl_excess_std",
+    "pw_excess_std",
+    "ld_excess_std",
+    "type_code",
+    "air",
+    "proc",
+    "rpm",
+    "torque",
+    "wear"
+  ],
+  "properties": {
+    "tw_excess_std": {
+      "type": "number"
+    },
+    "cl_excess_std": {
+      "type": "number"
+    },
+    "pw_excess_std": {
+      "type": "number"
+    },
+    "ld_excess_std": {
+      "type": "number"
+    },
+    "type_code": {
+      "type": "number"
+    },
+    "air": {
+      "type": "number"
+    },
+    "proc": {
+      "type": "number"
+    },
+    "rpm": {
+      "type": "number"
+    },
+    "torque": {
+      "type": "number"
+    },
+    "wear": {
+      "type": "number"
+    }
+  }
+}

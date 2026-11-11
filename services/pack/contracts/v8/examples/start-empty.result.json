@@ -1,0 +1,26 @@
+{
+  "decision": {
+    "probabilities": {
+      "CL-1": 25,
+      "CL-2": 25,
+      "CL-3": 25,
+      "CL-4": 25
+    },
+    "evidence": {
+      "CL-1": 0,
+      "CL-2": 0,
+      "CL-3": 0,
+      "CL-4": 0
+    },
+    "low_evidence": true,
+    "kind": "lock",
+    "section": "1.2"
+  },
+  "similar": [],
+  "retrieval": {
+    "source": "packrt",
+    "vector_db_version": null,
+    "query_from": null,
+    "fallback_used": null
+  }
+}

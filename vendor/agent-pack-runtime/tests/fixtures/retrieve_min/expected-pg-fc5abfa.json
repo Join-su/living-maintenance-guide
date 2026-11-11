@@ -1,0 +1,2101 @@
+{
+ "excluded": [
+  "timestamps -> <TS>",
+  "span ids (16 hex) -> <HEX16>",
+  "temp folder and python path -> <TMP> · <PY>",
+  "ms",
+  "pack_env",
+  "runtime.digest",
+  "runtime.version",
+  "runtime_version",
+  "execution_config.sha256 (the config names the temp folder)",
+  "trace.event body_sha256 -> <BODY_SHA>",
+  "trace.run manifest_sha256 -> <MANIFEST_SHA>"
+ ],
+ "probe_error": {
+  "error": "build",
+  "message": "ReleaseError: release 'no-such-model'을 보관 폴더에서 찾을 수 없습니다"
+ },
+ "run": {
+  "binding": {
+   "backend": "pgvector",
+   "connection_env": "LLMOPSAGENT_RUNTIME_DSN",
+   "embedding": {
+    "dim": 64,
+    "mode": "fake",
+    "model": "text-embedding-3-small",
+    "provider": "openai"
+   },
+   "embedding_dim": 64,
+   "embedding_key_env": null,
+   "embedding_mode": "fake",
+   "embedding_model": "text-embedding-3-small",
+   "index_sha256": "e15cf37fa86c643498a28a5263a43232b6fd5a759b73eb8a54a777ea3c501d26",
+   "manifest": {
+    "backend": "flat-local",
+    "chunks": 10,
+    "embedding": {
+     "dim": 64,
+     "mode": "fake",
+     "model": "text-embedding-3-small",
+     "provider": "openai"
+    },
+    "files": {
+     "chunks.jsonl": "54787569607783b05591def28ec6ce302dca876d3f1ebdac12e094de9f3f2659",
+     "vectors.json": "60266b9a0f4297d38ce8450659fcc9c74ef2d4cfdc34e885ee97fee420c28bbe"
+    },
+    "index_sha256": "e15cf37fa86c643498a28a5263a43232b6fd5a759b73eb8a54a777ea3c501d26",
+    "kind": "index",
+    "release_id": "ir-docs-v1",
+    "store": "docs"
+   },
+   "manifest_sha256": "93a8d4a18f92a7f60724a96d911ab612fb10e458022c029e71bd3ce9b2ca6887",
+   "release_id": "ir-docs-v1",
+   "schema": "retrieve_min",
+   "sha256": "e15cf37fa86c643498a28a5263a43232b6fd5a759b73eb8a54a777ea3c501d26",
+   "table": "manual_chunk",
+   "type": "vector"
+  },
+  "closed": 0,
+  "log": [
+   {
+    "tx": "begin"
+   },
+   {
+    "tx": "begin"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     "0123456789abcdef0123456789abcd07",
+     "evaluation",
+     "agent_pack",
+     "ev007",
+     null,
+     "retrieve_min",
+     "sha256:fa7ec3afcc73eedc879b6440f3e76b7fec0b392dbe5eaeae0c3f6821db4508bc",
+     "drs:78aa95033003ab5a",
+     {
+      "jsonb": {
+       "docs": {
+        "release_id": "ir-docs-v1",
+        "sha256": "93a8d4a18f92a7f60724a96d911ab612fb10e458022c029e71bd3ce9b2ca6887"
+       },
+       "rows": {
+        "release_id": "tr-rows-v1",
+        "sha256": "18a9fccfe9344021b1f45239c6c9431c75178e0936e22975172d6a99641fb8cd"
+       }
+      }
+     },
+     "<RUNTIME_VERSION>",
+     "probe",
+     "<MANIFEST_SHA>",
+     "redact-1",
+     "dev",
+     "<TS>"
+    ],
+    "sql": "INSERT INTO trace.run (run_id, trace_id, origin, source_kind, evaluation_run_id, deployment_id, pack_id, pack_revision, data_release_id, release_bindings, runtime_version, graph, manifest_sha256, redaction_policy_version, retention_class, started_at) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+   },
+   {
+    "tx": "commit"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     0,
+     "<HEX16>",
+     null,
+     "run_started",
+     null,
+     "<TS>",
+     2,
+     {
+      "jsonb": {
+       "data_release_id": "drs:78aa95033003ab5a",
+       "deployment_id": null,
+       "evaluation_run_id": "ev007",
+       "graph": "probe",
+       "input_ref": {
+        "media_type": "application/json",
+        "ref": "sha256:d0b87d9accc04c7f45e6cee24cfa5e3f2597be13274424771da45f23cfe0e675",
+        "size": 104
+       },
+       "manifest": {
+        "evidence_index_releases": {
+         "docs": {
+          "embedding": {
+           "dim": 64,
+           "mode": "fake",
+           "model": "text-embedding-3-small",
+           "provider": "openai"
+          },
+          "index_sha256": "e15cf37fa86c643498a28a5263a43232b6fd5a759b73eb8a54a777ea3c501d26",
+          "location": "postgresql:retrieve_min.manual_chunk",
+          "manifest_sha256": "93a8d4a18f92a7f60724a96d911ab612fb10e458022c029e71bd3ce9b2ca6887",
+          "release_id": "ir-docs-v1"
+         }
+        },
+        "execution_config": {
+         "backends": {
+          "docs": "pgvector",
+          "rows": "sqlite-file"
+         },
+         "config_version": 1,
+         "entrypoint": "probe"
+        },
+        "model_releases": {},
+        "pack_revision": "sha256:fa7ec3afcc73eedc879b6440f3e76b7fec0b392dbe5eaeae0c3f6821db4508bc",
+        "runtime": {},
+        "table_snapshots": {
+         "rows": {
+          "location": "<TMP>/releases/tables/tr-rows-v1",
+          "manifest_sha256": "18a9fccfe9344021b1f45239c6c9431c75178e0936e22975172d6a99641fb8cd",
+          "path_name": "rows.sqlite",
+          "release_id": "tr-rows-v1",
+          "sha256": "45f8352b2762b25e845849a0781d6c48885c55865eee8598533424a3e05602c9"
+         }
+        }
+       },
+       "origin": "evaluation",
+       "pack_id": "retrieve_min",
+       "pack_revision": "sha256:fa7ec3afcc73eedc879b6440f3e76b7fec0b392dbe5eaeae0c3f6821db4508bc",
+       "redaction_policy_version": "redact-1",
+       "release_bindings": {
+        "docs": {
+         "release_id": "ir-docs-v1",
+         "sha256": "93a8d4a18f92a7f60724a96d911ab612fb10e458022c029e71bd3ce9b2ca6887"
+        },
+        "rows": {
+         "release_id": "tr-rows-v1",
+         "sha256": "18a9fccfe9344021b1f45239c6c9431c75178e0936e22975172d6a99641fb8cd"
+        }
+       },
+       "retention_class": "dev",
+       "source_kind": "agent_pack"
+      }
+     },
+     "<BODY_SHA>"
+    ],
+    "sql": "INSERT INTO trace.event (run_id, seq, span_id, parent_span_id, type, node_id, at, contract, body, body_sha256) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (run_id, seq) DO NOTHING RETURNING seq"
+   },
+   {
+    "params": [
+     "d0b87d9accc04c7f45e6cee24cfa5e3f2597be13274424771da45f23cfe0e675",
+     "run_01JC0000000000000000000007",
+     "input",
+     104,
+     "application/json",
+     "d0/d0b87d9accc04c7f45e6cee24cfa5e3f2597be13274424771da45f23cfe0e675",
+     "dev",
+     "redact-1"
+    ],
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING"
+   },
+   {
+    "tx": "commit"
+   },
+   {
+    "tx": "begin"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     1,
+     "<HEX16>",
+     "<HEX16>",
+     "node_started",
+     "c1_plain",
+     "<TS>",
+     2,
+     {
+      "jsonb": {
+       "input_ref": {
+        "media_type": "application/json",
+        "ref": "sha256:f25898e5e1d45579d415099df193a549efc6f5e5d41fba9d015a805ed3ad3cc4",
+        "size": 110
+       },
+       "iteration": 1,
+       "node_path": "probe.c1_plain"
+      }
+     },
+     "<BODY_SHA>"
+    ],
+    "sql": "INSERT INTO trace.event (run_id, seq, span_id, parent_span_id, type, node_id, at, contract, body, body_sha256) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (run_id, seq) DO NOTHING RETURNING seq"
+   },
+   {
+    "params": [
+     "f25898e5e1d45579d415099df193a549efc6f5e5d41fba9d015a805ed3ad3cc4",
+     "run_01JC0000000000000000000007",
+     "input",
+     110,
+     "application/json",
+     "f2/f25898e5e1d45579d415099df193a549efc6f5e5d41fba9d015a805ed3ad3cc4",
+     "dev",
+     "redact-1"
+    ],
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     1,
+     "c1_plain",
+     1,
+     "started",
+     "<TS>",
+     "sha256:f25898e5e1d45579d415099df193a549efc6f5e5d41fba9d015a805ed3ad3cc4"
+    ],
+    "sql": "INSERT INTO trace.node_event (run_id, seq, node_id, iteration, status, started_at, input_ref) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+   },
+   {
+    "tx": "commit"
+   },
+   {
+    "tx": "begin"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     2,
+     "<HEX16>",
+     "<HEX16>",
+     "node_ended",
+     "c1_plain",
+     "<TS>",
+     2,
+     {
+      "jsonb": {
+       "error": null,
+       "iteration": 1,
+       "meta": {
+        "embed_tokens": null,
+        "embedding_mode": "fake",
+        "embedding_model": "text-embedding-3-small",
+        "fallback_reason": null,
+        "fallback_used": false,
+        "filter_applied": {},
+        "kind": "retrieve@1",
+        "query_ref": {
+         "media_type": "application/json",
+         "ref": "sha256:3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4",
+         "size": 49
+        },
+        "query_sha256": "3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4",
+        "release_id": "ir-docs-v1",
+        "results": [
+         {
+          "id": "D-04",
+          "score": 0.124674,
+          "source_type": "manual"
+         },
+         {
+          "id": "D-02",
+          "score": 0.111801,
+          "source_type": "manual"
+         },
+         {
+          "id": "D-07",
+          "score": 0.059011,
+          "source_type": "manual"
+         },
+         {
+          "id": "D-08",
+          "score": 0.059011,
+          "source_type": "manual"
+         }
+        ],
+        "store": "docs"
+       },
+       "node_path": "probe.c1_plain",
+       "output_ref": {
+        "media_type": "application/json",
+        "ref": "sha256:0841b42f66a42ec453fc262b4e6e29d48423e88b3f69f40e533559a0fcf4a5c8",
+        "size": 765
+       },
+       "status": "done"
+      }
+     },
+     "<BODY_SHA>"
+    ],
+    "sql": "INSERT INTO trace.event (run_id, seq, span_id, parent_span_id, type, node_id, at, contract, body, body_sha256) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (run_id, seq) DO NOTHING RETURNING seq"
+   },
+   {
+    "params": [
+     "3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4",
+     "run_01JC0000000000000000000007",
+     "query",
+     49,
+     "application/json",
+     "3f/3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4",
+     "dev",
+     "redact-1"
+    ],
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING"
+   },
+   {
+    "params": [
+     "0841b42f66a42ec453fc262b4e6e29d48423e88b3f69f40e533559a0fcf4a5c8",
+     "run_01JC0000000000000000000007",
+     "output",
+     765,
+     "application/json",
+     "08/0841b42f66a42ec453fc262b4e6e29d48423e88b3f69f40e533559a0fcf4a5c8",
+     "dev",
+     "redact-1"
+    ],
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     2,
+     "c1_plain",
+     1,
+     "retrieve@1",
+     "done",
+     "<TS>",
+     "sha256:0841b42f66a42ec453fc262b4e6e29d48423e88b3f69f40e533559a0fcf4a5c8",
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ],
+    "sql": "INSERT INTO trace.node_event (run_id, seq, node_id, iteration, kind, status, ended_at, output_ref, error, provider, model, request_config, tokens_in, tokens_out, prompt_ref, provider_raw_ref, custom_source_hash, expect_checks, route, checks) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     2,
+     "c1_plain",
+     "docs",
+     "ir-docs-v1",
+     "sha256:3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4",
+     "3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4",
+     {
+      "jsonb": {}
+     },
+     {
+      "jsonb": [
+       {
+        "id": "D-04",
+        "score": 0.124674,
+        "source_type": "manual"
+       },
+       {
+        "id": "D-02",
+        "score": 0.111801,
+        "source_type": "manual"
+       },
+       {
+        "id": "D-07",
+        "score": 0.059011,
+        "source_type": "manual"
+       },
+       {
+        "id": "D-08",
+        "score": 0.059011,
+        "source_type": "manual"
+       }
+      ]
+     },
+     false,
+     null,
+     "fake",
+     "text-embedding-3-small",
+     null
+    ],
+    "sql": "INSERT INTO trace.retrieval (run_id, seq, node_id, store, release_id, query_ref, query_sha256, filter_applied, results, fallback_used, fallback_reason, embedding_mode, embedding_model, embed_tokens) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+   },
+   {
+    "tx": "commit"
+   },
+   {
+    "tx": "begin"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     3,
+     "<HEX16>",
+     "<HEX16>",
+     "node_started",
+     "c2_filter",
+     "<TS>",
+     2,
+     {
+      "jsonb": {
+       "input_ref": {
+        "media_type": "application/json",
+        "ref": "sha256:f25898e5e1d45579d415099df193a549efc6f5e5d41fba9d015a805ed3ad3cc4",
+        "size": 110
+       },
+       "iteration": 1,
+       "node_path": "probe.c2_filter"
+      }
+     },
+     "<BODY_SHA>"
+    ],
+    "sql": "INSERT INTO trace.event (run_id, seq, span_id, parent_span_id, type, node_id, at, contract, body, body_sha256) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (run_id, seq) DO NOTHING RETURNING seq"
+   },
+   {
+    "params": [
+     "f25898e5e1d45579d415099df193a549efc6f5e5d41fba9d015a805ed3ad3cc4",
+     "run_01JC0000000000000000000007",
+     "input",
+     110,
+     "application/json",
+     "f2/f25898e5e1d45579d415099df193a549efc6f5e5d41fba9d015a805ed3ad3cc4",
+     "dev",
+     "redact-1"
+    ],
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     3,
+     "c2_filter",
+     1,
+     "started",
+     "<TS>",
+     "sha256:f25898e5e1d45579d415099df193a549efc6f5e5d41fba9d015a805ed3ad3cc4"
+    ],
+    "sql": "INSERT INTO trace.node_event (run_id, seq, node_id, iteration, status, started_at, input_ref) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+   },
+   {
+    "tx": "commit"
+   },
+   {
+    "tx": "begin"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     4,
+     "<HEX16>",
+     "<HEX16>",
+     "node_ended",
+     "c2_filter",
+     "<TS>",
+     2,
+     {
+      "jsonb": {
+       "error": null,
+       "iteration": 1,
+       "meta": {
+        "embed_tokens": null,
+        "embedding_mode": "fake",
+        "embedding_model": "text-embedding-3-small",
+        "fallback_reason": null,
+        "fallback_used": false,
+        "filter_applied": {
+         "group": "TW"
+        },
+        "kind": "retrieve@1",
+        "query_ref": {
+         "media_type": "application/json",
+         "ref": "sha256:3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4",
+         "size": 49
+        },
+        "query_sha256": "3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4",
+        "release_id": "ir-docs-v1",
+        "results": [
+         {
+          "id": "D-02",
+          "score": 0.111801,
+          "source_type": "manual"
+         },
+         {
+          "id": "D-03",
+          "score": -0.023458,
+          "source_type": "history"
+         },
+         {
+          "id": "D-01",
+          "score": -0.101188,
+          "source_type": "manual"
+         }
+        ],
+        "store": "docs"
+       },
+       "node_path": "probe.c2_filter",
+       "output_ref": {
+        "media_type": "application/json",
+        "ref": "sha256:cf97ed497b95d0af21cd4dccc341f945228f6096e424876c55714f62e6ef09ff",
+        "size": 607
+       },
+       "status": "done"
+      }
+     },
+     "<BODY_SHA>"
+    ],
+    "sql": "INSERT INTO trace.event (run_id, seq, span_id, parent_span_id, type, node_id, at, contract, body, body_sha256) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (run_id, seq) DO NOTHING RETURNING seq"
+   },
+   {
+    "params": [
+     "3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4",
+     "run_01JC0000000000000000000007",
+     "query",
+     49,
+     "application/json",
+     "3f/3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4",
+     "dev",
+     "redact-1"
+    ],
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING"
+   },
+   {
+    "params": [
+     "cf97ed497b95d0af21cd4dccc341f945228f6096e424876c55714f62e6ef09ff",
+     "run_01JC0000000000000000000007",
+     "output",
+     607,
+     "application/json",
+     "cf/cf97ed497b95d0af21cd4dccc341f945228f6096e424876c55714f62e6ef09ff",
+     "dev",
+     "redact-1"
+    ],
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     4,
+     "c2_filter",
+     1,
+     "retrieve@1",
+     "done",
+     "<TS>",
+     "sha256:cf97ed497b95d0af21cd4dccc341f945228f6096e424876c55714f62e6ef09ff",
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ],
+    "sql": "INSERT INTO trace.node_event (run_id, seq, node_id, iteration, kind, status, ended_at, output_ref, error, provider, model, request_config, tokens_in, tokens_out, prompt_ref, provider_raw_ref, custom_source_hash, expect_checks, route, checks) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     4,
+     "c2_filter",
+     "docs",
+     "ir-docs-v1",
+     "sha256:3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4",
+     "3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4",
+     {
+      "jsonb": {
+       "group": "TW"
+      }
+     },
+     {
+      "jsonb": [
+       {
+        "id": "D-02",
+        "score": 0.111801,
+        "source_type": "manual"
+       },
+       {
+        "id": "D-03",
+        "score": -0.023458,
+        "source_type": "history"
+       },
+       {
+        "id": "D-01",
+        "score": -0.101188,
+        "source_type": "manual"
+       }
+      ]
+     },
+     false,
+     null,
+     "fake",
+     "text-embedding-3-small",
+     null
+    ],
+    "sql": "INSERT INTO trace.retrieval (run_id, seq, node_id, store, release_id, query_ref, query_sha256, filter_applied, results, fallback_used, fallback_reason, embedding_mode, embedding_model, embed_tokens) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+   },
+   {
+    "tx": "commit"
+   },
+   {
+    "tx": "begin"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     5,
+     "<HEX16>",
+     "<HEX16>",
+     "node_started",
+     "c3_filter_list",
+     "<TS>",
+     2,
+     {
+      "jsonb": {
+       "input_ref": {
+        "media_type": "application/json",
+        "ref": "sha256:f25898e5e1d45579d415099df193a549efc6f5e5d41fba9d015a805ed3ad3cc4",
+        "size": 110
+       },
+       "iteration": 1,
+       "node_path": "probe.c3_filter_list"
+      }
+     },
+     "<BODY_SHA>"
+    ],
+    "sql": "INSERT INTO trace.event (run_id, seq, span_id, parent_span_id, type, node_id, at, contract, body, body_sha256) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (run_id, seq) DO NOTHING RETURNING seq"
+   },
+   {
+    "params": [
+     "f25898e5e1d45579d415099df193a549efc6f5e5d41fba9d015a805ed3ad3cc4",
+     "run_01JC0000000000000000000007",
+     "input",
+     110,
+     "application/json",
+     "f2/f25898e5e1d45579d415099df193a549efc6f5e5d41fba9d015a805ed3ad3cc4",
+     "dev",
+     "redact-1"
+    ],
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     5,
+     "c3_filter_list",
+     1,
+     "started",
+     "<TS>",
+     "sha256:f25898e5e1d45579d415099df193a549efc6f5e5d41fba9d015a805ed3ad3cc4"
+    ],
+    "sql": "INSERT INTO trace.node_event (run_id, seq, node_id, iteration, status, started_at, input_ref) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+   },
+   {
+    "tx": "commit"
+   },
+   {
+    "tx": "begin"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     6,
+     "<HEX16>",
+     "<HEX16>",
+     "node_ended",
+     "c3_filter_list",
+     "<TS>",
+     2,
+     {
+      "jsonb": {
+       "error": null,
+       "iteration": 1,
+       "meta": {
+        "embed_tokens": null,
+        "embedding_mode": "fake",
+        "embedding_model": "text-embedding-3-small",
+        "fallback_reason": null,
+        "fallback_used": false,
+        "filter_applied": {
+         "group": [
+          "TW",
+          "PW"
+         ]
+        },
+        "kind": "retrieve@1",
+        "query_ref": {
+         "media_type": "application/json",
+         "ref": "sha256:3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4",
+         "size": 49
+        },
+        "query_sha256": "3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4",
+        "release_id": "ir-docs-v1",
+        "results": [
+         {
+          "id": "D-04",
+          "score": 0.124674,
+          "source_type": "manual"
+         },
+         {
+          "id": "D-02",
+          "score": 0.111801,
+          "source_type": "manual"
+         },
+         {
+          "id": "D-03",
+          "score": -0.023458,
+          "source_type": "history"
+         }
+        ],
+        "store": "docs"
+       },
+       "node_path": "probe.c3_filter_list",
+       "output_ref": {
+        "media_type": "application/json",
+        "ref": "sha256:68c9d6f0ec9866ac399b1119eed6670592fd8bc84b9b41e2cec3e358e825d5fc",
+        "size": 606
+       },
+       "status": "done"
+      }
+     },
+     "<BODY_SHA>"
+    ],
+    "sql": "INSERT INTO trace.event (run_id, seq, span_id, parent_span_id, type, node_id, at, contract, body, body_sha256) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (run_id, seq) DO NOTHING RETURNING seq"
+   },
+   {
+    "params": [
+     "3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4",
+     "run_01JC0000000000000000000007",
+     "query",
+     49,
+     "application/json",
+     "3f/3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4",
+     "dev",
+     "redact-1"
+    ],
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING"
+   },
+   {
+    "params": [
+     "68c9d6f0ec9866ac399b1119eed6670592fd8bc84b9b41e2cec3e358e825d5fc",
+     "run_01JC0000000000000000000007",
+     "output",
+     606,
+     "application/json",
+     "68/68c9d6f0ec9866ac399b1119eed6670592fd8bc84b9b41e2cec3e358e825d5fc",
+     "dev",
+     "redact-1"
+    ],
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     6,
+     "c3_filter_list",
+     1,
+     "retrieve@1",
+     "done",
+     "<TS>",
+     "sha256:68c9d6f0ec9866ac399b1119eed6670592fd8bc84b9b41e2cec3e358e825d5fc",
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ],
+    "sql": "INSERT INTO trace.node_event (run_id, seq, node_id, iteration, kind, status, ended_at, output_ref, error, provider, model, request_config, tokens_in, tokens_out, prompt_ref, provider_raw_ref, custom_source_hash, expect_checks, route, checks) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     6,
+     "c3_filter_list",
+     "docs",
+     "ir-docs-v1",
+     "sha256:3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4",
+     "3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4",
+     {
+      "jsonb": {
+       "group": [
+        "TW",
+        "PW"
+       ]
+      }
+     },
+     {
+      "jsonb": [
+       {
+        "id": "D-04",
+        "score": 0.124674,
+        "source_type": "manual"
+       },
+       {
+        "id": "D-02",
+        "score": 0.111801,
+        "source_type": "manual"
+       },
+       {
+        "id": "D-03",
+        "score": -0.023458,
+        "source_type": "history"
+       }
+      ]
+     },
+     false,
+     null,
+     "fake",
+     "text-embedding-3-small",
+     null
+    ],
+    "sql": "INSERT INTO trace.retrieval (run_id, seq, node_id, store, release_id, query_ref, query_sha256, filter_applied, results, fallback_used, fallback_reason, embedding_mode, embedding_model, embed_tokens) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+   },
+   {
+    "tx": "commit"
+   },
+   {
+    "tx": "begin"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     7,
+     "<HEX16>",
+     "<HEX16>",
+     "node_started",
+     "c4_relax",
+     "<TS>",
+     2,
+     {
+      "jsonb": {
+       "input_ref": {
+        "media_type": "application/json",
+        "ref": "sha256:f25898e5e1d45579d415099df193a549efc6f5e5d41fba9d015a805ed3ad3cc4",
+        "size": 110
+       },
+       "iteration": 1,
+       "node_path": "probe.c4_relax"
+      }
+     },
+     "<BODY_SHA>"
+    ],
+    "sql": "INSERT INTO trace.event (run_id, seq, span_id, parent_span_id, type, node_id, at, contract, body, body_sha256) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (run_id, seq) DO NOTHING RETURNING seq"
+   },
+   {
+    "params": [
+     "f25898e5e1d45579d415099df193a549efc6f5e5d41fba9d015a805ed3ad3cc4",
+     "run_01JC0000000000000000000007",
+     "input",
+     110,
+     "application/json",
+     "f2/f25898e5e1d45579d415099df193a549efc6f5e5d41fba9d015a805ed3ad3cc4",
+     "dev",
+     "redact-1"
+    ],
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     7,
+     "c4_relax",
+     1,
+     "started",
+     "<TS>",
+     "sha256:f25898e5e1d45579d415099df193a549efc6f5e5d41fba9d015a805ed3ad3cc4"
+    ],
+    "sql": "INSERT INTO trace.node_event (run_id, seq, node_id, iteration, status, started_at, input_ref) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+   },
+   {
+    "tx": "commit"
+   },
+   {
+    "tx": "begin"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     8,
+     "<HEX16>",
+     "<HEX16>",
+     "node_ended",
+     "c4_relax",
+     "<TS>",
+     2,
+     {
+      "jsonb": {
+       "error": null,
+       "iteration": 1,
+       "meta": {
+        "embed_tokens": null,
+        "embedding_mode": "fake",
+        "embedding_model": "text-embedding-3-small",
+        "fallback_reason": "결과 0개 < 2 → ['group'] 조건을 빼고 다시 검색",
+        "fallback_used": true,
+        "filter_applied": {},
+        "kind": "retrieve@1",
+        "query_ref": {
+         "media_type": "application/json",
+         "ref": "sha256:3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4",
+         "size": 49
+        },
+        "query_sha256": "3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4",
+        "release_id": "ir-docs-v1",
+        "results": [
+         {
+          "id": "D-04",
+          "score": 0.124674,
+          "source_type": "manual"
+         },
+         {
+          "id": "D-02",
+          "score": 0.111801,
+          "source_type": "manual"
+         },
+         {
+          "id": "D-07",
+          "score": 0.059011,
+          "source_type": "manual"
+         }
+        ],
+        "store": "docs"
+       },
+       "node_path": "probe.c4_relax",
+       "output_ref": {
+        "media_type": "application/json",
+        "ref": "sha256:4971ed8ddc684b2664fb6d08836d730b7d0e857c5776a8de81f5f305161b79e4",
+        "size": 578
+       },
+       "status": "done"
+      }
+     },
+     "<BODY_SHA>"
+    ],
+    "sql": "INSERT INTO trace.event (run_id, seq, span_id, parent_span_id, type, node_id, at, contract, body, body_sha256) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (run_id, seq) DO NOTHING RETURNING seq"
+   },
+   {
+    "params": [
+     "3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4",
+     "run_01JC0000000000000000000007",
+     "query",
+     49,
+     "application/json",
+     "3f/3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4",
+     "dev",
+     "redact-1"
+    ],
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING"
+   },
+   {
+    "params": [
+     "4971ed8ddc684b2664fb6d08836d730b7d0e857c5776a8de81f5f305161b79e4",
+     "run_01JC0000000000000000000007",
+     "output",
+     578,
+     "application/json",
+     "49/4971ed8ddc684b2664fb6d08836d730b7d0e857c5776a8de81f5f305161b79e4",
+     "dev",
+     "redact-1"
+    ],
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     8,
+     "c4_relax",
+     1,
+     "retrieve@1",
+     "done",
+     "<TS>",
+     "sha256:4971ed8ddc684b2664fb6d08836d730b7d0e857c5776a8de81f5f305161b79e4",
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ],
+    "sql": "INSERT INTO trace.node_event (run_id, seq, node_id, iteration, kind, status, ended_at, output_ref, error, provider, model, request_config, tokens_in, tokens_out, prompt_ref, provider_raw_ref, custom_source_hash, expect_checks, route, checks) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     8,
+     "c4_relax",
+     "docs",
+     "ir-docs-v1",
+     "sha256:3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4",
+     "3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4",
+     {
+      "jsonb": {}
+     },
+     {
+      "jsonb": [
+       {
+        "id": "D-04",
+        "score": 0.124674,
+        "source_type": "manual"
+       },
+       {
+        "id": "D-02",
+        "score": 0.111801,
+        "source_type": "manual"
+       },
+       {
+        "id": "D-07",
+        "score": 0.059011,
+        "source_type": "manual"
+       }
+      ]
+     },
+     true,
+     "결과 0개 < 2 → ['group'] 조건을 빼고 다시 검색",
+     "fake",
+     "text-embedding-3-small",
+     null
+    ],
+    "sql": "INSERT INTO trace.retrieval (run_id, seq, node_id, store, release_id, query_ref, query_sha256, filter_applied, results, fallback_used, fallback_reason, embedding_mode, embedding_model, embed_tokens) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+   },
+   {
+    "tx": "commit"
+   },
+   {
+    "tx": "begin"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     9,
+     "<HEX16>",
+     "<HEX16>",
+     "node_started",
+     "c5_mmr",
+     "<TS>",
+     2,
+     {
+      "jsonb": {
+       "input_ref": {
+        "media_type": "application/json",
+        "ref": "sha256:f25898e5e1d45579d415099df193a549efc6f5e5d41fba9d015a805ed3ad3cc4",
+        "size": 110
+       },
+       "iteration": 1,
+       "node_path": "probe.c5_mmr"
+      }
+     },
+     "<BODY_SHA>"
+    ],
+    "sql": "INSERT INTO trace.event (run_id, seq, span_id, parent_span_id, type, node_id, at, contract, body, body_sha256) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (run_id, seq) DO NOTHING RETURNING seq"
+   },
+   {
+    "params": [
+     "f25898e5e1d45579d415099df193a549efc6f5e5d41fba9d015a805ed3ad3cc4",
+     "run_01JC0000000000000000000007",
+     "input",
+     110,
+     "application/json",
+     "f2/f25898e5e1d45579d415099df193a549efc6f5e5d41fba9d015a805ed3ad3cc4",
+     "dev",
+     "redact-1"
+    ],
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     9,
+     "c5_mmr",
+     1,
+     "started",
+     "<TS>",
+     "sha256:f25898e5e1d45579d415099df193a549efc6f5e5d41fba9d015a805ed3ad3cc4"
+    ],
+    "sql": "INSERT INTO trace.node_event (run_id, seq, node_id, iteration, status, started_at, input_ref) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+   },
+   {
+    "tx": "commit"
+   },
+   {
+    "tx": "begin"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     10,
+     "<HEX16>",
+     "<HEX16>",
+     "node_ended",
+     "c5_mmr",
+     "<TS>",
+     2,
+     {
+      "jsonb": {
+       "error": null,
+       "iteration": 1,
+       "meta": {
+        "embed_tokens": null,
+        "embedding_mode": "fake",
+        "embedding_model": "text-embedding-3-small",
+        "fallback_reason": null,
+        "fallback_used": false,
+        "filter_applied": {},
+        "kind": "retrieve@1",
+        "query_ref": {
+         "media_type": "application/json",
+         "ref": "sha256:3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4",
+         "size": 49
+        },
+        "query_sha256": "3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4",
+        "release_id": "ir-docs-v1",
+        "results": [
+         {
+          "id": "D-04",
+          "score": 0.124674,
+          "source_type": "manual"
+         },
+         {
+          "id": "D-02",
+          "score": 0.111801,
+          "source_type": "manual"
+         },
+         {
+          "id": "D-07",
+          "score": 0.059011,
+          "source_type": "manual"
+         }
+        ],
+        "store": "docs"
+       },
+       "node_path": "probe.c5_mmr",
+       "output_ref": {
+        "media_type": "application/json",
+        "ref": "sha256:4d1eda26fe60f7b47c1bb7e537a13d669ca14aa28c957ba355b04dfe4f784128",
+        "size": 581
+       },
+       "status": "done"
+      }
+     },
+     "<BODY_SHA>"
+    ],
+    "sql": "INSERT INTO trace.event (run_id, seq, span_id, parent_span_id, type, node_id, at, contract, body, body_sha256) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (run_id, seq) DO NOTHING RETURNING seq"
+   },
+   {
+    "params": [
+     "3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4",
+     "run_01JC0000000000000000000007",
+     "query",
+     49,
+     "application/json",
+     "3f/3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4",
+     "dev",
+     "redact-1"
+    ],
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING"
+   },
+   {
+    "params": [
+     "4d1eda26fe60f7b47c1bb7e537a13d669ca14aa28c957ba355b04dfe4f784128",
+     "run_01JC0000000000000000000007",
+     "output",
+     581,
+     "application/json",
+     "4d/4d1eda26fe60f7b47c1bb7e537a13d669ca14aa28c957ba355b04dfe4f784128",
+     "dev",
+     "redact-1"
+    ],
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     10,
+     "c5_mmr",
+     1,
+     "retrieve@1",
+     "done",
+     "<TS>",
+     "sha256:4d1eda26fe60f7b47c1bb7e537a13d669ca14aa28c957ba355b04dfe4f784128",
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ],
+    "sql": "INSERT INTO trace.node_event (run_id, seq, node_id, iteration, kind, status, ended_at, output_ref, error, provider, model, request_config, tokens_in, tokens_out, prompt_ref, provider_raw_ref, custom_source_hash, expect_checks, route, checks) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     10,
+     "c5_mmr",
+     "docs",
+     "ir-docs-v1",
+     "sha256:3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4",
+     "3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4",
+     {
+      "jsonb": {}
+     },
+     {
+      "jsonb": [
+       {
+        "id": "D-04",
+        "score": 0.124674,
+        "source_type": "manual"
+       },
+       {
+        "id": "D-02",
+        "score": 0.111801,
+        "source_type": "manual"
+       },
+       {
+        "id": "D-07",
+        "score": 0.059011,
+        "source_type": "manual"
+       }
+      ]
+     },
+     false,
+     null,
+     "fake",
+     "text-embedding-3-small",
+     null
+    ],
+    "sql": "INSERT INTO trace.retrieval (run_id, seq, node_id, store, release_id, query_ref, query_sha256, filter_applied, results, fallback_used, fallback_reason, embedding_mode, embedding_model, embed_tokens) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+   },
+   {
+    "tx": "commit"
+   },
+   {
+    "tx": "begin"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     11,
+     "<HEX16>",
+     "<HEX16>",
+     "node_started",
+     "c6_table",
+     "<TS>",
+     2,
+     {
+      "jsonb": {
+       "input_ref": {
+        "media_type": "application/json",
+        "ref": "sha256:f25898e5e1d45579d415099df193a549efc6f5e5d41fba9d015a805ed3ad3cc4",
+        "size": 110
+       },
+       "iteration": 1,
+       "node_path": "probe.c6_table"
+      }
+     },
+     "<BODY_SHA>"
+    ],
+    "sql": "INSERT INTO trace.event (run_id, seq, span_id, parent_span_id, type, node_id, at, contract, body, body_sha256) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (run_id, seq) DO NOTHING RETURNING seq"
+   },
+   {
+    "params": [
+     "f25898e5e1d45579d415099df193a549efc6f5e5d41fba9d015a805ed3ad3cc4",
+     "run_01JC0000000000000000000007",
+     "input",
+     110,
+     "application/json",
+     "f2/f25898e5e1d45579d415099df193a549efc6f5e5d41fba9d015a805ed3ad3cc4",
+     "dev",
+     "redact-1"
+    ],
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     11,
+     "c6_table",
+     1,
+     "started",
+     "<TS>",
+     "sha256:f25898e5e1d45579d415099df193a549efc6f5e5d41fba9d015a805ed3ad3cc4"
+    ],
+    "sql": "INSERT INTO trace.node_event (run_id, seq, node_id, iteration, status, started_at, input_ref) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+   },
+   {
+    "tx": "commit"
+   },
+   {
+    "tx": "begin"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     12,
+     "<HEX16>",
+     "<HEX16>",
+     "node_ended",
+     "c6_table",
+     "<TS>",
+     2,
+     {
+      "jsonb": {
+       "error": null,
+       "iteration": 1,
+       "meta": {
+        "embed_tokens": null,
+        "embedding_mode": null,
+        "embedding_model": null,
+        "fallback_reason": "결과 0개 < 1 → ['group'] 조건을 빼고 다시 검색",
+        "fallback_used": true,
+        "filter_applied": {},
+        "kind": "retrieve@1",
+        "query_ref": {
+         "media_type": "application/json",
+         "ref": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+         "size": 2
+        },
+        "query_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "release_id": "tr-rows-v1",
+        "results": [
+         {
+          "id": "R-01",
+          "score": 1.0,
+          "source_type": "rows"
+         },
+         {
+          "id": "R-02",
+          "score": 1.0,
+          "source_type": "rows"
+         }
+        ],
+        "store": "rows"
+       },
+       "node_path": "probe.c6_table",
+       "output_ref": {
+        "media_type": "application/json",
+        "ref": "sha256:101a784ab27c55c5dc61b2da97e8613bd1a033d5302f2dd8625b8c849d1f304e",
+        "size": 342
+       },
+       "status": "done"
+      }
+     },
+     "<BODY_SHA>"
+    ],
+    "sql": "INSERT INTO trace.event (run_id, seq, span_id, parent_span_id, type, node_id, at, contract, body, body_sha256) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (run_id, seq) DO NOTHING RETURNING seq"
+   },
+   {
+    "params": [
+     "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+     "run_01JC0000000000000000000007",
+     "query",
+     2,
+     "application/json",
+     "44/44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+     "dev",
+     "redact-1"
+    ],
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING"
+   },
+   {
+    "params": [
+     "101a784ab27c55c5dc61b2da97e8613bd1a033d5302f2dd8625b8c849d1f304e",
+     "run_01JC0000000000000000000007",
+     "output",
+     342,
+     "application/json",
+     "10/101a784ab27c55c5dc61b2da97e8613bd1a033d5302f2dd8625b8c849d1f304e",
+     "dev",
+     "redact-1"
+    ],
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     12,
+     "c6_table",
+     1,
+     "retrieve@1",
+     "done",
+     "<TS>",
+     "sha256:101a784ab27c55c5dc61b2da97e8613bd1a033d5302f2dd8625b8c849d1f304e",
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ],
+    "sql": "INSERT INTO trace.node_event (run_id, seq, node_id, iteration, kind, status, ended_at, output_ref, error, provider, model, request_config, tokens_in, tokens_out, prompt_ref, provider_raw_ref, custom_source_hash, expect_checks, route, checks) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     12,
+     "c6_table",
+     "rows",
+     "tr-rows-v1",
+     "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+     "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+     {
+      "jsonb": {}
+     },
+     {
+      "jsonb": [
+       {
+        "id": "R-01",
+        "score": 1.0,
+        "source_type": "rows"
+       },
+       {
+        "id": "R-02",
+        "score": 1.0,
+        "source_type": "rows"
+       }
+      ]
+     },
+     true,
+     "결과 0개 < 1 → ['group'] 조건을 빼고 다시 검색",
+     null,
+     null,
+     null
+    ],
+    "sql": "INSERT INTO trace.retrieval (run_id, seq, node_id, store, release_id, query_ref, query_sha256, filter_applied, results, fallback_used, fallback_reason, embedding_mode, embedding_model, embed_tokens) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+   },
+   {
+    "tx": "commit"
+   },
+   {
+    "tx": "begin"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     13,
+     "<HEX16>",
+     "<HEX16>",
+     "node_started",
+     "summary",
+     "<TS>",
+     2,
+     {
+      "jsonb": {
+       "input_ref": {
+        "media_type": "application/json",
+        "ref": "sha256:02d7f59128cec127f040b978a66b204f0798669be241e7f2afa2e63080f5b643",
+        "size": 3583
+       },
+       "iteration": 1,
+       "node_path": "probe.summary"
+      }
+     },
+     "<BODY_SHA>"
+    ],
+    "sql": "INSERT INTO trace.event (run_id, seq, span_id, parent_span_id, type, node_id, at, contract, body, body_sha256) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (run_id, seq) DO NOTHING RETURNING seq"
+   },
+   {
+    "params": [
+     "02d7f59128cec127f040b978a66b204f0798669be241e7f2afa2e63080f5b643",
+     "run_01JC0000000000000000000007",
+     "input",
+     3583,
+     "application/json",
+     "02/02d7f59128cec127f040b978a66b204f0798669be241e7f2afa2e63080f5b643",
+     "dev",
+     "redact-1"
+    ],
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     13,
+     "summary",
+     1,
+     "started",
+     "<TS>",
+     "sha256:02d7f59128cec127f040b978a66b204f0798669be241e7f2afa2e63080f5b643"
+    ],
+    "sql": "INSERT INTO trace.node_event (run_id, seq, node_id, iteration, status, started_at, input_ref) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+   },
+   {
+    "tx": "commit"
+   },
+   {
+    "tx": "begin"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     14,
+     "<HEX16>",
+     "<HEX16>",
+     "node_ended",
+     "summary",
+     "<TS>",
+     2,
+     {
+      "jsonb": {
+       "error": null,
+       "iteration": 1,
+       "meta": {
+        "artifact": {
+         "format": "md",
+         "sha256": "e731bb4b288bd4f3989b9ad9f93bae63b19edd8f9d69d87e8626842ca5f8d506"
+        },
+        "kind": "render@1"
+       },
+       "node_path": "probe.summary",
+       "output_ref": {
+        "media_type": "application/json",
+        "ref": "sha256:9cb824259e9d155bc0d81b362c6f3d4637d7fabaa5cf139930ab1edf71d30fec",
+        "size": 4272
+       },
+       "status": "done"
+      }
+     },
+     "<BODY_SHA>"
+    ],
+    "sql": "INSERT INTO trace.event (run_id, seq, span_id, parent_span_id, type, node_id, at, contract, body, body_sha256) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (run_id, seq) DO NOTHING RETURNING seq"
+   },
+   {
+    "params": [
+     "9cb824259e9d155bc0d81b362c6f3d4637d7fabaa5cf139930ab1edf71d30fec",
+     "run_01JC0000000000000000000007",
+     "output",
+     4272,
+     "application/json",
+     "9c/9cb824259e9d155bc0d81b362c6f3d4637d7fabaa5cf139930ab1edf71d30fec",
+     "dev",
+     "redact-1"
+    ],
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     14,
+     "summary",
+     1,
+     "render@1",
+     "done",
+     "<TS>",
+     "sha256:9cb824259e9d155bc0d81b362c6f3d4637d7fabaa5cf139930ab1edf71d30fec",
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ],
+    "sql": "INSERT INTO trace.node_event (run_id, seq, node_id, iteration, kind, status, ended_at, output_ref, error, provider, model, request_config, tokens_in, tokens_out, prompt_ref, provider_raw_ref, custom_source_hash, expect_checks, route, checks) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+   },
+   {
+    "tx": "commit"
+   },
+   {
+    "tx": "begin"
+   },
+   {
+    "params": [
+     "run_01JC0000000000000000000007",
+     15,
+     "<HEX16>",
+     null,
+     "run_ended",
+     null,
+     "<TS>",
+     2,
+     {
+      "jsonb": {
+       "error": null,
+       "outcome": "completed",
+       "output_ref": {
+        "media_type": "application/json",
+        "ref": "sha256:ac81f8035232c1a0921bccd51bf7cafc858598e83d2c9bdeb71d666b374d9b3d",
+        "size": 4263
+       },
+       "status": "succeeded",
+       "tokens_in": 0,
+       "tokens_out": 0
+      }
+     },
+     "<BODY_SHA>"
+    ],
+    "sql": "INSERT INTO trace.event (run_id, seq, span_id, parent_span_id, type, node_id, at, contract, body, body_sha256) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (run_id, seq) DO NOTHING RETURNING seq"
+   },
+   {
+    "params": [
+     "ac81f8035232c1a0921bccd51bf7cafc858598e83d2c9bdeb71d666b374d9b3d",
+     "run_01JC0000000000000000000007",
+     "final",
+     4263,
+     "application/json",
+     "ac/ac81f8035232c1a0921bccd51bf7cafc858598e83d2c9bdeb71d666b374d9b3d",
+     "dev",
+     "redact-1"
+    ],
+    "sql": "INSERT INTO trace.payload_ref (sha256, run_id, role, size, media_type, location, retention_class, redaction_policy_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING"
+   },
+   {
+    "tx": "commit"
+   }
+  ],
+  "outcome": "completed",
+  "payload_files": {
+   "02/02d7f59128cec127f040b978a66b204f0798669be241e7f2afa2e63080f5b643": {
+    "c1": [
+     {
+      "fallback_used": false,
+      "id": "D-04",
+      "index_release": "ir-docs-v1",
+      "score": 0.124674,
+      "source_type": "manual",
+      "store": "docs",
+      "text": "전력이 범위를 벗어나면 회전 속도와 토크를 다시 잰다"
+     },
+     {
+      "fallback_used": false,
+      "id": "D-02",
+      "index_release": "ir-docs-v1",
+      "score": 0.111801,
+      "source_type": "manual",
+      "store": "docs",
+      "text": "공구 끝 마모 폭이 0.3mm를 넘으면 교체한다"
+     },
+     {
+      "fallback_used": false,
+      "id": "D-07",
+      "index_release": "ir-docs-v1",
+      "score": 0.059011,
+      "source_type": "manual",
+      "store": "docs",
+      "text": "점검 전 전원을 내리고 잠금 표지를 단다"
+     },
+     {
+      "fallback_used": false,
+      "id": "D-08",
+      "index_release": "ir-docs-v1",
+      "score": 0.059011,
+      "source_type": "manual",
+      "store": "docs",
+      "text": "점검 전 전원을 내리고 잠금 표지를 단다"
+     }
+    ],
+    "c2": [
+     {
+      "fallback_used": false,
+      "id": "D-02",
+      "index_release": "ir-docs-v1",
+      "score": 0.111801,
+      "source_type": "manual",
+      "store": "docs",
+      "text": "공구 끝 마모 폭이 0.3mm를 넘으면 교체한다"
+     },
+     {
+      "fallback_used": false,
+      "id": "D-03",
+      "index_release": "ir-docs-v1",
+      "score": -0.023458,
+      "source_type": "history",
+      "store": "docs",
+      "text": "토크가 갑자기 오르면 주축 부하와 공구 마모를 함께 본다"
+     },
+     {
+      "fallback_used": false,
+      "id": "D-01",
+      "index_release": "ir-docs-v1",
+      "score": -0.101188,
+      "source_type": "manual",
+      "store": "docs",
+      "text": "공구 마모가 심하면 공구를 바꾸고 마모 폭을 기록한다"
+     }
+    ],
+    "c3": [
+     {
+      "fallback_used": false,
+      "id": "D-04",
+      "index_release": "ir-docs-v1",
+      "score": 0.124674,
+      "source_type": "manual",
+      "store": "docs",
+      "text": "전력이 범위를 벗어나면 회전 속도와 토크를 다시 잰다"
+     },
+     {
+      "fallback_used": false,
+      "id": "D-02",
+      "index_release": "ir-docs-v1",
+      "score": 0.111801,
+      "source_type": "manual",
+      "store": "docs",
+      "text": "공구 끝 마모 폭이 0.3mm를 넘으면 교체한다"
+     },
+     {
+      "fallback_used": false,
+      "id": "D-03",
+      "index_release": "ir-docs-v1",
+      "score": -0.023458,
+      "source_type": "history",
+      "store": "docs",
+      "text": "토크가 갑자기 오르면 주축 부하와 공구 마모를 함께 본다"
+     }
+    ],
+    "c4": [
+     {
+      "fallback_used": true,
+      "id": "D-04",
+      "index_release": "ir-docs-v1",
+      "score": 0.124674,
+      "source_type": "manual",
+      "store": "docs",
+      "text": "전력이 범위를 벗어나면 회전 속도와 토크를 다시 잰다"
+     },
+     {
+      "fallback_used": true,
+      "id": "D-02",
+      "index_release": "ir-docs-v1",
+      "score": 0.111801,
+      "source_type": "manual",
+      "store": "docs",
+      "text": "공구 끝 마모 폭이 0.3mm를 넘으면 교체한다"
+     },
+     {
+      "fallback_used": true,
+      "id": "D-07",
+      "index_release": "ir-docs-v1",
+      "score": 0.059011,
+      "source_type": "manual",
+      "store": "docs",
+      "text": "점검 전 전원을 내리고 잠금 표지를 단다"
+     }
+    ],
+    "c5": [
+     {
+      "fallback_used": false,
+      "id": "D-04",
+      "index_release": "ir-docs-v1",
+      "score": 0.124674,
+      "source_type": "manual",
+      "store": "docs",
+      "text": "전력이 범위를 벗어나면 회전 속도와 토크를 다시 잰다"
+     },
+     {
+      "fallback_used": false,
+      "id": "D-02",
+      "index_release": "ir-docs-v1",
+      "score": 0.111801,
+      "source_type": "manual",
+      "store": "docs",
+      "text": "공구 끝 마모 폭이 0.3mm를 넘으면 교체한다"
+     },
+     {
+      "fallback_used": false,
+      "id": "D-07",
+      "index_release": "ir-docs-v1",
+      "score": 0.059011,
+      "source_type": "manual",
+      "store": "docs",
+      "text": "점검 전 전원을 내리고 잠금 표지를 단다"
+     }
+    ],
+    "c6": [
+     {
+      "fallback_used": true,
+      "id": "R-01",
+      "score": 1.0,
+      "source_type": "rows",
+      "store": "rows",
+      "text": "{\"row_id\": \"R-01\", \"group\": \"TW\", \"action\": \"공구 교체\"}"
+     },
+     {
+      "fallback_used": true,
+      "id": "R-02",
+      "score": 1.0,
+      "source_type": "rows",
+      "store": "rows",
+      "text": "{\"row_id\": \"R-02\", \"group\": \"TW\", \"action\": \"마모 폭 기록\"}"
+     }
+    ],
+    "q": {
+     "group": "TW",
+     "groups": [
+      "TW",
+      "PW"
+     ],
+     "rare": "XX",
+     "text": "공구 마모 점검 전에 전원을 내린다"
+    }
+   },
+   "08/0841b42f66a42ec453fc262b4e6e29d48423e88b3f69f40e533559a0fcf4a5c8": {
+    "c1": [
+     {
+      "fallback_used": false,
+      "id": "D-04",
+      "index_release": "ir-docs-v1",
+      "score": 0.124674,
+      "source_type": "manual",
+      "store": "docs",
+      "text": "전력이 범위를 벗어나면 회전 속도와 토크를 다시 잰다"
+     },
+     {
+      "fallback_used": false,
+      "id": "D-02",
+      "index_release": "ir-docs-v1",
+      "score": 0.111801,
+      "source_type": "manual",
+      "store": "docs",
+      "text": "공구 끝 마모 폭이 0.3mm를 넘으면 교체한다"
+     },
+     {
+      "fallback_used": false,
+      "id": "D-07",
+      "index_release": "ir-docs-v1",
+      "score": 0.059011,
+      "source_type": "manual",
+      "store": "docs",
+      "text": "점검 전 전원을 내리고 잠금 표지를 단다"
+     },
+     {
+      "fallback_used": false,
+      "id": "D-08",
+      "index_release": "ir-docs-v1",
+      "score": 0.059011,
+      "source_type": "manual",
+      "store": "docs",
+      "text": "점검 전 전원을 내리고 잠금 표지를 단다"
+     }
+    ]
+   },
+   "10/101a784ab27c55c5dc61b2da97e8613bd1a033d5302f2dd8625b8c849d1f304e": {
+    "c6": [
+     {
+      "fallback_used": true,
+      "id": "R-01",
+      "score": 1.0,
+      "source_type": "rows",
+      "store": "rows",
+      "text": "{\"row_id\": \"R-01\", \"group\": \"TW\", \"action\": \"공구 교체\"}"
+     },
+     {
+      "fallback_used": true,
+      "id": "R-02",
+      "score": 1.0,
+      "source_type": "rows",
+      "store": "rows",
+      "text": "{\"row_id\": \"R-02\", \"group\": \"TW\", \"action\": \"마모 폭 기록\"}"
+     }
+    ]
+   },
+   "3f/3f62fa6984ada1395554521ac6e145d375241d8b53d484f32b5ea332639d8bc4": "공구 마모 점검 전에 전원을 내린다",
+   "44/44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a": {},
+   "49/4971ed8ddc684b2664fb6d08836d730b7d0e857c5776a8de81f5f305161b79e4": {
+    "c4": [
+     {
+      "fallback_used": true,
+      "id": "D-04",
+      "index_release": "ir-docs-v1",
+      "score": 0.124674,
+      "source_type": "manual",
+      "store": "docs",
+      "text": "전력이 범위를 벗어나면 회전 속도와 토크를 다시 잰다"
+     },
+     {
+      "fallback_used": true,
+      "id": "D-02",
+      "index_release": "ir-docs-v1",
+      "score": 0.111801,
+      "source_type": "manual",
+      "store": "docs",
+      "text": "공구 끝 마모 폭이 0.3mm를 넘으면 교체한다"
+     },
+     {
+      "fallback_used": true,
+      "id": "D-07",
+      "index_release": "ir-docs-v1",
+      "score": 0.059011,
+      "source_type": "manual",
+      "store": "docs",
+      "text": "점검 전 전원을 내리고 잠금 표지를 단다"
+     }
+    ]
+   },
+   "4d/4d1eda26fe60f7b47c1bb7e537a13d669ca14aa28c957ba355b04dfe4f784128": {
+    "c5": [
+     {
+      "fallback_used": false,
+      "id": "D-04",
+      "index_release": "ir-docs-v1",
+      "score": 0.124674,
+      "source_type": "manual",
+      "store": "docs",
+      "text": "전력이 범위를 벗어나면 회전 속도와 토크를 다시 잰다"
+     },
+     {
+      "fallback_used": false,
+      "id": "D-02",
+      "index_release": "ir-docs-v1",
+      "score": 0.111801,
+      "source_type": "manual",
+      "store": "docs",
+      "text": "공구 끝 마모 폭이 0.3mm를 넘으면 교체한다"
+     },
+     {
+      "fallback_used": false,
+      "id": "D-07",
+      "index_release": "ir-docs-v1",
+      "score": 0.059011,
+      "source_type": "manual",
+      "store": "docs",
+      "text": "점검 전 전원을 내리고 잠금 표지를 단다"
+     }
+    ]
+   },
+   "68/68c9d6f0ec9866ac399b1119eed6670592fd8bc84b9b41e2cec3e358e825d5fc": {
+    "c3": [
+     {
+      "fallback_used": false,
+      "id": "D-04",
+      "index_release": "ir-docs-v1",
+      "score": 0.124674,
+      "source_type": "manual",
+      "store": "docs",
+      "text": "전력이 범위를 벗어나면 회전 속도와 토크를 다시 잰다"
+     },
+     {
+      "fallback_used": false,
+      "id": "D-02",
+      "index_release": "ir-docs-v1",
+      "score": 0.111801,
+      "source_type": "manual",
+      "store": "docs",
+      "text": "공구 끝 마모 폭이 0.3mm를 넘으면 교체한다"
+     },
+     {
+      "fallback_used": false,
+      "id": "D-03",
+      "index_release": "ir-docs-v1",
+      "score": -0.023458,
+      "source_type": "history",
+      "store": "docs",
+      "text": "토크가 갑자기 오르면 주축 부하와 공구 마모를 함께 본다"
+     }
+    ]
+   },
+   "9c/9cb824259e9d155bc0d81b362c6f3d4637d7fabaa5cf139930ab1edf71d30fec": {
+    "note": "# 결과 수 — 공구 마모 점검 전에 전원을 내린다\n\n- c1 [{\"fallback_used\": false, \"id\": \"D-04\", \"index_release\": \"ir-docs-v1\", \"score\": 0.124674, \"source_type\": \"manual\", \"store\": \"docs\", \"text\": \"전력이 범위를 벗어나면 회전 속도와 토크를 다시 잰다\"}, {\"fallback_used\": false, \"id\": \"D-02\", \"index_release\": \"ir-docs-v1\", \"score\": 0.111801, \"source_type\": \"manual\", \"store\": \"docs\", \"text\": \"공구 끝 마모 폭이 0.3mm를 넘으면 교체한다\"}, {\"fallback_used\": false, \"id\": \"D-07\", \"index_release\": \"ir-docs-v1\", \"score\": 0.059011, \"source_type\": \"manual\", \"store\": \"docs\", \"text\": \"점검 전 전원을 내리고 잠금 표지를 단다\"}, {\"fallback_used\": false, \"id\": \"D-08\", \"index_release\": \"ir-docs-v1\", \"score\": 0.059011, \"source_type\": \"manual\", \"store\": \"docs\", \"text\": \"점검 전 전원을 내리고 잠금 표지를 단다\"}] · c2 [{\"fallback_used\": false, \"id\": \"D-02\", \"index_release\": \"ir-docs-v1\", \"score\": 0.111801, \"source_type\": \"manual\", \"store\": \"docs\", \"text\": \"공구 끝 마모 폭이 0.3mm를 넘으면 교체한다\"}, {\"fallback_used\": false, \"id\": \"D-03\", \"index_release\": \"ir-docs-v1\", \"score\": -0.023458, \"source_type\": \"history\", \"store\": \"docs\", \"text\": \"토크가 갑자기 오르면 주축 부하와 공구 마모를 함께 본다\"}, {\"fallback_used\": false, \"id\": \"D-01\", \"index_release\": \"ir-docs-v1\", \"score\": -0.101188, \"source_type\": \"manual\", \"store\": \"docs\", \"text\": \"공구 마모가 심하면 공구를 바꾸고 마모 폭을 기록한다\"}] · c3 [{\"fallback_used\": false, \"id\": \"D-04\", \"index_release\": \"ir-docs-v1\", \"score\": 0.124674, \"source_type\": \"manual\", \"store\": \"docs\", \"text\": \"전력이 범위를 벗어나면 회전 속도와 토크를 다시 잰다\"}, {\"fallback_used\": false, \"id\": \"D-02\", \"index_release\": \"ir-docs-v1\", \"score\": 0.111801, \"source_type\": \"manual\", \"store\": \"docs\", \"text\": \"공구 끝 마모 폭이 0.3mm를 넘으면 교체한다\"}, {\"fallback_used\": false, \"id\": \"D-03\", \"index_release\": \"ir-docs-v1\", \"score\": -0.023458, \"source_type\": \"history\", \"store\": \"docs\", \"text\": \"토크가 갑자기 오르면 주축 부하와 공구 마모를 함께 본다\"}]\n- c4 [{\"fallback_used\": true, \"id\": \"D-04\", \"index_release\": \"ir-docs-v1\", \"score\": 0.124674, \"source_type\": \"manual\", \"store\": \"docs\", \"text\": \"전력이 범위를 벗어나면 회전 속도와 토크를 다시 잰다\"}, {\"fallback_used\": true, \"id\": \"D-02\", \"index_release\": \"ir-docs-v1\", \"score\": 0.111801, \"source_type\": \"manual\", \"store\": \"docs\", \"text\": \"공구 끝 마모 폭이 0.3mm를 넘으면 교체한다\"}, {\"fallback_used\": true, \"id\": \"D-07\", \"index_release\": \"ir-docs-v1\", \"score\": 0.059011, \"source_type\": \"manual\", \"store\": \"docs\", \"text\": \"점검 전 전원을 내리고 잠금 표지를 단다\"}] · c5 [{\"fallback_used\": false, \"id\": \"D-04\", \"index_release\": \"ir-docs-v1\", \"score\": 0.124674, \"source_type\": \"manual\", \"store\": \"docs\", \"text\": \"전력이 범위를 벗어나면 회전 속도와 토크를 다시 잰다\"}, {\"fallback_used\": false, \"id\": \"D-02\", \"index_release\": \"ir-docs-v1\", \"score\": 0.111801, \"source_type\": \"manual\", \"store\": \"docs\", \"text\": \"공구 끝 마모 폭이 0.3mm를 넘으면 교체한다\"}, {\"fallback_used\": false, \"id\": \"D-07\", \"index_release\": \"ir-docs-v1\", \"score\": 0.059011, \"source_type\": \"manual\", \"store\": \"docs\", \"text\": \"점검 전 전원을 내리고 잠금 표지를 단다\"}] · c6 [{\"fallback_used\": true, \"id\": \"R-01\", \"score\": 1.0, \"source_type\": \"rows\", \"store\": \"rows\", \"text\": \"{\\\"row_id\\\": \\\"R-01\\\", \\\"group\\\": \\\"TW\\\", \\\"action\\\": \\\"공구 교체\\\"}\"}, {\"fallback_used\": true, \"id\": \"R-02\", \"score\": 1.0, \"source_type\": \"rows\", \"store\": \"rows\", \"text\": \"{\\\"row_id\\\": \\\"R-02\\\", \\\"group\\\": \\\"TW\\\", \\\"action\\\": \\\"마모 폭 기록\\\"}\"}]\n"
+   },
+   "ac/ac81f8035232c1a0921bccd51bf7cafc858598e83d2c9bdeb71d666b374d9b3d": "# 결과 수 — 공구 마모 점검 전에 전원을 내린다\n\n- c1 [{\"fallback_used\": false, \"id\": \"D-04\", \"index_release\": \"ir-docs-v1\", \"score\": 0.124674, \"source_type\": \"manual\", \"store\": \"docs\", \"text\": \"전력이 범위를 벗어나면 회전 속도와 토크를 다시 잰다\"}, {\"fallback_used\": false, \"id\": \"D-02\", \"index_release\": \"ir-docs-v1\", \"score\": 0.111801, \"source_type\": \"manual\", \"store\": \"docs\", \"text\": \"공구 끝 마모 폭이 0.3mm를 넘으면 교체한다\"}, {\"fallback_used\": false, \"id\": \"D-07\", \"index_release\": \"ir-docs-v1\", \"score\": 0.059011, \"source_type\": \"manual\", \"store\": \"docs\", \"text\": \"점검 전 전원을 내리고 잠금 표지를 단다\"}, {\"fallback_used\": false, \"id\": \"D-08\", \"index_release\": \"ir-docs-v1\", \"score\": 0.059011, \"source_type\": \"manual\", \"store\": \"docs\", \"text\": \"점검 전 전원을 내리고 잠금 표지를 단다\"}] · c2 [{\"fallback_used\": false, \"id\": \"D-02\", \"index_release\": \"ir-docs-v1\", \"score\": 0.111801, \"source_type\": \"manual\", \"store\": \"docs\", \"text\": \"공구 끝 마모 폭이 0.3mm를 넘으면 교체한다\"}, {\"fallback_used\": false, \"id\": \"D-03\", \"index_release\": \"ir-docs-v1\", \"score\": -0.023458, \"source_type\": \"history\", \"store\": \"docs\", \"text\": \"토크가 갑자기 오르면 주축 부하와 공구 마모를 함께 본다\"}, {\"fallback_used\": false, \"id\": \"D-01\", \"index_release\": \"ir-docs-v1\", \"score\": -0.101188, \"source_type\": \"manual\", \"store\": \"docs\", \"text\": \"공구 마모가 심하면 공구를 바꾸고 마모 폭을 기록한다\"}] · c3 [{\"fallback_used\": false, \"id\": \"D-04\", \"index_release\": \"ir-docs-v1\", \"score\": 0.124674, \"source_type\": \"manual\", \"store\": \"docs\", \"text\": \"전력이 범위를 벗어나면 회전 속도와 토크를 다시 잰다\"}, {\"fallback_used\": false, \"id\": \"D-02\", \"index_release\": \"ir-docs-v1\", \"score\": 0.111801, \"source_type\": \"manual\", \"store\": \"docs\", \"text\": \"공구 끝 마모 폭이 0.3mm를 넘으면 교체한다\"}, {\"fallback_used\": false, \"id\": \"D-03\", \"index_release\": \"ir-docs-v1\", \"score\": -0.023458, \"source_type\": \"history\", \"store\": \"docs\", \"text\": \"토크가 갑자기 오르면 주축 부하와 공구 마모를 함께 본다\"}]\n- c4 [{\"fallback_used\": true, \"id\": \"D-04\", \"index_release\": \"ir-docs-v1\", \"score\": 0.124674, \"source_type\": \"manual\", \"store\": \"docs\", \"text\": \"전력이 범위를 벗어나면 회전 속도와 토크를 다시 잰다\"}, {\"fallback_used\": true, \"id\": \"D-02\", \"index_release\": \"ir-docs-v1\", \"score\": 0.111801, \"source_type\": \"manual\", \"store\": \"docs\", \"text\": \"공구 끝 마모 폭이 0.3mm를 넘으면 교체한다\"}, {\"fallback_used\": true, \"id\": \"D-07\", \"index_release\": \"ir-docs-v1\", \"score\": 0.059011, \"source_type\": \"manual\", \"store\": \"docs\", \"text\": \"점검 전 전원을 내리고 잠금 표지를 단다\"}] · c5 [{\"fallback_used\": false, \"id\": \"D-04\", \"index_release\": \"ir-docs-v1\", \"score\": 0.124674, \"source_type\": \"manual\", \"store\": \"docs\", \"text\": \"전력이 범위를 벗어나면 회전 속도와 토크를 다시 잰다\"}, {\"fallback_used\": false, \"id\": \"D-02\", \"index_release\": \"ir-docs-v1\", \"score\": 0.111801, \"source_type\": \"manual\", \"store\": \"docs\", \"text\": \"공구 끝 마모 폭이 0.3mm를 넘으면 교체한다\"}, {\"fallback_used\": false, \"id\": \"D-07\", \"index_release\": \"ir-docs-v1\", \"score\": 0.059011, \"source_type\": \"manual\", \"store\": \"docs\", \"text\": \"점검 전 전원을 내리고 잠금 표지를 단다\"}] · c6 [{\"fallback_used\": true, \"id\": \"R-01\", \"score\": 1.0, \"source_type\": \"rows\", \"store\": \"rows\", \"text\": \"{\\\"row_id\\\": \\\"R-01\\\", \\\"group\\\": \\\"TW\\\", \\\"action\\\": \\\"공구 교체\\\"}\"}, {\"fallback_used\": true, \"id\": \"R-02\", \"score\": 1.0, \"source_type\": \"rows\", \"store\": \"rows\", \"text\": \"{\\\"row_id\\\": \\\"R-02\\\", \\\"group\\\": \\\"TW\\\", \\\"action\\\": \\\"마모 폭 기록\\\"}\"}]\n",
+   "cf/cf97ed497b95d0af21cd4dccc341f945228f6096e424876c55714f62e6ef09ff": {
+    "c2": [
+     {
+      "fallback_used": false,
+      "id": "D-02",
+      "index_release": "ir-docs-v1",
+      "score": 0.111801,
+      "source_type": "manual",
+      "store": "docs",
+      "text": "공구 끝 마모 폭이 0.3mm를 넘으면 교체한다"
+     },
+     {
+      "fallback_used": false,
+      "id": "D-03",
+      "index_release": "ir-docs-v1",
+      "score": -0.023458,
+      "source_type": "history",
+      "store": "docs",
+      "text": "토크가 갑자기 오르면 주축 부하와 공구 마모를 함께 본다"
+     },
+     {
+      "fallback_used": false,
+      "id": "D-01",
+      "index_release": "ir-docs-v1",
+      "score": -0.101188,
+      "source_type": "manual",
+      "store": "docs",
+      "text": "공구 마모가 심하면 공구를 바꾸고 마모 폭을 기록한다"
+     }
+    ]
+   },
+   "d0/d0b87d9accc04c7f45e6cee24cfa5e3f2597be13274424771da45f23cfe0e675": {
+    "group": "TW",
+    "groups": [
+     "TW",
+     "PW"
+    ],
+    "rare": "XX",
+    "text": "공구 마모 점검 전에 전원을 내린다"
+   },
+   "f2/f25898e5e1d45579d415099df193a549efc6f5e5d41fba9d015a805ed3ad3cc4": {
+    "q": {
+     "group": "TW",
+     "groups": [
+      "TW",
+      "PW"
+     ],
+     "rare": "XX",
+     "text": "공구 마모 점검 전에 전원을 내린다"
+    }
+   }
+  },
+  "pg_log": [
+   {
+    "dsn_is_env_value": true,
+    "pg": "connect"
+   },
+   {
+    "args": [],
+    "pg": "SELECT current_user"
+   },
+   {
+    "args": [
+     "ir-docs-v1"
+    ],
+    "pg": "SELECT release_id, kind, sha256, manifest, embedding_provider, embedding_model, embedding_dim, embedding_mode, store FROM \"retrieve_min\".data_release WHERE release_id = %s"
+   },
+   {
+    "pg": "close"
+   },
+   {
+    "dsn_is_env_value": true,
+    "pg": "connect"
+   },
+   {
+    "args": [
+     "ir-docs-v1"
+    ],
+    "pg": "SELECT chunk_id, text, metadata, embedding::text AS embedding FROM \"retrieve_min\".\"manual_chunk\" WHERE release_id = %s ORDER BY chunk_id"
+   },
+   {
+    "pg": "close"
+   }
+  ],
+  "status": "succeeded"
+ }
+}

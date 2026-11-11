@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# 시험 전용(EV-001 CH-36): verify-e2e · 평가 실행의 host 앱 서버(uvicorn 127.0.0.1:18000 · E2E_API_PORT로 바꿈)를 띄우고 · 멈추고 · 다시 띄운다.
+# 넘기는 환경은 아래 이름뿐(env -i) — 외부 키 이름이 끼지 않게. 값은 부른 쪽(verify-e2e · eval-run)이 만든다.
+# 사용: scripts/e2e-host-api start|stop|restart|names|app-mode   (E2E_RUN_DIR = pid · 로그 폴더)
+set -euo pipefail
+R=$(cd "$(dirname "$0")/.." && pwd)
+RUN=${E2E_RUN_DIR:?E2E_RUN_DIR 가 필요합니다}
+PORT=${E2E_API_PORT:-18000}  # D-537: dev-2 e2e는 28000(dev e2e와 호스트 포트 겹침 0)
+NAMES=(DATABASE_URL DATA_DIR C1A15_TECH_PASSWORD C1A15_LEAD_PASSWORD C1A15_INTERNAL_TOKEN APP_MODE C1A15_JUDGE C1A15_DEPLOY_URL C1A15_ALARM C1A15_R12_INBOX C1A15_KG_INBOX C1A15_CHECKS)
+up() { for _ in $(seq 1 60); do curl -fsS -o /dev/null http://127.0.0.1:$PORT/api/health 2>/dev/null && return 0; sleep 0.5; done; echo "host 앱 서버가 안 뜸" >&2; tail -20 "$RUN/api.log" >&2; return 1; }
+free() { ! lsof -nP -iTCP:$PORT -sTCP:LISTEN -t >/dev/null 2>&1; }
+start() {
+  free || { echo "$PORT 포트를 이미 다른 프로세스가 씀 — 옛 앱 서버에 health가 붙지 않게 멈춤" >&2; return 1; }
+  local args=(PATH="$PATH" HOME="$HOME" PYTHONPATH="src${E2E_EXTRA_PYTHONPATH:+:$E2E_EXTRA_PYTHONPATH}")
+  for n in "${NAMES[@]}"; do [ -n "${!n:-}" ] && args+=("$n=${!n}"); done
+  (cd "$R/server" && exec env -i "${args[@]}" .venv/bin/uvicorn c1a15.api.main:app --host 127.0.0.1 --port "$PORT") >> "$RUN/api.log" 2>&1 &
+  echo $! > "$RUN/api.pid"
+  up
+}
+stop() {
+  [ -f "$RUN/api.pid" ] || return 0
+  local p; p=$(cat "$RUN/api.pid"); kill "$p" 2>/dev/null || true
+  for _ in $(seq 1 40); do kill -0 "$p" 2>/dev/null || break; sleep 0.25; done
+  kill -0 "$p" 2>/dev/null && kill -9 "$p" 2>/dev/null || true  # 10초 안에 안 끝나면 강제
+  for _ in $(seq 1 20); do free && break; sleep 0.25; done
+  rm -f "$RUN/api.pid"
+}
+case "${1:-}" in
+  start) start ;;
+  stop) stop ;;
+  restart) stop; start ;;
+  names) for n in "${NAMES[@]}"; do [ -n "${!n:-}" ] && echo "$n"; done; echo PATH; echo HOME; echo PYTHONPATH ;;
+  app-mode) echo "${APP_MODE:-}" ;;
+  *) echo "start|stop|restart|names|app-mode"; exit 2 ;;
+esac

@@ -1,0 +1,19 @@
+# 시험용 Pack(EV-002 LS-0): llm@1 schema 출력 하나. 실제 호출 없음 — 시험은 urlopen을 바꿔치기한다. 주소는 환경에서만(OPENAI_BASE_URL).
+ir_version: 1
+runtime_contract: {min_runtime_version: 0.10.0}
+pack: {id: llm_min, version: V0, title: "llm@1 시험"}
+env: {required: [OPENAI_API_KEY], optional: []}
+schemas:
+  Ticket: schemas/ticket.json
+  Answer: schemas/answer.json
+graphs:
+  ask:
+    state:
+      ticket: Ticket
+      answer: Answer
+    nodes:
+      - {id: draft, kind: llm@1, params: {provider: openai, model: gpt-4.1-mini, prompt: prompts/draft.md, output: Answer, temperature: 0}, reads: [ticket], writes: [answer]}
+    edges: [[START, draft], [draft, END]]
+entrypoints:
+  - {graph: ask, input: Ticket, output: Answer}
+trace: {contract: 1}

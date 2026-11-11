@@ -1,0 +1,18 @@
+{
+ "backend": "flat-local",
+ "chunks": 10,
+ "embedding": {
+  "dim": 64,
+  "mode": "fake",
+  "model": "text-embedding-3-small",
+  "provider": "openai"
+ },
+ "files": {
+  "chunks.jsonl": "54787569607783b05591def28ec6ce302dca876d3f1ebdac12e094de9f3f2659",
+  "vectors.json": "60266b9a0f4297d38ce8450659fcc9c74ef2d4cfdc34e885ee97fee420c28bbe"
+ },
+ "index_sha256": "e15cf37fa86c643498a28a5263a43232b6fd5a759b73eb8a54a777ea3c501d26",
+ "kind": "index",
+ "release_id": "ir-docs-v1",
+ "store": "docs"
+}

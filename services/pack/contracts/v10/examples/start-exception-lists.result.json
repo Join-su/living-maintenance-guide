@@ -1,0 +1,186 @@
+{
+  "decision": {
+    "probabilities": {
+      "CL-1": 37,
+      "CL-2": 37,
+      "CL-3": 5,
+      "CL-4": 21
+    },
+    "evidence": {
+      "CL-1": 4,
+      "CL-2": 4,
+      "CL-3": 0,
+      "CL-4": 2
+    },
+    "low_evidence": false,
+    "kind": "lock",
+    "section": "1.2"
+  },
+  "similar": [
+    {
+      "record_id": "H-0207",
+      "cause": "CL-2",
+      "score": 0.887499
+    },
+    {
+      "record_id": "H-0208",
+      "cause": "CL-1",
+      "score": 0.870196
+    },
+    {
+      "record_id": "H-0206",
+      "cause": "CL-4",
+      "score": 0.849284
+    },
+    {
+      "record_id": "H-0203",
+      "cause": "CL-4",
+      "score": 0.829617
+    },
+    {
+      "record_id": "H-0200",
+      "cause": "CL-2",
+      "score": 0.813981
+    },
+    {
+      "record_id": "H-0204",
+      "cause": "CL-1",
+      "score": 0.786573
+    },
+    {
+      "record_id": "H-0212",
+      "cause": "CL-1",
+      "score": 0.784719
+    },
+    {
+      "record_id": "H-0191",
+      "cause": "CL-1",
+      "score": 0.780616
+    },
+    {
+      "record_id": "H-0194",
+      "cause": "CL-2",
+      "score": 0.777997
+    },
+    {
+      "record_id": "H-0192",
+      "cause": "CL-2",
+      "score": 0.72286
+    }
+  ],
+  "retrieval": {
+    "source": "packrt",
+    "vector_db_version": "graph-mm3-v3-48a5b999-bfa0976f",
+    "query_from": null,
+    "fallback_used": false
+  },
+  "exception_guide": {
+    "section": "EX-R-9001",
+    "relation_id": "EX-R-9001",
+    "grade": "C",
+    "title": "필터 덮개 고정 나사 확인",
+    "text": "손으로 돌려 봄",
+    "steps": [
+      "손으로 돌려 봄",
+      "눈금을 봄"
+    ],
+    "criteria": "모두 체결 = 정상",
+    "basis": [
+      "R-9001"
+    ],
+    "minutes": 5,
+    "next_section": "4.3",
+    "checks": [
+      {
+        "what": "필터 덮개 고정 나사",
+        "how": "손으로 돌려 봄",
+        "criteria": "모두 체결 = 정상",
+        "minutes": 5
+      },
+      {
+        "what": "냉각수 수위",
+        "how": "눈금을 봄",
+        "criteria": "",
+        "minutes": 3
+      }
+    ],
+    "actions": [
+      {
+        "what": "풀린 나사 다시 조임",
+        "parts": [],
+        "minutes": 5
+      },
+      {
+        "what": "냉각수 보충",
+        "parts": [
+          "냉각수"
+        ],
+        "minutes": 10
+      }
+    ],
+    "topic": "필터 덮개 나사",
+    "matched": {
+      "group": "온도 차 저하",
+      "equipment_id": "M-02",
+      "sensors": [
+        [
+          "temp_diff_k",
+          "<=",
+          8.2
+        ]
+      ],
+      "exception": "EX-R-9001",
+      "records": [
+        "R-9001"
+      ]
+    }
+  },
+  "preview": {
+    "probabilities": {
+      "CL-1": 37,
+      "CL-2": 37,
+      "CL-3": 5,
+      "CL-4": 21
+    },
+    "evidence": {
+      "CL-1": 4,
+      "CL-2": 4,
+      "CL-3": 0,
+      "CL-4": 2
+    },
+    "low_evidence": false,
+    "kind": "instruct",
+    "section": "4.3",
+    "cause": "CL-1",
+    "grade": "A",
+    "reason_facts": {
+      "probability": 37,
+      "minutes": 3,
+      "grade": "A",
+      "alternatives": [
+        {
+          "section": "4.4",
+          "grade": "C",
+          "desc": "축을 손으로 흔들 때 유격이 느껴지거나 날개가 깨져 있으면 \"이상\"이다."
+        },
+        {
+          "section": "4.5",
+          "grade": "A",
+          "desc": "수위가 MIN 선 아래면 \"이상\"이다."
+        },
+        {
+          "section": "4.6",
+          "grade": "A",
+          "desc": "어느 하나라도 표준값보다 낮게 설정되어 있으면 \"이상\"이다."
+        },
+        {
+          "section": "EX-R-9001",
+          "grade": "C",
+          "relation": "EX-R-9001",
+          "title": "필터 덮개 고정 나사"
+        }
+      ]
+    },
+    "unable_before": 0
+  }
+}

@@ -1,0 +1,68 @@
+# 시험용 Pack(D-462): C1-a15 보고서 꼴 — 첫 router 요청 종류 · report: llm 쓰기 → 검사(grounded) → 떨어지면 다시 쓰기 → 두 번째 검사
+# (grounded_2) → finish, 통과 쪽 finish_1 · note: 준비 → 쓰기 → 꼬리표 · 표시(나란히) → join → 출력(검사 없음) · 실제 호출 없음.
+ir_version: 1
+runtime_contract: {min_runtime_version: 0.10.0}
+pack: {id: ff_rewrite, version: V1, title: "다시 쓰기 고리 시험"}
+env: {required: [OPENAI_API_KEY], optional: [OPENAI_BASE_URL]}
+schemas:
+  Request: schemas/request.json
+  Text: schemas/text.json
+  Result: schemas/result.json
+graphs:
+  run:
+    state:
+      request: Request
+      text: Text
+      check: dict
+      text_2: Text
+      check_2: dict
+      hint: Text
+      note: Text
+      tag: Text
+      mark: Text
+      result: Result
+    nodes:
+      - {id: route_request, kind: router@1, params: {by: state.request.kind, cases: {report: write, note: prep_note}, default: unsupported}, reads: [request], writes: []}
+      - {id: write, kind: llm@1, params: {provider: openai, model: gpt-4.1-mini, prompt: prompts/write.md, output: Text, temperature: 0}, reads: [request], writes: [text]}
+      - id: check
+        kind: validate@2
+        params:
+          rules:
+            - custom: "custom.report:grounded"
+          on_fail: rewrite
+        reads: [request, text]
+        writes: [check]
+      - {id: rewrite, kind: llm@1, params: {provider: openai, model: gpt-4.1-mini, prompt: prompts/rewrite.md, output: Text, temperature: 0}, reads: [request, text, check], writes: [text_2]}
+      - id: check_2
+        kind: validate@2
+        params:
+          rules:
+            - custom: "custom.report:grounded_2"
+          on_fail: finish
+        reads: [request, text, check, text_2]
+        writes: [check_2]
+      - {id: finish, kind: custom_code@3, params: {fn: "custom.report:finish"}, capabilities: {network: none, side_effect: none}, reads: [request, text, check, text_2, check_2], writes: [result]}
+      - {id: finish_1, kind: custom_code@3, params: {fn: "custom.report:finish"}, capabilities: {network: none, side_effect: none}, reads: [request, text, check], writes: [result]}
+      - {id: prep_note, kind: llm@1, params: {provider: openai, model: gpt-4.1-mini, prompt: prompts/prep.md, output: Text, temperature: 0}, reads: [request], writes: [hint]}
+      - {id: write_note, kind: llm@1, params: {provider: openai, model: gpt-4.1-mini, prompt: prompts/note.md, output: Text, temperature: 0}, reads: [request], writes: [note]}
+      - {id: tag_note, kind: llm@1, params: {provider: openai, model: gpt-4.1-mini, prompt: prompts/tag.md, output: Text, temperature: 0}, reads: [request], writes: [tag]}
+      - {id: mark_note, kind: llm@1, params: {provider: openai, model: gpt-4.1-mini, prompt: prompts/mark.md, output: Text, temperature: 0}, reads: [request], writes: [mark]}
+      - {id: note_out, kind: render@1, params: {template: templates/note.json, format: json, to: result}, reads: [request, note], writes: [result]}
+      - {id: unsupported, kind: render@1, params: {template: templates/unsupported.json, format: json, to: result}, reads: [request], writes: [result]}
+    edges:
+      - [START, route_request]
+      - [write, check]
+      - [check, finish_1]
+      - [rewrite, check_2]
+      - [check_2, finish]
+      - [finish, END]
+      - [finish_1, END]
+      - [prep_note, write_note]
+      - [write_note, tag_note]
+      - [write_note, mark_note]
+      - {join: [tag_note, mark_note], to: note_out}
+      - [note_out, END]
+      - [unsupported, END]
+entrypoints:
+  - {graph: run, input: Request, output: Result}
+trace: {contract: 1}

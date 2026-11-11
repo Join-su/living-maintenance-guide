@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AlarmBasis",
+  "description": "prepare_alarm 출력(Pack 안 state, Run 출력 아님) — 계산 칸(출력 · 온도 차)과 경계 판정 결과(넘지 않았으면 null)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["sensor_derived", "hit"],
+  "properties": {
+    "sensor_derived": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["power_w", "temp_diff_k"],
+      "properties": {"power_w": {"type": "number"}, "temp_diff_k": {"type": "number"}}
+    },
+    "hit": {
+      "oneOf": [
+        {"type": "null"},
+        {"type": "object", "required": ["group", "alarm"], "properties": {"group": {"type": "string"}, "alarm": {"type": "object"}}}
+      ]
+    }
+  }
+}

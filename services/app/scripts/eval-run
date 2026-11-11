@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+# P-16 평가 실행(FLOW-12): 격리된 시험 스택(무작위 비밀값 · fixture 모드 · 끝나면 DB down -v)에서 평가 카드 30건을 평가 모드로 돌리고
+# 지표 6개 보고서를 쓴다. 정답 자료 파일 열기 감시(앱 서버) · 이력 색인 행 수 불변 · 분리 검사(AC-15-C1)도 함께 기록한다.
+# EV-001 ES-16(CH-37): 앱 기본 길 = deploy → host 실행(시험 DB = compose db만 · host 앱 서버 · 가짜 배포 서버 · host 화면 중계).
+# 감시는 host 앱 서버를 PYTHONPATH=src:scripts/eval_watch로 띄워 켠다(scripts/eval-compose.yml과 같은 일 — 그 파일은 compose 길용, S3-Q2 판).
+# 사용: scripts/eval-run <보고서.json>   (화면 중계 18081/18082 — A16-N7 · 18000 · 18796을 쓰므로 verify-e2e와 동시에 돌리지 않는다)
+set -euo pipefail
+cd "$(dirname "$0")/.."
+R=$PWD
+OUT="${1:?보고서 경로가 필요합니다}"
+export COMPOSE_PROJECT_NAME=c1a15-eval DB_HOST_PORT="${DB_HOST_PORT:-55436}" APP_MODE=fixture
+gen() { python3 -c 'import secrets; print(secrets.token_urlsafe(16))'; }
+export POSTGRES_PASSWORD="$(gen)" C1A15_TECH_PASSWORD="$(gen)" C1A15_LEAD_PASSWORD="$(gen)" C1A15_INTERNAL_TOKEN="$(gen)"
+export DATABASE_URL="postgresql+psycopg://c1a15:${POSTGRES_PASSWORD}@127.0.0.1:${DB_HOST_PORT}/c1a15" DATA_DIR="$R/data"
+export C1A15_JUDGE=deploy C1A15_DEPLOY_URL=http://127.0.0.1:18796 C1A15_API_URL=http://127.0.0.1:18000
+export E2E_RUN_DIR E2E_EXTRA_PYTHONPATH="$R/scripts/eval_watch"; E2E_RUN_DIR=$(mktemp -d)
+PIDS=()
+cleanup() {
+  scripts/e2e-host-api stop >/dev/null 2>&1 || true
+  for p in "${PIDS[@]:-}"; do kill "$p" 2>/dev/null || true; done
+  docker compose down -v --remove-orphans >/dev/null 2>&1 || true
+  rm -rf "${E2E_RUN_DIR:?}"
+}
+trap cleanup EXIT
+for p in 18081 18082 18000 18796; do  # ES-16 N-1: 이미 쓰는 포트(개발 compose 스택 등)면 시작하지 않음
+  lsof -nP -iTCP:$p -sTCP:LISTEN -t >/dev/null 2>&1 && { echo "eval-run: 포트 $p 를 이미 다른 프로세스가 씀"; exit 1; }
+done
+npm run --silent build >/dev/null
+docker compose down -v --remove-orphans >/dev/null 2>&1 || true  # 이름 volume(D-335): 앞 실행이 남긴 이 시험 project 자료를 비우고 시작
+docker compose up -d --wait db >/dev/null 2>&1
+for s in "alembic upgrade head" "python -m c1a15.loader"; do  # LangGraph checkpoint 표는 ES-23에서 뺌
+  (cd server && PYTHONPATH=src uv run --frozen $s >> "$E2E_RUN_DIR/init.log" 2>&1)
+done
+(cd server && PYTHONPATH=src:tests exec .venv/bin/python tests/fake_deploy.py 18796) > "$E2E_RUN_DIR/fake.log" 2>&1 &
+PIDS+=($!)
+up_fake=""; for _ in $(seq 1 40); do [ "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:18796/ 2>/dev/null)" != 000 ] && { up_fake=1; break; }; sleep 0.25; done  # 가짜는 /info 없음 — 포트가 답하면 뜬 것
+[ -n "$up_fake" ] || { echo "eval-run: 가짜 배포 서버(18796) 가 안 뜸"; exit 1; }
+scripts/e2e-host-api start >/dev/null
+python3 scripts/host_web.py 18081 18082 http://127.0.0.1:18000 "$R" > "$E2E_RUN_DIR/host_web.log" 2>&1 &
+PIDS+=($!)
+for _ in $(seq 1 90); do curl -fsS http://127.0.0.1:18081/api/health >/dev/null 2>&1 && break; sleep 1; done
+q() { docker compose exec -T db psql -U c1a15 -d c1a15 -tAc "$1"; }
+HIST_BEFORE=$(q "select count(*) from knowledge.history_records")
+EVAL_TECH_URL=http://127.0.0.1:18081 EVAL_LEAD_URL=http://127.0.0.1:18082 python3 scripts/eval_run.py --out "$OUT"
+HIST_AFTER=$(q "select count(*) from knowledge.history_records")
+EVAL_ALARMS=$(q "select count(*) from ops.alarms where eval_mode")
+UDIS=$(q "select coalesce(string_agg(record->'source'->>'udi', ','), '') from knowledge.history_records")
+FORBIDDEN=$(grep -c "FORBIDDEN_OPEN" "$E2E_RUN_DIR/api.log" || true)
+echo "eval-run: start 대역 $(grep -c "start stand_in" "$E2E_RUN_DIR/fake.log" || true)건(ES-16 N-12 — 카드 val 30은 0이어야 함)"
+WATCH_ON=$(cd server && PYTHONPATH="src:$E2E_EXTRA_PYTHONPATH" .venv/bin/python -c "import sys; print(int('forbidden_open' in sys.modules))")
+python3 - "$OUT" "$HIST_BEFORE" "$HIST_AFTER" "$EVAL_ALARMS" "$FORBIDDEN" "$WATCH_ON" "$UDIS" <<'PY'
+import json, sys
+out, before, after, alarms, forbidden, watch, udis = sys.argv[1:]
+rep = json.load(open(out))
+cards_udi = set().union(*(json.load(open(f"eval/cards/{k}/card_udi_map.json")).values() for k in ("val", "test")))  # 두 묶음 모두 이력과 분리
+hist_udi = {u for u in udis.split(",") if u}
+rep["isolation"] = {
+    "history_rows_before": int(before), "history_rows_after": int(after),  # R12: 평가 모드 보고서는 이력에 안 들어감
+    "eval_mode_alarms": int(alarms),
+    "forbidden_open_in_api": int(forbidden), "file_watch_active_in_api": bool(int(watch)),  # AC-15-C2 실행 감시(host 앱 서버)
+    "history_udi_x_card_udi": len(hist_udi & cards_udi), "history_udi_count": len(hist_udi),  # AC-15-C1 분리
+}
+json.dump(rep, open(out, "w"), ensure_ascii=False, indent=1)
+print(json.dumps(rep["isolation"], ensure_ascii=False))
+PY
+echo "eval-run: done"

@@ -1,0 +1,14 @@
+{
+ "counts": {
+  "edges_machine_work": 1131,
+  "edges_same_line": 96,
+  "nodes": 1122,
+  "with_record": 1022
+ },
+ "defs_sha256": "c5bf60b866274d9d46cf82860ad6535b2566db22577d4960a504b26df950314c",
+ "raw_sha256": {
+  "history.jsonl": "5b01d0196f8b615ddfc00e6cbc51e534d7ca1f508af7dfab18c6466ae182a7da",
+  "occurrences.jsonl": "9220bde7f138d37d14a0aea2a439addc4cb6d6836567b8f4af2952b775b3e8c9"
+ },
+ "version": "rel-v1"
+}

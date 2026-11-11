@@ -1,0 +1,38 @@
+# Deployment Server 설정 — 태그 배포 task10@v0-pg-local(지시 006b 초안). 비밀 값 없음(환경 변수 이름만). 상대 경로는 이 파일 기준.
+# v0-local과 다른 점: 실행 설정이 PostgreSQL backend(task10-pack pack/execution/postgres-fake.yaml과 같은 store·release), 데이터 폴더 따로.
+# - packrt 0.8.0(llmops 016 E-S-01) 전에는 Pack을 불러올 수 없다(backend 이름을 모름). 그때까지 이 설정으로 서버를 켜지 않는다
+# - 등록(deploy-bootstrap)·실제 요청은 E-S-01 뒤. data_release_id는 파일 backend와 달라(예상 drs:54e2537743f7fa9c) deployment_id를 따로 씀
+deployment_id: task10@v0-pg-local
+retention_class: standard            # 운영 배포(dev 7일 보존은 *@dev-local만)
+pack:
+  repo: ../../task10-pack            # 읽기만(git rev-parse·archive)
+  ref: v0                            # 태그(→ 93ca0a1). 응답 pack.tag = "v0"
+  pack_subdir: pack
+  releases_subdir: releases
+  expect_revision: "sha256:877b0ed5e60724bc0b0b82fc77925be4f8240ba2a9249aef6090c42689ce60fa"
+execution:                           # pack-resource-contract v1.0 3절 형식(서버가 data_dir/execution-config.yaml로 씀)
+  entrypoint: respond
+  stores:                            # release는 task10 schema에 적재된 것(개발 DB llmopsagent, runtime_reader로 읽기만)
+    history: {backend: postgres-table, release: hc-ai4i2020-s7-v2, connection: {env: LLMOPSAGENT_RUNTIME_DSN}}
+    manuals:
+      backend: pgvector
+      release: ir-manuals-v3-fake    # 가짜 임베딩 release(64차원)와 mode fake가 짝(계약 E-3·E-4). Pack v0 index.embedding과 공급자·모델 같음
+      connection: {env: LLMOPSAGENT_RUNTIME_DSN}
+      embedding: {mode: fake}
+  models: {}
+runtime_db:                          # 실행용 DSN(runtime_reader). 환경 변수가 있으면 그것, 없으면 env_file에서 이 이름 한 줄만 읽음
+  env_file: ../.env   # 배포단 자체 .env(scripts/make-env.sh, 두 이름만). 서버 프로세스 환경에는 DB 접속 정보 중 이것과 trace 기록기 이름만 남김(나머지 …_DSN·…PASSWORD는 뺌)
+data_dir: ../var/v0-pg-local
+packs_dir: ../.packs
+review_policy: auto_approve          # packrt 정책 이름. 동작은 approve → escalate → reject 순 자동 선택(015c)
+provider: fake                       # 실제 provider(http)는 승인 뒤에만
+registration:
+  mode: llmops_pg                    # 등록 대조: PG llmops.deployment를 runtime_reader(runtime_db.env_file)로 SELECT만 — A5 뒤 llmops.db는 이전됨(답장 031-01 · D-153). 등록은 llmops
+trace:                               # 공유 기록기 tracewriter → PostgreSQL trace(trace_writer 계정). 비밀 값은 env_file에만(git 밖)
+  dsn_env: LLMOPSAGENT_TRACE_DSN     # 환경 변수가 있으면 그것, 없으면 env_file에서 같은 이름을 찾음
+  env_file: ../.env   # 배포단 자체 .env(git 밖, 600, runtime·trace DSN 두 줄 — scripts/make-env.sh)
+  # payload_root: 원문 파일 폴더(기본 data_dir/trace-payloads)
+outcome_by_node:
+  record_no_issue: no_issue
+grounding_keys: [answer, evidence, review, alarm_resolution]
+secret_env_names: [OPENAI_API_KEY]   # 가림에 쓸 비밀 값의 환경 변수 이름(값은 읽어서 가림에만 씀)

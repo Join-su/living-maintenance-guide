@@ -1,0 +1,23 @@
+# 시험 전용 덧파일(EV-001 CH-42): compose 길 verify-e2e(scripts/verify-e2e-compose)만 쓴다.
+# 가짜 배포 서버 = 같은 앱 이미지 + server/tests(읽기 전용) — 같은 compose 망 안에서만 열고 포트를 밖에 열지 않는다.
+services:
+  fake-deploy:
+    build: ./server
+    command: python /tests/fake_deploy.py 18796 0.0.0.0
+    environment:
+      DATABASE_URL: postgresql+psycopg://c1a15:${POSTGRES_PASSWORD}@db:5432/c1a15
+      DATA_DIR: /data
+      PYTHONPATH: /app/src:/tests
+    volumes:
+      - ./server/tests:/tests:ro
+      - ./data:/data:ro
+    depends_on:
+      init:
+        condition: service_completed_successfully
+  api:
+    environment:
+      C1A15_DEPLOY_URL: http://fake-deploy:18796
+      C1A15_DEPLOY_HOST: fake-deploy
+    depends_on:
+      fake-deploy:
+        condition: service_started

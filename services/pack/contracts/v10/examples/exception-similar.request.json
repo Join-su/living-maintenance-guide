@@ -1,0 +1,38 @@
+{
+  "kind": "exception_similar",
+  "session_id": "S-12",
+  "group": "CL",
+  "exception": {
+    "topic": "필터 덮개 나사",
+    "checks": [
+      {
+        "what": "필터 덮개 고정 나사",
+        "how": "나사 네 개를 손으로 돌려 본다",
+        "criteria": "네 개 모두 체결 = 정상",
+        "minutes": null,
+        "instruction": "필터 덮개 고정 나사: 나사 네 개를 손으로 돌려 본다 네 개 모두 체결 = 정상"
+      },
+      {
+        "what": "냉각수 수위",
+        "how": "냉각수 탱크 눈금을 본다",
+        "criteria": "아래 선 밑 = 이상",
+        "minutes": null,
+        "instruction": "냉각수 수위: 냉각수 탱크 눈금을 본다 아래 선 밑 = 이상"
+      }
+    ],
+    "actions": [
+      {
+        "what": "풀린 나사 다시 조임",
+        "parts": [],
+        "minutes": null,
+        "instruction": "풀린 나사 다시 조임:"
+      },
+      {
+        "what": "냉각수 보충",
+        "parts": [],
+        "minutes": 10,
+        "instruction": "냉각수 보충:"
+      }
+    ]
+  }
+}

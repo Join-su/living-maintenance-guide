@@ -1,0 +1,662 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "c1a15-pack/contracts/v3/run_request.json",
+  "title": "RunRequest",
+  "description": "C1-a15 Pack Run 입력 v3(약속 v2 + 새 kind report — 보고서 문장 node, D-285) — kind = alarm | start(첫 Run, P1 다리 similar 그대로) | judge | report. 사용자 ID · 표시 이름 · 메모 원문 · 정정 사유 칸 없음",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "kind"
+  ],
+  "properties": {
+    "kind": {
+      "type": "string",
+      "enum": [
+        "alarm",
+        "start",
+        "judge",
+        "report"
+      ]
+    },
+    "session_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9-]{1,40}$",
+      "description": "앱 진단 세션 id(문자열). start · judge 필수 — trace Run 입력에 남아 LLMOps가 세션으로 묶음(deploy Q-4)"
+    },
+    "event_card": {
+      "$ref": "#/$defs/event_card"
+    },
+    "settings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ml_alarm_threshold"
+      ],
+      "properties": {
+        "ml_alarm_threshold": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "exclusiveMaximum": 1,
+          "description": "ML 알람 문턱 = 앱 사용자 설정 한 곳(D-260 (3)). 바퀴 손잡이 아님"
+        }
+      }
+    },
+    "event_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9-]{1,40}$",
+      "description": "start: 이 세션을 연 알람의 event_id(알람 Run과 잇기)"
+    },
+    "group": {
+      "type": "string",
+      "enum": [
+        "TW",
+        "PW",
+        "CL",
+        "LD"
+      ]
+    },
+    "query": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "direction",
+        "sensor_snapshot"
+      ],
+      "description": "start 리트리버 질의 재료. 질의 글은 Pack이 증상군 이름 · 방향으로 만듦",
+      "properties": {
+        "direction": {
+          "enum": [
+            "경계 위",
+            "경계 아래",
+            null
+          ]
+        },
+        "sensor_snapshot": {
+          "$ref": "#/$defs/sensors5"
+        }
+      }
+    },
+    "similar": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "record_id",
+          "score"
+        ],
+        "properties": {
+          "record_id": {
+            "type": "string"
+          },
+          "cause": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "score": {
+            "type": "number"
+          }
+        }
+      },
+      "description": "judge: 첫 Run에서 받아 앱이 저장한 상위 10건 그대로(필수). start: P1 다리 — 앱 임시 리트리버 결과(선택, 있으면 Pack 리트리버를 건너뜀, 0.12.0 뒤 빠짐) · report: 같은 10건(근거 기록 ID 검사 기준, 필수)"
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/event"
+      }
+    },
+    "grades": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "enum": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ]
+      }
+    },
+    "minutes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      }
+    },
+    "report_draft": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "앱이 코드로 채운 보고서 8항목 초안(앱 flow.report_facts — 원문 = 근거 검사 실패 때 대체 글). LLM이 다시 쓰는 칸은 cause · action뿐, 나머지 6칸은 근거 수치 · 절 번호의 원천",
+      "required": [
+        "equipment_alarm",
+        "sensor_evidence",
+        "check_path",
+        "cause",
+        "evidence_records",
+        "action",
+        "downtime",
+        "unresolved"
+      ],
+      "properties": {
+        "equipment_alarm": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400
+        },
+        "sensor_evidence": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400
+        },
+        "check_path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400
+        },
+        "cause": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400
+        },
+        "evidence_records": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400
+        },
+        "action": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400
+        },
+        "downtime": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400
+        },
+        "unresolved": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400
+        }
+      }
+    },
+    "allowed_sections": {
+      "type": "array",
+      "maxItems": 60,
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9]\\.[0-9](\\.[0-9])?$"
+      },
+      "description": "이번 세션에서 열린 · 기록된 절 번호(앱 _report_grounding의 세션 section · step_opened.decision.section). 초안 글의 절 번호는 Pack이 더 셈"
+    }
+  },
+  "$defs": {
+    "sensors5": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "AI4I 원값 5칸(단위 고정). 출력 power_w = round(torque_nm × rpm × 2π / 60) · 온도 차 temp_diff_k = round(process − air, 1)은 Pack이 계산 — 입력에 넣지 않음",
+      "required": [
+        "air_temperature_k",
+        "process_temperature_k",
+        "rotational_speed_rpm",
+        "torque_nm",
+        "tool_wear_min"
+      ],
+      "properties": {
+        "air_temperature_k": {
+          "type": "number"
+        },
+        "process_temperature_k": {
+          "type": "number"
+        },
+        "rotational_speed_rpm": {
+          "type": "number"
+        },
+        "torque_nm": {
+          "type": "number"
+        },
+        "tool_wear_min": {
+          "type": "number"
+        }
+      }
+    },
+    "event_card": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "EventCard(약속 A, task10 초안 v2 1절 모양) — 고장 라벨 칸 없음. 추이 · 각본 번호 · 평가 모드 · 시각 · 배정은 앱 몫이라 여기 없음 · v2: product_type(D-264)",
+      "required": [
+        "event_id",
+        "source_mode",
+        "equipment_id",
+        "sensor_snapshot",
+        "alarm",
+        "data_lineage"
+      ],
+      "properties": {
+        "event_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9-]{1,40}$",
+          "description": "앱이 Run 전에 만듦(권장 C1A-E + 12자리 hex)"
+        },
+        "source_mode": {
+          "enum": [
+            "sensor_boundary",
+            "ml_predicted"
+          ],
+          "description": "알람을 정하는 길 — 앱 설정 C1A15_ALARM=boundary|ml"
+        },
+        "equipment_id": {
+          "type": "string",
+          "pattern": "^M-[0-9]{2}$"
+        },
+        "sensor_snapshot": {
+          "$ref": "#/$defs/sensors5"
+        },
+        "alarm": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "source"
+          ],
+          "properties": {
+            "source": {
+              "const": "none"
+            }
+          },
+          "description": "알람 · 증상군은 입력이 아니라 Pack 결과"
+        },
+        "data_lineage": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "source_release",
+            "row_id"
+          ],
+          "properties": {
+            "source_release": {
+              "type": "string",
+              "pattern": "^ai4i-2020"
+            },
+            "row_id": {
+              "type": [
+                "integer",
+                "string"
+              ]
+            },
+            "split": {
+              "enum": [
+                "train",
+                "val",
+                "test",
+                "demo"
+              ]
+            }
+          }
+        },
+        "product_type": {
+          "enum": [
+            "L",
+            "M",
+            "H"
+          ],
+          "description": "AI4I 제품 등급(Type). source_mode = ml_predicted이면 필수(D-264 — 사용자 모델 LightGBMLarge 입력). 시연 · 평가 행은 UDI로 원본 값"
+        }
+      }
+    },
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "seq",
+        "type"
+      ],
+      "properties": {
+        "seq": {
+          "type": "integer"
+        },
+        "type": {
+          "type": "string"
+        },
+        "void": {
+          "type": "boolean"
+        },
+        "section": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "value": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "judged_value": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "signal": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "out_of_scope_finding": {
+              "type": "boolean"
+            },
+            "conflicts_with_button": {
+              "type": "boolean"
+            },
+            "interpretation": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "quote": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "yes": {
+          "type": "boolean"
+        },
+        "outcome": {
+          "type": "string"
+        },
+        "corrected": {
+          "type": "boolean"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "answer": {
+          "type": "string"
+        },
+        "mode": {
+          "type": "string"
+        },
+        "choice": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string",
+          "enum": [
+            "llm_failure",
+            "out_of_scope_finding"
+          ]
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "alarm"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "event_card"
+        ],
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "session_id"
+              ]
+            },
+            {
+              "required": [
+                "event_id"
+              ]
+            },
+            {
+              "required": [
+                "group"
+              ]
+            },
+            {
+              "required": [
+                "query"
+              ]
+            },
+            {
+              "required": [
+                "similar"
+              ]
+            },
+            {
+              "required": [
+                "events"
+              ]
+            },
+            {
+              "required": [
+                "grades"
+              ]
+            },
+            {
+              "required": [
+                "minutes"
+              ]
+            },
+            {
+              "required": [
+                "report_draft"
+              ]
+            },
+            {
+              "required": [
+                "allowed_sections"
+              ]
+            }
+          ]
+        },
+        "if": {
+          "properties": {
+            "event_card": {
+              "properties": {
+                "source_mode": {
+                  "const": "ml_predicted"
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "required": [
+            "settings"
+          ],
+          "properties": {
+            "event_card": {
+              "required": [
+                "product_type"
+              ]
+            }
+          }
+        },
+        "else": {
+          "not": {
+            "required": [
+              "settings"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "start"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "session_id",
+          "event_id",
+          "group",
+          "query",
+          "events",
+          "grades",
+          "minutes"
+        ],
+        "properties": {
+          "events": {
+            "maxItems": 0
+          }
+        },
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "event_card"
+              ]
+            },
+            {
+              "required": [
+                "settings"
+              ]
+            },
+            {
+              "required": [
+                "report_draft"
+              ]
+            },
+            {
+              "required": [
+                "allowed_sections"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "judge"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "session_id",
+          "group",
+          "similar",
+          "events",
+          "grades",
+          "minutes"
+        ],
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "event_card"
+              ]
+            },
+            {
+              "required": [
+                "settings"
+              ]
+            },
+            {
+              "required": [
+                "event_id"
+              ]
+            },
+            {
+              "required": [
+                "query"
+              ]
+            },
+            {
+              "required": [
+                "report_draft"
+              ]
+            },
+            {
+              "required": [
+                "allowed_sections"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "report"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "session_id",
+          "group",
+          "similar",
+          "report_draft",
+          "allowed_sections"
+        ],
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "event_card"
+              ]
+            },
+            {
+              "required": [
+                "settings"
+              ]
+            },
+            {
+              "required": [
+                "event_id"
+              ]
+            },
+            {
+              "required": [
+                "query"
+              ]
+            },
+            {
+              "required": [
+                "events"
+              ]
+            },
+            {
+              "required": [
+                "grades"
+              ]
+            },
+            {
+              "required": [
+                "minutes"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

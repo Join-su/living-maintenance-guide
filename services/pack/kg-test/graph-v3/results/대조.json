@@ -1,0 +1,82 @@
+{
+ "gold_causes": 14,
+ "graph_causes": 14,
+ "graph_causes_not_in_gold": 0,
+ "groups": [
+  {
+   "actions_gold": 3,
+   "actions_graph": 3,
+   "causes_gold": 4,
+   "causes_graph": 4,
+   "checks_gold_hit": 4,
+   "checks_graph": 4,
+   "checks_manual": 4,
+   "group": "공구 마모 경고",
+   "records": 40
+  },
+  {
+   "actions_gold": 3,
+   "actions_graph": 3,
+   "causes_gold": 3,
+   "causes_graph": 3,
+   "checks_gold_hit": 4,
+   "checks_graph": 4,
+   "checks_manual": 4,
+   "group": "출력 이탈",
+   "records": 81
+  },
+  {
+   "actions_gold": 4,
+   "actions_graph": 4,
+   "causes_gold": 4,
+   "causes_graph": 4,
+   "checks_gold_hit": 4,
+   "checks_graph": 4,
+   "checks_manual": 4,
+   "group": "온도 차 저하",
+   "records": 108
+  },
+  {
+   "actions_gold": 3,
+   "actions_graph": 3,
+   "causes_gold": 3,
+   "causes_graph": 3,
+   "checks_gold_hit": 4,
+   "checks_graph": 4,
+   "checks_manual": 4,
+   "group": "토크 과부하",
+   "records": 29
+  }
+ ],
+ "layer": "mm3-v1",
+ "links": {
+  "맞음": 44,
+  "빠짐": 0,
+  "틀림": 0
+ },
+ "per_cause": {
+  "원인": {
+   "맞음": 14,
+   "빠짐": 0,
+   "틀림": 0
+  },
+  "점검": {
+   "맞음": 14,
+   "빠짐": 0,
+   "틀림": 0
+  },
+  "조치": {
+   "맞음": 14,
+   "빠짐": 0,
+   "틀림": 0
+  },
+  "증상군": {
+   "맞음": 14,
+   "빠짐": 0,
+   "틀림": 0
+  }
+ },
+ "records": 300,
+ "reps": 4,
+ "role_screen_vs_confirm": "구별 안 됨(이력에는 '이상'만 남음)"
+}

@@ -1,0 +1,111 @@
+#!/usr/bin/env bash
+# 실행 구성 확인: 두 앱 빌드 → 시험 DB(compose db만) → host 준비(migration · 적재) → 가짜 배포 서버 · host 앱 서버 · host 화면 중계
+# → 8081/8082 smoke · 권한 경계 · 발생기 · 재시작 · Playwright → 정리.
+# EV-001 ES-16(CH-36, S3-Q7 (가)): 앱 기본 길 = deploy라 compose 안 앱 서버는 켜지지 않음(컨테이너 → 배포 서버 = S3-Q2 판) → host 실행.
+# compose 안에서만 뜻이 있는 확인(API 포트 8000이 밖에 닫힘)은 미룸 목록으로 찍고 S3-Q2 판에서 되살린다.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+R=$PWD
+export COMPOSE_PROJECT_NAME=c1a15-e2e DB_HOST_PORT="${DB_HOST_PORT:-55434}"
+gen() { python3 -c 'import secrets; print(secrets.token_urlsafe(16))'; }
+export POSTGRES_PASSWORD="$(gen)" C1A15_TECH_PASSWORD="$(gen)" C1A15_LEAD_PASSWORD="$(gen)" C1A15_INTERNAL_TOKEN="$(gen)" APP_MODE=fixture
+export DATABASE_URL="postgresql+psycopg://c1a15:${POSTGRES_PASSWORD}@127.0.0.1:${DB_HOST_PORT}/c1a15" DATA_DIR="$R/data"
+export C1A15_JUDGE=deploy C1A15_DEPLOY_URL=http://127.0.0.1:18796 C1A15_API_URL=http://127.0.0.1:18000
+export C1A15_ALARM="${C1A15_ALARM:-boundary}"  # 흐름 장면은 경계 행으로 만듦 — ML 길 장면(@ml)은 C1A15_ALARM=ml로 따로(D-546)
+export E2E_RUN_DIR; E2E_RUN_DIR=$(mktemp -d)
+PIDS=()
+cleanup() {
+  scripts/e2e-host-api stop >/dev/null 2>&1 || true
+  for p in "${PIDS[@]:-}"; do kill "$p" 2>/dev/null || true; done
+  docker compose down -v --remove-orphans >/dev/null 2>&1 || true
+  rm -rf "${E2E_RUN_DIR:?}"
+}
+trap cleanup EXIT
+fail() { echo "verify-e2e FAIL: $*"; tail -20 "$E2E_RUN_DIR/init.log" 2>/dev/null || true; tail -40 "$E2E_RUN_DIR/api.log" 2>/dev/null || true; exit 1; }
+# ES-16 N-1: host 포트(화면 중계 8081 · 8082 · 앱 서버 18000 · 가짜 배포 서버 18796)를 이미 쓰면(예 개발 compose 스택) 시작하지 않음
+for p in 8081 8082 18000 18796; do lsof -nP -iTCP:$p -sTCP:LISTEN -t >/dev/null 2>&1 && fail "포트 $p 를 이미 다른 프로세스가 씀 — 개발 compose 스택 등을 먼저 내림"; done
+npm run --silent build >/dev/null
+docker compose down -v --remove-orphans >/dev/null 2>&1 || true  # 이름 volume(D-335): 앞 실행이 남긴 이 시험 project 자료를 비우고 시작
+docker compose up -d --wait db >/dev/null 2>&1
+# compose init 대신 host에서 차례로 — 종료 코드 0이어야 함
+for s in "alembic upgrade head" "python -m c1a15.loader"; do  # LangGraph checkpoint 표는 ES-23에서 뺌
+  (cd server && PYTHONPATH=src uv run --frozen $s >> "$E2E_RUN_DIR/init.log" 2>&1) || fail "init(migration · 적재) — $s"
+done
+(cd server && PYTHONPATH=src:tests exec .venv/bin/python tests/fake_deploy.py 18796) > "$E2E_RUN_DIR/fake.log" 2>&1 &
+PIDS+=($!)
+up_fake=""; for _ in $(seq 1 40); do [ "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:18796/ 2>/dev/null)" != 000 ] && { up_fake=1; break; }; sleep 0.25; done  # 가짜는 /info 없음 — 포트가 답하면 뜬 것
+[ -n "$up_fake" ] || fail "가짜 배포 서버(18796) 가 안 뜸"
+scripts/e2e-host-api start >/dev/null || fail "host 앱 서버"
+python3 scripts/host_web.py 8081 8082 http://127.0.0.1:18000 "$R" > "$E2E_RUN_DIR/host_web.log" 2>&1 &
+PIDS+=($!)
+for _ in $(seq 1 90); do curl -fsS http://127.0.0.1:8081/api/health >/dev/null 2>&1 && break; sleep 1; done
+curl -fsS http://127.0.0.1:8081/ | grep -q 'data-surface="tech"' || fail "8081 첫 화면"
+curl -fsS http://127.0.0.1:8082/ | grep -q 'data-surface="lead"' || fail "8082 첫 화면"
+curl -fsS http://127.0.0.1:8081/session/123 | grep -q 'data-surface="tech"' || fail "8081 깊은 경로"
+curl -fsS http://127.0.0.1:8082/review/9 | grep -q 'data-surface="lead"' || fail "8082 깊은 경로"
+[ "$(curl -fsS -H 'X-App: lead' http://127.0.0.1:8081/api/health)" = '{"status":"ok","app":"tech"}' ] || fail "8081 /api X-App 덮어쓰기"
+[ "$(curl -fsS -H 'X-App: tech' http://127.0.0.1:8082/api/health)" = '{"status":"ok","app":"lead"}' ] || fail "8082 /api X-App 덮어쓰기"
+echo "verify-e2e(미룸 — S3-Q2 판): API 포트 8000이 밖에 닫힘(nginx 뒤 compose에서만 뜻이 있음)"
+! scripts/e2e-host-api names | grep -Eq 'OPENAI|_API_KEY$' || fail "host 앱 서버에 넘기는 환경에 외부 키 이름이 있음"
+scripts/e2e-host-api app-mode | grep -qx fixture || fail "host 앱 서버가 fixture 모드가 아님"
+docker compose exec -T db psql -U c1a15 -d c1a15 -tAc "select count(*) from knowledge.history_records" | grep -qx 300 || fail "적재 이력 300건"
+# ADV-06(S-02): 실제 nginx를 거친 앱별 권한 경계 — 위조 X-App · 다른 앱 쿠키 · 쿠키 없음 · 로그아웃 뒤는 거부, 업무 기록은 바뀌지 않음
+J="$E2E_RUN_DIR/jar"; mkdir -p "$J"
+code() { curl -s -o /dev/null -w '%{http_code}' "$@"; }
+creds() { python3 -c 'import json, sys; print(json.dumps({"user_id": sys.argv[1], "password": sys.argv[2]}))' "$1" "$2"; }
+TECHJSON=$(creds tech.kim "$C1A15_TECH_PASSWORD"); LEADJSON=$(creds lead.park "$C1A15_LEAD_PASSWORD")
+[ "$(code -c "$J/t" -H 'Content-Type: application/json' -d "$TECHJSON" http://127.0.0.1:8081/api/login)" = 200 ] || fail "정비자 로그인(8081)"
+[ "$(code -c "$J/l" -H 'Content-Type: application/json' -d "$LEADJSON" http://127.0.0.1:8082/api/login)" = 200 ] || fail "파트장 로그인(8082)"
+[ "$(code -H 'Content-Type: application/json' -d "$LEADJSON" http://127.0.0.1:8081/api/login)" = 403 ] || fail "8081에 파트장 로그인이 거부되지 않음"
+[ "$(code -b $J/t http://127.0.0.1:8081/api/tech/home)" = 200 ] || fail "정비자 홈"
+[ "$(code -b $J/t -H 'X-App: lead' http://127.0.0.1:8081/api/tech/home)" = 200 ] || fail "8081 위조 X-App은 nginx가 덮어써야 함"
+LEADTOK=$(awk '$6=="lead_session"{print $7}' $J/l)
+[ "$(code -b "tech_session=$LEADTOK" http://127.0.0.1:8081/api/tech/home)" = 403 ] || fail "파트장 세션을 정비자 쿠키로 쓰면 거부"
+[ "$(code -b $J/t http://127.0.0.1:8082/api/tech/home)" = 401 ] || fail "정비자 쿠키로 8082 정비자 API는 거부"
+[ "$(code http://127.0.0.1:8081/api/tech/home)" = 401 ] || fail "쿠키 없음 거부"
+BEFORE=$(docker compose exec -T db psql -U c1a15 -d c1a15 -tAc "select count(*) from ops.session_events")
+[ "$(code -b "tech_session=$LEADTOK" -H 'Content-Type: application/json' -d '{"type":"lock"}' http://127.0.0.1:8081/api/tech/sessions/1/events)" = 403 ] || fail "위조 세션의 쓰기 거부"
+for port in 8081 8082; do  # 알람 등록(내부 API)은 토큰이 맞아도 nginx 경유면 거부(X-App이 붙음)
+  [ "$(code -H "X-Internal-Token: $C1A15_INTERNAL_TOKEN" -H 'Content-Type: application/json' -d '{"equipment_id":"M-01","sensor_snapshot":{"power_w":6000,"temp_diff_k":7.0,"torque_nm":40,"tool_wear_min":100}}' http://127.0.0.1:$port/api/internal/alarms)" = 403 ] || fail "$port 경유 내부 알람 등록이 거부되지 않음"
+done
+[ "$(docker compose exec -T db psql -U c1a15 -d c1a15 -tAc "select count(*) from ops.alarms")" = 0 ] || fail "거부된 내부 등록이 알람을 만듦"
+[ "$(code -b $J/t -X POST http://127.0.0.1:8081/api/logout)" = 200 ] || fail "로그아웃"
+[ "$(code -b $J/t http://127.0.0.1:8081/api/tech/home)" = 401 ] || fail "로그아웃 뒤 거부"
+[ "$(docker compose exec -T db psql -U c1a15 -d c1a15 -tAc "select count(*) from ops.session_events")" = "$BEFORE" ] || fail "거부된 요청이 업무 기록을 바꿈"
+echo "verify-e2e(ADV-06 nginx 권한 경계): pass"
+# P-07(S-02): 시연 알람 발생기(host) → 담당 정비자 홈(8081)에 5초 안에(AC-13 · AC-28 · AC-34 실행 구성 부분)
+[ "$(code -c "$J/t" -H 'Content-Type: application/json' -d "$TECHJSON" http://127.0.0.1:8081/api/login)" = 200 ] || fail "정비자 다시 로그인"
+(cd server && PYTHONPATH=src .venv/bin/python -m c1a15.alarms DEMO-01) | grep -q '^DEMO-01 알람 [0-9]* 등록 · 배정 tech.kim' || fail "알람 발생기 등록"
+T0=$(date +%s); seen=""
+while [ $(( $(date +%s) - T0 )) -lt 5 ]; do
+  curl -fsS -b $J/t http://127.0.0.1:8081/api/tech/home | python3 -c 'import json,sys; h=json.load(sys.stdin); sys.exit(0 if any(a["equipment_id"]=="M-01" and a["status"]=="new" for a in h["alarms"]) else 1)' && { seen=1; break; }
+  sleep 0.5
+done
+[ -n "$seen" ] || fail "등록한 알람이 5초 안에 정비자 홈에 보이지 않음"
+! (cd server && C1A15_API_URL=http://example.com PYTHONPATH=src .venv/bin/python -m c1a15.alarms DEMO-02) >/dev/null 2>&1 || fail "발생기가 외부 주소를 허용함"
+echo "verify-e2e(P-07 알람 발생기 → 정비자 홈): pass"
+# EP-C1-HITL-001 L3(S-02): 세션 중간에 앱 서버를 다시 띄워도 같은 단계 · 같은 순위 · 잠금 시각,
+# 다음 단계 = 업무 기록에서 다시 판정한 Run(via deploy — ES-16 약속 바뀜: checkpoint 재개 아님)
+jget() { python3 -c 'import json,sys; d=json.load(sys.stdin); print(eval(sys.argv[1], {}, {"d": d}))' "$1"; }
+AID=$(curl -fsS -b $J/t http://127.0.0.1:8081/api/tech/home | jget 'd["alarms"][0]["alarm_id"]')
+S=$(curl -fsS -b $J/t -X POST http://127.0.0.1:8081/api/tech/alarms/$AID/session)
+SID=$(echo "$S" | jget 'd["session_id"]'); SEQ=$(echo "$S" | jget 'd["last_seq"]')
+S=$(curl -fsS -b $J/t -H 'Content-Type: application/json' -d "{\"seq\": $((SEQ+1)), \"type\": \"alarm_ack\"}" http://127.0.0.1:8081/api/tech/sessions/$SID/events)  # EV-007
+SEQ=$(echo "$S" | jget 'd["last_seq"]')
+S=$(curl -fsS -b $J/t -H 'Content-Type: application/json' -d "{\"seq\": $((SEQ+1)), \"type\": \"lock\"}" http://127.0.0.1:8081/api/tech/sessions/$SID/events)
+BEFORE_STEP=$(echo "$S" | jget '(d["step"], d["probabilities"], d["lock_at"])'); SEQ=$(echo "$S" | jget 'd["last_seq"]')
+scripts/e2e-host-api restart >/dev/null || fail "앱 서버 다시 띄우기"
+for _ in $(seq 1 30); do curl -fsS http://127.0.0.1:8081/api/health >/dev/null 2>&1 && break; sleep 1; done
+AFTER_STEP=$(curl -fsS -b $J/t http://127.0.0.1:8081/api/tech/sessions/$SID | jget '(d["step"], d["probabilities"], d["lock_at"])')
+[ "$BEFORE_STEP" = "$AFTER_STEP" ] || fail "api 재시작 뒤 단계 · 순위 · 잠금 시각이 다름"
+curl -fsS -b $J/t -H 'Content-Type: application/json' -d "{\"seq\": $((SEQ+1)), \"type\": \"precheck_done\", \"values\": \"하우징 표면 52 °C\"}" http://127.0.0.1:8081/api/tech/sessions/$SID/events >/dev/null || fail "재시작 뒤 입력"
+VIA=$(docker compose exec -T db psql -U c1a15 -d c1a15 -tAc "select coalesce(string_agg(payload->>'via', ','), '') from ops.session_events where session_id = $SID and type = 'step_opened' and seq > $SEQ")
+[ "$VIA" = "deploy" ] || fail "재시작 뒤 열린 다음 단계가 deploy Run 하나가 아님($VIA)"  # ES-16 N-3: 재시작 뒤 step_opened 1건 · via = deploy
+echo "verify-e2e(재시작 재개 L3 — 업무 기록에서 다시 판정): pass"
+# P-08(S-02 2차 cycle) · P-10(S-03) · P-13(S-04) · P-15(S-05) · P-17(S-06): 정비자 앱 화면 journey · 두 앱 교차 · 지난 화면 · 정정 · 시연 10건 완주 — Playwright 1.63.0(로컬 chromium, 내려받기 없음), 외부 요청 차단 · 콘솔 오류 0
+(cd e2e && BASE_URL=http://127.0.0.1:8081 LEAD_URL=http://127.0.0.1:8082 npx --no-install playwright test ${E2E_PW_ARGS:-}) || fail "앱 E2E(Playwright)"
+STAND=$(grep -c "start stand_in" "$E2E_RUN_DIR/fake.log" || true)
+[ "$STAND" = 0 ] || fail "가짜 배포 서버 start 대역 ${STAND}건 — 시연 알람은 모두 승인 행과 같아야 함(ES-15 NB-1)"
+SKIPPED=$(python3 -c 'import json, sys; print(json.load(open(sys.argv[1]))["stats"]["skipped"])' "${E2E_REPORT:-e2e/test-results/report.json}")
+echo "verify-e2e(P-08 · P-10 · P-13 · P-15 · P-17 정비자 앱 journey · 두 앱 교차 · 지난 화면 · 정정 · 시연 10건 완주 L3): pass${E2E_PW_ARGS:+ — 일부만(E2E_PW_ARGS=$E2E_PW_ARGS), 전체 통과 아님}$([ "$SKIPPED" = 0 ] || echo " — 멈춤 ${SKIPPED}건, 전체 통과 아님")"
+echo "verify-e2e(S-01 smoke): pass"

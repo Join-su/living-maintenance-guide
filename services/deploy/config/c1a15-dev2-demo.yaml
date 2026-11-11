@@ -1,0 +1,37 @@
+# [dev-2] D-570 실시간 시연 설정(시연 서버를 dev-2로 옮길 때만 · 옮김은 오케 go) — 경로는 이 파일 자리 기준 · repo/worktrees/<이름>/config에서 씀(../../../ = repo) — 8796 c1a15-dev-local.yaml과 다른 것:
+#   Pack = 시연 전용 복제(var/c1a15-dev2-demo/c1a15-pack · kg_apply 그래프 커밋은 여기에만) · 모델 v2(Pack dev-2 deploy-real.yaml) · 장부 없음(시연 기간 · 계획 d546)
+#   · 버전 전환 0(감시 AD_VERSIONS=off) · 시작 장치 = 로그: 감시(AD_KG=on)가 KG 반영 대기 폴더(승인 기록 파일)를 보고 kg_apply → 관문 → 반영(D-570 23:46). 나머지(실제 벡터 DB · 질의 임베딩 · trace)는 8796과 같음.
+deployment_id: c1a15@dev-local
+retention_class: dev
+pack:
+  repo: ../../../llmopsagent-deploy/var/c1a15-dev2-demo/c1a15-pack
+  ref: d580-g1                 # 시연 첫 상태(D-583): Pack ef9ec74 + 가이드 문장 가짜 AI 나눔 답 한 줄 — demo/dev2/import-pack.sh · set-tag.sh
+  pack_subdir: pack
+  releases_subdir: releases
+  expect_revision: "sha256:492b016ce255b2233689d2117dd1767b17fd139b26e07f6a366cb9169fbc4328"
+execution:
+  entrypoint: run
+  stores:
+    history: {backend: flat-local, release: ir-history-16d297d8, embedding: {mode: real, key_env: OPENAI_API_KEY}}
+    manuals: {backend: flat-local, release: ir-manuals-3ae4dcdf, embedding: {mode: real, key_env: OPENAI_API_KEY}}
+  models:
+    failure_classifier: {release: mr-ai4i-lgbm-large-v2}
+release_roots_extra:
+  - ../../../llmopsagent-deploy/var/c1a15-dev2-demo/releases
+  - ../../../agent-pack-runtime-ingest/releases-c1a15
+data_dir: ../../../llmopsagent-deploy/var/c1a15-dev2-demo/data
+packs_dir: ../../../llmopsagent-deploy/var/c1a15-dev2-demo/packs
+review_policy: auto_approve
+provider: fake
+embedding:
+  provider: http
+  env_file: ../../../c1a15-pack/.env
+  base_url: https://api.openai.com/v1
+registration:
+  mode: none
+trace:
+  dsn_env: LLMOPSAGENT_TRACE_DSN
+  env_file: ../../../llmopsagent-deploy/.env
+  payload_root: ../../../llmopsagent-deploy/var/v1-pg-local/trace-payloads
+outcome_by_node: {}
+grounding_keys: []

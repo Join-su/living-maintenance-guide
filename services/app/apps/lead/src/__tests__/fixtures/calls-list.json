@@ -1,0 +1,23 @@
+{
+ "now": "2026-10-13T12:40:44.223396+00:00",
+ "rows": [
+  {
+   "call_id": 15,
+   "kind": "handover",
+   "equipment_id": "M-06",
+   "group_name": "온도 차 저하",
+   "sent_at": "2026-10-13T12:40:44.078667+00:00",
+   "need": "점검 소진 · 원인 미상",
+   "sender_name": "김 정비"
+  },
+  {
+   "call_id": 14,
+   "kind": "approval",
+   "equipment_id": "M-05",
+   "group_name": "온도 차 저하",
+   "sent_at": "2026-10-13T12:40:43.589832+00:00",
+   "need": "냉각 팬 분해 점검(4.4, C)",
+   "sender_name": "김 정비"
+  }
+ ]
+}

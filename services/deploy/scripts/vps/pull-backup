@@ -1,0 +1,91 @@
+#!/usr/bin/env python3
+"""백업 받기(VFE EV-005 ES-C, CHG-05 · D-82) — 사용자 맥에서 실행. VPS 백업 폴더를 받아 맥에도 7일치만 남깁니다. 표준 라이브러리만.
+  pull-backup --remote <사용자@호스트:/srv/llmopsagent/backup> --dest <맥 폴더> [--keep 7]
+      1 받기   rsync -a --exclude *.partial <remote>/ <dest>/   (만드는 중인 .partial은 받지 않음)
+      2 확인   남길 날짜 폴더(최근 --keep개)마다 manifest.json의 sha256과 대조 — 다르면 종료 1(지우기 안 함)
+      3 정리   <dest> 바로 아래 날짜 폴더(YYYY-MM-DD, 링크 아님) 중 최근 --keep개만 남김. 그 밖의 것은 건드리지 않음
+바꿀 수 있는 명령(시험은 가짜): PULL_BACKUP_RSYNC(기본 "rsync -a"). 받은 파일 안의 값은 출력하지 않습니다.
+종료: 0 완료 / 1 받기 실패 · 대조 다름 / 2 사용 오류."""
+import argparse
+import hashlib
+import json
+import os
+import re
+import shlex
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+
+DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+
+
+def out(msg):
+    print(msg, flush=True)
+
+
+def sha256(p):
+    h = hashlib.sha256()
+    with open(p, "rb") as f:
+        for b in iter(lambda: f.read(1 << 20), b""):
+            h.update(b)
+    return h.hexdigest()
+
+
+def date_dirs(dest):
+    return sorted(p for p in dest.iterdir() if DATE_RE.fullmatch(p.name) and p.is_dir() and not p.is_symlink())
+
+
+def verify(day_dir):
+    """manifest.json의 파일 · 크기 · sha256 대조. 틀린 파일 이름 목록."""
+    try:
+        m = json.loads((day_dir / "manifest.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return ["manifest.json"]
+    if not m.get("files"):
+        return ["manifest.json(파일 목록 없음)"]
+    bad = []
+    for f in m["files"]:
+        p = day_dir / f["name"]
+        if not p.is_file() or p.stat().st_size != f["bytes"] or sha256(p) != f["sha256"]:
+            bad.append(f["name"])
+    return bad
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser(prog="pull-backup")
+    ap.add_argument("--remote", required=True)
+    ap.add_argument("--dest", required=True)
+    ap.add_argument("--keep", type=int, default=7)
+    a = ap.parse_args(argv)
+    dest = Path(a.dest)
+    if a.keep < 1 or not dest.is_dir():
+        print("사용 오류: --dest 있는 폴더 · --keep 1 이상", file=sys.stderr)
+        return 2
+    rsync = shlex.split(os.environ.get("PULL_BACKUP_RSYNC") or "rsync -a")
+    out(f"[1/3] 받기 → {dest}")
+    r = subprocess.run([*rsync, "--exclude", "*.partial", a.remote.rstrip("/") + "/", str(dest) + "/"], capture_output=True, text=True)
+    if r.returncode:
+        out(f"결과: 받기 실패(종료 {r.returncode}) — 맥 백업은 그대로")
+        return 1
+    days = date_dirs(dest)
+    kept = days[-a.keep:]
+    bad = {d.name: b for d in kept if (b := verify(d))}
+    out(f"[2/3] 대조: 남길 날짜 폴더 {len(kept)}개, 다름 {len(bad)}개")
+    if bad:
+        for k, v in bad.items():
+            out(f"  {k}: {', '.join(v)}")
+        out("결과: 대조 다름 — 지우기는 하지 않음. 다시 받아 주세요")
+        return 1
+    root, gone = dest.resolve(), []
+    for p in days[:-a.keep]:
+        if p.resolve().parent == root:
+            shutil.rmtree(p)
+            gone.append(p.name)
+    out(f"[3/3] 남김 {len(date_dirs(dest))}개, 지움 {len(gone)}개{(' (' + ', '.join(gone) + ')') if gone else ''}")
+    out("결과: 완료")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

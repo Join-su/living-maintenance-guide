@@ -1,0 +1,38 @@
+[project]
+name = "llmops-lite"
+version = "0.1.0"
+description = "LLMOps Control Plane — local LangGraph agent evaluation (fixture/fake provider by default)"
+requires-python = ">=3.14"
+dependencies = [
+  "langgraph",
+  "fastapi",
+  "uvicorn",
+  "pyyaml>=6.0.3",
+  "jsonschema>=4.26.0",
+  "packrt",
+  "tracewriter",
+  "psycopg[binary]>=3.2",
+]
+
+[dependency-groups]
+dev = [
+  "pytest",
+  "httpx",
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.sources]
+# packrt and the shared trace writer live in their own repository agent-pack-runtime (EV-023 CHG-204): one repository tag
+# for both, installed non-editable; the local clone for now, the GitHub remote at the CI step
+packrt = { git = "https://github.com/Join-su/agent-pack-runtime.git", tag = "v0.15.0", subdirectory = "packrt" }
+tracewriter = { git = "https://github.com/Join-su/agent-pack-runtime.git", tag = "v0.15.0", subdirectory = "tracewriter" }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+  "flow: S-01~S-38 user-flow runs counted by network_zero_check",
+  "negative_network: intentional NEG-NET-* tests (expected deny, 0 successful connections)",
+  "pg: needs the local PostgreSQL of db/compose.yaml (run through scripts/verify-db.sh; skipped without it unless LLMOPS_PG_REQUIRED=1)",
+]

@@ -1,0 +1,8 @@
+# 평가 suite — Pack revision 밖. 시연 10 세션의 첫 Run(약속 v4 — Pack 리트리버 retrieve_history) — 기대값 = Pack 출력(가짜 DB ir-history-412ea43e, D-313 · D-314 승인)
+# 만든 도구: tools/make_start_suite.py(입력은 tools/make_evals.py — 다리 칸 similar는 쓰지 않음 H-5 (나))
+suite: c1a15_start
+split: fixture
+graph: run
+dataset: dataset.jsonl
+expectations: expectations.jsonl
+review_policy: {default: fixture, missing_fixture: stop_before}

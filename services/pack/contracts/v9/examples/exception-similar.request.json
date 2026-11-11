@@ -1,0 +1,20 @@
+{
+  "kind": "exception_similar",
+  "session_id": "S-12",
+  "group": "CL",
+  "items": [
+    {
+      "check": {
+        "what": "냉각수 수위",
+        "how": "냉각수 탱크 눈금을 본다",
+        "criteria": "눈금 아래면 이상",
+        "minutes": null
+      },
+      "action": {
+        "what": "냉각수 보충",
+        "parts": [],
+        "minutes": null
+      }
+    }
+  ]
+}

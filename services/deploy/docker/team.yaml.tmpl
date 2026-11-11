@@ -1,0 +1,33 @@
+# pack-server settings — made once from this template by pack-server-start (kept in the volume afterwards, because the watcher
+# rewrites pack.ref · expect_revision on every deploy · rollback · graph apply). Same fields as the demo server; paths are the
+# container's. The placeholders are filled at first start: the first Pack tag (kg-init) and its revision.
+deployment_id: ${DEPLOYMENT_ID}
+retention_class: dev
+pack:
+  repo: /srv/pack-repo/c1a15-pack
+  ref: ${PACK_TAG}   # keep the space after the tag: the watcher finds '  ref: <tag> ' to change it
+  pack_subdir: pack
+  releases_subdir: releases
+  expect_revision: "${PACK_REVISION}"
+execution:
+  entrypoint: run
+  stores:
+    history: {backend: flat-local, release: ir-history-16d297d8, embedding: {mode: real, key_env: OPENAI_API_KEY}}
+    manuals: {backend: flat-local, release: ir-manuals-3ae4dcdf, embedding: {mode: real, key_env: OPENAI_API_KEY}}
+  models:
+    failure_classifier: {release: mr-ai4i-lgbm-large-v2}
+release_roots_extra:
+  - /srv/pack-repo/agent-pack-runtime-ingest/releases-c1a15
+data_dir: /var/lib/deploy/data
+packs_dir: /var/lib/deploy/packs
+review_policy: auto_approve
+provider: http
+registration:
+  mode: llmops_db
+  path: /shared/agentops-data/llmops.db
+trace:
+  dsn_env: LLMOPSAGENT_TRACE_DSN
+  env_file: /secrets/trace-db.env
+  payload_root: /shared/trace-payloads
+outcome_by_node: {}
+grounding_keys: []

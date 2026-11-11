@@ -1,0 +1,24 @@
+{
+  "decision": {
+    "probabilities": {
+      "CL-1": 82,
+      "CL-2": 6,
+      "CL-3": 6,
+      "CL-4": 6
+    },
+    "evidence": {
+      "CL-1": 10,
+      "CL-2": 0,
+      "CL-3": 0,
+      "CL-4": 0
+    },
+    "low_evidence": false,
+    "kind": "call",
+    "section": "EX-NEW",
+    "grade": "C",
+    "reason": "exception_progress",
+    "exception_progress": {
+      "mode": "call_first"
+    }
+  }
+}

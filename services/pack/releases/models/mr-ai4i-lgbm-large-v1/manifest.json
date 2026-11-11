@@ -1,0 +1,231 @@
+{
+ "kind": "model",
+ "release_id": "mr-ai4i-lgbm-large-v1",
+ "trusted": true,
+ "artifact": {
+  "file": "model.onnx",
+  "format": "onnx",
+  "sha256": "81f40c2c7d14b739a0901aff0e38afdd28b0390b6e056198afaa45312b56c410",
+  "output": {
+   "kind": "proba",
+   "name": "lgb_probabilities"
+  }
+ },
+ "files": {
+  "model.onnx": "81f40c2c7d14b739a0901aff0e38afdd28b0390b6e056198afaa45312b56c410",
+  "compare.json": "5a2e8fa646e1a5ce670e8669147a370602da6ee2adb0ca01e786e6bba9de4719",
+  "scorecard-val.json": "1a93ff77f9ac3d4ed5a5e0096a1767dd09968ba8c6e258794cc08dac4e23afb1"
+ },
+ "classes": [
+  "HDF",
+  "NONE",
+  "OSF",
+  "PWF",
+  "TWF"
+ ],
+ "feature_schema": {
+  "version": 1,
+  "fields": [
+   "type_code",
+   "air",
+   "proc",
+   "rpm",
+   "torque",
+   "wear"
+  ],
+  "sources": {
+   "type_code": "event_card.product_type",
+   "air": "sensor_snapshot.air_temperature_k",
+   "proc": "sensor_snapshot.process_temperature_k",
+   "rpm": "sensor_snapshot.rotational_speed_rpm",
+   "torque": "sensor_snapshot.torque_nm",
+   "wear": "sensor_snapshot.tool_wear_min"
+  },
+  "encodings": {
+   "type_code": {
+    "L": 0,
+    "M": 1,
+    "H": 2
+   }
+  },
+  "derivation": "ONNX 그래프 안(Pack은 계산 안 함): f_air/proc = air / proc(proc = 0이면 0) · f_rpm×torque = rpm × torque · f_torque×wear = torque × wear · zone_wear = 1 if 224.5 < wear ≤ 247.0 else 0(train에서 찾은 구간)"
+ },
+ "threshold_config": {
+  "values": {
+   "min_probability": 0.5,
+   "normal_classes": [
+    "NONE"
+   ]
+  },
+  "sha256": "edadc3c751841c13cbc2f3b642e977bed555ce76bd56d625c51de9d398ad7389"
+ },
+ "runtime_requirements": {
+  "onnx_ir_version": 7,
+  "opset": {
+   "ai.onnx": 13,
+   "ai.onnx.ml": 1
+  },
+  "onnxruntime": "1.31.0",
+  "onnxruntime_read_check": {
+   "onnxruntime": "1.31.0",
+   "ir_version": 7,
+   "opset": {
+    "ai.onnx": 13,
+    "ai.onnx.ml": 1
+   },
+   "inputs": [
+    {
+     "name": "input",
+     "type": "tensor(float)",
+     "shape": [
+      null,
+      6
+     ]
+    }
+   ],
+   "outputs": [
+    {
+     "name": "lgb_label",
+     "type": "tensor(int64)"
+    },
+    {
+     "name": "lgb_probabilities",
+     "type": "tensor(float)"
+    }
+   ],
+   "result": "읽힘 · CPU session 열림 · 대조는 compare.json(같은 판)"
+  },
+  "onnxruntime_min": "1.6",
+  "note": "실행 쪽(deploy · c1a15-pack · llmops)은 onnxruntime 1.31.0 — 그 판에서 읽힘 · 대조 확인. onnxruntime_min은 호환표 기준(시험 안 함). 입력 1개 tensor(float) [N, 6], 출력 확률 [N, 5]"
+ },
+ "provenance": {
+  "training_data": "ai4i2020@sha256:dc6630cd9b1f0f853922fad78a1b6436570d3f1ec863f1dd5c4340ac56bc8a8e",
+  "split_file": {
+   "ai4i-split.json": "sha256:7964c6f880f4cc418d03444bf34faf7f8c20d469ebf2939a3194bb3f42004ee0",
+   "ai4i-split-by-udi.csv": "sha256:1929f57ea68b21bbdc90c8532ca27c3014e4ddc32b1b9cfeed68484e9e4bf376",
+   "split.py": "sha256:1acbee5bad8822a921f7b696ea00624e245ff8ac5eb5056940bb51945f39230c",
+   "seed": 20261022,
+   "version": "v2(D-227)"
+  },
+  "split_used": {
+   "train": "학습 5,735행 전체(variant B, 정제 안 함)",
+   "val": "1,912행 — AutoGluon tuning_data로 학습에 쓰임(D-265 표시)",
+   "test": "1,914행 — 두 번 봄: 노트북 cell 36(HistGB 전후) · cell 38(leaderboard, LightGBMLarge score_test 0.7729)(D-265 표시)",
+   "demo": "439행 — 학습 · 조절 0"
+  },
+  "rows": 5735,
+  "rows_sha256": "d61fb94dab5d545dd0beaa5b86641789db2e73292d716151cebdcf8a6eabd79b",
+  "class_counts": {
+   "HDF": 49,
+   "NONE": 5561,
+   "OSF": 46,
+   "PWF": 53,
+   "TWF": 26
+  },
+  "multi_label_rule": "유형 둘 이상이면 TWF > HDF > PWF > OSF 하나 · 유형 없는 고장 · RNF는 NONE(RNF class 없음)",
+  "trainer": {
+   "tool": "AutoGluon 1.6.3 TabularPredictor(label, eval_metric f1_macro, sample_weight balance_weight, presets medium_quality, time_limit 600)",
+   "python": "3.13.15",
+   "lightgbm": "4.7.0",
+   "model": "LightGBMLarge",
+   "feature_generator_steps": [
+    "AsTypeFeatureGenerator",
+    "FillNaFeatureGenerator",
+    "IdentityFeatureGenerator",
+    "DropUniqueFeatureGenerator",
+    "DropDuplicatesFeatureGenerator"
+   ],
+   "best_model": "WeightedEnsemble_L2",
+   "ensemble_base": [
+    "LightGBMLarge"
+   ],
+   "lightgbm_params": {
+    "learning_rate": 0.03,
+    "num_leaves": 128,
+    "feature_fraction": 0.9,
+    "min_data_in_leaf": 3,
+    "seed": 0
+   },
+   "num_iteration": 52,
+   "features_equal_saved_X": true
+  },
+  "training_code": "orchestration/data/ai4i-split-v2/examples/ai4i_analysis_to_features.ipynb@sha256:08cae8f18d0be9586317013b75bed1398121ab088760651135d7b20818bd8baf (cell 2 · 23 · 27 · 33 · 38)",
+  "source_model": {
+   "predictor.pkl": "sha256:72687fd8fda3b408978a23a45abd3680e4efa15e3e1d55dcd78d920d89f6e065",
+   "learner.pkl": "sha256:e696a1fdc8bb3e7be3ea509a24fcc078266707270d9f5b05e468dd60a1a2011a",
+   "metadata.json": "sha256:bd47d0c41fe3faf7cd7b3eb7484193f6e6e46f706e2a355d0c1f8933ff85af48",
+   "models/LightGBMLarge/model.pkl": "sha256:0d25030bf465a4cc27f8b30eab884f89550763f8fc4498138f2e1dc5745c73df"
+  },
+  "conversion": {
+   "tool": {
+    "build_release.py": "sha256:a3bc6f8814fc8b8b3ebbc974fbcb00b7b7e0b4256473f930265195a67dd1069f",
+    "common.py": "sha256:26a9b80ebf818aace57436dcb40c2dc5b287171e9afb8e1dfc8f20ac3ce4e579"
+   },
+   "packages": {
+    "onnx": "1.23.2",
+    "onnxmltools": "1.16.0",
+    "onnxruntime": "1.31.0",
+    "autogluon.tabular": "1.6.3",
+    "lightgbm": "4.7.0"
+   },
+   "parity": {
+    "train": {
+     "rows": 5735,
+     "max_abs_diff": 1.7881393432617188e-07,
+     "mean_abs_diff": 1.2826106292638138e-08,
+     "argmax_same": 5735,
+     "rows_diff_gt_1e-4": 0
+    },
+    "val": {
+     "rows": 1912,
+     "max_abs_diff": 7.152557373046875e-07,
+     "mean_abs_diff": 1.3039100556692818e-08,
+     "argmax_same": 1912,
+     "rows_diff_gt_1e-4": 0
+    },
+    "test": {
+     "rows": 1914,
+     "max_abs_diff": 1.7881393432617188e-07,
+     "mean_abs_diff": 1.3078610600598056e-08,
+     "argmax_same": 1914,
+     "rows_diff_gt_1e-4": 0
+    },
+    "demo": {
+     "rows": 439,
+     "max_abs_diff": 1.7881393432617188e-07,
+     "mean_abs_diff": 1.344753425050705e-08,
+     "argmax_same": 439,
+     "rows_diff_gt_1e-4": 0
+    }
+   }
+  },
+  "metrics": {
+   "split": "val(독립 아님)",
+   "macro_f1": 0.812,
+   "alarm_rules": {
+    "task10_top_class": {
+     "alarms": 61,
+     "failure_rows": 60,
+     "caught": 50,
+     "recall": 0.833,
+     "false_alarms": 11,
+     "false_alarm_rate_of_normal": 0.0059
+    },
+    "c1a15_risk": {
+     "alarms": 67,
+     "failure_rows": 60,
+     "caught": 52,
+     "recall": 0.867,
+     "false_alarms": 15,
+     "false_alarm_rate_of_normal": 0.0081
+    },
+    "rows_rules_disagree": 6
+   },
+   "calibration_ece_top_class": 0.0922,
+   "calibration_ece_risk": 0.095,
+   "file": "scorecard-val.json"
+  },
+  "created_at": "2026-10-24T15:18:45+09:00"
+ },
+ "note": "사용자 학습 모델(AutoGluon LightGBMLarge) ONNX — 위험도 · 유형 확률(확정 진단 아님). class에 RNF 없음. TWF는 val f1 낮음(데이터 한계, 노트북 정리). 알람 식은 Pack마다 다름: task10 = 가장 큰 class ≠ NONE이고 ≥ 하한 · C1-a15 = 위험도(1 − P(NONE)) ≥ 앱 설정 문턱(D-260 (3))."
+}

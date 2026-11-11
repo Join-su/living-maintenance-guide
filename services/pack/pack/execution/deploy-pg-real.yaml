@@ -1,0 +1,20 @@
+# pg 판 배포용 실행 설정 — 실제 DB(Pack EV-001 PS-06, D-327 · D-298 · packrt-1 011 1절). **공유 DB DDL · 적재(사용자 승인) 전에는 운영에 쓰지 않음** — deploy가 고를 때만 씀. 이 run에서 Run 0.
+# deploy-real.yaml과 같고 stores 줄만 pgvector. 질의 임베딩은 실제(start 한 번에 이력 · 매뉴얼 2건 — 키 · 예산 필요, 사용자 승인 뒤). 연결 env 이름은 LLMOPSAGENT_RUNTIME_DSN 하나(값은 실행 환경 몫 — 이 파일에 0).
+# 되돌림 = deploy-real.yaml(flat-local, 같은 release id). 비밀 값 없음(키 환경 변수 이름만), Pack revision 밖.
+config_version: 1
+entrypoint: run
+environment: {kind: local-python, python: ../../.venv/bin/python}
+release_roots: [../../releases, ../../../agent-pack-runtime-ingest/releases-c1a15]   # model release 폴더(Pack 저장소 안 사본) · 벡터 DB(packrt-1 자리, 읽기만)
+models:
+  failure_classifier: {release: mr-ai4i-lgbm-large-v2}   # 사용자 모델(task10-pack 2c74ac0 사본, D-268 · D-272) — 되돌림은 이 줄을 mr-c1a15-standin-v1로
+stores:
+  history:
+    backend: pgvector
+    release: ir-history-16d297d8                    # <pack.id>.data_release에 적재돼 있어야 함 — 이 줄의 corpus가 고르기 기준
+    connection: {env: LLMOPSAGENT_RUNTIME_DSN}      # 이 이름만(runtime_reader)
+    embedding: {mode: real, key_env: OPENAI_API_KEY}
+  manuals:
+    backend: pgvector
+    release: ir-manuals-3ae4dcdf
+    connection: {env: LLMOPSAGENT_RUNTIME_DSN}
+    embedding: {mode: real, key_env: OPENAI_API_KEY}

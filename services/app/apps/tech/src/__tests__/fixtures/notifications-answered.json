@@ -1,0 +1,45 @@
+{
+ "items": [
+  {
+   "kind": "in_progress",
+   "alarm_id": 30,
+   "session_id": 30,
+   "equipment_id": "M-03",
+   "group_name": "온도 차 저하",
+   "occurred_at": "2026-10-13T12:40:30.420438+00:00",
+   "progress": {
+    "check_no": 1,
+    "check_max": 3
+   }
+  },
+  {
+   "kind": "in_progress",
+   "alarm_id": 31,
+   "session_id": 31,
+   "equipment_id": "M-04",
+   "group_name": "온도 차 저하",
+   "occurred_at": "2026-10-13T12:40:30.809702+00:00",
+   "progress": {
+    "check_no": 3,
+    "check_max": 4
+   },
+   "answer": "approved"
+  },
+  {
+   "kind": "answered_call",
+   "alarm_id": 31,
+   "session_id": 31,
+   "equipment_id": "M-04",
+   "group_name": "온도 차 저하",
+   "occurred_at": "2026-10-13T12:40:30.809702+00:00",
+   "call_section": "4.4",
+   "call_title": "냉각 팬 분해 점검",
+   "call_grade": "C",
+   "answer": "approved",
+   "answered_by": "lead.park",
+   "answered_by_name": "박 파트장",
+   "answered_at": "2026-10-13T12:40:32.793219+00:00"
+  }
+ ],
+ "empty": false
+}

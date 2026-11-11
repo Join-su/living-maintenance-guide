@@ -1,0 +1,10 @@
+.venv
+__pycache__/
+*.pyc
+.tmp/
+.DS_Store
+vendor/packrt/packrt.egg-info/
+.vibe-factory/
+.env
+.env.*
+/status/

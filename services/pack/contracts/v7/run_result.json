@@ -1,0 +1,496 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "c1a15-pack/contracts/v6/run_result.json",
+  "title": "RunResult",
+  "description": "C1-a15 Pack Run 출력 v6 — v5에서 alarm 칸 하나만 바뀜: candidate(사람 판단 후보) 지움 → no_alarm_reason(알람 없음 사유). 그 밖 칸 · 뜻은 v5와 같음",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "alarm": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "event_id",
+        "alarm",
+        "group",
+        "group_source",
+        "alarm_block",
+        "sensor_derived",
+        "ml",
+        "no_alarm_reason"
+      ],
+      "properties": {
+        "event_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9-]{1,40}$"
+        },
+        "alarm": {
+          "type": "boolean"
+        },
+        "group": {
+          "enum": [
+            "TW",
+            "PW",
+            "CL",
+            "LD",
+            null
+          ]
+        },
+        "group_source": {
+          "enum": [
+            "sensor_boundary",
+            "ml_type",
+            null
+          ]
+        },
+        "alarm_block": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "sensor",
+                "value",
+                "unit",
+                "boundary",
+                "direction",
+                "trend_title"
+              ],
+              "properties": {
+                "sensor": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "number"
+                },
+                "unit": {
+                  "type": "string"
+                },
+                "boundary": {
+                  "type": "number"
+                },
+                "direction": {
+                  "enum": [
+                    "경계 위",
+                    "경계 아래"
+                  ]
+                },
+                "trend_title": {
+                  "type": "string"
+                }
+              }
+            }
+          ],
+          "description": "경계 판정 결과(앱 알람 행 alarm 칸과 같은 모양). 경계를 안 넘었으면 null"
+        },
+        "sensor_derived": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "power_w",
+            "temp_diff_k"
+          ],
+          "properties": {
+            "power_w": {
+              "type": "number"
+            },
+            "temp_diff_k": {
+              "type": "number"
+            }
+          }
+        },
+        "ml": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "model_release",
+                "risk",
+                "alarm",
+                "top_k",
+                "confidence",
+                "threshold",
+                "confirmed"
+              ],
+              "properties": {
+                "model_release": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "risk": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "alarm": {
+                  "type": "boolean"
+                },
+                "top_k": {
+                  "type": "array",
+                  "maxItems": 3,
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "type",
+                      "probability",
+                      "group_suggestion"
+                    ],
+                    "properties": {
+                      "type": {
+                        "type": "string"
+                      },
+                      "probability": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      "group_suggestion": {
+                        "enum": [
+                          "TW",
+                          "PW",
+                          "CL",
+                          "LD",
+                          null
+                        ]
+                      }
+                    }
+                  }
+                },
+                "confidence": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "threshold": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "exclusiveMaximum": 1
+                },
+                "confirmed": {
+                  "const": false
+                },
+                "group_source": {
+                  "enum": [
+                    "sensor_boundary",
+                    "ml_type"
+                  ]
+                }
+              }
+            }
+          ],
+          "description": "source_mode = ml_predicted일 때 예측 요약(sensor_boundary면 null). 원인 순위 · 판정에는 쓰지 않음(D-238)"
+        },
+        "no_alarm_reason": {
+          "enum": [
+            "low_confidence",
+            "rnf",
+            "model_failure",
+            null
+          ],
+          "description": "ML 길에서 위험도 ≥ 문턱인데 알람이 없을 때 그 사유(앱은 감사 한 줄만, D-529 · D-530 덧 2) — low_confidence = 1등 유형 확률 < 문턱 · rnf = 1등 유형 RNF · model_failure = 앱이 예측 실패를 읽은 꼴(Pack Run은 run.predict_failure로 실패). 알람이 났거나 위험도 < 문턱 · 경계 길이면 null. 위험도 · 유형은 ml 칸"
+        }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string"
+        }
+      },
+      "description": "다음 단계 하나(앱 engine/session.decide와 같은 모양)"
+    },
+    "preview": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string"
+        }
+      },
+      "description": "start에만 — 요청 업무 기록 + 잠금 · 사전 확인으로 판정한 다음 단계(decision과 같은 모양 · 같은 옵션 값). 앱 진단 화면 '다음 점검' 미리보기"
+    },
+    "similar": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "record_id",
+          "score"
+        ],
+        "properties": {
+          "record_id": {
+            "type": "string"
+          },
+          "cause": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "score": {
+            "type": "number"
+          }
+        }
+      },
+      "description": "start: Pack 리트리버(retrieve@2, store history)가 고른 상위 10건 — record_id = 조각 locator.record_id · cause = 조각 metadata.cause(return_metadata — 고른 뒤 붙임, 필터 · 순위 밖 G-8 · D-305, 확정 원인 없으면 null) · score = retrieve@2 최종 점수(소수 6자리). 점수 내림차순 · 같으면 record_id 순(PP-09)"
+    },
+    "retrieval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "vector_db_version",
+        "query_from",
+        "fallback_used"
+      ],
+      "description": "start 리트리버 요약 — Pack state에 있는 값만(retrieve@2 결과 조각에서). method · top_k · index_recipe_sha256 · fallback_reason · ranks · locator는 trace(LLMOps retrievals)에만. similar가 비면 아래 셋은 null",
+      "properties": {
+        "source": {
+          "const": "packrt",
+          "description": "v4는 Pack 리트리버만(P1 다리 request 없음)"
+        },
+        "vector_db_version": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "description": "이력 DB version = retrieve@2 조각의 index_release(packrt release id). 앱이 세션에 저장(R12 새 version은 다음 세션부터). similar가 비면 null"
+        },
+        "query_from": {
+          "enum": [
+            "embed",
+            null
+          ],
+          "description": "embed = 질의 벡터를 그 Run에서 만듦(가짜 모드 포함 — 조각 ranks.vector가 있음). lexical 방식이거나 similar가 비면 null. 미리 계산한 질의 벡터(G-3, release)는 11-01 뒤 새 version"
+        },
+        "fallback_used": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "retrieve@2 다시 찾기(필터 키 빼기)를 썼는지. similar가 비면 null"
+        }
+      }
+    },
+    "report": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cause",
+        "action"
+      ],
+      "properties": {
+        "cause": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "text",
+            "fallback",
+            "attempts",
+            "reason"
+          ],
+          "properties": {
+            "text": {
+              "type": "string",
+              "minLength": 1
+            },
+            "fallback": {
+              "type": "boolean",
+              "description": "true = 근거 검사를 두 번 통과하지 못해 원문(report_draft의 그 칸)으로 대체"
+            },
+            "attempts": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2
+            },
+            "reason": {
+              "enum": [
+                null,
+                "ungrounded_section",
+                "ungrounded_record",
+                "ungrounded_number",
+                "empty"
+              ]
+            }
+          }
+        },
+        "action": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "text",
+            "fallback",
+            "attempts",
+            "reason"
+          ],
+          "properties": {
+            "text": {
+              "type": "string",
+              "minLength": 1
+            },
+            "fallback": {
+              "type": "boolean",
+              "description": "true = 근거 검사를 두 번 통과하지 못해 원문(report_draft의 그 칸)으로 대체"
+            },
+            "attempts": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2
+            },
+            "reason": {
+              "enum": [
+                null,
+                "ungrounded_section",
+                "ungrounded_record",
+                "ungrounded_number",
+                "empty"
+              ]
+            }
+          }
+        }
+      },
+      "description": "LLM이 다시 쓴 보고서 문장 둘(나머지 6칸은 앱 초안 그대로라 돌려주지 않음)"
+    },
+    "manual_support": {
+      "type": "object",
+      "maxProperties": 8,
+      "propertyNames": {
+        "pattern": "^[A-Z]{2}-[0-9]$"
+      },
+      "additionalProperties": {
+        "type": "number",
+        "minimum": 0
+      },
+      "description": "매뉴얼 결과 몫 {원인 코드: 값}(Pack 옵션 use_manual 켤 때만 · start 결과에서 받아 judge 요청에 그대로 다시 보냄)"
+    }
+  },
+  "oneOf": [
+    {
+      "required": [
+        "alarm"
+      ],
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "decision"
+            ]
+          },
+          {
+            "required": [
+              "similar"
+            ]
+          },
+          {
+            "required": [
+              "retrieval"
+            ]
+          },
+          {
+            "required": [
+              "report"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "required": [
+        "decision",
+        "similar",
+        "retrieval"
+      ],
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "alarm"
+            ]
+          },
+          {
+            "required": [
+              "report"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "required": [
+        "decision"
+      ],
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "alarm"
+            ]
+          },
+          {
+            "required": [
+              "similar"
+            ]
+          },
+          {
+            "required": [
+              "retrieval"
+            ]
+          },
+          {
+            "required": [
+              "report"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "required": [
+        "report"
+      ],
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "alarm"
+            ]
+          },
+          {
+            "required": [
+              "decision"
+            ]
+          },
+          {
+            "required": [
+              "similar"
+            ]
+          },
+          {
+            "required": [
+              "retrieval"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

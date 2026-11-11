@@ -1,0 +1,6 @@
+# scripts/check-public.sh 허용 목록: '<규칙 glob> <경로 glob>' — 줄마다 까닭
+# 시험 파일의 가짜 키(값 안에 fake · test 표시 · 가림 시험용) — 원래 저장소 시험 그대로
+secret.* services/deploy/tests/*
+secret.* vendor/agent-pack-runtime/tests/*
+# AgentOps 화면 글 한 줄 '묶음 없음 — task10-pack 준비 중'(동결 코드 · task10-pack = 예시 Pack 이름)
+internal.session-name services/agentops/web/popover.js

@@ -1,0 +1,120 @@
+{
+  "decision": {
+    "probabilities": {
+      "CL-1": 37,
+      "CL-2": 37,
+      "CL-3": 5,
+      "CL-4": 21
+    },
+    "evidence": {
+      "CL-1": 4,
+      "CL-2": 4,
+      "CL-3": 0,
+      "CL-4": 2
+    },
+    "low_evidence": false,
+    "kind": "lock",
+    "section": "1.2"
+  },
+  "similar": [
+    {
+      "record_id": "H-0207",
+      "cause": "CL-2",
+      "score": 0.887499
+    },
+    {
+      "record_id": "H-0208",
+      "cause": "CL-1",
+      "score": 0.870196
+    },
+    {
+      "record_id": "H-0206",
+      "cause": "CL-4",
+      "score": 0.849284
+    },
+    {
+      "record_id": "H-0203",
+      "cause": "CL-4",
+      "score": 0.829617
+    },
+    {
+      "record_id": "H-0200",
+      "cause": "CL-2",
+      "score": 0.813981
+    },
+    {
+      "record_id": "H-0204",
+      "cause": "CL-1",
+      "score": 0.786573
+    },
+    {
+      "record_id": "H-0212",
+      "cause": "CL-1",
+      "score": 0.784719
+    },
+    {
+      "record_id": "H-0191",
+      "cause": "CL-1",
+      "score": 0.780616
+    },
+    {
+      "record_id": "H-0194",
+      "cause": "CL-2",
+      "score": 0.777997
+    },
+    {
+      "record_id": "H-0192",
+      "cause": "CL-2",
+      "score": 0.72286
+    }
+  ],
+  "retrieval": {
+    "source": "packrt",
+    "vector_db_version": "graph-mm3-v2-48a5b999-fbdb9d71",
+    "query_from": null,
+    "fallback_used": false
+  },
+  "exception_guide": {
+    "section": "EX-R-0001",
+    "relation_id": "EX-R-0001",
+    "grade": "C",
+    "title": "필터 덮개 고정 나사 확인",
+    "text": "필터 덮개 고정 나사가 모두 있는지 보고, 빠졌으면 새로 끼운 뒤 필터를 교체한다",
+    "steps": [
+      "덮개 고정 나사 네 개 확인",
+      "빠진 나사 새로 끼움",
+      "필터 교체"
+    ],
+    "criteria": "나사 네 개 모두 체결 = 정상",
+    "basis": [
+      "R-0001"
+    ],
+    "minutes": 5,
+    "next_section": "4.3"
+  },
+  "preview": {
+    "probabilities": {
+      "CL-1": 37,
+      "CL-2": 37,
+      "CL-3": 5,
+      "CL-4": 21
+    },
+    "evidence": {
+      "CL-1": 4,
+      "CL-2": 4,
+      "CL-3": 0,
+      "CL-4": 2
+    },
+    "low_evidence": false,
+    "kind": "call",
+    "section": "EX-R-0001",
+    "grade": "C",
+    "cause": "CL-1",
+    "reason": "exception_guide",
+    "relation": "EX-R-0001",
+    "graph": {
+      "used": "EX-R-0001",
+      "layer": "mm3-v2-48a5b999"
+    }
+  }
+}

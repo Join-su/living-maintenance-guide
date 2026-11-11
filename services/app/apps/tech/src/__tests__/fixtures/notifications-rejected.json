@@ -1,0 +1,85 @@
+{
+ "items": [
+  {
+   "kind": "in_progress",
+   "alarm_id": 43,
+   "session_id": 43,
+   "equipment_id": "M-06",
+   "group_name": "온도 차 저하",
+   "occurred_at": "2026-10-13T12:40:43.908653+00:00",
+   "progress": {
+    "check_no": 4,
+    "check_max": 4
+   },
+   "answer": "assign"
+  },
+  {
+   "kind": "in_progress",
+   "alarm_id": 39,
+   "session_id": 39,
+   "equipment_id": "M-01",
+   "group_name": "온도 차 저하",
+   "occurred_at": "2026-10-13T12:40:42.194860+00:00",
+   "progress": {
+    "check_no": 1,
+    "check_max": 3
+   }
+  },
+  {
+   "kind": "in_progress",
+   "alarm_id": 42,
+   "session_id": 42,
+   "equipment_id": "M-05",
+   "group_name": "온도 차 저하",
+   "occurred_at": "2026-10-13T12:40:43.498657+00:00",
+   "progress": {
+    "check_no": 2,
+    "check_max": 3
+   },
+   "answer": "direct"
+  },
+  {
+   "kind": "answered_call",
+   "alarm_id": 43,
+   "session_id": 43,
+   "equipment_id": "M-06",
+   "group_name": "온도 차 저하",
+   "occurred_at": "2026-10-13T12:40:43.908653+00:00",
+   "call_section": null,
+   "call_title": null,
+   "call_grade": null,
+   "answer": "assign",
+   "answered_by": "lead.park",
+   "answered_by_name": "박 파트장",
+   "answered_at": "2026-10-13T12:40:44.259784+00:00"
+  },
+  {
+   "kind": "answered_call",
+   "alarm_id": 42,
+   "session_id": 42,
+   "equipment_id": "M-05",
+   "group_name": "온도 차 저하",
+   "occurred_at": "2026-10-13T12:40:43.498657+00:00",
+   "call_section": "4.4",
+   "call_title": "냉각 팬 분해 점검",
+   "call_grade": "C",
+   "answer": "direct",
+   "answered_by": "lead.park",
+   "answered_by_name": "박 파트장",
+   "answered_at": "2026-10-13T12:40:44.240158+00:00"
+  },
+  {
+   "kind": "rejected_report",
+   "alarm_id": 39,
+   "session_id": 39,
+   "equipment_id": "M-01",
+   "group_name": "온도 차 저하",
+   "occurred_at": "2026-10-13T12:40:42.194860+00:00",
+   "report_cause": "냉각 필터 막힘",
+   "reject_reason": "필터 표면 상태를 메모로 다시 적어 주세요",
+   "rejected_by_name": "박 파트장",
+   "rejected_at": "2026-10-13T12:40:44.280307+00:00"
+  }
+ ],
+ "empty": false
+}

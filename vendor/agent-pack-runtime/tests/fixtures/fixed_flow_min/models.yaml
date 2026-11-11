@@ -1,0 +1,2 @@
+providers:
+  openai: {env: OPENAI_API_KEY, base_url_env: OPENAI_BASE_URL, models: {chat: [gpt-4.1-mini, gpt-4.1-nano]}}

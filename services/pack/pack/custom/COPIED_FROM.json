@@ -1,0 +1,70 @@
+{
+ "app_repository": "c1a15-maint-guide",
+ "app_commit": "f33e12bbb10dfcfb387bc4c1b1c51cd7d4c970e8",
+ "files": [
+  {
+   "source": "server/src/c1a15/engine/knowledge.py",
+   "source_sha256": "94de399012b45d52e131705bd617f2bd6bf4997c41961b3878eb67963285c001",
+   "target": "custom/knowledge.py",
+   "target_sha256": "94de399012b45d52e131705bd617f2bd6bf4997c41961b3878eb67963285c001",
+   "rewrite": "import 0줄(c1a15.engine · c1a15.llm.base → custom)"
+  },
+  {
+   "source": "server/src/c1a15/engine/rules.py",
+   "source_sha256": "9010cce24f1e8d6065f3c80abecbf9a09d8b653795bcab7380977a949faa8e8b",
+   "target": "custom/rules.py",
+   "target_sha256": "73b29be5488720b8527c85a531788dabfa82d7a9a594e1ff41e0aa0bbc279640",
+   "rewrite": "import 1줄(c1a15.engine · c1a15.llm.base → custom)"
+  },
+  {
+   "source": "server/src/c1a15/engine/session.py",
+   "source_sha256": "aeb712fa79b13e78041c11eb7bd7d21250805384105302268ec12cc86a66ee53",
+   "target": "custom/session.py",
+   "target_sha256": "d3166be46e7ff21198969cf9035c6d8ec112bebda733a88c43c86be0a901052b",
+   "rewrite": "import 2줄(c1a15.engine · c1a15.llm.base → custom)"
+  },
+  {
+   "source": "data/manuals/manual_sections.json",
+   "source_sha256": "f88279a4f06383d46f46a00352e122f5f413f7f150befc69d797a21b21b07c94",
+   "target": "custom/manual_sections.json",
+   "target_sha256": "f88279a4f06383d46f46a00352e122f5f413f7f150befc69d797a21b21b07c94",
+   "rewrite": "없음(바이트 그대로)"
+  },
+  {
+   "source": "data/alarm_rules.json",
+   "source_sha256": "9bebb5d54f5a97d4a3609afdd10008dafa84c70c0bb29f9fa762bf08128815ea",
+   "target": "custom/alarm_rules.json",
+   "target_sha256": "9bebb5d54f5a97d4a3609afdd10008dafa84c70c0bb29f9fa762bf08128815ea",
+   "rewrite": "없음(바이트 그대로)"
+  },
+  {
+   "source": "server/src/c1a15/engine/alarm_rules.py",
+   "source_sha256": "449369c40738f9ff409fd5dd27012cf0623a2bacefea091d02770e95be767942",
+   "target": "custom/alarm_rules.py",
+   "target_sha256": "449369c40738f9ff409fd5dd27012cf0623a2bacefea091d02770e95be767942",
+   "rewrite": "import 0줄(c1a15.engine · c1a15.llm.base → custom)"
+  },
+  {
+   "source": "server/src/c1a15/alarms/ml.py",
+   "source_sha256": "227bb7c4fd5c9a875deef43cf55685d7b9b81834e38e2ad90e3648c699918eb2",
+   "target": "custom/alarm_route.py",
+   "target_sha256": "227bb7c4fd5c9a875deef43cf55685d7b9b81834e38e2ad90e3648c699918eb2",
+   "rewrite": "import 0줄(c1a15.engine · c1a15.llm.base → custom)"
+  },
+  {
+   "source": "server/src/c1a15/llm/base.py",
+   "source_sha256": "f8901cbae8701cf9404863717fcc35726a9b01d39cb74c5e4c09d17f9b137634",
+   "target": "custom/llm_base.py",
+   "target_sha256": "f8901cbae8701cf9404863717fcc35726a9b01d39cb74c5e4c09d17f9b137634",
+   "rewrite": "import 0줄(c1a15.engine · c1a15.llm.base → custom)"
+  },
+  {
+   "source": "server/src/c1a15/llm/grounding.py",
+   "source_sha256": "b5f43fa29fb8733c1ebc2e2e3637d0573af4525a0497e8432c7a5e8fdd1d7d0b",
+   "target": "custom/report_grounding.py",
+   "target_sha256": "55a3c91a6bf2c7810a5876d3a63e2f4450c640b53580499c89ea7e27454f553d",
+   "rewrite": "import 1줄(c1a15.engine · c1a15.llm.base → custom)"
+  }
+ ],
+ "rule": "사본은 이 도구로만 바꾼다. 앱 engine/이 바뀌면 다시 돌리고, 두 길 대조(VC-01)로 확인한다."
+}

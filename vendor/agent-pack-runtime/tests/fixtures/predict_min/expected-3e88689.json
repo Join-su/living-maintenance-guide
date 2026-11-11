@@ -1,0 +1,1218 @@
+{
+ "code_revision": "3e88689debf65dfbd659b735697acbbf3b510728",
+ "packrt_version": "0.10.1",
+ "n_list": [
+  "at",
+  "ms",
+  "pack_env",
+  "parent_span_id",
+  "span_id",
+  "trace",
+  "runtime.digest",
+  "<TMP>"
+ ],
+ "load": {
+  "task10_min": {
+   "errors": [],
+   "warnings": [],
+   "revision": "sha256:1f573d6fbf764b0f12d35702fcf289b8836856248a220c9d17a2ee2f22f4f419"
+  },
+  "decide_min": {
+   "errors": [],
+   "warnings": [],
+   "revision": "sha256:312c38e31be7c7f23f523336b0e37dd30b58f770b7161b79f083a731bd01f297"
+  },
+  "llm_min": {
+   "errors": [],
+   "warnings": [],
+   "revision": "sha256:3836c56828fc1794d4f52869dbadb00b46103588f7f72c3f56bdc9fb4a8cac97"
+  },
+  "predict_min": {
+   "errors": [],
+   "warnings": [],
+   "revision": "sha256:7ca9aa2bbabda45333d7aadfe68b8db2df0ad399b1f210071c94c29261e84e55"
+  }
+ },
+ "run_decide_min": {
+  "result": {
+   "status": "succeeded",
+   "outcome": "completed",
+   "output": "# 바로 확인 — T-1\n\n- 분류: billing\n- 심각도: 2\n",
+   "error": null,
+   "run_id": "run_local",
+   "detail": {
+    "state": {
+     "ticket": {
+      "id": "T-1",
+      "text": "결제가 두 번 됐어요",
+      "channel": "web"
+     },
+     "triage": {
+      "urgent": {
+       "value": true,
+       "probabilities": {
+        "true": 0.328205,
+        "false": 0.671795
+       },
+       "confidence": 0.671795,
+       "confidence_source": "runtime_derived",
+       "confidence_method": "max_probability"
+      },
+      "category": {
+       "value": "billing",
+       "probabilities": {
+        "billing": 0.671443,
+        "technical": 0.078241,
+        "other": 0.250316
+       },
+       "confidence": 0.671443,
+       "confidence_source": "provider"
+      },
+      "severity": {
+       "value": 2,
+       "probabilities": {
+        "1": 0.268665,
+        "2": 0.532886,
+        "3": 0.198449
+       },
+       "confidence": 0.532886,
+       "confidence_source": "provider"
+      }
+     },
+     "note": "# 바로 확인 — T-1\n\n- 분류: billing\n- 심각도: 2\n"
+    }
+   }
+  },
+  "events": [
+   {
+    "contract": 2,
+    "run_id": "run_local",
+    "seq": 0,
+    "trace_id": "00000000000000000000000000000001",
+    "type": "run_started",
+    "node_id": null,
+    "body": {
+     "origin": "evaluation",
+     "source_kind": "agent_pack",
+     "evaluation_run_id": null,
+     "deployment_id": null,
+     "pack_id": "decide_min",
+     "pack_revision": "sha256:312c38e31be7c7f23f523336b0e37dd30b58f770b7161b79f083a731bd01f297",
+     "data_release_id": "drs:44136fa355b3678a",
+     "release_bindings": {},
+     "runtime_version": "0.10.1",
+     "graph": "triage",
+     "manifest": {
+      "pack_revision": "sha256:312c38e31be7c7f23f523336b0e37dd30b58f770b7161b79f083a731bd01f297",
+      "runtime": {
+       "version": "0.10.1"
+      },
+      "execution_config": {
+       "sha256": "47310e835154e170c830955e65fb39777e0ede8b77a9ce10d7c240191758dd3b",
+       "config_version": 1,
+       "entrypoint": "triage",
+       "backends": {}
+      },
+      "model_releases": {},
+      "evidence_index_releases": {},
+      "table_snapshots": {}
+     },
+     "input_ref": {
+      "ref": "sha256:0000000000000000000000000000000000000000000000000000000000000001",
+      "size": 0,
+      "media_type": "application/json"
+     },
+     "retention_class": "standard"
+    }
+   },
+   {
+    "contract": 2,
+    "run_id": "run_local",
+    "seq": 1,
+    "trace_id": "00000000000000000000000000000001",
+    "type": "node_started",
+    "node_id": "assess",
+    "body": {
+     "node_path": "triage.assess",
+     "iteration": 1,
+     "input_ref": {
+      "ref": "sha256:0000000000000000000000000000000000000000000000000000000000000002",
+      "size": 0,
+      "media_type": "application/json"
+     }
+    }
+   },
+   {
+    "contract": 2,
+    "run_id": "run_local",
+    "seq": 2,
+    "trace_id": "00000000000000000000000000000001",
+    "type": "node_ended",
+    "node_id": "assess",
+    "body": {
+     "node_path": "triage.assess",
+     "iteration": 1,
+     "status": "done",
+     "output_ref": {
+      "ref": "sha256:0000000000000000000000000000000000000000000000000000000000000005",
+      "size": 0,
+      "media_type": "application/json"
+     },
+     "error": null,
+     "meta": {
+      "kind": "decide@1",
+      "provider": "jev",
+      "model": "jev-1.13.0",
+      "tokens_in": 83,
+      "tokens_out": 3,
+      "questions": {
+       "urgent": {
+        "confidence_source": "runtime_derived",
+        "confidence_method": "max_probability",
+        "type": "noul"
+       },
+       "category": {
+        "confidence_source": "provider",
+        "type": "choice"
+       },
+       "severity": {
+        "confidence_source": "provider",
+        "type": "score"
+       }
+      },
+      "fallback_used": [
+       "urgent"
+      ],
+      "limits": [
+       "fake_decision"
+      ],
+      "state_ref": {
+       "ref": "sha256:0000000000000000000000000000000000000000000000000000000000000003",
+       "size": 0,
+       "media_type": "application/json"
+      },
+      "provider_raw_ref": {
+       "ref": "sha256:0000000000000000000000000000000000000000000000000000000000000004",
+       "size": 0,
+       "media_type": "application/json"
+      }
+     }
+    }
+   },
+   {
+    "contract": 2,
+    "run_id": "run_local",
+    "seq": 3,
+    "trace_id": "00000000000000000000000000000001",
+    "type": "node_started",
+    "node_id": "route",
+    "body": {
+     "node_path": "triage.route",
+     "iteration": 1,
+     "input_ref": {
+      "ref": "sha256:0000000000000000000000000000000000000000000000000000000000000006",
+      "size": 0,
+      "media_type": "application/json"
+     }
+    }
+   },
+   {
+    "contract": 2,
+    "run_id": "run_local",
+    "seq": 4,
+    "trace_id": "00000000000000000000000000000001",
+    "type": "node_ended",
+    "node_id": "route",
+    "body": {
+     "node_path": "triage.route",
+     "iteration": 1,
+     "status": "done",
+     "output_ref": {
+      "ref": "sha256:0000000000000000000000000000000000000000000000000000000000000007",
+      "size": 0,
+      "media_type": "application/json"
+     },
+     "error": null,
+     "meta": {
+      "kind": "router@1",
+      "route": {
+       "value": "true",
+       "target": "page_now"
+      }
+     }
+    }
+   },
+   {
+    "contract": 2,
+    "run_id": "run_local",
+    "seq": 5,
+    "trace_id": "00000000000000000000000000000001",
+    "type": "node_started",
+    "node_id": "page_now",
+    "body": {
+     "node_path": "triage.page_now",
+     "iteration": 1,
+     "input_ref": {
+      "ref": "sha256:0000000000000000000000000000000000000000000000000000000000000008",
+      "size": 0,
+      "media_type": "application/json"
+     }
+    }
+   },
+   {
+    "contract": 2,
+    "run_id": "run_local",
+    "seq": 6,
+    "trace_id": "00000000000000000000000000000001",
+    "type": "node_ended",
+    "node_id": "page_now",
+    "body": {
+     "node_path": "triage.page_now",
+     "iteration": 1,
+     "status": "done",
+     "output_ref": {
+      "ref": "sha256:0000000000000000000000000000000000000000000000000000000000000009",
+      "size": 0,
+      "media_type": "application/json"
+     },
+     "error": null,
+     "meta": {
+      "kind": "render@1",
+      "artifact": {
+       "format": "md",
+       "sha256": "6523634493b36e13452d36b3c560b8a5539787262d0cc60c4d9b71c23c2d0fab"
+      }
+     }
+    }
+   },
+   {
+    "contract": 2,
+    "run_id": "run_local",
+    "seq": 7,
+    "trace_id": "00000000000000000000000000000001",
+    "type": "run_ended",
+    "node_id": null,
+    "body": {
+     "status": "succeeded",
+     "outcome": "completed",
+     "output_ref": {
+      "ref": "sha256:000000000000000000000000000000000000000000000000000000000000000a",
+      "size": 0,
+      "media_type": "application/json"
+     },
+     "error": null,
+     "tokens_in": 83,
+     "tokens_out": 3
+    }
+   }
+  ],
+  "payloads": [
+   {
+    "role": "input",
+    "value": {
+     "id": "T-1",
+     "text": "결제가 두 번 됐어요",
+     "channel": "web"
+    },
+    "retention_class": "standard"
+   },
+   {
+    "role": "input",
+    "value": {
+     "ticket": {
+      "id": "T-1",
+      "text": "결제가 두 번 됐어요",
+      "channel": "web"
+     }
+    },
+    "retention_class": "standard"
+   },
+   {
+    "role": "decide_state",
+    "value": {
+     "text": "결제가 두 번 됐어요",
+     "channel": "web"
+    },
+    "retention_class": "standard"
+   },
+   {
+    "role": "provider_raw",
+    "value": {
+     "model": "jev-1.13.0",
+     "answers": {
+      "urgent": {
+       "type": "noul",
+       "noul": 0.328205
+      },
+      "category": {
+       "type": "choice",
+       "choice": "billing",
+       "probabilities": {
+        "billing": 0.671443,
+        "technical": 0.078241,
+        "other": 0.250316
+       },
+       "confidence": 0.671443
+      },
+      "severity": {
+       "type": "score",
+       "score": 2,
+       "probabilities": {
+        "1": 0.268665,
+        "2": 0.532886,
+        "3": 0.198449
+       },
+       "legend": [
+        "낮음",
+        "보통",
+        "높음"
+       ],
+       "confidence": 0.532886
+      }
+     },
+     "usage": {
+      "input_tokens": 83,
+      "output_tokens": 3
+     },
+     "limits": [
+      "fake_decision"
+     ]
+    },
+    "retention_class": "provider_raw"
+   },
+   {
+    "role": "output",
+    "value": {
+     "triage": {
+      "urgent": {
+       "value": true,
+       "probabilities": {
+        "true": 0.328205,
+        "false": 0.671795
+       },
+       "confidence": 0.671795,
+       "confidence_source": "runtime_derived",
+       "confidence_method": "max_probability"
+      },
+      "category": {
+       "value": "billing",
+       "probabilities": {
+        "billing": 0.671443,
+        "technical": 0.078241,
+        "other": 0.250316
+       },
+       "confidence": 0.671443,
+       "confidence_source": "provider"
+      },
+      "severity": {
+       "value": 2,
+       "probabilities": {
+        "1": 0.268665,
+        "2": 0.532886,
+        "3": 0.198449
+       },
+       "confidence": 0.532886,
+       "confidence_source": "provider"
+      }
+     }
+    },
+    "retention_class": "standard"
+   },
+   {
+    "role": "input",
+    "value": {
+     "triage": {
+      "urgent": {
+       "value": true,
+       "probabilities": {
+        "true": 0.328205,
+        "false": 0.671795
+       },
+       "confidence": 0.671795,
+       "confidence_source": "runtime_derived",
+       "confidence_method": "max_probability"
+      },
+      "category": {
+       "value": "billing",
+       "probabilities": {
+        "billing": 0.671443,
+        "technical": 0.078241,
+        "other": 0.250316
+       },
+       "confidence": 0.671443,
+       "confidence_source": "provider"
+      },
+      "severity": {
+       "value": 2,
+       "probabilities": {
+        "1": 0.268665,
+        "2": 0.532886,
+        "3": 0.198449
+       },
+       "confidence": 0.532886,
+       "confidence_source": "provider"
+      }
+     }
+    },
+    "retention_class": "standard"
+   },
+   {
+    "role": "output",
+    "value": {},
+    "retention_class": "standard"
+   },
+   {
+    "role": "input",
+    "value": {
+     "ticket": {
+      "id": "T-1",
+      "text": "결제가 두 번 됐어요",
+      "channel": "web"
+     },
+     "triage": {
+      "urgent": {
+       "value": true,
+       "probabilities": {
+        "true": 0.328205,
+        "false": 0.671795
+       },
+       "confidence": 0.671795,
+       "confidence_source": "runtime_derived",
+       "confidence_method": "max_probability"
+      },
+      "category": {
+       "value": "billing",
+       "probabilities": {
+        "billing": 0.671443,
+        "technical": 0.078241,
+        "other": 0.250316
+       },
+       "confidence": 0.671443,
+       "confidence_source": "provider"
+      },
+      "severity": {
+       "value": 2,
+       "probabilities": {
+        "1": 0.268665,
+        "2": 0.532886,
+        "3": 0.198449
+       },
+       "confidence": 0.532886,
+       "confidence_source": "provider"
+      }
+     }
+    },
+    "retention_class": "standard"
+   },
+   {
+    "role": "output",
+    "value": {
+     "note": "# 바로 확인 — T-1\n\n- 분류: billing\n- 심각도: 2\n"
+    },
+    "retention_class": "standard"
+   },
+   {
+    "role": "final",
+    "value": "# 바로 확인 — T-1\n\n- 분류: billing\n- 심각도: 2\n",
+    "retention_class": "standard"
+   }
+  ],
+  "manifest": {
+   "pack_revision": "sha256:312c38e31be7c7f23f523336b0e37dd30b58f770b7161b79f083a731bd01f297",
+   "runtime": {
+    "version": "0.10.1"
+   },
+   "execution_config": {
+    "sha256": "47310e835154e170c830955e65fb39777e0ede8b77a9ce10d7c240191758dd3b",
+    "config_version": 1,
+    "entrypoint": "triage",
+    "backends": {}
+   },
+   "model_releases": {},
+   "evidence_index_releases": {},
+   "table_snapshots": {}
+  }
+ },
+ "run_llm_min": {
+  "result": {
+   "status": "succeeded",
+   "outcome": "completed",
+   "output": {
+    "summary": "결제 두 번",
+    "category": "billing",
+    "confidence": 0.9
+   },
+   "error": null,
+   "run_id": "run_local",
+   "detail": {
+    "state": {
+     "ticket": {
+      "id": "T-1",
+      "text": "결제가 두 번 됐어요"
+     },
+     "answer": {
+      "summary": "결제 두 번",
+      "category": "billing",
+      "confidence": 0.9
+     }
+    }
+   }
+  },
+  "events": [
+   {
+    "contract": 2,
+    "run_id": "run_local",
+    "seq": 0,
+    "trace_id": "00000000000000000000000000000001",
+    "type": "run_started",
+    "node_id": null,
+    "body": {
+     "origin": "evaluation",
+     "source_kind": "agent_pack",
+     "evaluation_run_id": null,
+     "deployment_id": null,
+     "pack_id": "llm_min",
+     "pack_revision": "sha256:3836c56828fc1794d4f52869dbadb00b46103588f7f72c3f56bdc9fb4a8cac97",
+     "data_release_id": "drs:44136fa355b3678a",
+     "release_bindings": {},
+     "runtime_version": "0.10.1",
+     "graph": "ask",
+     "manifest": {
+      "pack_revision": "sha256:3836c56828fc1794d4f52869dbadb00b46103588f7f72c3f56bdc9fb4a8cac97",
+      "runtime": {
+       "version": "0.10.1"
+      },
+      "execution_config": {
+       "sha256": "97a6aaee5897b55a3e7f6f6224dac81906870c62e738e0f39322dcd3c0a2ba66",
+       "config_version": 1,
+       "entrypoint": "ask",
+       "backends": {}
+      },
+      "model_releases": {},
+      "evidence_index_releases": {},
+      "table_snapshots": {}
+     },
+     "input_ref": {
+      "ref": "sha256:0000000000000000000000000000000000000000000000000000000000000001",
+      "size": 0,
+      "media_type": "application/json"
+     },
+     "retention_class": "standard"
+    }
+   },
+   {
+    "contract": 2,
+    "run_id": "run_local",
+    "seq": 1,
+    "trace_id": "00000000000000000000000000000001",
+    "type": "node_started",
+    "node_id": "draft",
+    "body": {
+     "node_path": "ask.draft",
+     "iteration": 1,
+     "input_ref": {
+      "ref": "sha256:0000000000000000000000000000000000000000000000000000000000000002",
+      "size": 0,
+      "media_type": "application/json"
+     }
+    }
+   },
+   {
+    "contract": 2,
+    "run_id": "run_local",
+    "seq": 2,
+    "trace_id": "00000000000000000000000000000001",
+    "type": "node_ended",
+    "node_id": "draft",
+    "body": {
+     "node_path": "ask.draft",
+     "iteration": 1,
+     "status": "done",
+     "output_ref": {
+      "ref": "sha256:0000000000000000000000000000000000000000000000000000000000000005",
+      "size": 0,
+      "media_type": "application/json"
+     },
+     "error": null,
+     "meta": {
+      "kind": "llm@1",
+      "provider": "openai",
+      "model": "gpt-4.1-mini",
+      "request_config": {
+       "temperature": 0,
+       "max_tokens": null
+      },
+      "tokens_in": 11,
+      "tokens_out": 7,
+      "prompt_ref": {
+       "ref": "sha256:0000000000000000000000000000000000000000000000000000000000000003",
+       "size": 0,
+       "media_type": "application/json"
+      },
+      "provider_raw_ref": {
+       "ref": "sha256:0000000000000000000000000000000000000000000000000000000000000004",
+       "size": 0,
+       "media_type": "application/json"
+      }
+     }
+    }
+   },
+   {
+    "contract": 2,
+    "run_id": "run_local",
+    "seq": 3,
+    "trace_id": "00000000000000000000000000000001",
+    "type": "run_ended",
+    "node_id": null,
+    "body": {
+     "status": "succeeded",
+     "outcome": "completed",
+     "output_ref": {
+      "ref": "sha256:0000000000000000000000000000000000000000000000000000000000000006",
+      "size": 0,
+      "media_type": "application/json"
+     },
+     "error": null,
+     "tokens_in": 11,
+     "tokens_out": 7
+    }
+   }
+  ],
+  "payloads": [
+   {
+    "role": "input",
+    "value": {
+     "id": "T-1",
+     "text": "결제가 두 번 됐어요"
+    },
+    "retention_class": "standard"
+   },
+   {
+    "role": "input",
+    "value": {
+     "ticket": {
+      "id": "T-1",
+      "text": "결제가 두 번 됐어요"
+     }
+    },
+    "retention_class": "standard"
+   },
+   {
+    "role": "prompt",
+    "value": "다음 문의를 한 줄로 요약하고 분류하세요: 결제가 두 번 됐어요\n",
+    "retention_class": "standard"
+   },
+   {
+    "role": "provider_raw",
+    "value": {
+     "id": "chatcmpl-ls0",
+     "object": "chat.completion",
+     "model": "gpt-4.1-mini-2025-04-14",
+     "system_fingerprint": "fp_ls0",
+     "choices": [
+      {
+       "index": 0,
+       "message": {
+        "role": "assistant",
+        "content": "{\"summary\": \"결제 두 번\", \"category\": \"billing\", \"confidence\": 0.9}",
+        "refusal": null
+       },
+       "finish_reason": "stop"
+      }
+     ],
+     "usage": {
+      "prompt_tokens": 11,
+      "completion_tokens": 7,
+      "total_tokens": 18
+     }
+    },
+    "retention_class": "provider_raw"
+   },
+   {
+    "role": "output",
+    "value": {
+     "answer": {
+      "summary": "결제 두 번",
+      "category": "billing",
+      "confidence": 0.9
+     }
+    },
+    "retention_class": "standard"
+   },
+   {
+    "role": "final",
+    "value": {
+     "summary": "결제 두 번",
+     "category": "billing",
+     "confidence": 0.9
+    },
+    "retention_class": "standard"
+   }
+  ],
+  "manifest": {
+   "pack_revision": "sha256:3836c56828fc1794d4f52869dbadb00b46103588f7f72c3f56bdc9fb4a8cac97",
+   "runtime": {
+    "version": "0.10.1"
+   },
+   "execution_config": {
+    "sha256": "97a6aaee5897b55a3e7f6f6224dac81906870c62e738e0f39322dcd3c0a2ba66",
+    "config_version": 1,
+    "entrypoint": "ask",
+    "backends": {}
+   },
+   "model_releases": {},
+   "evidence_index_releases": {},
+   "table_snapshots": {}
+  }
+ },
+ "run_predict_min": {
+  "result": {
+   "status": "succeeded",
+   "outcome": "completed",
+   "output": {
+    "type": "OSF",
+    "probability": 0.355439
+   },
+   "error": null,
+   "run_id": "run_local",
+   "detail": {
+    "state": {
+     "event": {
+      "event_id": "E-1",
+      "air_temp": 300,
+      "process_temp": 310,
+      "rpm": 1000,
+      "torque": 60,
+      "tool_wear": 50
+     },
+     "prediction": {
+      "type": "OSF",
+      "probability": 0.355439
+     }
+    }
+   }
+  },
+  "events": [
+   {
+    "contract": 2,
+    "run_id": "run_local",
+    "seq": 0,
+    "trace_id": "00000000000000000000000000000001",
+    "type": "run_started",
+    "node_id": null,
+    "body": {
+     "origin": "evaluation",
+     "source_kind": "agent_pack",
+     "evaluation_run_id": null,
+     "deployment_id": null,
+     "pack_id": "predict_min",
+     "pack_revision": "sha256:7ca9aa2bbabda45333d7aadfe68b8db2df0ad399b1f210071c94c29261e84e55",
+     "data_release_id": "drs:44136fa355b3678a",
+     "release_bindings": {},
+     "runtime_version": "0.10.1",
+     "graph": "detect",
+     "manifest": {
+      "pack_revision": "sha256:7ca9aa2bbabda45333d7aadfe68b8db2df0ad399b1f210071c94c29261e84e55",
+      "runtime": {
+       "version": "0.10.1"
+      },
+      "execution_config": {
+       "sha256": "5281dcec010c7500ce38f069b5ee7ad376c772ab2b4ce174af73a1b80271b33a",
+       "config_version": 1,
+       "entrypoint": "detect",
+       "backends": {}
+      },
+      "model_releases": {
+       "failure_classifier": {
+        "release_id": "mr-min-001",
+        "manifest_sha256": "fcae46cbeb9cf827dafee27f2e898a08909208acb5e10b5af2e84d4e8c8a5bfd",
+        "artifact_sha256": "a4349f1dad89907ef32ab1033b453c96b6ddf93486052a0d33e78050e7572eb9",
+        "format": "json-linear",
+        "feature_schema_version": 1,
+        "location": "<TMP>/releases/models/mr-min-001"
+       }
+      },
+      "evidence_index_releases": {},
+      "table_snapshots": {}
+     },
+     "input_ref": {
+      "ref": "sha256:0000000000000000000000000000000000000000000000000000000000000001",
+      "size": 0,
+      "media_type": "application/json"
+     },
+     "retention_class": "standard"
+    }
+   },
+   {
+    "contract": 2,
+    "run_id": "run_local",
+    "seq": 1,
+    "trace_id": "00000000000000000000000000000001",
+    "type": "node_started",
+    "node_id": "predict_failure",
+    "body": {
+     "node_path": "detect.predict_failure",
+     "iteration": 1,
+     "input_ref": {
+      "ref": "sha256:0000000000000000000000000000000000000000000000000000000000000002",
+      "size": 0,
+      "media_type": "application/json"
+     }
+    }
+   },
+   {
+    "contract": 2,
+    "run_id": "run_local",
+    "seq": 2,
+    "trace_id": "00000000000000000000000000000001",
+    "type": "node_ended",
+    "node_id": "predict_failure",
+    "body": {
+     "node_path": "detect.predict_failure",
+     "iteration": 1,
+     "status": "done",
+     "output_ref": {
+      "ref": "sha256:0000000000000000000000000000000000000000000000000000000000000004",
+      "size": 0,
+      "media_type": "application/json"
+     },
+     "error": null,
+     "meta": {
+      "kind": "predict@1",
+      "model_release": "mr-min-001",
+      "features_ref": {
+       "ref": "sha256:0000000000000000000000000000000000000000000000000000000000000003",
+       "size": 0,
+       "media_type": "application/json"
+      }
+     }
+    }
+   },
+   {
+    "contract": 2,
+    "run_id": "run_local",
+    "seq": 3,
+    "trace_id": "00000000000000000000000000000001",
+    "type": "run_ended",
+    "node_id": null,
+    "body": {
+     "status": "succeeded",
+     "outcome": "completed",
+     "output_ref": {
+      "ref": "sha256:0000000000000000000000000000000000000000000000000000000000000005",
+      "size": 0,
+      "media_type": "application/json"
+     },
+     "error": null,
+     "tokens_in": 0,
+     "tokens_out": 0
+    }
+   }
+  ],
+  "payloads": [
+   {
+    "role": "input",
+    "value": {
+     "event_id": "E-1",
+     "air_temp": 300,
+     "process_temp": 310,
+     "rpm": 1000,
+     "torque": 60,
+     "tool_wear": 50
+    },
+    "retention_class": "standard"
+   },
+   {
+    "role": "input",
+    "value": {
+     "event": {
+      "event_id": "E-1",
+      "air_temp": 300,
+      "process_temp": 310,
+      "rpm": 1000,
+      "torque": 60,
+      "tool_wear": 50
+     }
+    },
+    "retention_class": "standard"
+   },
+   {
+    "role": "features",
+    "value": {
+     "event_id": "E-1",
+     "air_temp": 300,
+     "process_temp": 310,
+     "rpm": 1000,
+     "torque": 60,
+     "tool_wear": 50
+    },
+    "retention_class": "standard"
+   },
+   {
+    "role": "output",
+    "value": {
+     "prediction": {
+      "type": "OSF",
+      "probability": 0.355439
+     }
+    },
+    "retention_class": "standard"
+   },
+   {
+    "role": "final",
+    "value": {
+     "type": "OSF",
+     "probability": 0.355439
+    },
+    "retention_class": "standard"
+   }
+  ],
+  "manifest": {
+   "pack_revision": "sha256:7ca9aa2bbabda45333d7aadfe68b8db2df0ad399b1f210071c94c29261e84e55",
+   "runtime": {
+    "version": "0.10.1"
+   },
+   "execution_config": {
+    "sha256": "5281dcec010c7500ce38f069b5ee7ad376c772ab2b4ce174af73a1b80271b33a",
+    "config_version": 1,
+    "entrypoint": "detect",
+    "backends": {}
+   },
+   "model_releases": {
+    "failure_classifier": {
+     "release_id": "mr-min-001",
+     "manifest_sha256": "fcae46cbeb9cf827dafee27f2e898a08909208acb5e10b5af2e84d4e8c8a5bfd",
+     "artifact_sha256": "a4349f1dad89907ef32ab1033b453c96b6ddf93486052a0d33e78050e7572eb9",
+     "format": "json-linear",
+     "feature_schema_version": 1,
+     "location": "<TMP>/releases/models/mr-min-001"
+    }
+   },
+   "evidence_index_releases": {},
+   "table_snapshots": {}
+  }
+ },
+ "run_predict_min_missing_field": {
+  "result": {
+   "status": "succeeded",
+   "outcome": "completed",
+   "output": {
+    "type": "PWF",
+    "probability": 0.429637
+   },
+   "error": null,
+   "run_id": "run_local",
+   "detail": {
+    "state": {
+     "event": {
+      "event_id": "E-1",
+      "air_temp": 300,
+      "process_temp": 310,
+      "rpm": 1000,
+      "torque": 60
+     },
+     "prediction": {
+      "type": "PWF",
+      "probability": 0.429637
+     }
+    }
+   }
+  },
+  "events": [
+   {
+    "contract": 2,
+    "run_id": "run_local",
+    "seq": 0,
+    "trace_id": "00000000000000000000000000000001",
+    "type": "run_started",
+    "node_id": null,
+    "body": {
+     "origin": "evaluation",
+     "source_kind": "agent_pack",
+     "evaluation_run_id": null,
+     "deployment_id": null,
+     "pack_id": "predict_min",
+     "pack_revision": "sha256:7ca9aa2bbabda45333d7aadfe68b8db2df0ad399b1f210071c94c29261e84e55",
+     "data_release_id": "drs:44136fa355b3678a",
+     "release_bindings": {},
+     "runtime_version": "0.10.1",
+     "graph": "detect",
+     "manifest": {
+      "pack_revision": "sha256:7ca9aa2bbabda45333d7aadfe68b8db2df0ad399b1f210071c94c29261e84e55",
+      "runtime": {
+       "version": "0.10.1"
+      },
+      "execution_config": {
+       "sha256": "e94ee8f880ec9c9cfb95d3f31f3a1aede6f2b34991be0685139d94bdf84fc1aa",
+       "config_version": 1,
+       "entrypoint": "detect",
+       "backends": {}
+      },
+      "model_releases": {
+       "failure_classifier": {
+        "release_id": "mr-min-001",
+        "manifest_sha256": "fcae46cbeb9cf827dafee27f2e898a08909208acb5e10b5af2e84d4e8c8a5bfd",
+        "artifact_sha256": "a4349f1dad89907ef32ab1033b453c96b6ddf93486052a0d33e78050e7572eb9",
+        "format": "json-linear",
+        "feature_schema_version": 1,
+        "location": "<TMP>/releases/models/mr-min-001"
+       }
+      },
+      "evidence_index_releases": {},
+      "table_snapshots": {}
+     },
+     "input_ref": {
+      "ref": "sha256:0000000000000000000000000000000000000000000000000000000000000001",
+      "size": 0,
+      "media_type": "application/json"
+     },
+     "retention_class": "standard"
+    }
+   },
+   {
+    "contract": 2,
+    "run_id": "run_local",
+    "seq": 1,
+    "trace_id": "00000000000000000000000000000001",
+    "type": "node_started",
+    "node_id": "predict_failure",
+    "body": {
+     "node_path": "detect.predict_failure",
+     "iteration": 1,
+     "input_ref": {
+      "ref": "sha256:0000000000000000000000000000000000000000000000000000000000000002",
+      "size": 0,
+      "media_type": "application/json"
+     }
+    }
+   },
+   {
+    "contract": 2,
+    "run_id": "run_local",
+    "seq": 2,
+    "trace_id": "00000000000000000000000000000001",
+    "type": "node_ended",
+    "node_id": "predict_failure",
+    "body": {
+     "node_path": "detect.predict_failure",
+     "iteration": 1,
+     "status": "done",
+     "output_ref": {
+      "ref": "sha256:0000000000000000000000000000000000000000000000000000000000000004",
+      "size": 0,
+      "media_type": "application/json"
+     },
+     "error": null,
+     "meta": {
+      "kind": "predict@1",
+      "model_release": "mr-min-001",
+      "features_ref": {
+       "ref": "sha256:0000000000000000000000000000000000000000000000000000000000000003",
+       "size": 0,
+       "media_type": "application/json"
+      }
+     }
+    }
+   },
+   {
+    "contract": 2,
+    "run_id": "run_local",
+    "seq": 3,
+    "trace_id": "00000000000000000000000000000001",
+    "type": "run_ended",
+    "node_id": null,
+    "body": {
+     "status": "succeeded",
+     "outcome": "completed",
+     "output_ref": {
+      "ref": "sha256:0000000000000000000000000000000000000000000000000000000000000005",
+      "size": 0,
+      "media_type": "application/json"
+     },
+     "error": null,
+     "tokens_in": 0,
+     "tokens_out": 0
+    }
+   }
+  ],
+  "payloads": [
+   {
+    "role": "input",
+    "value": {
+     "event_id": "E-1",
+     "air_temp": 300,
+     "process_temp": 310,
+     "rpm": 1000,
+     "torque": 60
+    },
+    "retention_class": "standard"
+   },
+   {
+    "role": "input",
+    "value": {
+     "event": {
+      "event_id": "E-1",
+      "air_temp": 300,
+      "process_temp": 310,
+      "rpm": 1000,
+      "torque": 60
+     }
+    },
+    "retention_class": "standard"
+   },
+   {
+    "role": "features",
+    "value": {
+     "event_id": "E-1",
+     "air_temp": 300,
+     "process_temp": 310,
+     "rpm": 1000,
+     "torque": 60
+    },
+    "retention_class": "standard"
+   },
+   {
+    "role": "output",
+    "value": {
+     "prediction": {
+      "type": "PWF",
+      "probability": 0.429637
+     }
+    },
+    "retention_class": "standard"
+   },
+   {
+    "role": "final",
+    "value": {
+     "type": "PWF",
+     "probability": 0.429637
+    },
+    "retention_class": "standard"
+   }
+  ],
+  "manifest": {
+   "pack_revision": "sha256:7ca9aa2bbabda45333d7aadfe68b8db2df0ad399b1f210071c94c29261e84e55",
+   "runtime": {
+    "version": "0.10.1"
+   },
+   "execution_config": {
+    "sha256": "e94ee8f880ec9c9cfb95d3f31f3a1aede6f2b34991be0685139d94bdf84fc1aa",
+    "config_version": 1,
+    "entrypoint": "detect",
+    "backends": {}
+   },
+   "model_releases": {
+    "failure_classifier": {
+     "release_id": "mr-min-001",
+     "manifest_sha256": "fcae46cbeb9cf827dafee27f2e898a08909208acb5e10b5af2e84d4e8c8a5bfd",
+     "artifact_sha256": "a4349f1dad89907ef32ab1033b453c96b6ddf93486052a0d33e78050e7572eb9",
+     "format": "json-linear",
+     "feature_schema_version": 1,
+     "location": "<TMP>/releases/models/mr-min-001"
+    }
+   },
+   "evidence_index_releases": {},
+   "table_snapshots": {}
+  }
+ }
+}

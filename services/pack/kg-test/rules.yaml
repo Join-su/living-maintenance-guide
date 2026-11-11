@@ -1,0 +1,117 @@
+# D-531 시험 데이터 규칙(공개) — 이 파일이 먼저이고, 이력 · 시험 사례는 이 규칙으로만 만든다(gen.py · 씨앗 고정).
+# 가상 공장 · 가상 매뉴얼(냉각 장 하나). 지금 C1-a15 데이터 · 매뉴얼과 상관없음. 숫자는 설계 초안 v0.
+version: kg-test-rules-v0
+seed: 20261103
+
+plant:
+  lines:
+    L1: [M-01, M-02, M-03, M-04, M-05, M-06, M-07, M-08, M-09, M-10]
+    L2: [M-11, M-12, M-13, M-14, M-15, M-16, M-17, M-18, M-19, M-20]
+    L3: [M-21, M-22, M-23, M-24, M-25, M-26, M-27, M-28, M-29, M-30]
+  period: {start: "2025-11-01", end: "2026-10-31"}   # 1년
+  seasons:   # 월 → 계절
+    winter: [12, 1, 2]
+    spring: [3, 4, 5]
+    summer: [6, 7, 8]
+    fall: [9, 10, 11]
+
+symptom_group: {code: CL, name: 온도 차 저하}   # 이번 시험은 냉각 장 하나
+
+# 센서 7칸(지금 Pack 이력 재정렬과 같은 이름) — 계산 칸: temp_diff_k = process − air · power_w = torque × rpm × 2π ÷ 60
+sensors:
+  fields: [air_temperature_k, process_temperature_k, rotational_speed_rpm, torque_nm, tool_wear_min, temp_diff_k, power_w]
+  air_temperature_k: {mean_by_season: {winter: 297.5, spring: 300.0, summer: 302.5, fall: 300.0}, sd: 1.0}
+  tool_wear_min: {uniform: [0, 220]}
+  alarm: {field: temp_diff_k, below: 8.2}   # 냉각 알람 = 온도 차가 경계 아래(지금 앱 경계와 같은 값)
+
+# 원인 — 매뉴얼 안 다섯 · 매뉴얼 밖 셋. 알람 때 센서 모양(signature)은 겹치게 둔다(센서만으로는 반쯤만 가려짐).
+#   temp_diff_k · rotational_speed_rpm · torque_nm = [아래, 위] 고른 분포
+causes:
+  C1: {name: 흡기 필터 막힘, in_manual: true,  signature: {temp_diff_k: [7.4, 8.1], rotational_speed_rpm: [1330, 1385], torque_nm: [42, 52]}}
+  C2: {name: 냉각 팬 열화,   in_manual: true,  signature: {temp_diff_k: [6.8, 7.8], rotational_speed_rpm: [1300, 1365], torque_nm: [46, 56]}}
+  C3: {name: 냉각수 부족 · 누설, in_manual: true, signature: {temp_diff_k: [7.0, 8.1], rotational_speed_rpm: [1335, 1390], torque_nm: [38, 48]}}
+  C4: {name: 온도 설정 오류, in_manual: true,  signature: {temp_diff_k: [7.7, 8.15], rotational_speed_rpm: [1370, 1430], torque_nm: [36, 46]}}
+  C5: {name: 열교환기 오염,  in_manual: true,  signature: {temp_diff_k: [6.6, 7.6], rotational_speed_rpm: [1310, 1375], torque_nm: [44, 54]}}
+  X1: {name: 공장 냉각수 공급 압력 저하, in_manual: false, signature: {temp_diff_k: [7.1, 8.1], rotational_speed_rpm: [1330, 1390], torque_nm: [40, 50]}}
+  X2: {name: 직전 정비 조립 불량, in_manual: false, signature: like_replaced_part}   # 바꾼 부품의 원인 모양(필터 → C1 · 팬 → C2)
+  X3: {name: 센서 고장(설비 정상), in_manual: false, signature: {temp_diff_k: [5.5, 8.0], rotational_speed_rpm: [1460, 1560], torque_nm: [35, 45]}}   # 한 센서만 튐
+
+# 보통 알람(예외 아님) — 하루 평균 건수 · 계절별 원인 분포(E1)
+base_events:
+  per_day_by_season: {winter: 2.35, spring: 2.25, summer: 3.2, fall: 2.25}
+  cause_by_season:   # E1 계절 분포 — 여름 필터 막힘 많음 · 겨울 설정 오류 · 냉각수 많음
+    summer: {C1: 0.45, C2: 0.15, C3: 0.15, C4: 0.05, C5: 0.20}
+    winter: {C1: 0.10, C2: 0.15, C3: 0.30, C4: 0.35, C5: 0.10}
+    spring: {C1: 0.25, C2: 0.20, C3: 0.20, C4: 0.15, C5: 0.20}
+    fall:   {C1: 0.25, C2: 0.20, C3: 0.20, C4: 0.15, C5: 0.20}
+
+# 예외 규칙
+exceptions:
+  E1: {what: 계절 분포, rule: "base_events.cause_by_season — 원인 비율이 계절마다 다름"}
+  E2:
+    what: 설비 밖 문제(공급 냉각수)
+    rule: "같은 라인 3 ~ 4대가 30분 안에 냉각 알람 → 원인 = X1 · 조치 = 설비 손대지 말고 공급 쪽 연락(6.2)"
+    bursts_per_year: 16
+    machines: [3, 4]
+    window_min: 30
+  E3:
+    what: 연쇄 원인(필터 늦은 교체 → 팬)
+    rule: "C1 알람에서 필터를 임시 청소만 하고 교체를 미룬 설비(C1의 30%)는 70% 확률로 14 ~ 21일 뒤 같은 설비 C2 알람"
+    late_replace_share: 0.30
+    follow_prob: 0.70
+    after_days: [14, 21]
+  E4:
+    what: 직전 정비 영향(조립 불량)
+    rule: "부품 교체(5.1 필터 · 5.2 팬) 뒤 12% 확률로 3일 안 같은 설비 냉각 알람 → 원인 = X2 · 조치 = 파트장 호출 · 직전 정비 인계(6.1)"
+    prob: 0.12
+    within_days: 3
+  E5:
+    what: 센서 이상
+    rule: "온도 차만 경계 아래로 튀고 회전수 · 토크는 정상 범위 → 원인 = X3 · 점검 = 센서 교차 확인(4.6) · 조치 = 계측 담당 인계(6.3)"
+    per_year: 40
+
+# 섞인 사례(헷갈림) — 예외 모양은 있으나 원인은 보통: 규칙이 확률이라 생기는 것(E3 30% · E4 88%) + 일부러 넣는 것
+mixed:
+  near_replacement_ordinary: {per_year: 25, rule: "부품 교체 뒤 3일 안 보통 원인 알람(계절 분포)"}
+  late_filter_ordinary:      {per_year: 15, rule: "필터 늦은 교체 뒤 14 ~ 21일 안 같은 설비 보통 원인(C2 아닌) 알람"}
+
+# 점검 · 조치 · 호출 — 매뉴얼 절 번호 · 권한 등급 · 소요 분(매뉴얼 본문 = manual/cooling.md)
+#   권한: A = 정비자 단독 · B = 파트장 승인 뒤 정비자 · C = 파트장 · 외부 업체만(정비자 단독 지시 불가)
+steps:
+  "4.1": {kind: check,  name: 흡기 필터 점검,        grade: A, minutes: 10}
+  "4.2": {kind: check,  name: 냉각 팬 회전 점검,     grade: A, minutes: 15}
+  "4.3": {kind: check,  name: 냉각수 수위 · 누설 점검, grade: A, minutes: 20}
+  "4.4": {kind: check,  name: 온도 설정값 점검,      grade: A, minutes: 5}
+  "4.5": {kind: check,  name: 열교환기 점검,         grade: B, minutes: 30}
+  "4.6": {kind: check,  name: 센서 표시값 교차 확인, grade: A, minutes: 10}
+  "5.1": {kind: action, name: 흡기 필터 교체,        grade: A, minutes: 20, part: filter}
+  "5.2": {kind: action, name: 냉각 팬 교체,          grade: B, minutes: 60, part: fan}
+  "5.3": {kind: action, name: 냉각수 보충 · 누설부 조임, grade: A, minutes: 15}
+  "5.4": {kind: action, name: 온도 설정값 복원,      grade: B, minutes: 10}
+  "5.5": {kind: action, name: 열교환기 세척,         grade: C, minutes: 120}
+  "6.1": {kind: call,   name: 파트장 호출 · 직전 정비 인계, grade: A, minutes: 5}
+  "6.2": {kind: call,   name: 공급 쪽(설비팀) 연락,  grade: A, minutes: 5}
+  "6.3": {kind: call,   name: 계측 담당 인계,        grade: A, minutes: 5}
+
+# 정답 = 원인마다 '불러와야 할 점검 · 조치' 묶음과 첫 단계(규칙에서 나옴 · 시험 사례 파일에만 적힘)
+gold_by_cause:
+  C1: {steps: ["4.1", "5.1"], first: "4.1"}
+  C2: {steps: ["4.2", "5.2"], first: "4.2"}
+  C3: {steps: ["4.3", "5.3"], first: "4.3"}
+  C4: {steps: ["4.4", "5.4"], first: "4.4"}
+  C5: {steps: ["4.5", "5.5"], first: "4.5"}
+  X1: {steps: ["6.2"], first: "6.2"}          # 설비 점검 · 조치 0
+  X2: {steps: ["6.1"], first: "6.1"}          # 설비 점검 · 조치 0
+  X3: {steps: ["4.6", "6.3"], first: "4.6"}   # 설비 조치 0
+
+# 이력 기록이 보이는 때(셋 방식 같음): 알람 시각 t에서
+visibility:
+  occurrence: "t 전 모든 알람(설비 · 라인 · 시각 · 센서)"
+  record: "t − 2시간 전에 끝난 기록만(점검 결과 · 확정 원인 · 조치 · 메모)"
+
+# 시험 사례 떼어 두기 — 2026-01-01 뒤 알람에서 갈래별로 뽑음 · 다른 사건의 앞 사건(E3 · E4 부모)은 뽑지 않음
+holdout:
+  from: "2026-01-01"
+  counts: {normal: 20, E1: 15, E2: 13, E3: 13, E4: 13, E5: 13, mixed: 13}
+  normal: "봄 · 가을 · 예외 모양 없음"
+  E1: "여름 · 겨울 · 예외 모양 없음"

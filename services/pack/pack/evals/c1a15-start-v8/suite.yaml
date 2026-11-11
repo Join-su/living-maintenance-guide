@@ -1,0 +1,8 @@
+# 평가 suite — Pack revision 밖. 시연 10 세션의 첫 Run · 입력 = c1a15-start와 바이트 같음 · 기대값 = Pack c6617c6 출력(가짜 DB · 그래프 graph-mm3-v2-48a5b999-fbdb9d71)
+# 만든 도구: orchestration/agents/c1a15-eval/handoff/d546/start-v8/make_start_v8.py(c1a15-eval) · 칸 decision · similar · retrieval · preview · exception_guide 없음
+suite: c1a15_start_v8
+split: fixture
+graph: run
+dataset: dataset.jsonl
+expectations: expectations.jsonl
+review_policy: {default: fixture, missing_fixture: stop_before}

@@ -1,0 +1,4 @@
+# packrt · tracewriter 빌드 backend(deploy.Dockerfile, --no-build-isolation) — 판 = pinned.json build_isolation(Mac .venv 설치 때 쓴 판).
+# 해시 = pypi.org JSON(/pypi/setuptools/84.0.0/json)과 PEP 691 simple(/simple/setuptools/) 두 길이 같은 wheel sha256(지시 036 S1, 2026-10-20 읽기 2번)
+setuptools==84.0.0 \
+    --hash=sha256:51a52592b3b99e102b609654876bd65f19f999935166d1352678931132b0c670

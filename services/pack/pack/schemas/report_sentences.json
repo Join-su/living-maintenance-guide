@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ReportSentences",
+  "description": "보고서 문장 node의 LLM 출력 — 원인(cause) · 조치(action) 두 문장(약속 v3 report, PC-09)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["cause", "action"],
+  "properties": {"cause": {"type": "string"}, "action": {"type": "string"}}
+}

@@ -1,0 +1,24 @@
+{
+ "call_id": 15,
+ "kind": "handover",
+ "equipment_id": "M-06",
+ "group_name": "온도 차 저하",
+ "sent_at": "2026-10-13T12:40:44.078667+00:00",
+ "section": null,
+ "grade": null,
+ "summary": "M-06 온도 차 저하(21:40). 흡기 필터 육안 점검 · 냉각 팬 분해 점검 확인 불가 2회, 냉각 설정값 확인 · 냉각수 수위 확인 정상. 할 수 있는 A · B 점검 없음. 설비 정지 대기.",
+ "options": [
+  {
+   "value": "assign",
+   "label": "주간 숙련자 배정",
+   "hint": "주간 근무 숙련자에게 넘깁니다"
+  },
+  {
+   "value": "direct",
+   "label": "직접 확인",
+   "hint": "파트장이 확인하고 결과를 보고서에 기록"
+  }
+ ],
+ "answered": false,
+ "answer": null
+}

@@ -1,0 +1,41 @@
+# VPS 전용 덧파일: 포트를 밖에 열지 않고 Traefik(HTTPS)으로만 접속한다.
+# 쓰는 법: 서버 .env에 COMPOSE_FILE=docker-compose.yml:docker-compose.vps.yml 과 아래 이름들을 둔다(값은 .env에만).
+#   C1A15_TECH_HOST=정비자 앱 주소   C1A15_LEAD_HOST=파트장 앱 주소
+#   배포 서버(EV-001 CH-41 · D-325 (3)): C1A15_DEPLOY_NETWORK=배포 서버 전용 망(deploy compose가 만듦 — deploy 먼저 띄움)
+#   C1A15_DEPLOY_URL · C1A15_DEPLOY_HOST=그 망 안 배포 서버 이름 · 포트   C1A15_R12_INBOX_HOST=받은 편지 호스트 폴더(root 0755)
+services:
+  db:
+    ports: !override
+      - "127.0.0.1:55432:5432"   # 서버 안에서만. 이 맥에서는 SSH 터널로 본다.
+    restart: unless-stopped
+  api:
+    restart: unless-stopped
+    # 배포 서버 전용 망에만 더 붙음(공유 PG가 있는 망에는 붙지 않음 — deploy 145 DQ-1). db와는 기본 망 그대로
+    networks:
+      - default
+      - deploy
+    # R12 받은 편지(D-325 (3)): 호스트 폴더 하나 — 앱 쓰기 · deploy-tools 읽기(uid 10001). 파일 0644 · tmp → rename
+    volumes:
+      - ${C1A15_R12_INBOX_HOST:?.env에 C1A15_R12_INBOX_HOST 필요}:/r12-inbox
+    environment:
+      C1A15_R12_INBOX: /r12-inbox
+  web:
+    ports: !reset []
+    restart: unless-stopped
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.c1a15-tech.rule: Host(`${C1A15_TECH_HOST:?.env에 C1A15_TECH_HOST 필요}`)
+      traefik.http.routers.c1a15-tech.entrypoints: websecure
+      traefik.http.routers.c1a15-tech.tls.certresolver: letsencrypt
+      traefik.http.routers.c1a15-tech.service: c1a15-tech
+      traefik.http.services.c1a15-tech.loadbalancer.server.port: "8081"
+      traefik.http.routers.c1a15-lead.rule: Host(`${C1A15_LEAD_HOST:?.env에 C1A15_LEAD_HOST 필요}`)
+      traefik.http.routers.c1a15-lead.entrypoints: websecure
+      traefik.http.routers.c1a15-lead.tls.certresolver: letsencrypt
+      traefik.http.routers.c1a15-lead.service: c1a15-lead
+      traefik.http.services.c1a15-lead.loadbalancer.server.port: "8082"
+
+networks:
+  deploy:
+    external: true
+    name: ${C1A15_DEPLOY_NETWORK:?.env에 C1A15_DEPLOY_NETWORK 필요}

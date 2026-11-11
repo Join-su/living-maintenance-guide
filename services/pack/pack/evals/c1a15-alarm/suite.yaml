@@ -1,0 +1,8 @@
+# 평가 suite — Pack revision 밖. 시연 각본 10건 알람 입력(경계 길) — 기대값 = 앱 경계 판정
+# 만든 도구: tools/make_evals.py(앱 6cf03bd git archive 사본 · 앱 run ES-02 vc01 기록 — eval/ 카드 정답 아님)
+suite: c1a15_alarm
+split: fixture
+graph: run
+dataset: dataset.jsonl
+expectations: expectations.jsonl
+review_policy: {default: fixture, missing_fixture: stop_before}

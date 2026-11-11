@@ -1,0 +1,20 @@
+[project]
+name = "c1a15-pack"
+version = "0.1.0"
+description = "C1-a15 Pack — 정비 길잡이 판정 · 예측 node(packrt v0.15.0). C1-a15 앱(c1a15-maint-guide)과 따로, 입력은 요청 본문으로만"
+requires-python = ">=3.12"
+dependencies = [
+    "onnxruntime==1.31.0",
+    "packrt",
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = [
+    "vendor/packrt",
+]
+
+[tool.uv.sources]
+packrt = { workspace = true }

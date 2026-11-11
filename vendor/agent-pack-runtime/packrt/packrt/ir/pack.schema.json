@@ -1,0 +1,1448 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://github.com/Join-su/llmops-lite-v2/docs/schemas/pack.schema.json",
+ "title": "Agent Pack pack.yaml (ir_version 1, P0 범위) — 명세 v0.3",
+ "description": "docs/agent-pack-spec-v0.md v0.3 불러오기 1단계. 0단계(엄격 YAML 읽기: 중복 키·문자열 아닌 키·따옴표 없는 on/yes 등 거부)와 2단계(참조·그래프·state 의미 검사)는 이 스키마의 몫이 아니다. P0 node 종류(predict·retrieve·llm·validate·router·human_review·render·custom_code)와 decide@1(EV-001, agent-pack-runtime 0.10.0)의 params는 정의된 키만 허용한다(H-01). 다른 종류는 형식(kind·reads·writes)만 검사한다.",
+ "type": "object",
+ "required": [
+  "ir_version",
+  "runtime_contract",
+  "pack",
+  "env",
+  "schemas",
+  "graphs",
+  "entrypoints",
+  "trace"
+ ],
+ "additionalProperties": false,
+ "properties": {
+  "ir_version": {
+   "const": 1
+  },
+  "runtime_contract": {
+   "type": "object",
+   "required": [
+    "min_runtime_version"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "min_runtime_version": {
+     "type": "string",
+     "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    }
+   }
+  },
+  "pack": {
+   "type": "object",
+   "required": [
+    "id",
+    "version",
+    "title"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "type": "string",
+     "pattern": "^[a-z][a-z0-9_]*$"
+    },
+    "version": {
+     "type": "string",
+     "minLength": 1
+    },
+    "title": {
+     "type": "string",
+     "minLength": 1
+    },
+    "description": {
+     "type": "string"
+    }
+   }
+  },
+  "env": {
+   "type": "object",
+   "required": [
+    "required"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "required": {
+     "type": "array",
+     "items": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_]*$"
+     }
+    },
+    "optional": {
+     "type": "array",
+     "items": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_]*$"
+     }
+    }
+   }
+  },
+  "stores": {
+   "type": "object",
+   "additionalProperties": false,
+   "patternProperties": {
+    "^[a-z][a-z0-9_]*$": {
+     "$ref": "#/$defs/store"
+    }
+   }
+  },
+  "tools": {
+   "type": "object",
+   "additionalProperties": false,
+   "patternProperties": {
+    "^[a-z][a-z0-9_]*$": {
+     "$ref": "#/$defs/tool"
+    }
+   }
+  },
+  "schemas": {
+   "type": "object",
+   "additionalProperties": false,
+   "patternProperties": {
+    "^[A-Z][A-Za-z0-9]*$": {
+     "type": "string",
+     "pattern": "^schemas/[A-Za-z0-9_./-]+\\.json$"
+    }
+   }
+  },
+  "graphs": {
+   "type": "object",
+   "minProperties": 1,
+   "additionalProperties": false,
+   "patternProperties": {
+    "^[a-z][a-z0-9_]*$": {
+     "$ref": "#/$defs/graph"
+    }
+   }
+  },
+  "entrypoints": {
+   "type": "array",
+   "minItems": 1,
+   "items": {
+    "type": "object",
+    "required": [
+     "graph",
+     "input",
+     "output"
+    ],
+    "additionalProperties": false,
+    "properties": {
+     "graph": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$"
+     },
+     "input": {
+      "type": "string"
+     },
+     "output": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "trace": {
+   "type": "object",
+   "required": [
+    "contract"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "contract": {
+     "const": 1
+    }
+   }
+  }
+ },
+ "$defs": {
+  "capabilities": {
+   "type": "object",
+   "required": [
+    "network",
+    "side_effect"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "network": {
+     "enum": [
+      "none",
+      "allowlisted"
+     ]
+    },
+    "side_effect": {
+     "enum": [
+      "none",
+      "dry_run",
+      "approval_required",
+      "allowed"
+     ]
+    }
+   }
+  },
+  "store": {
+   "type": "object",
+   "required": [
+    "type"
+   ],
+   "properties": {
+    "type": {
+     "enum": [
+      "table",
+      "vector",
+      "files"
+     ]
+    }
+   },
+   "allOf": [
+    {
+     "if": {
+      "properties": {
+       "type": {
+        "const": "table"
+       }
+      }
+     },
+     "then": {
+      "required": [
+       "schema",
+       "key"
+      ],
+      "additionalProperties": false,
+      "properties": {
+       "type": {},
+       "schema": {
+        "type": "string",
+        "pattern": "^[A-Z][A-Za-z0-9]*$"
+       },
+       "key": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    {
+     "if": {
+      "properties": {
+       "type": {
+        "const": "vector"
+       }
+      }
+     },
+     "then": {
+      "required": [
+       "index"
+      ],
+      "additionalProperties": false,
+      "properties": {
+       "type": {},
+       "metadata_required": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       },
+       "index": {
+        "type": "object",
+        "required": [
+         "embedding"
+        ],
+        "additionalProperties": false,
+        "properties": {
+         "embedding": {
+          "type": "object",
+          "required": [
+           "provider",
+           "model"
+          ],
+          "additionalProperties": false,
+          "properties": {
+           "provider": {
+            "type": "string"
+           },
+           "model": {
+            "type": "string"
+           }
+          }
+         },
+         "chunk": {
+          "type": "object",
+          "required": [
+           "size",
+           "overlap"
+          ],
+          "additionalProperties": false,
+          "properties": {
+           "size": {
+            "type": "integer",
+            "minimum": 1
+           },
+           "overlap": {
+            "type": "integer",
+            "minimum": 0
+           }
+          }
+         },
+         "split": {
+          "enum": [
+           "record",
+           "section",
+           "chars"
+          ]
+         },
+         "metadata": {
+          "type": "array",
+          "items": {
+           "type": "string"
+          }
+         },
+         "chunker": {
+          "type": "string"
+         },
+         "rerank_norm": {
+          "type": "object",
+          "required": [
+           "fields"
+          ],
+          "additionalProperties": false,
+          "properties": {
+           "fields": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+             "type": "string"
+            }
+           },
+           "from": {
+            "type": "object"
+           }
+          }
+         }
+        }
+       },
+       "filterable": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       }
+      }
+     }
+    },
+    {
+     "if": {
+      "properties": {
+       "type": {
+        "const": "files"
+       }
+      }
+     },
+     "then": {
+      "additionalProperties": false,
+      "properties": {
+       "type": {}
+      }
+     }
+    }
+   ]
+  },
+  "tool": {
+   "type": "object",
+   "required": [
+    "effect",
+    "input",
+    "output",
+    "capabilities",
+    "adapters"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "effect": {
+     "enum": [
+      "none",
+      "read",
+      "write"
+     ]
+    },
+    "input": {
+     "type": "string"
+    },
+    "output": {
+     "type": "string"
+    },
+    "capabilities": {
+     "$ref": "#/$defs/capabilities"
+    },
+    "adapters": {
+     "type": "object",
+     "properties": {
+      "mock": {
+       "type": "string",
+       "pattern": "^custom\\.[a-z0-9_.]+:[a-z_][a-z0-9_]*$"
+      },
+      "http": {
+       "type": "object"
+      }
+     }
+    }
+   }
+  },
+  "state_type": {
+   "oneOf": [
+    {
+     "type": "string",
+     "minLength": 1
+    },
+    {
+     "type": "object",
+     "required": [
+      "type"
+     ],
+     "additionalProperties": false,
+     "properties": {
+      "type": {
+       "type": "string"
+      },
+      "merge": {
+       "enum": [
+        "append",
+        "merge_dict"
+       ]
+      },
+      "order_by": {
+       "type": "array",
+       "minItems": 1,
+       "items": {
+        "type": "string"
+       }
+      }
+     },
+     "allOf": [
+      {
+       "if": {
+        "properties": {
+         "merge": {
+          "const": "append"
+         }
+        },
+        "required": [
+         "merge"
+        ]
+       },
+       "then": {
+        "required": [
+         "order_by"
+        ]
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "graph": {
+   "type": "object",
+   "required": [
+    "state",
+    "nodes",
+    "edges"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "state": {
+     "type": "object",
+     "minProperties": 1,
+     "additionalProperties": false,
+     "patternProperties": {
+      "^[a-z][a-z0-9_]*$": {
+       "$ref": "#/$defs/state_type"
+      }
+     }
+    },
+    "nodes": {
+     "type": "array",
+     "minItems": 1,
+     "items": {
+      "$ref": "#/$defs/node"
+     }
+    },
+    "edges": {
+     "type": "array",
+     "minItems": 1,
+     "items": {
+      "$ref": "#/$defs/edge"
+     }
+    }
+   }
+  },
+  "edge": {
+   "oneOf": [
+    {
+     "type": "array",
+     "minItems": 2,
+     "maxItems": 2,
+     "items": {
+      "type": "string"
+     }
+    },
+    {
+     "type": "object",
+     "required": [
+      "join",
+      "to"
+     ],
+     "additionalProperties": false,
+     "properties": {
+      "join": {
+       "type": "array",
+       "minItems": 2,
+       "items": {
+        "type": "string"
+       }
+      },
+      "to": {
+       "type": "string"
+      }
+     }
+    },
+    {
+     "type": "object",
+     "required": [
+      "from",
+      "to",
+      "max_iterations"
+     ],
+     "additionalProperties": false,
+     "properties": {
+      "from": {
+       "type": "string"
+      },
+      "to": {
+       "type": "string"
+      },
+      "max_iterations": {
+       "type": "integer",
+       "minimum": 1
+      }
+     }
+    }
+   ]
+  },
+  "node": {
+   "type": "object",
+   "required": [
+    "id",
+    "kind",
+    "reads",
+    "writes"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "type": "string",
+     "pattern": "^[a-z][a-z0-9_]*$"
+    },
+    "kind": {
+     "type": "string",
+     "pattern": "^(llm|decide|predict|retrieve|parse|transform|router|map|subgraph|validate|human_review|tool|render|custom_code)(@[0-9]+)?$"
+    },
+    "params": {
+     "type": "object",
+     "propertyNames": {
+      "type": "string"
+     }
+    },
+    "reads": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "writes": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "expect": {
+     "type": "object",
+     "required": [
+      "text"
+     ],
+     "additionalProperties": false,
+     "properties": {
+      "text": {
+       "type": "string",
+       "minLength": 1
+      },
+      "checks": {
+       "type": "array",
+       "items": {
+        "type": "object"
+       }
+      }
+     }
+    },
+    "on_error": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "retry": {
+       "type": "integer",
+       "minimum": 0,
+       "maximum": 3
+      },
+      "then": {
+       "type": "string",
+       "pattern": "^(fail|route:[a-z][a-z0-9_]*)$"
+      }
+     }
+    },
+    "idempotent": {
+     "type": "boolean"
+    },
+    "capabilities": {
+     "$ref": "#/$defs/capabilities"
+    },
+    "ui": {
+     "type": "object"
+    }
+   },
+   "allOf": [
+    {
+     "if": {
+      "properties": {
+       "kind": {
+        "pattern": "^llm(@[0-9]+)?$"
+       }
+      },
+      "required": [
+       "kind"
+      ]
+     },
+     "then": {
+      "properties": {
+       "params": {
+        "type": "object",
+        "required": [
+         "provider",
+         "model",
+         "prompt",
+         "output"
+        ],
+        "properties": {
+         "provider": {
+          "type": "string"
+         },
+         "model": {
+          "type": "string"
+         },
+         "prompt": {
+          "type": "string",
+          "pattern": "^prompts/"
+         },
+         "output": {
+          "type": "string"
+         },
+         "temperature": {
+          "type": "number",
+          "minimum": 0
+         },
+         "max_tokens": {
+          "type": "integer",
+          "minimum": 1
+         },
+         "strict": {
+          "type": "boolean"
+         },
+         "seed": {
+          "type": "integer"
+         },
+         "reasoning_effort": {
+          "enum": [
+           "none",
+           "minimal",
+           "low",
+           "medium",
+           "high",
+           "xhigh",
+           "max"
+          ]
+         }
+        },
+        "additionalProperties": false
+       }
+      },
+      "required": [
+       "params"
+      ]
+     }
+    },
+    {
+     "if": {
+      "properties": {
+       "kind": {
+        "pattern": "^decide(@[0-9]+)?$"
+       }
+      },
+      "required": [
+       "kind"
+      ]
+     },
+     "then": {
+      "properties": {
+       "params": {
+        "type": "object",
+        "required": [
+         "provider",
+         "model",
+         "state",
+         "questions"
+        ],
+        "properties": {
+         "provider": {
+          "type": "string"
+         },
+         "model": {
+          "type": "string"
+         },
+         "state": {
+          "oneOf": [
+           {
+            "type": "object",
+            "minProperties": 1,
+            "additionalProperties": {
+             "type": "string"
+            }
+           },
+           {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+             "type": "string"
+            },
+            "uniqueItems": true
+           }
+          ]
+         },
+         "questions": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+           "type": "string",
+           "pattern": "^[a-z][a-z0-9_]*$"
+          },
+          "additionalProperties": {
+           "type": "object",
+           "required": [
+            "type",
+            "criteria"
+           ],
+           "additionalProperties": false,
+           "properties": {
+            "type": {
+             "enum": [
+              "noul",
+              "choice",
+              "score"
+             ]
+            },
+            "instructions": {
+             "type": "string"
+            },
+            "criteria": {}
+           },
+           "allOf": [
+            {
+             "if": {
+              "properties": {
+               "type": {
+                "const": "noul"
+               }
+              }
+             },
+             "then": {
+              "properties": {
+               "criteria": {
+                "type": "object",
+                "required": [
+                 "true",
+                 "false"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                 "true": {
+                  "type": "string"
+                 },
+                 "false": {
+                  "type": "string"
+                 }
+                }
+               }
+              }
+             }
+            },
+            {
+             "if": {
+              "properties": {
+               "type": {
+                "const": "choice"
+               }
+              }
+             },
+             "then": {
+              "properties": {
+               "criteria": {
+                "type": "object",
+                "minProperties": 1,
+                "maxProperties": 255,
+                "additionalProperties": {
+                 "type": [
+                  "string",
+                  "null"
+                 ]
+                }
+               }
+              }
+             }
+            },
+            {
+             "if": {
+              "properties": {
+               "type": {
+                "const": "score"
+               }
+              }
+             },
+             "then": {
+              "properties": {
+               "criteria": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 10,
+                "items": {
+                 "type": "string"
+                }
+               }
+              }
+             }
+            }
+           ]
+          }
+         },
+         "min_confidence": {
+          "oneOf": [
+           {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+           },
+           {
+            "type": "object",
+            "minProperties": 1,
+            "additionalProperties": {
+             "type": "number",
+             "minimum": 0,
+             "maximum": 1
+            }
+           }
+          ]
+         },
+         "fallback": {
+          "type": "object",
+          "minProperties": 1
+         }
+        },
+        "additionalProperties": false
+       }
+      },
+      "required": [
+       "params"
+      ]
+     }
+    },
+    {
+     "if": {
+      "properties": {
+       "kind": {
+        "pattern": "^predict(@[0-9]+)?$"
+       }
+      },
+      "required": [
+       "kind"
+      ]
+     },
+     "then": {
+      "properties": {
+       "params": {
+        "type": "object",
+        "required": [
+         "model",
+         "features",
+         "output"
+        ],
+        "properties": {
+         "model": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+         },
+         "features": {
+          "type": "object"
+         },
+         "output": {
+          "type": "string"
+         }
+        },
+        "additionalProperties": false
+       }
+      },
+      "required": [
+       "params"
+      ]
+     }
+    },
+    {
+     "if": {
+      "properties": {
+       "kind": {
+        "pattern": "^retrieve(@1)?$"
+       }
+      },
+      "required": [
+       "kind"
+      ]
+     },
+     "then": {
+      "properties": {
+       "params": {
+        "type": "object",
+        "required": [
+         "store"
+        ],
+        "properties": {
+         "store": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+         },
+         "query": {
+          "type": "string"
+         },
+         "top_k": {
+          "type": "integer",
+          "minimum": 1
+         },
+         "search": {
+          "enum": [
+           "similarity",
+           "mmr"
+          ]
+         },
+         "mmr": {
+          "type": "object"
+         },
+         "score_threshold": {
+          "type": "number"
+         },
+         "filter": {
+          "type": "object"
+         },
+         "where": {
+          "type": "object"
+         },
+         "select": {
+          "type": "array",
+          "items": {
+           "type": "string"
+          }
+         },
+         "limit": {
+          "type": "integer",
+          "minimum": 1
+         },
+         "fallback": {
+          "type": "object",
+          "required": [
+           "min_results",
+           "relax"
+          ],
+          "properties": {
+           "min_results": {
+            "type": "integer",
+            "minimum": 1
+           },
+           "relax": {
+            "type": "array",
+            "items": {
+             "type": "string"
+            }
+           }
+          }
+         }
+        },
+        "additionalProperties": false
+       }
+      },
+      "required": [
+       "params"
+      ]
+     }
+    },
+    {
+     "if": {
+      "properties": {
+       "kind": {
+        "const": "retrieve@2"
+       }
+      },
+      "required": [
+       "kind"
+      ]
+     },
+     "then": {
+      "properties": {
+       "params": {
+        "type": "object",
+        "required": [
+         "store",
+         "query"
+        ],
+        "additionalProperties": false,
+        "properties": {
+         "store": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+         },
+         "query": {
+          "type": "string"
+         },
+         "filter": {
+          "type": "object"
+         },
+         "method": {
+          "enum": [
+           "vector",
+           "lexical",
+           "hybrid"
+          ]
+         },
+         "search": {
+          "enum": [
+           "similarity",
+           "mmr"
+          ]
+         },
+         "mmr": {
+          "type": "object"
+         },
+         "lexical": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+           "tokenizer": {
+            "enum": [
+             "ko-bigram-1"
+            ]
+           },
+           "k1": {
+            "type": "number",
+            "exclusiveMinimum": 0
+           },
+           "b": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+           }
+          }
+         },
+         "fuse": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+           "method": {
+            "const": "rrf"
+           },
+           "k": {
+            "type": "integer",
+            "minimum": 1
+           },
+           "pool": {
+            "type": "integer",
+            "minimum": 1
+           }
+          }
+         },
+         "rerank": {
+          "type": "object",
+          "required": [
+           "fields",
+           "query",
+           "weights"
+          ],
+          "additionalProperties": false,
+          "properties": {
+           "fields": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+             "type": "string"
+            }
+           },
+           "query": {
+            "type": "string"
+           },
+           "pool": {
+            "type": "integer",
+            "minimum": 1
+           },
+           "weights": {
+            "type": "object",
+            "required": [
+             "retrieval",
+             "sensor"
+            ],
+            "additionalProperties": false,
+            "properties": {
+             "retrieval": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+             },
+             "sensor": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+             }
+            }
+           }
+          }
+         },
+         "top_k": {
+          "type": "integer",
+          "minimum": 1
+         },
+         "score_threshold": {
+          "anyOf": [
+           {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "fallback": {
+          "type": "object",
+          "required": [
+           "min_results",
+           "relax"
+          ],
+          "properties": {
+           "min_results": {
+            "type": "integer",
+            "minimum": 1
+           },
+           "relax": {
+            "type": "array",
+            "items": {
+             "type": "string"
+            }
+           }
+          }
+         },
+         "return_metadata": {
+          "type": "array",
+          "items": {
+           "type": "string"
+          }
+         },
+         "index": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+           "chunk_size": {
+            "anyOf": [
+             {
+              "type": "integer",
+              "minimum": 1
+             },
+             {
+              "type": "null"
+             }
+            ]
+           },
+           "overlap": {
+            "type": "integer",
+            "minimum": 0
+           }
+          }
+         }
+        }
+       }
+      },
+      "required": [
+       "params"
+      ]
+     }
+    },
+    {
+     "if": {
+      "properties": {
+       "kind": {
+        "pattern": "^validate(@[0-9]+)?$"
+       }
+      },
+      "required": [
+       "kind"
+      ]
+     },
+     "then": {
+      "properties": {
+       "params": {
+        "type": "object",
+        "required": [
+         "rules"
+        ],
+        "properties": {
+         "rules": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+           "type": "object",
+           "minProperties": 1,
+           "maxProperties": 1
+          }
+         },
+         "on_fail": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+         }
+        },
+        "additionalProperties": false
+       }
+      },
+      "required": [
+       "params"
+      ]
+     }
+    },
+    {
+     "if": {
+      "properties": {
+       "kind": {
+        "pattern": "^router(@[0-9]+)?$"
+       }
+      },
+      "required": [
+       "kind"
+      ]
+     },
+     "then": {
+      "properties": {
+       "params": {
+        "type": "object",
+        "required": [
+         "by",
+         "cases",
+         "default"
+        ],
+        "properties": {
+         "cases": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+           "type": "string"
+          },
+          "propertyNames": {
+           "type": "string"
+          }
+         },
+         "default": {
+          "type": "string"
+         },
+         "by": {
+          "type": "string",
+          "pattern": "^state(\\.[a-z_][a-z0-9_]*)+$"
+         }
+        },
+        "additionalProperties": false
+       }
+      },
+      "required": [
+       "params"
+      ]
+     }
+    },
+    {
+     "if": {
+      "properties": {
+       "kind": {
+        "pattern": "^human_review(@[0-9]+)?$"
+       }
+      },
+      "required": [
+       "kind"
+      ]
+     },
+     "then": {
+      "properties": {
+       "params": {
+        "type": "object",
+        "required": [
+         "subject",
+         "actions",
+         "routes"
+        ],
+        "properties": {
+         "subject": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+         },
+         "actions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+           "enum": [
+            "approve",
+            "edit",
+            "escalate",
+            "reject"
+           ]
+          }
+         },
+         "editable": {
+          "type": "array",
+          "items": {
+           "type": "string"
+          }
+         },
+         "revalidate": {
+          "type": "array",
+          "items": {
+           "type": "string"
+          }
+         },
+         "states": {
+          "type": "array",
+          "items": {
+           "type": "string"
+          }
+         },
+         "routes": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+           "type": "string"
+          }
+         },
+         "timeout": {
+          "type": "object"
+         }
+        },
+        "additionalProperties": false
+       }
+      },
+      "required": [
+       "params"
+      ]
+     }
+    },
+    {
+     "if": {
+      "properties": {
+       "kind": {
+        "pattern": "^render(@[0-9]+)?$"
+       }
+      },
+      "required": [
+       "kind"
+      ]
+     },
+     "then": {
+      "properties": {
+       "params": {
+        "type": "object",
+        "required": [
+         "template",
+         "format",
+         "to"
+        ],
+        "properties": {
+         "template": {
+          "type": "string",
+          "pattern": "^templates/"
+         },
+         "format": {
+          "enum": [
+           "md",
+           "docx",
+           "xlsx",
+           "json",
+           "csv",
+           "ddl",
+           "mermaid"
+          ]
+         },
+         "to": {
+          "type": "string"
+         }
+        },
+        "additionalProperties": false
+       }
+      },
+      "required": [
+       "params"
+      ]
+     }
+    },
+    {
+     "if": {
+      "properties": {
+       "kind": {
+        "pattern": "^custom_code@3$"
+       }
+      },
+      "required": [
+       "kind"
+      ]
+     },
+     "then": {
+      "properties": {
+       "params": {
+        "type": "object",
+        "required": [
+         "fn"
+        ],
+        "properties": {
+         "fn": {
+          "type": "string",
+          "pattern": "^custom\\.[a-z0-9_.]+:[a-z_][a-z0-9_]*$"
+         },
+         "stores": {
+          "type": "array",
+          "items": {
+           "type": "string",
+           "pattern": "^[a-z][a-z0-9_]*$"
+          },
+          "uniqueItems": true,
+          "minItems": 1
+         },
+         "options": {
+          "type": "object"
+         }
+        },
+        "additionalProperties": false
+       }
+      },
+      "required": [
+       "params",
+       "capabilities"
+      ]
+     }
+    }
+   ]
+  }
+ }
+}

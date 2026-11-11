@@ -1,0 +1,240 @@
+{
+ "now": "2026-10-13T12:40:44.323590+00:00",
+ "total": 36,
+ "rows": [
+  {
+   "section": "1.2",
+   "title": "잠금 확인",
+   "grade": "A",
+   "label": "단독 가능"
+  },
+  {
+   "section": "2.2",
+   "title": "공구 번호·마모 카운터 기록",
+   "grade": "A",
+   "label": "단독 가능"
+  },
+  {
+   "section": "2.3",
+   "title": "교체 기록 대조",
+   "grade": "A",
+   "label": "단독 가능"
+  },
+  {
+   "section": "2.3.2",
+   "title": "마모 카운터 정정",
+   "grade": "B",
+   "label": "확인 후"
+  },
+  {
+   "section": "2.4",
+   "title": "날 끝 확대경 점검",
+   "grade": "A",
+   "label": "단독 가능"
+  },
+  {
+   "section": "2.4.2",
+   "title": "공구 교체",
+   "grade": "A",
+   "label": "단독 가능"
+  },
+  {
+   "section": "2.5",
+   "title": "시험 가공 치수 확인",
+   "grade": "B",
+   "label": "확인 후"
+  },
+  {
+   "section": "2.6",
+   "title": "편마모·콜릿 흔들림 점검",
+   "grade": "A",
+   "label": "단독 가능"
+  },
+  {
+   "section": "2.6.2",
+   "title": "콜릿 청소 후 공구 교체",
+   "grade": "A",
+   "label": "단독 가능"
+  },
+  {
+   "section": "3.2",
+   "title": "인버터 경고 코드 기록",
+   "grade": "A",
+   "label": "단독 가능"
+  },
+  {
+   "section": "3.3",
+   "title": "회전 조건 설정 확인",
+   "grade": "A",
+   "label": "단독 가능"
+  },
+  {
+   "section": "3.3.2",
+   "title": "가공 설정값 원복",
+   "grade": "C",
+   "label": "승인 필요"
+  },
+  {
+   "section": "3.4",
+   "title": "엔코더 커넥터·케이블 육안 점검",
+   "grade": "A",
+   "label": "단독 가능"
+  },
+  {
+   "section": "3.4.2",
+   "title": "엔코더 커넥터 재체결",
+   "grade": "A",
+   "label": "단독 가능"
+  },
+  {
+   "section": "3.5",
+   "title": "인버터 경고 이력 확인",
+   "grade": "A",
+   "label": "단독 가능"
+  },
+  {
+   "section": "3.6",
+   "title": "전원 단자대 점검",
+   "grade": "C",
+   "label": "승인 필요"
+  },
+  {
+   "section": "4.2",
+   "title": "고온부 확인과 온도 기록",
+   "grade": "A",
+   "label": "단독 가능"
+  },
+  {
+   "section": "4.3",
+   "title": "흡기 필터 육안 점검",
+   "grade": "A",
+   "label": "단독 가능"
+  },
+  {
+   "section": "4.3.2",
+   "title": "흡기 필터 교체",
+   "grade": "A",
+   "label": "단독 가능"
+  },
+  {
+   "section": "4.4",
+   "title": "냉각 팬 분해 점검",
+   "grade": "C",
+   "label": "승인 필요"
+  },
+  {
+   "section": "4.4.2",
+   "title": "냉각 팬 모듈 교체",
+   "grade": "C",
+   "label": "승인 필요"
+  },
+  {
+   "section": "4.5",
+   "title": "냉각수 수위 확인",
+   "grade": "A",
+   "label": "단독 가능"
+  },
+  {
+   "section": "4.5.2",
+   "title": "냉각수 보충",
+   "grade": "B",
+   "label": "확인 후"
+  },
+  {
+   "section": "4.6",
+   "title": "냉각 설정값 확인",
+   "grade": "A",
+   "label": "단독 가능"
+  },
+  {
+   "section": "4.6.2",
+   "title": "냉각 설정값 변경",
+   "grade": "C",
+   "label": "승인 필요"
+  },
+  {
+   "section": "5.2",
+   "title": "소재·가공 프로그램 기록",
+   "grade": "A",
+   "label": "단독 가능"
+  },
+  {
+   "section": "5.3",
+   "title": "절삭유 노즐 분사 확인",
+   "grade": "A",
+   "label": "단독 가능"
+  },
+  {
+   "section": "5.3.2",
+   "title": "절삭유 노즐 청소·교체",
+   "grade": "A",
+   "label": "단독 가능"
+  },
+  {
+   "section": "5.4",
+   "title": "절삭 조건 대조",
+   "grade": "A",
+   "label": "단독 가능"
+  },
+  {
+   "section": "5.4.2",
+   "title": "절삭 조건 조정",
+   "grade": "C",
+   "label": "승인 필요"
+  },
+  {
+   "section": "5.5",
+   "title": "스핀들 진동 측정",
+   "grade": "B",
+   "label": "확인 후"
+  },
+  {
+   "section": "5.6",
+   "title": "스핀들 베어링 분해 점검",
+   "grade": "D",
+   "label": "범위 밖"
+  },
+  {
+   "section": "6.1",
+   "title": "재가동",
+   "grade": "B",
+   "label": "확인 후"
+  },
+  {
+   "section": "6.2",
+   "title": "이상 없음·감시 마감",
+   "grade": "A",
+   "label": "단독 가능"
+  },
+  {
+   "section": "7.1",
+   "title": "전기 계통 작업",
+   "grade": "D",
+   "label": "범위 밖"
+  },
+  {
+   "section": "7.2",
+   "title": "스핀들·베어링 분해",
+   "grade": "D",
+   "label": "범위 밖"
+  }
+ ],
+ "changes": [
+  {
+   "section": "4.3",
+   "title": "흡기 필터 육안 점검",
+   "before": "C",
+   "after": "A",
+   "by_name": "박 파트장",
+   "at": "2026-10-13T12:40:44.319480+00:00"
+  },
+  {
+   "section": "4.3",
+   "title": "흡기 필터 육안 점검",
+   "before": "A",
+   "after": "C",
+   "by_name": "박 파트장",
+   "at": "2026-10-13T12:40:44.316249+00:00"
+  }
+ ]
+}

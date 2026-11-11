@@ -1,0 +1,46 @@
+{
+ "artifact": {
+  "file": "model.json",
+  "format": "json-linear",
+  "sha256": "2b4e9daf4ad4caaf84d39352b123dc9c8a52d966aba3c1412dfc14a258fd2f6c"
+ },
+ "classes": [
+  "NONE",
+  "TWF",
+  "HDF",
+  "PWF",
+  "OSF"
+ ],
+ "feature_schema": {
+  "fields": [
+   "tw_excess_std",
+   "cl_excess_std",
+   "pw_excess_std",
+   "ld_excess_std"
+  ],
+  "version": 1,
+  "derivation": "칸 = (train 알람 경계를 넘은 값 ÷ train 표준편차), 부호 있음 — TW: (공구 마모 − 상위) · CL: (하위 − 온도 차) · PW: max(하위 − 출력, 출력 − 상위) · LD: (토크 − 상위). 경계 · 표준편차 = 앱 data/alarm_rules.json 사본(custom/alarm_rules.json)"
+ },
+ "files": {
+  "model.json": "2b4e9daf4ad4caaf84d39352b123dc9c8a52d966aba3c1412dfc14a258fd2f6c"
+ },
+ "kind": "model",
+ "note": "손 가중치 자리 모델(학습 0 · 라벨 0) — 경계 규칙을 확률 모양으로 옮긴 것, ML 일반화 주장 아님. 사용자 ONNX 모델로 바꿔 끼울 자리.",
+ "provenance": {
+  "method": "hand weights K=6.0, bias 0 (NONE logit 0)",
+  "training": "none",
+  "labels_used": 0,
+  "tool": "tools/make_standin_model.py"
+ },
+ "release_id": "mr-c1a15-standin-v1",
+ "threshold_config": {
+  "sha256": "edadc3c751841c13cbc2f3b642e977bed555ce76bd56d625c51de9d398ad7389",
+  "values": {
+   "min_probability": 0.5,
+   "normal_classes": [
+    "NONE"
+   ]
+  }
+ },
+ "trusted": true
+}

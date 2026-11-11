@@ -1,0 +1,306 @@
+{
+ "session_id": 35,
+ "alarm_id": 35,
+ "status": "in_progress",
+ "locked": true,
+ "lock_at": "2026-10-13T12:40:38.373763+00:00",
+ "probabilities": {},
+ "evidence": {},
+ "low_evidence": false,
+ "top_records": [
+  "H-0295",
+  "H-0224",
+  "H-0248"
+ ],
+ "similar_basis": "상위 10건",
+ "cause_names": {
+  "CL-1": "냉각 필터 막힘",
+  "CL-2": "냉각 팬 열화",
+  "CL-3": "냉각수 부족",
+  "CL-4": "냉각 설정 오류"
+ },
+ "similar_cards": [
+  {
+   "record_id": "H-0295",
+   "equipment_id": "M-13",
+   "month": 9,
+   "similarity_pct": 82,
+   "outcome_type": "원인 확정",
+   "cause_code": "CL-1",
+   "outcome_label": "냉각 필터 막힘",
+   "action_name": "흡기 필터 교체",
+   "downtime_min": 27
+  },
+  {
+   "record_id": "H-0224",
+   "equipment_id": "M-12",
+   "month": 9,
+   "similarity_pct": 81,
+   "outcome_type": "원인 확정",
+   "cause_code": "CL-1",
+   "outcome_label": "냉각 필터 막힘",
+   "action_name": "흡기 필터 교체",
+   "downtime_min": 27
+  },
+  {
+   "record_id": "H-0248",
+   "equipment_id": "M-02",
+   "month": 9,
+   "similarity_pct": 72,
+   "outcome_type": "원인 확정",
+   "cause_code": "CL-1",
+   "outcome_label": "냉각 필터 막힘",
+   "action_name": "흡기 필터 교체",
+   "downtime_min": 26
+  }
+ ],
+ "alarm": {
+  "alarm_id": 35,
+  "equipment_id": "M-03",
+  "equipment_type": "회전 가공 설비",
+  "occurred_at": "2026-10-13T12:40:38.335622+00:00",
+  "symptom_group": "CL",
+  "group_name": "온도 차 저하",
+  "system": "냉각 계통",
+  "alarm": {
+   "sensor": "온도 차",
+   "value": 7.8,
+   "unit": "K",
+   "boundary": 8.3,
+   "direction": "경계 아래",
+   "trend_title": "온도 차 추이 · 최근 12회 측정"
+  },
+  "boundary_text": "하위 경계 8.3 K",
+  "out_of_range_count": 1,
+  "trend": [
+   {
+    "at": "2026-09-22T08:00:00+09:00",
+    "value": 8.4
+   },
+   {
+    "at": "2026-09-23T01:31:00+09:00",
+    "value": 8.2
+   },
+   {
+    "at": "2026-09-23T19:02:00+09:00",
+    "value": 8.2
+   },
+   {
+    "at": "2026-09-24T12:33:00+09:00",
+    "value": 8.7
+   },
+   {
+    "at": "2026-09-25T06:04:00+09:00",
+    "value": 8.2
+   },
+   {
+    "at": "2026-09-25T23:36:00+09:00",
+    "value": 7.7
+   },
+   {
+    "at": "2026-09-26T17:07:00+09:00",
+    "value": 7.8
+   },
+   {
+    "at": "2026-09-27T10:38:00+09:00",
+    "value": 7.9
+   },
+   {
+    "at": "2026-09-28T04:09:00+09:00",
+    "value": 7.8
+   },
+   {
+    "at": "2026-09-28T21:40:00+09:00",
+    "value": 7.8
+   },
+   {
+    "at": "2026-09-29T15:12:00+09:00",
+    "value": 7.8
+   },
+   {
+    "at": "2026-09-30T08:43:00+09:00",
+    "value": 7.8
+   }
+  ],
+  "trend_title": "온도 차 추이 · 최근 12회 측정",
+  "sensors": [
+   {
+    "key": "temp_diff_k",
+    "name": "온도 차",
+    "value": 7.8,
+    "unit": "K",
+    "value_text": "7.8 K",
+    "range_text": "8.3 K 이상",
+    "status": "경계 아래",
+    "is_alarm_sensor": true,
+    "out_of_range": true
+   },
+   {
+    "key": "rotational_speed_rpm",
+    "name": "회전 속도",
+    "value": 1511.0,
+    "unit": "rpm",
+    "value_text": "1,511 rpm",
+    "range_text": "1,305 ~ 1,979",
+    "status": "정상",
+    "is_alarm_sensor": false,
+    "out_of_range": false
+   },
+   {
+    "key": "torque_nm",
+    "name": "회전력",
+    "value": 37.7,
+    "unit": "Nm",
+    "value_text": "37.7 Nm",
+    "range_text": "20.5 ~ 59.7",
+    "status": "정상",
+    "is_alarm_sensor": false,
+    "out_of_range": false
+   },
+   {
+    "key": "tool_wear_min",
+    "name": "공구 마모",
+    "value": 60.0,
+    "unit": "분",
+    "value_text": "60 분",
+    "range_text": "4 ~ 214",
+    "status": "정상",
+    "is_alarm_sensor": false,
+    "out_of_range": false
+   },
+   {
+    "key": "air_temperature_k",
+    "name": "공기 온도",
+    "value": 302.7,
+    "unit": "K",
+    "value_text": "302.7 K",
+    "range_text": "296.4 ~ 302.4",
+    "status": "정상",
+    "is_alarm_sensor": false,
+    "out_of_range": false
+   }
+  ],
+  "ai_reading": {
+   "text": "온도 차 값(7.8 K)이 경계(8.3 K)보다 작아졌습니다. 냉각 계통 쪽 문제일 가능성이 높습니다.",
+   "fallback": false,
+   "label": null
+  },
+  "similar_count": 10
+ },
+ "results": [
+  {
+   "seq": 9,
+   "section": "4.3",
+   "value": "정상",
+   "memo": null
+  },
+  {
+   "seq": 12,
+   "section": "4.6",
+   "value": "정상",
+   "memo": null
+  },
+  {
+   "seq": 15,
+   "section": "4.5",
+   "value": "정상",
+   "memo": null
+  },
+  {
+   "seq": 18,
+   "section": "4.4",
+   "value": "정상",
+   "memo": null
+  }
+ ],
+ "step": {
+  "kind": "monitor_close",
+  "section": "6.2",
+  "grade": "A",
+  "cause": null,
+  "reason": null,
+  "unable_before": null,
+  "interpretation": null,
+  "quote": null,
+  "outcome": null,
+  "call_status": null
+ },
+ "last_seq": 23,
+ "recommend_handover": false,
+ "path": [
+  {
+   "at": "2026-10-13T12:40:38.373763+00:00",
+   "title": "잠금 확인",
+   "detail": "1.2절",
+   "status": "ok"
+  },
+  {
+   "at": "2026-10-13T12:40:38.387627+00:00",
+   "title": "고온부 확인과 온도 기록",
+   "detail": "4.2절",
+   "status": "ok"
+  },
+  {
+   "at": "2026-10-13T12:40:38.401845+00:00",
+   "title": "흡기 필터 육안 점검",
+   "detail": "정상",
+   "status": "ok"
+  },
+  {
+   "at": "2026-10-13T12:40:38.415805+00:00",
+   "title": "냉각 설정값 확인",
+   "detail": "정상",
+   "status": "ok"
+  },
+  {
+   "at": "2026-10-13T12:40:38.431685+00:00",
+   "title": "냉각수 수위 확인",
+   "detail": "정상",
+   "status": "ok"
+  },
+  {
+   "at": "2026-10-13T12:40:38.447103+00:00",
+   "title": "냉각 팬 분해 점검",
+   "detail": "정상",
+   "status": "ok"
+  },
+  {
+   "at": "2026-10-13T12:40:38.461284+00:00",
+   "title": "재가동",
+   "detail": "6.1절 · 체크리스트 확인",
+   "status": "ok"
+  },
+  {
+   "at": "2026-10-13T12:40:38.475416+00:00",
+   "title": "재가동 후 값 확인",
+   "detail": "9.1 K · 경계 이내",
+   "status": "ok"
+  }
+ ],
+ "restart": {
+  "section": "6.1",
+  "title": "재가동",
+  "grade": "B",
+  "checklist": [
+   "주변 공구·이물질 치움",
+   "냉각 커버 고정 확인",
+   "작업자 대피 확인"
+  ],
+  "restarted_at": "2026-10-13T12:40:38.461284+00:00",
+  "outcome": "within",
+  "value": {
+   "sensor": "온도 차",
+   "value": 9.1,
+   "value_text": "9.1 K",
+   "boundary_text": "8.3 K",
+   "rule_text": "경계 8.3 K 이상이면 경계 이내",
+   "basis": "무부하 3분 운전 뒤"
+  }
+ },
+ "monitor": {
+  "section": "6.2",
+  "title": "이상 없음·감시 마감",
+  "grade": "A",
+  "closed": false
+ }
+}

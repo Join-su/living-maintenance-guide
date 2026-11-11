@@ -1,0 +1,9 @@
+# 평가 suite — Pack revision 밖. c1a15-start-v8 10 case + 설비 붙인 값(시연 각본 · suite 원본 아님) + 관계가 맞아야 하는 K7 가 6 case
+# 기대값 = Pack 456c68e 출력(가짜 DB) · 안내 없음 case = 그래프 graph-mm3-v2-48a5b999-fbdb9d71 · 안내 뜸 case(근거 설비 7) = 그래프 graph-mm3-v2-48a5b999-ex1-02fc5418
+# 만든 도구: orchestration/agents/c1a15-eval/handoff/d546/start-v8b/make_start_v8b.py(c1a15-eval)
+suite: c1a15_start_v8b
+split: fixture
+graph: run
+dataset: dataset.jsonl
+expectations: expectations.jsonl
+review_policy: {default: fixture, missing_fixture: stop_before}

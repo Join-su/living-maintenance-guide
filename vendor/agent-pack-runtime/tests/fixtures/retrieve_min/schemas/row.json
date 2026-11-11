@@ -1,0 +1,2 @@
+{"$schema": "https://json-schema.org/draft/2020-12/schema", "type": "object", "required": ["row_id", "group", "action"],
+ "properties": {"row_id": {"type": "string"}, "group": {"type": "string"}, "action": {"type": "string"}}}

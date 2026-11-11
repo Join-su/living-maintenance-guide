@@ -1,0 +1,101 @@
+{
+ "backend": "flat-local",
+ "build_sha256": "f3ed6c2eb97f3ac466f1a0a6e495fd32f3c69a3ac9bc55d3524f94965c39fe0f",
+ "builder": {
+  "name": "packrt.index",
+  "version": 1
+ },
+ "chunks": 300,
+ "corpus_release": {
+  "id": "c1a15-history-train-v1",
+  "sha256": "31bb6dab03a9d30c82b7a414c3a11870a7912d8b1f9f57ec3580f470f61fc6a1"
+ },
+ "documents": 300,
+ "embedding": {
+  "dim": 64,
+  "mode": "fake",
+  "model": "text-embedding-3-small",
+  "provider": "openai"
+ },
+ "files": {
+  "chunks.jsonl": "6204b5d96c3bd7cf7e4ee756342057c50499fa7d8321565123a3ba07b2cd9d40",
+  "vectors.json": "8798d3588bf1dd62c18e25afa12c8975fe9ce73a5533074e4ffe65760417f1dc"
+ },
+ "index_recipe": {
+  "chunk_size": null,
+  "chunker": null,
+  "chunker_sha256": null,
+  "metadata": [
+   "air_temperature_k",
+   "cause",
+   "evidence_type",
+   "power_w",
+   "process_temperature_k",
+   "rotational_speed_rpm",
+   "source",
+   "symptom_group",
+   "temp_diff_k",
+   "tool_wear_min",
+   "torque_nm"
+  ],
+  "overlap": 0,
+  "rerank_norm": {
+   "fields": [
+    "air_temperature_k",
+    "process_temperature_k",
+    "rotational_speed_rpm",
+    "torque_nm",
+    "tool_wear_min",
+    "temp_diff_k",
+    "power_w"
+   ],
+   "from": {
+    "source": "generated"
+   }
+  },
+  "split": "record"
+ },
+ "index_recipe_sha256": "3c3e550d8c66ee1f2587c8eb6ab78abb390b730b1f738fbe8bc89e73044b5922",
+ "index_sha256": "13b21cc848a284d8a5bd9705a339c7e690f505e1999dad07ed3bbf2dbd1e03a3",
+ "kind": "index",
+ "parent_release": null,
+ "release_id": "ir-history-f3ed6c2e",
+ "rerank_norm": {
+  "air_temperature_k": {
+   "mean": 300.701667,
+   "n": 300,
+   "std": 1.804669
+  },
+  "power_w": {
+   "mean": 6622.89,
+   "n": 300,
+   "std": 1709.370482
+  },
+  "process_temperature_k": {
+   "mean": 309.859333,
+   "n": 300,
+   "std": 1.031316
+  },
+  "rotational_speed_rpm": {
+   "mean": 1554.096667,
+   "n": 300,
+   "std": 299.200391
+  },
+  "temp_diff_k": {
+   "mean": 9.157667,
+   "n": 300,
+   "std": 1.31569
+  },
+  "tool_wear_min": {
+   "mean": 133.416667,
+   "n": 300,
+   "std": 71.783956
+  },
+  "torque_nm": {
+   "mean": 43.448,
+   "n": 300,
+   "std": 15.912095
+  }
+ },
+ "store": "history"
+}

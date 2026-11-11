@@ -1,0 +1,12 @@
+[project]
+name = "llmopsagent-deploy"
+version = "0.2.0"
+description = "LLMOpsAgent Deployment Server (운영 1단계): 태그된 Agent Pack으로 EventCard 요청을 처리하고 실행 기록을 남긴다"
+requires-python = ">=3.12"
+# 설치는 scripts/install-venv.sh <packrt 저장소 태그>(전용 .venv, VFE EV-003 → EV-005 ES-D). packrt·tracewriter는 agent-pack-runtime
+# 같은 태그의 git archive 사본에서 비편집 설치, 제3자 패키지는 llmops uv.lock 판 + packrt가 고정한 판 — 실제 고정 값은 pinned.json·requirements/deploy-venv.txt.
+dependencies = ["fastapi", "uvicorn", "langgraph", "jsonschema", "pyyaml", "httpx", "psycopg[binary]", "packrt==0.15.0", "tracewriter==0.1.4"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["pg: logDB(PostgreSQL) 시험 — scripts/test-db.sh(DEPLOY_PG=1)에서만 돎"]

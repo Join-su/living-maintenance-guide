@@ -1,0 +1,60 @@
+{
+ "_note": "EV-002 LS-0: taken with the 7f565ac code (packrt 0.10.0) before strict · seed — the llm_min chat body, the draft node_ended meta and the failure errors. Copied from the run's evidence/LS-0-characterization.json.",
+ "code_revision": "7f565acd2ac61d88c71ab9522aff4dbbd81a852b",
+ "body": "{\"model\": \"gpt-4.1-mini\", \"messages\": [{\"role\": \"user\", \"content\": \"\\ub2e4\\uc74c \\ubb38\\uc758\\ub97c \\ud55c \\uc904\\ub85c \\uc694\\uc57d\\ud558\\uace0 \\ubd84\\ub958\\ud558\\uc138\\uc694: \\uacb0\\uc81c\\uac00 \\ub450 \\ubc88 \\ub410\\uc5b4\\uc694\\n\"}], \"response_format\": {\"type\": \"json_schema\", \"json_schema\": {\"name\": \"output\", \"schema\": {\"$schema\": \"https://json-schema.org/draft/2020-12/schema\", \"$id\": \"llm_min/answer.json\", \"title\": \"Answer\", \"description\": \"strict \\ubaa8\\uc591: \\ubaa8\\ub4e0 \\uce78 required, \\uc120\\ud0dd \\uce78\\uc740 null \\ud569\\uc9d1\\ud569\", \"type\": \"object\", \"additionalProperties\": false, \"required\": [\"summary\", \"category\", \"confidence\"], \"properties\": {\"summary\": {\"type\": \"string\", \"minLength\": 1}, \"category\": {\"type\": \"string\", \"enum\": [\"billing\", \"technical\", \"other\"]}, \"confidence\": {\"type\": [\"number\", \"null\"], \"minimum\": 0, \"maximum\": 1}}}, \"strict\": false}}, \"temperature\": 0}",
+ "meta": {
+  "kind": "llm@1",
+  "provider": "openai",
+  "model": "gpt-4.1-mini",
+  "request_config": {
+   "temperature": 0,
+   "max_tokens": null
+  },
+  "tokens_in": 11,
+  "tokens_out": 7,
+  "prompt_ref": {
+   "ref": "sha256:0000000000000000000000000000000000000000000000000000000000000003",
+   "size": 0,
+   "media_type": "application/json"
+  },
+  "provider_raw_ref": {
+   "ref": "sha256:0000000000000000000000000000000000000000000000000000000000000004",
+   "size": 0,
+   "media_type": "application/json"
+  }
+ },
+ "errors": {
+  "run_not_json": {
+   "node_path": "ask.draft",
+   "kind": "llm@1",
+   "code": "output_not_json",
+   "message": "모델 출력이 JSON이 아닙니다: 요약: 결제 두 번",
+   "retryable": false,
+   "attempt": 1
+  },
+  "run_schema": {
+   "node_path": "ask.draft",
+   "kind": "llm@1",
+   "code": "output_schema",
+   "message": "모델 출력이 Answer 형식에 맞지 않습니다: '' should be non-empty",
+   "retryable": false,
+   "attempt": 1
+  },
+  "run_refusal": {
+   "node_path": "ask.draft",
+   "kind": "llm@1",
+   "code": "TypeError",
+   "message": "the JSON object must be str, bytes or bytearray, not NoneType",
+   "retryable": false,
+   "attempt": 1
+  },
+  "run_length": {
+   "node_path": "ask.draft",
+   "kind": "llm@1",
+   "code": "output_not_json",
+   "message": "모델 출력이 JSON이 아닙니다: {\"summary\": \"결제",
+   "retryable": false,
+   "attempt": 1
+  }
+ }
+}

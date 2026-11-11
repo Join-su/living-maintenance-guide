@@ -1,0 +1,27 @@
+{
+ "_status": 409,
+ "detail": {
+  "reason": "confirm_required",
+  "current": {
+   "kind": "instruct",
+   "section": "4.6",
+   "title": "냉각 설정값 확인"
+  },
+  "next": {
+   "kind": "action",
+   "section": "4.3.2",
+   "title": "흡기 필터 교체"
+  },
+  "target": {
+   "section": "4.3",
+   "before": {
+    "value": "정상",
+    "memo": "필터 깨끗함"
+   },
+   "after": {
+    "value": "이상",
+    "memo": "필터 뒷면에 기름때가 절반 넘게 덮음"
+   }
+  }
+ }
+}

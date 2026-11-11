@@ -1,0 +1,26 @@
+{
+  "kind": "alarm",
+  "event_card": {
+    "event_id": "C1A-E8b21d4e07a5c",
+    "source_mode": "ml_predicted",
+    "equipment_id": "M-07",
+    "sensor_snapshot": {
+      "air_temperature_k": 300.1,
+      "process_temperature_k": 309.0,
+      "rotational_speed_rpm": 1420.0,
+      "torque_nm": 45.0,
+      "tool_wear_min": 180.0
+    },
+    "alarm": {
+      "source": "none"
+    },
+    "data_lineage": {
+      "source_release": "ai4i-2020@sha256:dc6630cd9b1f0f853922fad78a1b6436570d3f1ec863f1dd5c4340ac56bc8a8e",
+      "row_id": 6120,
+      "split": "val"
+    }
+  },
+  "settings": {
+    "ml_alarm_threshold": 0.5
+  }
+}

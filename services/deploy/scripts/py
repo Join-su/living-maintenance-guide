@@ -1,0 +1,12 @@
+#!/bin/sh
+# 배포단 전용 venv(.venv, scripts/install-venv.sh로 만듦 — packrt 저장소 태그 고정·비편집, pinned.json)로 이 저장소의 Python을 실행한다.
+# 다른 venv: DEPLOY_VENV=<venv>(사본 예행연습 등 — 그때 test_environment는 건너뜀). bytecode를 쓰지 않는다.
+HERE="$(cd "$(dirname "$0")/.." && pwd)"
+VENV="${DEPLOY_VENV:-$HERE/.venv}"
+if [ ! -x "$VENV/bin/python" ]; then
+  echo "가상환경이 없습니다: $VENV — scripts/install-venv.sh <packrt 저장소 태그>로 만드세요(사용자 승인 때)" >&2
+  exit 2
+fi
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONPATH="$HERE${PYTHONPATH:+:$PYTHONPATH}"
+cd "$HERE" && exec "$VENV/bin/python" "$@"

@@ -1,0 +1,22 @@
+{
+ "case_categories": {
+  "E1": 15,
+  "E2": 13,
+  "E3": 13,
+  "E4": 13,
+  "E5": 13,
+  "mixed": 13,
+  "normal": 20
+ },
+ "cases": 100,
+ "events": 1156,
+ "history": 1056,
+ "made": "2026-11-03 D-534",
+ "rules": "rules.yaml(kg-test-rules-v0 · 씨앗만 바꿈)",
+ "seed": 20261104,
+ "sha256": {
+  "cases.jsonl": "e2cb193f0c4e553761430bb459e33ad00981ecc1f125cb029689977d46005241",
+  "history.jsonl": "de53a48651587d46f9699d185f146dbfa8941cc43fc2ef5bb4ea6173db24d07a",
+  "occurrences.jsonl": "42300e5cf686d053de436ccbe73799f89613dc9c82214db303963751e0f97c0d"
+ }
+}

@@ -1,0 +1,9 @@
+{
+ "pack_copy_from_commit": "c6617c6",
+ "graph_release_id": "graph-mm3-v2-48a5b999-fbdb9d71",
+ "label_exception_check": "result.exception_guide.section",
+ "dataset_sha12": "37a7057718c4",
+ "old_expectations_sha12": "58b6f0c8d560",
+ "new_expectations_sha12": "2fd10795ec3d",
+ "net_tries": 0
+}

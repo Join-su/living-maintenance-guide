@@ -1,0 +1,10 @@
+{"id": "D-01", "metadata": {"evidence_type": "manual", "group": "TW", "kind": "manual"}, "text": "공구 마모가 심하면 공구를 바꾸고 마모 폭을 기록한다"}
+{"id": "D-02", "metadata": {"evidence_type": "manual", "group": "TW", "kind": "manual"}, "text": "공구 끝 마모 폭이 0.3mm를 넘으면 교체한다"}
+{"id": "D-03", "metadata": {"evidence_type": "history", "group": "TW", "kind": "history"}, "text": "토크가 갑자기 오르면 주축 부하와 공구 마모를 함께 본다"}
+{"id": "D-04", "metadata": {"evidence_type": "manual", "group": "PW", "kind": "manual"}, "text": "전력이 범위를 벗어나면 회전 속도와 토크를 다시 잰다"}
+{"id": "D-05", "metadata": {"evidence_type": "history", "group": "PW", "kind": "history"}, "text": "전력 이상 알람 뒤 공급 전압을 확인했다"}
+{"id": "D-06", "metadata": {"evidence_type": "manual", "group": "HD", "kind": "manual"}, "text": "방열이 나쁘면 공기 온도와 공정 온도 차가 작아진다"}
+{"id": "D-07", "metadata": {"evidence_type": "manual", "group": "GEN", "kind": "manual"}, "text": "점검 전 전원을 내리고 잠금 표지를 단다"}
+{"id": "D-08", "metadata": {"evidence_type": "manual", "group": "GEN", "kind": "manual"}, "text": "점검 전 전원을 내리고 잠금 표지를 단다"}
+{"id": "D-09", "metadata": {"evidence_type": "manual", "group": "OS", "kind": "manual"}, "text": "과부하는 토크와 공구 마모의 곱이 기준을 넘을 때 난다"}
+{"id": "D-10", "metadata": {"evidence_type": "history", "group": "RN", "kind": "history"}, "text": "임의 고장은 원인 칸을 비워 두고 사람에게 넘긴다"}

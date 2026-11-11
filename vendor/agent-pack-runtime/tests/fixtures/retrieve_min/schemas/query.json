@@ -1,0 +1,2 @@
+{"$schema": "https://json-schema.org/draft/2020-12/schema", "type": "object", "required": ["text", "group", "groups", "rare"], "additionalProperties": false,
+ "properties": {"text": {"type": "string"}, "group": {"type": "string"}, "groups": {"type": "array", "items": {"type": "string"}}, "rare": {"type": "string"}}}

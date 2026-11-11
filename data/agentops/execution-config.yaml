@@ -1,0 +1,16 @@
+# AgentOps execution settings for the Pack it evaluates (outside the Pack revision) — no secret values, names only.
+# scripts/kg-init.sh copies this file to /packs/first/execution-config.yaml, the folder you register on the AgentOps screen ('＋ release').
+# Paths are inside the agentops container:
+#   python         the Pack's own Python environment (/opt/pack-venv · packrt + the Pack's packages such as onnxruntime;
+#                  the AgentOps server's /opt/venv does not have them)
+#   release_roots  read-only volume pack-repo: the model releases inside the Pack repository · the vector DB copy beside it
+# The embedding key is read by its name (OPENAI_API_KEY) from <Pack folder>/.env, a link to the key file agentops-start writes in memory.
+config_version: 1
+entrypoint: run
+environment: {kind: local-python, python: /opt/pack-venv/bin/python}
+release_roots: [/srv/pack-repo/c1a15-pack/releases, /srv/pack-repo/agent-pack-runtime-ingest/releases-c1a15]
+models:
+  failure_classifier: {release: mr-ai4i-lgbm-large-v2}
+stores:
+  history: {backend: flat-local, release: ir-history-16d297d8, embedding: {mode: real, key_env: OPENAI_API_KEY}}
+  manuals: {backend: flat-local, release: ir-manuals-3ae4dcdf, embedding: {mode: real, key_env: OPENAI_API_KEY}}

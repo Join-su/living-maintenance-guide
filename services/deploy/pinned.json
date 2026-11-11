@@ -1,0 +1,27 @@
+{
+ "packrt_repo": {
+  "name": "agent-pack-runtime",
+  "url": "https://github.com/Join-su/agent-pack-runtime.git",
+  "tag": "v0.15.0",
+  "tag_object": "7b08b58f118da2108567f213a034dae59b56c4b7",
+  "commit": "d3bc887a4e4ba699cdc37e1cffdb079b9e50fa49"
+ },
+ "packrt": {
+  "version": "0.15.0",
+  "tree": "e64080bf86bef3146fb41caab16a65cde65dcc12"
+ },
+ "tracewriter": {
+  "version": "0.1.4",
+  "tree": "ab3e4f871b66ebb2473a1149879ce821ea18120c"
+ },
+ "fixed_by_packrt": {
+  "langgraph": "1.2.13",
+  "langsmith": "0.14.4"
+ },
+ "third_party": {
+  "llmops_commit": "0867ce0fca09324ba630f94ce12dd25e38f6f49e",
+  "uv_lock_sha256": "96e09a4af907799216c17bdc515c218d93393807e4153388a7c84b0493a88edf"
+ },
+ "python": "3.14.2",
+ "build_isolation": "setuptools==84.0.0"
+}

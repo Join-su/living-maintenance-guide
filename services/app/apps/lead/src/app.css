@@ -1,0 +1,156 @@
+/* 파트장 앱 최종안(D-528 · 구현 부록 1 · 2): 각지고 차분하게 — 짙은 왼쪽 메뉴 + 밝은 본문 · 모서리 0 ~ 2px · 그림자 0 · 회색 · 검정 · 강조 하나 · 글자만.
+   값은 prototype-final/app.css 의 .L 줄. 정비자 토큰(guide-a.css)은 그대로 두고 파트장 꼴만 여기서 덮어쓴다. */
+.L {
+  --lk: #1f2124; --lk2: #2c2f33; --lb: #f3f3f2; --lline: #dadada; --lsub: #55595f; --lacc: #3b4a8f; --lgap: 16px;
+  display: flex; min-height: 100vh; font-size: 15.5px; line-height: 1.6; color: var(--ink);
+}
+.L * { border-radius: 0; }
+.L button { font: inherit; border: 0; background: none; cursor: pointer; padding: 0; color: inherit; }
+.L button[disabled] { cursor: not-allowed; }
+
+/* 왼쪽 메뉴 · 머리 띠 */
+.L .lnav { width: 224px; flex: none; background: var(--lk); display: flex; flex-direction: column; padding: 22px 12px; height: 100vh; position: sticky; top: 0; }
+.L .lbrand { color: #fff; font-size: 18px; font-weight: 800; padding: 0 12px 24px; border-left: 3px solid #9aa3b5; margin-left: 4px; display: flex; align-items: baseline; gap: 8px; }
+.L .lbrand span { font-size: 13px; color: #a9adb3; font-weight: 600; }
+.L .lnav a { display: flex; align-items: center; height: 46px; padding: 0 14px; border-radius: 2px; color: #d5d7da; font-size: 16px; font-weight: 600; cursor: pointer; }
+.L .lnav a:hover { background: var(--lk2); }
+.L .lnav a.on { background: #34383d; color: #fff; font-weight: 800; }
+.L .lnav a .c { margin-left: auto; min-width: 22px; height: 22px; padding: 0 7px; background: #4a4e54; color: #fff; border-radius: 2px; font-size: 12.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.L .lnav .who { margin-top: auto; padding: 12px 10px; border-top: 1px solid #3a3d42; color: #d5d7da; font-size: 14px; }
+.L .lnav .who b { display: block; font-size: 15px; }
+.L .lnav .who span { color: #a9adb3; }
+.L .lmain { flex: 1; min-width: 0; background: var(--lb); padding-bottom: 28px; position: relative; }
+.L .lbar { height: 64px; background: #fff; border-bottom: 1px solid var(--lline); display: flex; align-items: center; gap: 14px; padding: 0 30px; }
+.L .lbar h2 { margin: 0; font-size: 22px; font-weight: 800; letter-spacing: -0.3px; }
+.L .lbar .dt { font-size: 15px; color: var(--lsub); }
+.L .lbar .sp { flex: 1; }
+.L .lcrumb { font-size: 15px; color: var(--lsub); }
+.L .lcrumb a { color: var(--ink); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+
+/* 요약 숫자 칸 · 제목 붙은 표 구역 */
+.L .ltiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; padding: 20px 28px 0; }
+.L .ltiles.four { grid-template-columns: repeat(4, 1fr); }
+.L .ltiles div { background: #fff; border: 1px solid var(--lline); padding: 18px 20px; }
+.L .ltiles b { display: block; font-size: 30px; font-weight: 800; line-height: 1.2; }
+.L .ltiles b.acc { color: var(--lacc); }
+.L .ltiles span { font-size: 15px; color: var(--lsub); }
+.L .lsect { margin: var(--lgap) 28px 0; background: #fff; border: 1px solid var(--lline); }
+.L .lsect-h { display: flex; align-items: baseline; gap: 10px; font-size: 16.5px; font-weight: 800; padding: 16px 18px 6px; }
+.L .lsect-h .c { font-size: 14.5px; font-weight: 600; color: var(--lsub); }
+.L .lsect-h .lnote { margin-left: auto; font-size: 13.5px; font-weight: 500; color: var(--lsub); } /* D-642 E 칸 머리 오른쪽 작은 안내 */
+.L .lgrid32 { display: grid; grid-template-columns: minmax(min-content, 1fr) minmax(0, 330px); gap: var(--lgap); margin: 0 28px; align-items: start; }
+.L .lgrid32 .lsect, .L .lgrid2 .lsect { margin: var(--lgap) 0 0; }
+.L .lgrid2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--lgap); margin: 0 28px; align-items: start; }
+/* D-642 R2: 좁은 창(1000px 안팎)에서 표 · 블록이 흰 바탕 밖으로 넘침 → 두 칸은 한 칸으로 쌓고, 그래도 넓은 표는 흰 칸 안에서 옆으로 밂 */
+.L .lsect { min-width: 0; overflow-x: auto; }
+@media (max-width: 1240px) {
+  .L .lgrid32, .L .lgrid2 { grid-template-columns: minmax(0, 1fr); }
+}
+.L .lt { width: 100%; border-collapse: collapse; }
+.L .lt th { text-align: left; color: var(--lsub); font-size: 14.5px; font-weight: 600; padding: 12px 18px; border-bottom: 1px solid var(--lline); white-space: nowrap; }
+.L .lt td { padding: 16px 18px; font-size: 16px; border-bottom: 1px solid #e6e6e6; white-space: nowrap; }
+.L .lt tr:last-child td { border-bottom: 0; }
+/* D-663 S4: 사전 점검 줄은 눌러서 아래 자세히 */
+.L .lt tr.pck-r { cursor: pointer; }
+.L .lt tr.pck-x td { white-space: normal; padding: 10px 18px 14px; font-size: 14.5px; color: var(--lsub); background: #fafafa; }
+.L .lt tr.pck-x .pck-xl { line-height: 1.6; }
+.L .lt tr.pck-x .pcb { font-size: 14px; padding: 4px 0; }
+.L .lt td.n, .L .lt th.n { text-align: right; font-variant-numeric: tabular-nums; }
+.L .lt td.r { text-align: right; }
+/* D-637 F10: 확정 원인 칸이 남는 폭을 쓰고 넘치면 … — 작성 · 확정 칸이 화면 밖으로 나가지 않음 */
+.L .lt td.cause { width: 100%; max-width: 0; overflow: hidden; text-overflow: ellipsis; }
+/* D-642 R2: 한 줄 값(서버 줄)은 짧아 좁은 창에서는 칸 안에서 줄바꿈해 다 보임 */
+.L .lt td.cause { white-space: normal; overflow-wrap: anywhere; }
+.L .lt td.w { white-space: normal; }
+.L .lt td .m { font-size: 13.5px; color: var(--lsub); margin-top: 2px; }
+.L .lt tr.pick { cursor: pointer; }
+.L .lt tr.pick:hover td { background: #fafafa; }
+.L .lt tr.lsm td { padding: 10px 18px; }
+.L .lnone { color: var(--lsub); font-size: 15.5px; padding: 22px 18px !important; }
+.L .lempty { padding: 56px 0; text-align: center; color: var(--lsub); font-size: 16px; }
+.L .lmore { border-top: 1px solid #e6e6e6; padding: 10px 18px; text-align: right; }
+.L .ltx { font-size: 15px; font-weight: 700; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.L .lscroll { overflow: auto; }
+
+/* 글자 버튼 · 상태 칸 */
+.L .lbtn { display: inline-flex; align-items: center; justify-content: center; height: 44px; padding: 0 18px; border-radius: 2px; font-size: 15.5px; font-weight: 700; background: var(--lacc); color: #fff; white-space: nowrap; }
+.L .lbtn:hover { background: #2f3c75; }
+.L .lbtn.g { background: #fff; color: var(--ink); box-shadow: inset 0 0 0 1.5px #9a9ea4; }
+.L .lbtn.g:hover { background: var(--lb); }
+.L .lbtn.r { background: #fff; color: #b42318; box-shadow: inset 0 0 0 1.5px #9a9ea4; }
+.L .lbtn.sm { height: 36px; padding: 0 14px; font-size: 14px; }
+.L .lbtn.full { width: 100%; }
+.L .lbtn[disabled] { background: #e3e3e3; color: #8a8d92; box-shadow: none; }
+.L .tx { display: inline-flex; align-items: center; height: 26px; padding: 0 10px; border-radius: 2px; font-size: 13.5px; font-weight: 700; background: #f0f0ef; color: var(--lsub); white-space: nowrap; }
+.L .tx.ok { background: #eaf3ec; color: #2e6b3f; }
+.L .tx.warn { background: #f6efe3; color: #7a5212; }
+.L .tx.bad { background: #f8e9e7; color: #b42318; }
+
+/* 확인 창 */
+.L .dim { position: fixed; inset: 0; background: rgba(20, 20, 20, 0.35); z-index: 20; }
+.L .lmdl { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 480px; background: #fff; border: 1px solid #9a9ea4; padding: 26px; z-index: 21; }
+.L .lmdl h4 { margin: 0; font-size: 19px; font-weight: 800; line-height: 1.45; }
+.L .lmdl label { display: block; font-size: 14px; font-weight: 700; color: #3a4354; margin: 16px 0 6px; }
+.L .lmdl textarea, .L .lta { display: block; width: 100%; min-height: 84px; border: 1.5px solid #9a9ea4; padding: 10px 12px; resize: none; font: inherit; font-size: 15px; color: var(--ink); background: #fff; }
+.L .lmdl textarea:focus, .L .lta:focus { outline: 2px solid var(--lacc); border-color: transparent; }
+.L .lmdl .mb { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+.L .lmdl .mb .lbtn { height: 48px; }
+.L .lmdl .vt { width: 100%; border-collapse: collapse; margin-top: 12px; }
+.L .lmdl .vt td { padding: 10px 12px; font-size: 15px; border-top: 1px solid #e6e6e6; border-bottom: 1px solid #e6e6e6; }
+.L .lmdl .vt td:first-child { width: 88px; color: var(--lsub); }
+.L .lerr { margin-top: 12px; padding: 10px 12px; background: #f8e9e7; color: #b42318; font-size: 14.5px; }
+.L .lerr b { display: block; }
+
+/* 권한 등급 · 감사 기록 · 호출 답하기 */
+.L .gl { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 2px; font-size: 13.5px; font-weight: 800; color: #fff; background: #3d4045; }
+.L .lseg { display: inline-flex; gap: 4px; }
+.L .lseg button { width: 34px; height: 30px; border-radius: 2px; font-size: 14px; font-weight: 800; color: var(--lsub); box-shadow: inset 0 0 0 1px #c9cbce; background: #fff; }
+.L .lseg button:hover { box-shadow: inset 0 0 0 1.5px var(--ink); color: var(--ink); }
+.L .lseg button.on { background: #3d4045; color: #fff; box-shadow: none; }
+.L .lchips { display: flex; gap: 6px; }
+.L .lchips button { height: 36px; padding: 0 14px; border-radius: 2px; font-size: 14px; font-weight: 700; color: #3a4354; box-shadow: inset 0 0 0 1.5px #c9cbce; background: #fff; }
+.L .lchips button.on { background: #3d4045; color: #fff; box-shadow: none; }
+.L .gsplit { display: grid; grid-template-columns: 1fr 296px; gap: var(--lgap); margin: var(--lgap) 28px 0; align-items: start; }
+.L .gsplit .lsect { margin: 0; }
+.L .lsec { font-size: 15px; font-weight: 800; padding: 12px 18px 4px; }
+.L .lact div { display: grid; grid-template-columns: 50px 1fr; gap: 8px; padding: 4px 18px; font-size: 15px; }
+.L .lact span { color: var(--lsub); font-variant-numeric: tabular-nums; }
+.L .lkv { padding: 6px 18px 10px; }
+.L .lkv div { display: grid; grid-template-columns: 76px 1fr; gap: 10px; padding: 6px 0; font-size: 15px; border-bottom: 1px solid #e6e6e6; }
+.L .lkv div:last-child { border-bottom: 0; }
+.L .lkv span:not(.gl) { color: var(--lsub); } /* .gl(검정 네모 흰 글자)은 덮지 않음 — 답장 001-zzx 자 */
+.L .rhd { display: flex; align-items: center; gap: 12px; padding: 20px 30px 0; }
+.L .rhd h2 { margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -0.3px; }
+.L .rsub { padding: 4px 30px 0; font-size: 15px; color: var(--lsub); }
+.L .cgrid { display: grid; grid-template-columns: 1fr 410px; gap: var(--lgap); margin: var(--lgap) 28px 0; align-items: stretch; }
+.L .cgrid .lsect { margin: 0; }
+.L .lsum { padding: 4px 18px 14px; font-size: 16px; line-height: 1.85; white-space: pre-wrap; }
+.L .lopts { display: flex; flex-direction: column; gap: 8px; padding: 4px 18px 0; }
+.L .lopts button { display: flex; align-items: center; gap: 12px; height: 52px; padding: 0 16px; text-align: left; font-size: 16px; font-weight: 700; box-shadow: inset 0 0 0 1px #c9cbce; background: #fff; }
+.L .lopts button i { width: 20px; height: 20px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px #9a9ea4; flex: none; }
+.L .lopts button.on { box-shadow: inset 0 0 0 2px var(--ink); }
+.L .lopts button.on i { box-shadow: inset 0 0 0 6px var(--ink); }
+.L .lopts button[disabled] { color: #8a8d92; }
+.L .llab { display: block; font-size: 14px; font-weight: 700; color: #3a4354; margin: 16px 0 6px; }
+.L .lcorr { margin: 0 18px 14px; padding: 12px 14px; background: #f6efe3; color: #4a3510; font-size: 15px; }
+.L .lcorr b { display: block; }
+
+/* 로그인(두 앱 같은 틀 · 파트장은 각지게) */
+.L.lg { align-items: center; justify-content: center; background: var(--lb); }
+.L .lg-card { width: 400px; background: #fff; border: 1px solid var(--lline); padding: 34px 32px; }
+.L .lg-b { font-size: 18px; font-weight: 800; display: flex; align-items: baseline; gap: 8px; }
+.L .lg-b span { font-size: 13px; color: var(--lsub); font-weight: 600; }
+.L .lg-card h2 { margin: 18px 0 10px; font-size: 22px; font-weight: 800; }
+.L .lg-card label { display: block; font-size: 14px; font-weight: 700; color: #3a4354; margin: 14px 0 6px; }
+.L .lg-card input { display: block; width: 100%; height: 46px; border: 1.5px solid #9a9ea4; padding: 0 12px; font: inherit; font-size: 16px; }
+.L .lg-card input:focus { outline: 2px solid var(--lacc); border-color: transparent; }
+.L .lg-card input.err { border-color: #b42318; }
+.L .lg-card .lbtn { margin-top: 22px; height: 48px; }
+.L .lwarn { margin-top: 14px; padding: 12px 14px; background: #f6efe3; color: #4a3510; font-size: 14.5px; line-height: 1.6; }
+.L .lwarn.raise { background: #f0f0ef; color: var(--ink); }
+.L .lwarn b { display: block; }
+.L .lflt { display: flex; gap: 8px; margin: var(--lgap) 28px 0; }
+.L .lsel { position: relative; display: inline-flex; align-items: center; height: 36px; padding: 0 14px; background: #fff; box-shadow: inset 0 0 0 1.5px #c9cbce; font-size: 14.5px; font-weight: 600; cursor: pointer; }
+.L .lsel .dd { position: absolute; left: 0; top: 38px; min-width: 160px; background: #fff; border: 1px solid #9a9ea4; z-index: 10; }
+.L .lsel .dd div { padding: 8px 14px; font-weight: 500; }
+.L .lsel .dd div:hover, .L .lsel .dd div.on { background: var(--lb); font-weight: 700; }

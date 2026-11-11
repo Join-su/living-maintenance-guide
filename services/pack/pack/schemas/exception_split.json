@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ExceptionSplit",
+  "description": "예외 칸 AI 나눔 node(split_exception)의 LLM 출력 — 예외 하나: 주제 하나 + 점검 목록 + 조치 목록(약속 v10 · D-566). 꼴 검사 · 거르기는 다음 node custom.split:finish",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "exception"
+  ],
+  "properties": {
+    "exception": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "topic",
+        "checks",
+        "actions"
+      ],
+      "properties": {
+        "topic": {
+          "type": "string"
+        },
+        "checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "what",
+              "how",
+              "criteria",
+              "minutes",
+              "instruction"
+            ],
+            "properties": {
+              "what": {
+                "type": "string"
+              },
+              "how": {
+                "type": "string"
+              },
+              "criteria": {
+                "type": "string"
+              },
+              "minutes": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "instruction": {
+                "type": "string",
+                "description": "D-642 C: 이 줄을 시키는 한 문장(무엇을 · 어떻게 · 판정 기준 · 글에 없는 값 0)"
+              }
+            }
+          }
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "what",
+              "parts",
+              "minutes",
+              "instruction"
+            ],
+            "properties": {
+              "what": {
+                "type": "string"
+              },
+              "parts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "minutes": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "instruction": {
+                "type": "string",
+                "description": "D-642 C: 이 줄을 시키는 한 문장(무엇을 · 어떻게 · 판정 기준 · 글에 없는 값 0)"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

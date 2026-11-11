@@ -1,0 +1,14 @@
+{
+ "base_score": 0.5,
+ "call_threshold": 50,
+ "check_first_cl": "none",
+ "check_first_ld": "none",
+ "check_first_pw": "none",
+ "check_first_tw": "none",
+ "manual_weight": 0.3,
+ "near_min": 0.8,
+ "order_signal": "count_equipment",
+ "query_text": "group_direction",
+ "score_rule": "rank_weighted",
+ "use_manual": false
+}

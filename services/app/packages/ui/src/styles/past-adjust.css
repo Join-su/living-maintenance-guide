@@ -1,0 +1,14 @@
+/* 표시 조정 ③(G3 승인 · 생성자 해석 ④ · 결정 012, CO-38): B 점검 기록의 지난 화면(T15 / check_b — B 기록일 때의 check_current ·
+   corrected · closed 포함)에서만. 값은 Coding Plan P-15 compiled_product_contract(표시 조정 ③)의 값 그대로다:
+   체크 행 32px → 20px, 체크 · 절차 글자 15px → 14px, 패널 여백 8px → 4px, 절차 행 여백 · 간격 6px → 2px,
+   지시 머리 · 판정 기준 줄 여백 축소, .act.pre > .sm 13px · margin 0, .ck 위아래 padding 1px, .proc li line-height 1.3,
+   패널 margin 4px 0 6px. 지시 화면(T06)과 다른 지난 화면에는 걸지 않는다(:has(.act.pre)는 B 기록 지난 화면에만 있다). */
+.ap-body.past:has(.act.pre) .act.pre { padding: 4px 14px; margin: 4px 0 6px; }
+.ap-body.past:has(.act.pre) .act.pre > .sm { font-size: 13px; margin: 0; }
+.ap-body.past:has(.act.pre) .act.pre .ck { min-height: 20px; padding-top: 1px; padding-bottom: 1px; font-size: 14px; }
+.ap-body.past:has(.act.pre) .proc { gap: 2px; }
+.ap-body.past:has(.act.pre) .proc li { padding-top: 2px; padding-bottom: 2px; font-size: 14px; line-height: 1.3; }
+.ap-body.past:has(.act.pre) .ins-h { margin-bottom: 4px; }
+.ap-body.past:has(.act.pre) .hint { margin-top: 4px; margin-bottom: 4px; }
+/* 체크 행 20px을 지키려면 상자(24px)도 줄여야 한다 — 이 화면에서만 18px(값 출처는 위 '체크 행 20px', L0 해석) */
+.ap-body.past:has(.act.pre) .act.pre .ck .cb { width: 18px; height: 18px; }

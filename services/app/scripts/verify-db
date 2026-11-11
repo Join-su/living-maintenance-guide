@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# 실제 PostgreSQL(pgvector) 시험 DB로 migration 왕복 · 적재 · 저장값을 확인한다. 시험 DB는 매번 새로 만들고 지운다.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+export COMPOSE_PROJECT_NAME=c1a15-test DB_HOST_PORT="${DB_HOST_PORT:-55433}"
+gen() { python3 -c 'import secrets; print(secrets.token_urlsafe(16))'; }
+export POSTGRES_PASSWORD="$(gen)" C1A15_TECH_PASSWORD="$(gen)" C1A15_LEAD_PASSWORD="$(gen)" C1A15_INTERNAL_TOKEN="$(gen)"
+trap 'docker compose down -v --remove-orphans >/dev/null 2>&1 || true' EXIT
+docker compose down -v --remove-orphans >/dev/null 2>&1 || true  # 이름 volume(D-335): 앞 실행이 남긴 이 시험 project 자료를 비우고 시작
+docker compose up -d --wait db
+export DATABASE_URL="postgresql+psycopg://c1a15:${POSTGRES_PASSWORD}@127.0.0.1:${DB_HOST_PORT}/c1a15"
+(cd server && uv run --frozen pytest -q -m db)
+echo "verify-db: pass"

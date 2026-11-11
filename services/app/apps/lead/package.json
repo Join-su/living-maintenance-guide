@@ -1,0 +1,16 @@
+{
+  "name": "@c1a15/lead",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@c1a15/ui": "0.1.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  }
+}

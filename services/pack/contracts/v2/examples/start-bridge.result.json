@@ -1,0 +1,77 @@
+{
+  "decision": {
+    "probabilities": {
+      "CL-1": 82,
+      "CL-2": 6,
+      "CL-3": 6,
+      "CL-4": 6
+    },
+    "evidence": {
+      "CL-1": 10,
+      "CL-2": 0,
+      "CL-3": 0,
+      "CL-4": 0
+    },
+    "low_evidence": false,
+    "kind": "lock",
+    "section": "1.2"
+  },
+  "similar": [
+    {
+      "record_id": "H-0226",
+      "cause": "CL-1",
+      "score": 0.79747663363109
+    },
+    {
+      "record_id": "H-0241",
+      "cause": "CL-1",
+      "score": 0.7516223859914211
+    },
+    {
+      "record_id": "H-0162",
+      "cause": "CL-1",
+      "score": 0.7132335527791197
+    },
+    {
+      "record_id": "H-0158",
+      "cause": "CL-1",
+      "score": 0.7077783336969297
+    },
+    {
+      "record_id": "H-0202",
+      "cause": "CL-1",
+      "score": 0.6703958047311664
+    },
+    {
+      "record_id": "H-0167",
+      "cause": "CL-1",
+      "score": 0.6452342728698082
+    },
+    {
+      "record_id": "H-0157",
+      "cause": "CL-1",
+      "score": 0.6155362688936843
+    },
+    {
+      "record_id": "H-0171",
+      "cause": "CL-1",
+      "score": 0.6148098980256612
+    },
+    {
+      "record_id": "H-0184",
+      "cause": "CL-1",
+      "score": 0.5327101056734955
+    },
+    {
+      "record_id": "H-0222",
+      "cause": "CL-1",
+      "score": 0.4834580145192742
+    }
+  ],
+  "retrieval": {
+    "source": "request",
+    "vector_db_version": null,
+    "query_from": null,
+    "top_k": 10
+  }
+}

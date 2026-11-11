@@ -1,0 +1,106 @@
+{
+ "boundary_rows": {
+  "split_file": "generation/split/ai4i-split-by-udi.csv",
+  "split_file_sha256": "1929f57ea68b21bbdc90c8532ca27c3014e4ddc32b1b9cfeed68484e9e4bf376",
+  "split": "train",
+  "rows": 5735
+ },
+ "placement": {
+  "rotation_offset": 2989,
+  "hot_spell_center_udi": "4491",
+  "machines": 20,
+  "year": 2026,
+  "rule": "행 순서 유지, 시작점 이동, 설비 = 위치 % 20 + 1",
+  "minutes_per_row": 52.56
+ },
+ "priority": [
+  "PW",
+  "CL",
+  "LD",
+  "TW"
+ ],
+ "rules": [
+  {
+   "group": "PW",
+   "sensor": "기계 출력",
+   "key": "power",
+   "unit": "W",
+   "boundaries": {
+    "low": 4189,
+    "high": 8403
+   }
+  },
+  {
+   "group": "CL",
+   "sensor": "온도 차",
+   "key": "temp_diff",
+   "unit": "K",
+   "boundaries": {
+    "low": 8.2
+   }
+  },
+  {
+   "group": "LD",
+   "sensor": "토크",
+   "key": "torque",
+   "unit": "Nm",
+   "boundaries": {
+    "high": 60.1
+   }
+  },
+  {
+   "group": "TW",
+   "sensor": "공구 마모 시간",
+   "key": "wear",
+   "unit": "분",
+   "boundaries": {
+    "high": 215.0
+   }
+  }
+ ],
+ "train_alarms": {
+  "TW": 118,
+  "PW": 286,
+  "CL": 122,
+  "LD": 34
+ },
+ "normal_ranges": {
+  "air_temperature_k": {
+   "low": 296.7,
+   "high": 303.8
+  },
+  "process_temperature_k": {
+   "low": 307.4,
+   "high": 312.8
+  },
+  "rotational_speed_rpm": {
+   "low": 1308.0,
+   "high": 1981.0
+  },
+  "torque_nm": {
+   "low": 20.3,
+   "high": 60.1
+  },
+  "tool_wear_min": {
+   "low": 4.0,
+   "high": 215.0
+  },
+  "temp_diff_k": {
+   "low": 8.2,
+   "high": 11.5
+  },
+  "power_w": {
+   "low": 4189,
+   "high": 8403
+  }
+ },
+ "train_std": {
+  "air_temperature_k": 1.8317,
+  "process_temperature_k": 1.4152,
+  "rotational_speed_rpm": 177.7222,
+  "torque_nm": 9.9637,
+  "tool_wear_min": 63.6363,
+  "temp_diff_k": 0.9464,
+  "power_w": 1071.0638
+ }
+}

@@ -1,0 +1,9 @@
+{
+ "version": "auto-v1",
+ "note": "EV-030 CHG-151: the automatic diagnosis rubric by node kind (D-90 — only nodes whose meaning has to be read). Item names are shown with ✓/✗ on the 피드백 · 검토 tab; the judge reads the node's expect.text, input and output. A new wording is a new version (results record the version).",
+ "kinds": {
+  "retrieve": [{"name": "찾아야 할 근거를 찾았나"}, {"name": "근거로 쓸 만한가"}],
+  "validate": [{"name": "규칙대로 판정했나"}],
+  "llm": [{"name": "입력에 맞는 출력인가"}, {"name": "근거 밖 내용이 없나"}]
+ }
+}

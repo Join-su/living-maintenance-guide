@@ -1,0 +1,64 @@
+{
+ "backend": "flat-local",
+ "build_sha256": "c65101474b30649491c485fe7aaf4374f379aee1a3227f4496d84e99e7fdeef9",
+ "builder": {
+  "name": "packrt.index",
+  "version": 1
+ },
+ "chunks": 3,
+ "corpus_release": {
+  "id": "hc-h0-history-v1",
+  "sha256": "ecf73090905c9f6c2863a017c1a0a8869633190b34e49d3372ea0e4fa7306774"
+ },
+ "documents": 3,
+ "embedding": {
+  "dim": 64,
+  "mode": "fake",
+  "model": "text-embedding-3-small",
+  "provider": "openai"
+ },
+ "files": {
+  "chunks.jsonl": "25b646a2e78dcb9710cb5712238c29b539091d1b59d2c94947c93664089dd4ef",
+  "vectors.json": "493cbe4999c6edf3c8dadc02a2cef4bb810223fa8707e23a93b41a531a068a4d"
+ },
+ "index_recipe": {
+  "chunk_size": null,
+  "chunker": null,
+  "chunker_sha256": null,
+  "metadata": [
+   "source",
+   "symptom_group",
+   "tool_wear_min",
+   "torque_nm"
+  ],
+  "overlap": 0,
+  "rerank_norm": {
+   "fields": [
+    "torque_nm",
+    "tool_wear_min"
+   ],
+   "from": {
+    "source": "generated"
+   }
+  },
+  "split": "record"
+ },
+ "index_recipe_sha256": "6629b5669a712c7fccee6fb6bffb6d71b5030c7bf31ac84f02681a36ab1f02d8",
+ "index_sha256": "70c5d7326c33faa209cf19836376fbd785a57d2e9adb2a8c47c808bef9c1270d",
+ "kind": "index",
+ "parent_release": null,
+ "release_id": "ir-history-c6510147",
+ "rerank_norm": {
+  "tool_wear_min": {
+   "mean": 160.0,
+   "n": 3,
+   "std": 57.154761
+  },
+  "torque_nm": {
+   "mean": 47.233333,
+   "n": 3,
+   "std": 10.855516
+  }
+ },
+ "store": "history"
+}

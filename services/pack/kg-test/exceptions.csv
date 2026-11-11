@@ -1,0 +1,6 @@
+id,name,rel,where,at_least,then,basis
+R1,공급 냉각수,same_line,,2,X1,"같은 라인 다른 설비 2대 이상이 창 안에 먼저 울림(자기 포함 3대 이상) → 설비 밖 공급 쪽 문제"
+R2,센서 이상,self,rotational_speed_rpm>=1450,1,X3,"온도 차만 경계 아래이고 회전수는 정상 → 센서가 잘못 읽음"
+R3,연쇄,machine_work,kind=deferred;age_days>=14;age_days<=21,1,C2,"필터 교체를 미루고 2 ~ 3주 뒤 같은 설비 알람 → 냉각 팬 열화"
+R4,직전 정비,machine_work,kind=replace;age_days<=3,1,X2,"부품 교체 뒤 3일 안 같은 설비 알람 → 조립 불량"
+R5,계절,self,season=@,1,분포,"같은 계절 원인 분포"

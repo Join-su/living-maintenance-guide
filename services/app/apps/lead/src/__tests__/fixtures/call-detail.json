@@ -1,0 +1,29 @@
+{
+ "call_id": 14,
+ "kind": "approval",
+ "equipment_id": "M-05",
+ "group_name": "온도 차 저하",
+ "sent_at": "2026-10-13T12:40:43.589832+00:00",
+ "section": "4.4",
+ "grade": "C",
+ "summary": "M-05 온도 차 저하(21:40). 흡기 필터 육안 점검 · 냉각 설정값 확인 점검 정상. 1순위 후보 냉각 팬 열화(50%), 확인에 냉각 팬 분해 점검(4.4절, C등급) 필요. 설비는 정지 상태로 대기 중.",
+ "options": [
+  {
+   "value": "approved",
+   "label": "승인 후 진행",
+   "hint": "정비자 앱에 그 C등급 점검 지시가 열립니다"
+  },
+  {
+   "value": "daytime",
+   "label": "주간 처리",
+   "hint": "저부하 감시 운전, 보고서 미확인 · 요청에 기록"
+  },
+  {
+   "value": "direct",
+   "label": "직접 확인",
+   "hint": "설비 정지 대기, 처리 결과를 보고서에 기록"
+  }
+ ],
+ "answered": false,
+ "answer": null
+}

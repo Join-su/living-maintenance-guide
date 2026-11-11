@@ -1,0 +1,8 @@
+# 평가 suite v4 = v3 데이터 13 case(바이트 그대로) + 기대값 보강(c1a15-eval D-470 ①): 모든 줄 rule 이름 · ⑧ 다듬음(not_equals) · ⑨ 미해결 섞임 없음 · ⑩ 바꿔 쓴 ID 없음(not_contains_any) · RF ⑦ 원문 대체 또는 밖 ID 없음(any_of)
+# 검사 꼴 not_equals · not_contains_any · any_of = LLMOps suites.check(리드 bea14c6). RF04 ~ RF06 초안의 '(참고 기록 H-xxxx)'는 앱 초안에 없는 시험 꼴(v3와 같음) · 가짜 길(초안 되풀이)은 ⑧에서 떨어지는 것이 맞음
+suite: c1a15_report_confirm_v4
+split: holdout
+graph: run
+dataset: dataset.jsonl
+expectations: expectations.jsonl
+review_policy: {default: fixture, missing_fixture: stop_before}

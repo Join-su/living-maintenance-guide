@@ -1,0 +1,55 @@
+{
+ "S01": [
+  "decision.probabilities",
+  "preview.grade",
+  "preview.graph",
+  "preview.kind",
+  "preview.probabilities",
+  "preview.reason",
+  "preview.reason_facts",
+  "preview.relation",
+  "preview.section",
+  "preview.unable_before",
+  "exception_guide"
+ ],
+ "S02": [
+  "decision.probabilities",
+  "preview.probabilities",
+  "preview.reason_facts"
+ ],
+ "S03": [
+  "decision.probabilities",
+  "preview.cause",
+  "preview.grade",
+  "preview.kind",
+  "preview.probabilities",
+  "preview.reason",
+  "preview.reason_facts",
+  "preview.section",
+  "preview.unable_before"
+ ],
+ "S04": [
+  "decision.probabilities",
+  "preview.probabilities",
+  "preview.reason_facts"
+ ],
+ "S05": [
+  "decision.probabilities",
+  "preview.probabilities",
+  "preview.reason_facts"
+ ],
+ "S06": [],
+ "S07": [
+  "decision.probabilities",
+  "preview.cause",
+  "preview.probabilities",
+  "preview.reason_facts",
+  "preview.section"
+ ],
+ "S08": [],
+ "S09": [
+  "decision.probabilities",
+  "preview.probabilities"
+ ],
+ "S10": []
+}

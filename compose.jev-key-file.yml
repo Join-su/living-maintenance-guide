@@ -1,0 +1,10 @@
+# Optional: give the Jev key (quality review model) by file path instead of writing it into .env — the same way as compose.key-file.yml.
+#   in .env: COMPOSE_FILE=docker-compose.yml:compose.jev-key-file.yml (or …:compose.key-file.yml:compose.jev-key-file.yml with both) and
+#   JEV_KEY_FILE=<absolute path>, then docker compose up -d (in .env, not on one command line — the scripts restart containers; guide 11)
+# The file holds a line TYPESAFE_API_KEY=… or JEV_API_KEY=… (or only the key). It is mounted read-only; agentops' start script reads it.
+services:
+  agentops:
+    secrets: [jev_key]
+secrets:
+  jev_key:
+    file: ${JEV_KEY_FILE:?JEV_KEY_FILE — Jev 키 파일 경로}

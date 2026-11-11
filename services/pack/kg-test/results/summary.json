@@ -1,0 +1,452 @@
+{
+ "1 매뉴얼만": {
+  "E1": {
+   "called": null,
+   "first": 0.133,
+   "loaded": 14.0,
+   "n": 15,
+   "outside_n": 0,
+   "precision": 0.143,
+   "recall": 1.0,
+   "touched": null,
+   "violations": 0
+  },
+  "E2": {
+   "called": 1.0,
+   "first": 0.0,
+   "loaded": 14.0,
+   "n": 13,
+   "outside_n": 13,
+   "precision": 0.071,
+   "recall": 1.0,
+   "touched": 1.0,
+   "violations": 0
+  },
+  "E3": {
+   "called": null,
+   "first": 0.0,
+   "loaded": 14.0,
+   "n": 13,
+   "outside_n": 0,
+   "precision": 0.143,
+   "recall": 1.0,
+   "touched": null,
+   "violations": 0
+  },
+  "E4": {
+   "called": 1.0,
+   "first": 0.0,
+   "loaded": 14.0,
+   "n": 13,
+   "outside_n": 13,
+   "precision": 0.071,
+   "recall": 1.0,
+   "touched": 1.0,
+   "violations": 0
+  },
+  "E5": {
+   "called": 1.0,
+   "first": 0.0,
+   "loaded": 14.0,
+   "n": 13,
+   "outside_n": 13,
+   "precision": 0.143,
+   "recall": 1.0,
+   "touched": 1.0,
+   "violations": 0
+  },
+  "all": {
+   "called": 1.0,
+   "first": 0.07,
+   "loaded": 14.0,
+   "n": 100,
+   "outside_n": 39,
+   "precision": 0.124,
+   "recall": 1.0,
+   "touched": 1.0,
+   "violations": 0
+  },
+  "mixed": {
+   "called": null,
+   "first": 0.231,
+   "loaded": 14.0,
+   "n": 13,
+   "outside_n": 0,
+   "precision": 0.143,
+   "recall": 1.0,
+   "touched": null,
+   "violations": 0
+  },
+  "normal": {
+   "called": null,
+   "first": 0.1,
+   "loaded": 14.0,
+   "n": 20,
+   "outside_n": 0,
+   "precision": 0.143,
+   "recall": 1.0,
+   "touched": null,
+   "violations": 0
+  }
+ },
+ "2 유사도(지금 꼴)": {
+  "E1": {
+   "called": null,
+   "first": 0.133,
+   "loaded": 2.133,
+   "n": 15,
+   "outside_n": 0,
+   "precision": 0.133,
+   "recall": 0.133,
+   "touched": null,
+   "violations": 0
+  },
+  "E2": {
+   "called": 0.231,
+   "first": 0.0,
+   "loaded": 2.231,
+   "n": 13,
+   "outside_n": 13,
+   "precision": 0.077,
+   "recall": 0.231,
+   "touched": 1.0,
+   "violations": 0
+  },
+  "E3": {
+   "called": null,
+   "first": 0.0,
+   "loaded": 2.077,
+   "n": 13,
+   "outside_n": 0,
+   "precision": 0.0,
+   "recall": 0.0,
+   "touched": null,
+   "violations": 0
+  },
+  "E4": {
+   "called": 0.0,
+   "first": 0.0,
+   "loaded": 2.077,
+   "n": 13,
+   "outside_n": 13,
+   "precision": 0.0,
+   "recall": 0.0,
+   "touched": 1.0,
+   "violations": 0
+  },
+  "E5": {
+   "called": 0.0,
+   "first": 0.0,
+   "loaded": 2.0,
+   "n": 13,
+   "outside_n": 13,
+   "precision": 0.0,
+   "recall": 0.0,
+   "touched": 1.0,
+   "violations": 0
+  },
+  "all": {
+   "called": 0.077,
+   "first": 0.07,
+   "loaded": 2.11,
+   "n": 100,
+   "outside_n": 39,
+   "precision": 0.077,
+   "recall": 0.1,
+   "touched": 1.0,
+   "violations": 0
+  },
+  "mixed": {
+   "called": null,
+   "first": 0.231,
+   "loaded": 2.154,
+   "n": 13,
+   "outside_n": 0,
+   "precision": 0.205,
+   "recall": 0.231,
+   "touched": null,
+   "violations": 0
+  },
+  "normal": {
+   "called": null,
+   "first": 0.1,
+   "loaded": 2.1,
+   "n": 20,
+   "outside_n": 0,
+   "precision": 0.1,
+   "recall": 0.1,
+   "touched": null,
+   "violations": 0
+  }
+ },
+ "2′ 유사도(재정렬 범위 전체)": {
+  "E1": {
+   "called": null,
+   "first": 0.333,
+   "loaded": 2.667,
+   "n": 15,
+   "outside_n": 0,
+   "precision": 0.478,
+   "recall": 0.6,
+   "touched": null,
+   "violations": 0
+  },
+  "E2": {
+   "called": 0.154,
+   "first": 0.154,
+   "loaded": 2.923,
+   "n": 13,
+   "outside_n": 13,
+   "precision": 0.051,
+   "recall": 0.154,
+   "touched": 1.0,
+   "violations": 0
+  },
+  "E3": {
+   "called": null,
+   "first": 0.385,
+   "loaded": 2.615,
+   "n": 13,
+   "outside_n": 0,
+   "precision": 0.569,
+   "recall": 0.692,
+   "touched": null,
+   "violations": 0
+  },
+  "E4": {
+   "called": 0.0,
+   "first": 0.0,
+   "loaded": 3.154,
+   "n": 13,
+   "outside_n": 13,
+   "precision": 0.0,
+   "recall": 0.0,
+   "touched": 1.0,
+   "violations": 0
+  },
+  "E5": {
+   "called": 0.538,
+   "first": 0.462,
+   "loaded": 2.154,
+   "n": 13,
+   "outside_n": 13,
+   "precision": 0.5,
+   "recall": 0.538,
+   "touched": 0.538,
+   "violations": 0
+  },
+  "all": {
+   "called": 0.231,
+   "first": 0.26,
+   "loaded": 2.74,
+   "n": 100,
+   "outside_n": 39,
+   "precision": 0.332,
+   "recall": 0.42,
+   "touched": 0.846,
+   "violations": 0
+  },
+  "mixed": {
+   "called": null,
+   "first": 0.231,
+   "loaded": 3.0,
+   "n": 13,
+   "outside_n": 0,
+   "precision": 0.359,
+   "recall": 0.462,
+   "touched": null,
+   "violations": 0
+  },
+  "normal": {
+   "called": null,
+   "first": 0.25,
+   "loaded": 2.7,
+   "n": 20,
+   "outside_n": 0,
+   "precision": 0.342,
+   "recall": 0.45,
+   "touched": null,
+   "violations": 0
+  }
+ },
+ "3 관계 질의 노드(D-533)": {
+  "E1": {
+   "called": null,
+   "first": 0.467,
+   "loaded": 3.333,
+   "n": 15,
+   "outside_n": 0,
+   "precision": 0.422,
+   "recall": 0.6,
+   "touched": null,
+   "violations": 0
+  },
+  "E2": {
+   "called": 1.0,
+   "first": 1.0,
+   "loaded": 1.0,
+   "n": 13,
+   "outside_n": 13,
+   "precision": 1.0,
+   "recall": 1.0,
+   "touched": 0.0,
+   "violations": 0
+  },
+  "E3": {
+   "called": null,
+   "first": 1.0,
+   "loaded": 3.231,
+   "n": 13,
+   "outside_n": 0,
+   "precision": 0.692,
+   "recall": 1.0,
+   "touched": null,
+   "violations": 0
+  },
+  "E4": {
+   "called": 0.0,
+   "first": 0.0,
+   "loaded": 2.615,
+   "n": 13,
+   "outside_n": 13,
+   "precision": 0.0,
+   "recall": 0.0,
+   "touched": 1.0,
+   "violations": 0
+  },
+  "E5": {
+   "called": 1.0,
+   "first": 1.0,
+   "loaded": 2.0,
+   "n": 13,
+   "outside_n": 13,
+   "precision": 1.0,
+   "recall": 1.0,
+   "touched": 0.0,
+   "violations": 0
+  },
+  "all": {
+   "called": 0.667,
+   "first": 0.59,
+   "loaded": 2.71,
+   "n": 100,
+   "outside_n": 39,
+   "precision": 0.527,
+   "recall": 0.65,
+   "touched": 0.333,
+   "violations": 0
+  },
+  "mixed": {
+   "called": null,
+   "first": 0.385,
+   "loaded": 3.077,
+   "n": 13,
+   "outside_n": 0,
+   "precision": 0.372,
+   "recall": 0.462,
+   "touched": null,
+   "violations": 0
+  },
+  "normal": {
+   "called": null,
+   "first": 0.4,
+   "loaded": 3.3,
+   "n": 20,
+   "outside_n": 0,
+   "precision": 0.325,
+   "recall": 0.55,
+   "touched": null,
+   "violations": 0
+  }
+ },
+ "3(옛) 관계 셈(D-531)": {
+  "E1": {
+   "called": null,
+   "first": 0.467,
+   "loaded": 3.333,
+   "n": 15,
+   "outside_n": 0,
+   "precision": 0.422,
+   "recall": 0.6,
+   "touched": null,
+   "violations": 0
+  },
+  "E2": {
+   "called": 1.0,
+   "first": 1.0,
+   "loaded": 1.0,
+   "n": 13,
+   "outside_n": 13,
+   "precision": 1.0,
+   "recall": 1.0,
+   "touched": 0.0,
+   "violations": 0
+  },
+  "E3": {
+   "called": null,
+   "first": 1.0,
+   "loaded": 3.231,
+   "n": 13,
+   "outside_n": 0,
+   "precision": 0.692,
+   "recall": 1.0,
+   "touched": null,
+   "violations": 0
+  },
+  "E4": {
+   "called": 0.077,
+   "first": 0.077,
+   "loaded": 2.231,
+   "n": 13,
+   "outside_n": 13,
+   "precision": 0.026,
+   "recall": 0.077,
+   "touched": 1.0,
+   "violations": 0
+  },
+  "E5": {
+   "called": 1.0,
+   "first": 1.0,
+   "loaded": 2.0,
+   "n": 13,
+   "outside_n": 13,
+   "precision": 1.0,
+   "recall": 1.0,
+   "touched": 0.0,
+   "violations": 0
+  },
+  "all": {
+   "called": 0.692,
+   "first": 0.59,
+   "loaded": 2.63,
+   "n": 100,
+   "outside_n": 39,
+   "precision": 0.527,
+   "recall": 0.66,
+   "touched": 0.333,
+   "violations": 0
+  },
+  "mixed": {
+   "called": null,
+   "first": 0.308,
+   "loaded": 2.846,
+   "n": 13,
+   "outside_n": 0,
+   "precision": 0.351,
+   "recall": 0.462,
+   "touched": null,
+   "violations": 0
+  },
+  "normal": {
+   "called": null,
+   "first": 0.4,
+   "loaded": 3.3,
+   "n": 20,
+   "outside_n": 0,
+   "precision": 0.325,
+   "recall": 0.55,
+   "touched": null,
+   "violations": 0
+  }
+ }
+}

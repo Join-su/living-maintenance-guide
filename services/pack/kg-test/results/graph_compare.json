@@ -1,0 +1,148 @@
+{
+ "graph_queries": 476,
+ "n": 100,
+ "same_rule": 100,
+ "same_steps": 100,
+ "score": {
+  "file": {
+   "E1": {
+    "first": 0.467,
+    "n": 15,
+    "precision": 0.422,
+    "recall": 0.6
+   },
+   "E2": {
+    "first": 1.0,
+    "n": 13,
+    "precision": 1.0,
+    "recall": 1.0
+   },
+   "E3": {
+    "first": 1.0,
+    "n": 13,
+    "precision": 0.692,
+    "recall": 1.0
+   },
+   "E4": {
+    "first": 0.0,
+    "n": 13,
+    "precision": 0.0,
+    "recall": 0.0
+   },
+   "E5": {
+    "first": 1.0,
+    "n": 13,
+    "precision": 1.0,
+    "recall": 1.0
+   },
+   "all": {
+    "first": 0.59,
+    "n": 100,
+    "precision": 0.527,
+    "recall": 0.65
+   },
+   "mixed": {
+    "first": 0.385,
+    "n": 13,
+    "precision": 0.372,
+    "recall": 0.462
+   },
+   "normal": {
+    "first": 0.4,
+    "n": 20,
+    "precision": 0.325,
+    "recall": 0.55
+   }
+  },
+  "graph": {
+   "E1": {
+    "first": 0.467,
+    "n": 15,
+    "precision": 0.422,
+    "recall": 0.6
+   },
+   "E2": {
+    "first": 1.0,
+    "n": 13,
+    "precision": 1.0,
+    "recall": 1.0
+   },
+   "E3": {
+    "first": 1.0,
+    "n": 13,
+    "precision": 0.692,
+    "recall": 1.0
+   },
+   "E4": {
+    "first": 0.0,
+    "n": 13,
+    "precision": 0.0,
+    "recall": 0.0
+   },
+   "E5": {
+    "first": 1.0,
+    "n": 13,
+    "precision": 1.0,
+    "recall": 1.0
+   },
+   "all": {
+    "first": 0.59,
+    "n": 100,
+    "precision": 0.527,
+    "recall": 0.65
+   },
+   "mixed": {
+    "first": 0.385,
+    "n": 13,
+    "precision": 0.372,
+    "recall": 0.462
+   },
+   "normal": {
+    "first": 0.4,
+    "n": 20,
+    "precision": 0.325,
+    "recall": 0.55
+   }
+  }
+ },
+ "text": {
+  "file": {
+   "chars": 2417,
+   "lines": 51
+  },
+  "graph": {
+   "chars": 3654,
+   "lines": 66
+  },
+  "graph_cypher_only": {
+   "chars": 1041,
+   "lines": 14
+  }
+ },
+ "time_ms": {
+  "file": {
+   "max": 8.9,
+   "per_case": 2.28,
+   "total": 228.3
+  },
+  "graph": {
+   "max": 28.6,
+   "per_case": 7.33,
+   "total": 732.9
+  }
+ },
+ "used": {
+  "file": {
+   "R1": 13,
+   "R2": 13,
+   "R3": 24,
+   "R5": 50
+  },
+  "graph": {
+   "R1": 13,
+   "R2": 13,
+   "R3": 24,
+   "R5": 50
+  }
+ }
+}

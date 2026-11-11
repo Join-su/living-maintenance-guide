@@ -1,0 +1,15 @@
+# web 빌드 context(services/app): 화면 빌드에 쓰는 것만(서버 · 평가 · 생성 · 시험 대본 · 빌드 결과 뺌)
+**/node_modules
+**/dist
+**/.venv
+**/__pycache__
+**/.DS_Store
+.env
+.env.*
+server
+eval
+generation
+data
+scripts
+e2e/*
+!e2e/package.json

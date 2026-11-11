@@ -1,0 +1,151 @@
+#!/usr/bin/env bash
+# 실행 구성 확인 — compose 길(EV-001 ES-20 · CH-42): 두 앱 빌드 → compose(db → init → fake-deploy · api → web) → smoke · 권한 경계
+# · 발생기 · 재시작 · Playwright → 정리. 앱 서버는 컨테이너 안에서 가짜 배포 서버(내부망 이름 fake-deploy)를 부른다(CH-38).
+# host 길은 scripts/verify-e2e(그대로). 시험 전용 덧파일 = docker-compose.e2e.yml. 이미지 build는 캐시 층만(D-333).
+set -euo pipefail
+cd "$(dirname "$0")/.."
+export COMPOSE_PROJECT_NAME=c1a15-e2ec DB_HOST_PORT="${DB_HOST_PORT:-55435}" COMPOSE_FILE=docker-compose.yml:docker-compose.e2e.yml
+gen() { python3 -c 'import secrets; print(secrets.token_urlsafe(16))'; }
+export POSTGRES_PASSWORD="$(gen)" C1A15_TECH_PASSWORD="$(gen)" C1A15_LEAD_PASSWORD="$(gen)" C1A15_INTERNAL_TOKEN="$(gen)" APP_MODE=fixture
+export C1A15_ALARM=boundary C1A15_R12_INBOX= C1A15_KG_INBOX= C1A15_CHECKS=off  # 저장소 .env 값이 시험 api로 새지 않게(ES-20 review N3)
+O=${E2E_EVIDENCE_DIR:-}  # 있으면 build 캐시 기록(RUN 번호 · CACHED 줄)을 남김 — 절대 경로 · 있는 폴더
+J=$(mktemp -d)
+trap 'rm -rf "${J:?}"; docker compose down -v --remove-orphans >/dev/null 2>&1 || true' EXIT
+fail() { echo "verify-e2e-compose FAIL: $*"; docker compose logs --no-color --tail 40 2>/dev/null || true; exit 1; }
+for p in 8081 8082 "$DB_HOST_PORT"; do  # 이미 쓰는 포트(개발 스택 · host 길 시험)면 시작하지 않음
+  lsof -nP -iTCP:"$p" -sTCP:LISTEN -t >/dev/null 2>&1 && fail "포트 $p 를 이미 다른 프로세스가 씀"
+done
+[ -z "$O" ] || { [ -d "$O" ] && [ "${O#/}" != "$O" ]; } || fail "E2E_EVIDENCE_DIR는 있는 폴더의 절대 경로: $O"
+for p in 8000 18796; do  # '밖에 닫힘' 확인 포트 — 다른 프로세스가 쓰면 거짓 실패라 미리 멈춤(ES-20 review N4)
+  lsof -nP -iTCP:"$p" -sTCP:LISTEN -t >/dev/null 2>&1 && fail "포트 $p 를 다른 프로세스가 씀 — 닫힘 확인을 할 수 없음"
+done
+# 캐시 층만(D-333 — 캐시 밖 내려받기 = 새 설치 → 멈춤): 설치 층(pip uv · uv sync)의 입력이 캐시를 만든 때(9473f9e)와 같아야 하고,
+# build 기록의 RUN 단계가 모두 CACHED여야 한다. (--network none 시험 build는 BuildKit 캐시 키가 달라 쓰지 않음)
+# 입력 대조는 sha256 고정 — git 밖 깨끗한 사본(ES-24 git archive)에서도 돎(ES-20 review N2)
+shasum -a 256 -c >/dev/null 2>&1 <<'SUMS' || fail "설치 층 입력(uv.lock · pyproject · Dockerfile · .python-version)이 캐시 기준 9473f9e와 다름 — 캐시 밖 build가 될 수 있음"
+a5d3473321ed79b62b4e18dae7e13c67667acd7ab13593c5600e636d43587997  server/uv.lock
+141d5d5b295f28ba31ba1733eadb02a2423516dac4491d1278cd650c675c7f5d  server/pyproject.toml
+4ef7e5644c7dd3ddbf481b7af4271ddbc6c1313d5ec044dbf947662bbe10ad14  server/Dockerfile
+7b55f8e67b5623c4bef3fa691288da9437d79d3aba156de48d481db32ac7d16d  server/.python-version
+SUMS
+npm run --silent build >/dev/null
+docker compose down -v --remove-orphans >/dev/null 2>&1 || true  # 이름 volume(D-335): 앞 실행이 남긴 이 시험 project 자료를 비우고 시작
+docker compose build --progress plain > "$J/build.log" 2>&1 || fail "compose build"
+python3 - "$J/build.log" "${O:+$O/build-cache.txt}" <<'PY' || fail "build의 RUN 단계 중 캐시 밖이 있음(새 내려받기) — 또는 RUN 줄을 못 읽음"
+import re, sys
+log = open(sys.argv[1], encoding="utf-8", errors="replace").read()
+runs = sorted(set(re.findall(r"^#(\d+) \[[^\]]*\] RUN ", log, re.M)), key=int)
+cached = set(re.findall(r"^#(\d+) CACHED$", log, re.M))
+lines = [l for l in log.splitlines() if re.match(r"^#\d+ (\[[^\]]*\] RUN |CACHED$)", l)]
+if len(sys.argv) > 2 and sys.argv[2]:
+    open(sys.argv[2], "w", encoding="utf-8").write("\n".join(lines) + f"\nRUN {len(runs)} · 캐시 밖 {sorted(set(runs) - cached)}\n")
+sys.exit(1 if len(runs) < 2 or set(runs) - cached else 0)  # 설치 층 RUN 둘(pip uv · uv sync)이 최소(ES-20 review N1)
+PY
+docker compose up -d --pull never --no-build >/dev/null 2>&1 || fail "compose up"
+for _ in $(seq 1 90); do curl -fsS http://127.0.0.1:8081/api/health >/dev/null 2>&1 && break; sleep 1; done
+[ "$(docker compose ps -a --format '{{.Service}} {{.ExitCode}}' | awk '$1=="init"{print $2}')" = "0" ] || fail "init(migration · 적재)가 0으로 끝나지 않음"
+curl -fsS http://127.0.0.1:8081/ | grep -q 'data-surface="tech"' || fail "8081 첫 화면"
+curl -fsS http://127.0.0.1:8082/ | grep -q 'data-surface="lead"' || fail "8082 첫 화면"
+curl -fsS http://127.0.0.1:8081/session/123 | grep -q 'data-surface="tech"' || fail "8081 깊은 경로"
+curl -fsS http://127.0.0.1:8082/review/9 | grep -q 'data-surface="lead"' || fail "8082 깊은 경로"
+[ "$(curl -fsS -H 'X-App: lead' http://127.0.0.1:8081/api/health)" = '{"status":"ok","app":"tech"}' ] || fail "8081 /api X-App 덮어쓰기"
+[ "$(curl -fsS -H 'X-App: tech' http://127.0.0.1:8082/api/health)" = '{"status":"ok","app":"lead"}' ] || fail "8082 /api X-App 덮어쓰기"
+! curl -fsS -m 2 http://127.0.0.1:8000/api/health >/dev/null 2>&1 || fail "API 포트가 밖에 열려 있음"
+! curl -fsS -m 2 http://127.0.0.1:18796/ >/dev/null 2>&1 || fail "가짜 배포 서버 포트가 밖에 열려 있음"
+echo "verify-e2e-compose(API 포트 8000이 밖에 닫힘 — DF-1): pass"
+docker compose exec -T api python -c "import os,sys; sys.exit(1 if any('OPENAI' in k or k.endswith('_API_KEY') for k in os.environ) else 0)" || fail "fixture api 컨테이너에 외부 키 환경 변수가 있음"
+docker compose exec -T api printenv APP_MODE | grep -qx fixture || fail "api가 fixture 모드가 아님"
+docker compose exec -T api printenv C1A15_DEPLOY_HOST | grep -qx fake-deploy || fail "api 배포 서버 이름이 fake-deploy가 아님"
+docker compose exec -T db psql -U c1a15 -d c1a15 -tAc "select count(*) from knowledge.history_records" | grep -qx 300 || fail "적재 이력 300건"
+# ADV-06(S-02): 실제 nginx를 거친 앱별 권한 경계 — 위조 X-App · 다른 앱 쿠키 · 쿠키 없음 · 로그아웃 뒤는 거부, 업무 기록은 바뀌지 않음
+code() { curl -s -o /dev/null -w '%{http_code}' "$@"; }
+creds() { python3 -c 'import json, sys; print(json.dumps({"user_id": sys.argv[1], "password": sys.argv[2]}))' "$1" "$2"; }
+TECHJSON=$(creds tech.kim "$C1A15_TECH_PASSWORD"); LEADJSON=$(creds lead.park "$C1A15_LEAD_PASSWORD")
+[ "$(code -c "$J/t" -H 'Content-Type: application/json' -d "$TECHJSON" http://127.0.0.1:8081/api/login)" = 200 ] || fail "정비자 로그인(8081)"
+[ "$(code -c "$J/l" -H 'Content-Type: application/json' -d "$LEADJSON" http://127.0.0.1:8082/api/login)" = 200 ] || fail "파트장 로그인(8082)"
+[ "$(code -H 'Content-Type: application/json' -d "$LEADJSON" http://127.0.0.1:8081/api/login)" = 403 ] || fail "8081에 파트장 로그인이 거부되지 않음"
+[ "$(code -b $J/t http://127.0.0.1:8081/api/tech/home)" = 200 ] || fail "정비자 홈"
+[ "$(code -b $J/t -H 'X-App: lead' http://127.0.0.1:8081/api/tech/home)" = 200 ] || fail "8081 위조 X-App은 nginx가 덮어써야 함"
+LEADTOK=$(awk '$6=="lead_session"{print $7}' $J/l)
+[ "$(code -b "tech_session=$LEADTOK" http://127.0.0.1:8081/api/tech/home)" = 403 ] || fail "파트장 세션을 정비자 쿠키로 쓰면 거부"
+[ "$(code -b $J/t http://127.0.0.1:8082/api/tech/home)" = 401 ] || fail "정비자 쿠키로 8082 정비자 API는 거부"
+[ "$(code http://127.0.0.1:8081/api/tech/home)" = 401 ] || fail "쿠키 없음 거부"
+BEFORE=$(docker compose exec -T db psql -U c1a15 -d c1a15 -tAc "select count(*) from ops.session_events")
+[ "$(code -b "tech_session=$LEADTOK" -H 'Content-Type: application/json' -d '{"type":"lock"}' http://127.0.0.1:8081/api/tech/sessions/1/events)" = 403 ] || fail "위조 세션의 쓰기 거부"
+for port in 8081 8082; do  # 알람 등록(내부 API)은 토큰이 맞아도 nginx 경유면 거부(X-App이 붙음)
+  [ "$(code -H "X-Internal-Token: $C1A15_INTERNAL_TOKEN" -H 'Content-Type: application/json' -d '{"equipment_id":"M-01","sensor_snapshot":{"power_w":6000,"temp_diff_k":7.0,"torque_nm":40,"tool_wear_min":100}}' http://127.0.0.1:$port/api/internal/alarms)" = 403 ] || fail "$port 경유 내부 알람 등록이 거부되지 않음"
+done
+[ "$(docker compose exec -T db psql -U c1a15 -d c1a15 -tAc "select count(*) from ops.alarms")" = 0 ] || fail "거부된 내부 등록이 알람을 만듦"
+[ "$(code -b $J/t -X POST http://127.0.0.1:8081/api/logout)" = 200 ] || fail "로그아웃"
+[ "$(code -b $J/t http://127.0.0.1:8081/api/tech/home)" = 401 ] || fail "로그아웃 뒤 거부"
+[ "$(docker compose exec -T db psql -U c1a15 -d c1a15 -tAc "select count(*) from ops.session_events")" = "$BEFORE" ] || fail "거부된 요청이 업무 기록을 바꿈"
+echo "verify-e2e-compose(ADV-06 nginx 권한 경계): pass"
+# P-07(S-02): compose 안에서 시연 알람 발생기 → 담당 정비자 홈(8081)에 5초 안에(AC-13 · AC-28 · AC-34 실행 구성 부분)
+[ "$(code -c "$J/t" -H 'Content-Type: application/json' -d "$TECHJSON" http://127.0.0.1:8081/api/login)" = 200 ] || fail "정비자 다시 로그인"
+docker compose exec -T api python -m c1a15.alarms DEMO-01 | grep -q '^DEMO-01 알람 [0-9]* 등록 · 배정 tech.kim' || fail "알람 발생기 등록"
+T0=$(date +%s); seen=""
+while [ $(( $(date +%s) - T0 )) -lt 5 ]; do
+  curl -fsS -b $J/t http://127.0.0.1:8081/api/tech/home | python3 -c 'import json,sys; h=json.load(sys.stdin); sys.exit(0 if any(a["equipment_id"]=="M-01" and a["status"]=="new" for a in h["alarms"]) else 1)' && { seen=1; break; }
+  sleep 0.5
+done
+[ -n "$seen" ] || fail "등록한 알람이 5초 안에 정비자 홈에 보이지 않음"
+! docker compose exec -T -e C1A15_API_URL=http://example.com api python -m c1a15.alarms DEMO-02 >/dev/null 2>&1 || fail "발생기가 외부 주소를 허용함"
+echo "verify-e2e-compose(P-07 알람 발생기 → 정비자 홈): pass"
+# L3(v14 약속 바뀜): api 컨테이너를 재시작해도 같은 단계 · 같은 순위 · 잠금 시각, 재시작 뒤 열린 다음 단계 = deploy Run 하나
+jget() { python3 -c 'import json,sys; d=json.load(sys.stdin); print(eval(sys.argv[1], {}, {"d": d}))' "$1"; }
+AID=$(curl -fsS -b $J/t http://127.0.0.1:8081/api/tech/home | jget 'd["alarms"][0]["alarm_id"]')
+S=$(curl -fsS -b $J/t -X POST http://127.0.0.1:8081/api/tech/alarms/$AID/session)
+SID=$(echo "$S" | jget 'd["session_id"]'); SEQ=$(echo "$S" | jget 'd["last_seq"]')
+START=$(docker compose exec -T db psql -U c1a15 -d c1a15 -tAc "select coalesce(deployment_id, '') || ' ' || coalesce(start_run_id, '') from ops.diag_sessions where session_id = $SID")
+[[ "$START" == "c1a15@v1-local run_"* ]] || fail "세션 시작이 컨테이너 → fake-deploy start Run이 아님($START)"
+echo "verify-e2e-compose(컨테이너 앱 → fake-deploy start Run): pass"
+S=$(curl -fsS -b $J/t -H 'Content-Type: application/json' -d "{\"seq\": $((SEQ+1)), \"type\": \"alarm_ack\"}" http://127.0.0.1:8081/api/tech/sessions/$SID/events)  # EV-007
+SEQ=$(echo "$S" | jget 'd["last_seq"]')
+S=$(curl -fsS -b $J/t -H 'Content-Type: application/json' -d "{\"seq\": $((SEQ+1)), \"type\": \"lock\"}" http://127.0.0.1:8081/api/tech/sessions/$SID/events)
+BEFORE_STEP=$(echo "$S" | jget '(d["step"], d["probabilities"], d["lock_at"])'); SEQ=$(echo "$S" | jget 'd["last_seq"]')
+docker compose restart api >/dev/null 2>&1
+for _ in $(seq 1 30); do curl -fsS http://127.0.0.1:8081/api/health >/dev/null 2>&1 && break; sleep 1; done
+AFTER_STEP=$(curl -fsS -b $J/t http://127.0.0.1:8081/api/tech/sessions/$SID | jget '(d["step"], d["probabilities"], d["lock_at"])')
+[ "$BEFORE_STEP" = "$AFTER_STEP" ] || fail "api 재시작 뒤 단계 · 순위 · 잠금 시각이 다름"
+curl -fsS -b $J/t -H 'Content-Type: application/json' -d "{\"seq\": $((SEQ+1)), \"type\": \"precheck_done\", \"values\": \"하우징 표면 52 °C\"}" http://127.0.0.1:8081/api/tech/sessions/$SID/events >/dev/null || fail "재시작 뒤 입력"
+VIA=$(docker compose exec -T db psql -U c1a15 -d c1a15 -tAc "select coalesce(string_agg(payload->>'via', ','), '') from ops.session_events where session_id = $SID and type = 'step_opened' and seq > $SEQ")
+[ "$VIA" = "deploy" ] || fail "재시작 뒤 열린 다음 단계가 deploy Run 하나가 아님($VIA)"
+echo "verify-e2e-compose(재시작 재개 L3 — via = deploy 1건): pass"
+# P-08 · P-10 · P-13 · P-15 · P-17: 화면 journey · 두 앱 교차 · 지난 화면 · 정정 · 시연 10건 완주 — Playwright(로컬 chromium, 내려받기 없음)
+(cd e2e && E2E_MODE=compose BASE_URL=http://127.0.0.1:8081 LEAD_URL=http://127.0.0.1:8082 npx --no-install playwright test ${E2E_PW_ARGS:-}) || fail "앱 E2E(Playwright)"
+STAND=$(docker compose logs --no-color fake-deploy 2>/dev/null | grep -c "start stand_in" || true)
+[ "$STAND" = 0 ] || fail "가짜 배포 서버 start 대역 ${STAND}건 — 시연 알람은 모두 승인 행과 같아야 함"
+# VC-62(EV-001 ES-21 · PR-35 · CH-39): `down`(volume 남김) 뒤 다시 띄워도 운영 자료 그대로 — init은 이미 설치된 DB에 migration · 적재 0
+dbq() { docker compose exec -T db psql -U c1a15 -d c1a15 -tAc "$1"; }
+snap() {
+  dbq "select string_agg(format('%s.%s=%s', table_schema, table_name, (xpath('/row/c/text()', query_to_xml(format('select count(*) as c from %I.%I', table_schema, table_name), false, true, '')))[1]::text), ' ' order by table_schema, table_name) from information_schema.tables where table_schema in ('ops', 'knowledge') and table_type = 'BASE TABLE'"
+  dbq "select coalesce(string_agg(record_id, ',' order by record_id), '') from knowledge.history_records where source = 'approved_report'"
+  dbq "select md5(string_agg(section_id || ':' || grade, ',' order by section_id)) from ops.grade_table"
+}
+dbq "update ops.grade_table set grade = 'B' where section_id = '4.5'" >/dev/null  # 적재기 기본값과 다른 등급 하나(review N6)
+SNAP0=$(snap)
+[ -n "$(dbq "select 1 from knowledge.history_records where source = 'approved_report' limit 1")" ] || fail "다시 띄우기 시험 전에 승인 이력이 없음(Playwright 승인 흐름)"
+docker compose down >/dev/null 2>&1 || fail "compose down(volume 남김)"  # 계약 그대로 down → up(D-335 이름 volume)
+docker compose up -d --pull never --no-build >/dev/null 2>&1 || fail "다시 compose up"
+for _ in $(seq 1 90); do curl -fsS http://127.0.0.1:8081/api/health >/dev/null 2>&1 && break; sleep 1; done
+[ "$(docker compose ps -a --format '{{.Service}} {{.ExitCode}}' | awk '$1=="init"{print $2}')" = "0" ] || fail "다시 띄운 init이 0으로 끝나지 않음"
+# down이 컨테이너를 지우므로 새 init 컨테이너 기록 = 이번 실행 하나뿐 — 한 줄이고 '이미 설치됨'이어야 함
+[ "$(docker compose logs --no-color init 2>/dev/null | grep -c "dbinit:" || true)" = 1 ] || fail "다시 띄울 때 init이 한 번 돌지 않음(시험 무효)"
+docker compose logs --no-color init 2>/dev/null | grep "dbinit:" | tail -1 | grep -q "이미 설치됨" || fail "다시 띄운 init이 '이미 설치됨'이 아님"
+[ "$(snap)" = "$SNAP0" ] || fail "다시 띄운 뒤 ops · knowledge 행 수 · 승인 이력 · 등급이 다름"
+echo "verify-e2e-compose(다시 띄우기 — 운영 자료 그대로 · init 적재 0, VC-62): pass"
+dbq "update alembic_version set version_num = '0008'" >/dev/null
+docker compose stop api >/dev/null 2>&1
+! docker compose up -d --pull never --no-build api >/dev/null 2>&1 || fail "판이 다른데 api가 떴음"
+RUNNING=$(docker compose ps --status running --services) || fail "compose ps"
+echo "$RUNNING" | grep -qx api && fail "판이 다른데 api가 돎"
+docker compose logs --no-color init 2>/dev/null | grep "dbinit:" | tail -1 | grep -q "사람 migration 필요" || fail "판 다름 메시지 없음"
+dbq "update alembic_version set version_num = '0009'" >/dev/null
+docker compose up -d --pull never --no-build >/dev/null 2>&1 || fail "판 되돌린 뒤 compose up"
+for _ in $(seq 1 60); do curl -fsS http://127.0.0.1:8081/api/health >/dev/null 2>&1 && break; sleep 1; done
+curl -fsS http://127.0.0.1:8081/api/health >/dev/null || fail "판 되돌린 뒤 api가 안 뜸"
+[ "$(snap)" = "$SNAP0" ] || fail "판 다름 시험 뒤 운영 자료가 바뀜"
+echo "verify-e2e-compose(판 다름 → init 멈춤 · api 안 뜸, VC-62): pass"
+SKIPPED=$(python3 -c 'import json, sys; print(json.load(open(sys.argv[1]))["stats"]["skipped"])' "${E2E_REPORT:-e2e/test-results/report.json}")
+echo "verify-e2e-compose(P-08 … 시연 10건 완주 L3): pass${E2E_PW_ARGS:+ — 일부만(E2E_PW_ARGS=$E2E_PW_ARGS), 전체 통과 아님}$([ "$SKIPPED" = 0 ] || echo " — 멈춤 ${SKIPPED}건, 전체 통과 아님")"
+echo "verify-e2e-compose(S-01 smoke): pass"

@@ -1,0 +1,7 @@
+# 테스트용 평가 suite (EV-002 V-SUITE): Pack revision에 들어가지 않음
+suite: task10_holdout
+split: holdout
+graph: respond
+dataset: dataset.jsonl
+review_policy: {default: fixture, missing_fixture: stop_before}
+judge: {enabled: true}

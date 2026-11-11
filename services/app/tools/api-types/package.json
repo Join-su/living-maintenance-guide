@@ -1,0 +1,13 @@
+{
+  "name": "@c1a15/api-types",
+  "version": "0.1.0",
+  "private": true,
+  "description": "server/openapi.json(OpenAPI 정본) → packages/ui/src/api/schema.d.ts. openapi-typescript가 TypeScript 5를 요구해 이 도구 workspace에만 둔다(저장소 TS 7과 분리).",
+  "scripts": {
+    "gen": "openapi-typescript ../../server/openapi.json -o ../../packages/ui/src/api/schema.d.ts"
+  },
+  "devDependencies": {
+    "openapi-typescript": "7.13.0",
+    "typescript": "^5.9.0"
+  }
+}

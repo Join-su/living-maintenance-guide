@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Prediction",
+  "description": "predict_failure 출력 — 유형 · 확률(packrt 0.11.0은 이 schema가 이름을 적은 칸만 더함: probabilities · model_release · alarm · threshold). 알람 판정 문턱은 앱 사용자 설정(여기 alarm은 release threshold_config로 낸 기록만)",
+  "type": "object",
+  "required": [
+    "type",
+    "probability"
+  ],
+  "properties": {
+    "type": {
+      "enum": [
+        "NONE",
+        "TWF",
+        "HDF",
+        "PWF",
+        "OSF"
+      ]
+    },
+    "probability": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "probabilities": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+      }
+    },
+    "model_release": {
+      "type": "string"
+    },
+    "alarm": {
+      "type": "boolean"
+    },
+    "threshold": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    }
+  }
+}

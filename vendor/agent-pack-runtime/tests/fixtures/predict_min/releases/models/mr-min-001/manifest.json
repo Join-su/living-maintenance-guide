@@ -1,0 +1,23 @@
+{
+ "release_id": "mr-min-001",
+ "kind": "model",
+ "artifact": {
+  "file": "model.json",
+  "format": "json-linear",
+  "sha256": "a4349f1dad89907ef32ab1033b453c96b6ddf93486052a0d33e78050e7572eb9"
+ },
+ "feature_schema": {
+  "version": 1,
+  "fields": [
+   "air_temp",
+   "process_temp",
+   "rpm",
+   "torque",
+   "tool_wear"
+  ]
+ },
+ "trusted": true,
+ "files": {
+  "model.json": "a4349f1dad89907ef32ab1033b453c96b6ddf93486052a0d33e78050e7572eb9"
+ }
+}

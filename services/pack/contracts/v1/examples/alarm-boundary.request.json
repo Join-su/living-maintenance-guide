@@ -1,0 +1,23 @@
+{
+  "kind": "alarm",
+  "event_card": {
+    "event_id": "C1A-E3f9a01c2d4b7",
+    "source_mode": "sensor_boundary",
+    "equipment_id": "M-01",
+    "sensor_snapshot": {
+      "air_temperature_k": 302.6,
+      "process_temperature_k": 310.4,
+      "rotational_speed_rpm": 1409.0,
+      "torque_nm": 53.3,
+      "tool_wear_min": 52.0
+    },
+    "alarm": {
+      "source": "none"
+    },
+    "data_lineage": {
+      "source_release": "ai4i-2020@sha256:dc6630cd9b1f0f853922fad78a1b6436570d3f1ec863f1dd5c4340ac56bc8a8e",
+      "row_id": 4492,
+      "split": "demo"
+    }
+  }
+}

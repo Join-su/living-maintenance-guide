@@ -1,0 +1,11 @@
+{
+ "documents": 1,
+ "files": {
+  "documents.jsonl": "72ffa8c0bf18ee7f38c569dbd9bf6ce0baabc4773535df92e101112479855655"
+ },
+ "format": "documents-1",
+ "kind": "corpus",
+ "parent_release": "c1a15-manuals-v1",
+ "release_id": "c1a15-manuals-v2",
+ "sha256": "6bb85f9409c54677ee3961756d836039910daed0703f4fb0e73532ef98f15f73"
+}

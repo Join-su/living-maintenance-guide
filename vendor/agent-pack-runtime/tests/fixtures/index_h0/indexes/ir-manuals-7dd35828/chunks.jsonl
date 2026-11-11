@@ -1,0 +1,7 @@
+{"id": "MG-A#s1#0", "locator": {"char_end": 30, "char_start": 0, "doc": "MG-A", "section": "s1"}, "metadata": {"group": "TW", "kind": "manual"}, "text": "## 1 점검 준비\n전원을 내리고 잠금 표지를 단다.\n"}
+{"id": "MG-A#s2#0", "locator": {"char_end": 40, "char_start": 0, "doc": "MG-A", "section": "s2"}, "metadata": {"group": "TW", "kind": "manual"}, "text": "## 2 공구 마모 확인\n공구 끝 마모 폭을 재고 0.3mm를 넘으면 교"}
+{"id": "MG-A#s2#1", "locator": {"char_end": 65, "char_start": 32, "doc": "MG-A", "section": "s2"}, "metadata": {"group": "TW", "kind": "manual"}, "text": "m를 넘으면 교체한다. 교체 뒤 시험 가공을 한 번 한다.\n"}
+{"id": "MG-B#s1#0", "locator": {"char_end": 40, "char_start": 0, "doc": "MG-B", "section": "s1"}, "metadata": {"group": "LD", "kind": "manual"}, "text": "## 1 토크 과부하\n토크가 경계 위로 3번 넘으면 이송 속도를 낮춘다."}
+{"id": "MG-B#s1#1", "locator": {"char_end": 41, "char_start": 32, "doc": "MG-B", "section": "s1"}, "metadata": {"group": "LD", "kind": "manual"}, "text": "속도를 낮춘다.\n"}
+{"id": "MG-B#s2#0", "locator": {"char_end": 40, "char_start": 0, "doc": "MG-B", "section": "s2"}, "metadata": {"group": "LD", "kind": "manual"}, "text": "## 2 조치 뒤 확인\n같은 조건에서 10분 돌려 토크가 경계 아래인지 "}
+{"id": "MG-B#s2#1", "locator": {"char_end": 44, "char_start": 32, "doc": "MG-B", "section": "s2"}, "metadata": {"group": "LD", "kind": "manual"}, "text": "경계 아래인지 본다.\n"}

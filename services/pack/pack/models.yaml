@@ -1,0 +1,10 @@
+# provider별 허용 모델 목록(packrt 명세 7장) — Pack revision 안, 비밀 값 0(환경 변수 이름만). 보고서 문장 node(PS-05 · 약속 v3 report).
+# 가짜 provider(배포 서버 · LLMOps · Pack 시험)는 이 저장소 tools/fake/rule.py로 답함. 실제 provider 첫 호출은 사용자 한 줄 승인 뒤.
+providers:
+  openai:
+    env: OPENAI_API_KEY
+    env_fallback: OPENAI_API_KEY_2   # 키 자동 전환(packrt 0.12.3, D-396 (4)) — 0.12.2는 이 칸을 읽지 않음 · 이름만
+    base_url_env: OPENAI_BASE_URL
+    models:
+      chat: [gpt-4.1-mini-2025-04-14, gpt-4o-mini-2024-07-18]   # D-442(D-433 EV-069 S-P): 효율 바퀴 모델 교체 후보 gpt-4o-mini(nano는 키 프로젝트 404로 바꿈) · 보고서 node model 칸은 mini 그대로
+      embedding: [text-embedding-3-small]   # 이력 · 매뉴얼 DB 선언(D-303) — 실제 질의 임베딩은 실제 DB 설정(deploy-real.yaml)에서만, 사용자 승인 뒤

@@ -1,0 +1,22 @@
+# llmopsagent local PostgreSQL 16 + pgvector (shared DB design v1.0 5·6.4, week 1: trace and task10).
+#   python db/dbadmin.py env && docker compose -f db/compose.yaml --env-file db/.env up -d && python db/dbadmin.py init && python db/dbadmin.py migrate
+# The port is opened on 127.0.0.1 only. Data stays inside the repository (db/.data/pg, ignored by git). Passwords come from db/.env.
+name: llmopsagent
+services:
+  postgres:
+    # pinned by version tag and digest (dev, tests and demo use the same image)
+    image: pgvector/pgvector:0.8.6-pg16-bookworm@sha256:ccc6e83d6e35e931dc7c5def2022729d5a6c370318d099181995567ff1fb4d6b
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?run python db/dbadmin.py env and pass --env-file db/.env}
+    ports:
+      - "127.0.0.1:${LLMOPSAGENT_PG_PORT:-55432}:5432"
+    volumes:
+      - ./.data/pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    restart: "no"

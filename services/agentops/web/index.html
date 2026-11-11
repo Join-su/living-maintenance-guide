@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LLMOps</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="app.css">
+<style>
+/* helpers carried over from the approved seed (G2A structure CSS + G2B direction-b layer) */
+.side a{cursor:pointer}.wtab,.lrow,.btn,.chip,.choice,.kcard,.card,.link,[data-act]{cursor:pointer}
+.graph-node{cursor:pointer}.graph-node.sel rect{stroke-width:3px!important}
+.loopn{font-size:10px}
+.scrim{z-index:20}
+.mon{min-width:0}
+.monarea{display:grid;gap:10px}
+.kv{display:grid;grid-template-columns:110px 1fr;gap:4px 8px;font-size:12.5px}
+.val-none{color:#667085;font-size:12px}
+.err-under{background:#fff4ed;border-radius:10px;padding:6px 10px;color:#c4320a;font-weight:600;font-size:12.5px;margin-top:4px}
+.err-under::before{content:"↑ "}
+.hidden{display:none!important}
+/* approved P13 narrow state: sidebar hidden, inspector below the work area (G2A selected P13 / narrow) */
+@media (max-width:1100px){.app{grid-template-columns:1fr}.side{display:none}.wbody{grid-template-columns:1fr}.insp{border-left:0}}
+.barrow{display:flex;align-items:center;gap:8px;margin-top:6px;font-size:12.5px}.barrow .nm{width:90px}
+</style>
+</head>
+<body>
+<div class="mode" data-region="mode" title="LLM 호출 모드: 가짜 provider — 호출 주소를 따르지 않는 코드는 실제 모델을 부를 수 있습니다"><b id="mode-label">가짜 모델로 실행 중</b></div>
+<div class="app" id="app"></div>
+<div id="overlay"></div>
+<script src="tidy.js"></script>
+<script src="canvas.js"></script>
+<script src="popover.js"></script>
+<script src="opsrun.js"></script>
+<script src="autocycle.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+{
+  "alarm": {
+    "event_id": "C1A-E8b21d4e07a5c",
+    "alarm": false,
+    "group": null,
+    "group_source": null,
+    "alarm_block": null,
+    "sensor_derived": {
+      "power_w": 6692,
+      "temp_diff_k": 8.9
+    },
+    "ml": {
+      "model_release": "mr-c1a15-standin-v1",
+      "risk": 0.62,
+      "alarm": true,
+      "top_k": [
+        {
+          "type": "HDF",
+          "probability": 0.41,
+          "group_suggestion": "CL"
+        },
+        {
+          "type": "TWF",
+          "probability": 0.12,
+          "group_suggestion": "TW"
+        },
+        {
+          "type": "PWF",
+          "probability": 0.06,
+          "group_suggestion": "PW"
+        }
+      ],
+      "confidence": 0.41,
+      "threshold": 0.5,
+      "confirmed": false
+    },
+    "candidate": {
+      "reason": "low_confidence",
+      "risk": 0.62,
+      "top_k": [
+        {
+          "type": "HDF",
+          "probability": 0.41,
+          "group_suggestion": "CL"
+        },
+        {
+          "type": "TWF",
+          "probability": 0.12,
+          "group_suggestion": "TW"
+        },
+        {
+          "type": "PWF",
+          "probability": 0.06,
+          "group_suggestion": "PW"
+        }
+      ],
+      "boundary_crossed": false,
+      "model_release": "mr-c1a15-standin-v1"
+    }
+  }
+}

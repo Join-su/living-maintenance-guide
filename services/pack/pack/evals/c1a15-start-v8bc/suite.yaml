@@ -1,0 +1,10 @@
+# 평가 suite — Pack revision 밖. c1a15-start-v8 10 case + 설비 붙인 값(시연 각본 · suite 원본 아님) + 관계가 맞아야 하는 K7 가 6 case
+# 기대값 = Pack 986eaff 출력(가짜 DB) · 안내 없음 case = 그래프 graph-mm3-v3-48a5b999-5cfbea5f · 안내 뜸 case(근거 설비 7) = 그래프 graph-mm3-v3-48a5b999-5cfbea5f+EX-R-0001
+# D-586: 안내 뜸 7 case preview · exception_guide.matched = Pack ef9ec74 출력(C 예외는 첫 추천에서 빠지고 후보 목록) · 그래프 같음 · 나머지 줄 바이트 그대로
+# 만든 도구: orchestration/agents/c1a15-eval/handoff/d546/start-v8bc/make_start_v8bc.py · handoff/d586/start-v8bc/make_v8bc_d586.py(c1a15-eval)
+suite: c1a15_start_v8bc
+split: fixture
+graph: run
+dataset: dataset.jsonl
+expectations: expectations.jsonl
+review_policy: {default: fixture, missing_fixture: stop_before}

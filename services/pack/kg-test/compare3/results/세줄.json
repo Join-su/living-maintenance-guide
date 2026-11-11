@@ -1,0 +1,576 @@
+{
+ "layer": "kgh-v1",
+ "rows": [
+  {
+   "row": "모두",
+   "line": "① 관계표+RAG",
+   "n": 126,
+   "first": 0.397,
+   "waste_n": 1.07,
+   "waste_min": 7.1,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "모두",
+   "line": "② RAG만",
+   "n": 126,
+   "first": 0.429,
+   "waste_n": 1.07,
+   "waste_min": 8.1,
+   "loaded": 0.913,
+   "action": 0.913
+  },
+  {
+   "row": "모두",
+   "line": "③ 지식그래프",
+   "n": 126,
+   "first": 0.405,
+   "waste_n": 1.06,
+   "waste_min": 6.9,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "모두",
+   "line": "③′ 근거 건수 순서",
+   "n": 126,
+   "first": 0.437,
+   "waste_n": 0.99,
+   "waste_min": 3.5,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "모두",
+   "line": "참고: 매뉴얼 차례만",
+   "n": 126,
+   "first": 0.397,
+   "waste_n": 1.13,
+   "waste_min": 4.7,
+   "loaded": 1.0,
+   "action": 0.0
+  },
+  {
+   "row": "증상군 PW",
+   "line": "① 관계표+RAG",
+   "n": 48,
+   "first": 0.292,
+   "waste_n": 1.19,
+   "waste_min": 4.6,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "증상군 PW",
+   "line": "② RAG만",
+   "n": 48,
+   "first": 0.396,
+   "waste_n": 1.12,
+   "waste_min": 4.4,
+   "loaded": 0.938,
+   "action": 0.938
+  },
+  {
+   "row": "증상군 PW",
+   "line": "③ 지식그래프",
+   "n": 48,
+   "first": 0.312,
+   "waste_n": 1.15,
+   "waste_min": 4.4,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "증상군 PW",
+   "line": "③′ 근거 건수 순서",
+   "n": 48,
+   "first": 0.312,
+   "waste_n": 1.1,
+   "waste_min": 4.1,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "증상군 PW",
+   "line": "참고: 매뉴얼 차례만",
+   "n": 48,
+   "first": 0.312,
+   "waste_n": 1.27,
+   "waste_min": 5.0,
+   "loaded": 1.0,
+   "action": 0.0
+  },
+  {
+   "row": "갈래 몰래 넣은 예외 1",
+   "line": "① 관계표+RAG",
+   "n": 11,
+   "first": 0.636,
+   "waste_n": 0.64,
+   "waste_min": 2.4,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "갈래 몰래 넣은 예외 1",
+   "line": "② RAG만",
+   "n": 11,
+   "first": 0.636,
+   "waste_n": 0.73,
+   "waste_min": 2.9,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "갈래 몰래 넣은 예외 1",
+   "line": "③ 지식그래프",
+   "n": 11,
+   "first": 0.636,
+   "waste_n": 0.64,
+   "waste_min": 2.4,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "갈래 몰래 넣은 예외 1",
+   "line": "③′ 근거 건수 순서",
+   "n": 11,
+   "first": 0.909,
+   "waste_n": 0.09,
+   "waste_min": 0.4,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "갈래 몰래 넣은 예외 1",
+   "line": "참고: 매뉴얼 차례만",
+   "n": 11,
+   "first": 0.909,
+   "waste_n": 0.18,
+   "waste_min": 0.7,
+   "loaded": 1.0,
+   "action": 0.0
+  },
+  {
+   "row": "증상군 CL",
+   "line": "① 관계표+RAG",
+   "n": 35,
+   "first": 0.486,
+   "waste_n": 0.91,
+   "waste_min": 4.7,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "증상군 CL",
+   "line": "② RAG만",
+   "n": 35,
+   "first": 0.457,
+   "waste_n": 0.97,
+   "waste_min": 4.8,
+   "loaded": 0.943,
+   "action": 0.943
+  },
+  {
+   "row": "증상군 CL",
+   "line": "③ 지식그래프",
+   "n": 35,
+   "first": 0.486,
+   "waste_n": 0.91,
+   "waste_min": 4.1,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "증상군 CL",
+   "line": "③′ 근거 건수 순서",
+   "n": 35,
+   "first": 0.514,
+   "waste_n": 0.97,
+   "waste_min": 3.7,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "증상군 CL",
+   "line": "참고: 매뉴얼 차례만",
+   "n": 35,
+   "first": 0.514,
+   "waste_n": 0.94,
+   "waste_min": 5.3,
+   "loaded": 1.0,
+   "action": 0.0
+  },
+  {
+   "row": "갈래 예외 없음",
+   "line": "① 관계표+RAG",
+   "n": 50,
+   "first": 0.3,
+   "waste_n": 1.42,
+   "waste_min": 8.2,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "갈래 예외 없음",
+   "line": "② RAG만",
+   "n": 50,
+   "first": 0.34,
+   "waste_n": 1.38,
+   "waste_min": 8.0,
+   "loaded": 0.84,
+   "action": 0.84
+  },
+  {
+   "row": "갈래 예외 없음",
+   "line": "③ 지식그래프",
+   "n": 50,
+   "first": 0.28,
+   "waste_n": 1.44,
+   "waste_min": 7.9,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "갈래 예외 없음",
+   "line": "③′ 근거 건수 순서",
+   "n": 50,
+   "first": 0.32,
+   "waste_n": 1.48,
+   "waste_min": 5.3,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "갈래 예외 없음",
+   "line": "참고: 매뉴얼 차례만",
+   "n": 50,
+   "first": 0.34,
+   "waste_n": 1.32,
+   "waste_min": 5.7,
+   "loaded": 1.0,
+   "action": 0.0
+  },
+  {
+   "row": "증상군 LD",
+   "line": "① 관계표+RAG",
+   "n": 23,
+   "first": 0.478,
+   "waste_n": 0.78,
+   "waste_min": 18.6,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "증상군 LD",
+   "line": "② RAG만",
+   "n": 23,
+   "first": 0.478,
+   "waste_n": 0.87,
+   "waste_min": 24.1,
+   "loaded": 0.87,
+   "action": 0.87
+  },
+  {
+   "row": "증상군 LD",
+   "line": "③ 지식그래프",
+   "n": 23,
+   "first": 0.478,
+   "waste_n": 0.78,
+   "waste_min": 18.6,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "증상군 LD",
+   "line": "③′ 근거 건수 순서",
+   "n": 23,
+   "first": 0.609,
+   "waste_n": 0.39,
+   "waste_min": 1.2,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "증상군 LD",
+   "line": "참고: 매뉴얼 차례만",
+   "n": 23,
+   "first": 0.609,
+   "waste_n": 0.39,
+   "waste_min": 1.2,
+   "loaded": 1.0,
+   "action": 0.0
+  },
+  {
+   "row": "갈래 교체 직후",
+   "line": "① 관계표+RAG",
+   "n": 34,
+   "first": 0.529,
+   "waste_n": 0.79,
+   "waste_min": 3.1,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "갈래 교체 직후",
+   "line": "② RAG만",
+   "n": 34,
+   "first": 0.529,
+   "waste_n": 0.82,
+   "waste_min": 3.3,
+   "loaded": 0.971,
+   "action": 0.971
+  },
+  {
+   "row": "갈래 교체 직후",
+   "line": "③ 지식그래프",
+   "n": 34,
+   "first": 0.559,
+   "waste_n": 0.76,
+   "waste_min": 2.9,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "갈래 교체 직후",
+   "line": "③′ 근거 건수 순서",
+   "n": 34,
+   "first": 0.647,
+   "waste_n": 0.74,
+   "waste_min": 2.6,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "갈래 교체 직후",
+   "line": "참고: 매뉴얼 차례만",
+   "n": 34,
+   "first": 0.471,
+   "waste_n": 1.06,
+   "waste_min": 4.6,
+   "loaded": 1.0,
+   "action": 0.0
+  },
+  {
+   "row": "갈래 같은 라인 동시",
+   "line": "① 관계표+RAG",
+   "n": 17,
+   "first": 0.235,
+   "waste_n": 1.06,
+   "waste_min": 4.2,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "갈래 같은 라인 동시",
+   "line": "② RAG만",
+   "n": 17,
+   "first": 0.353,
+   "waste_n": 0.94,
+   "waste_min": 3.8,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "갈래 같은 라인 동시",
+   "line": "③ 지식그래프",
+   "n": 17,
+   "first": 0.294,
+   "waste_n": 0.94,
+   "waste_min": 3.7,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "갈래 같은 라인 동시",
+   "line": "③′ 근거 건수 순서",
+   "n": 17,
+   "first": 0.059,
+   "waste_n": 1.0,
+   "waste_min": 3.9,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "갈래 같은 라인 동시",
+   "line": "참고: 매뉴얼 차례만",
+   "n": 17,
+   "first": 0.059,
+   "waste_n": 1.82,
+   "waste_min": 7.3,
+   "loaded": 1.0,
+   "action": 0.0
+  },
+  {
+   "row": "증상군 TW",
+   "line": "① 관계표+RAG",
+   "n": 20,
+   "first": 0.4,
+   "waste_n": 1.4,
+   "waste_min": 4.3,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "증상군 TW",
+   "line": "② RAG만",
+   "n": 20,
+   "first": 0.4,
+   "waste_n": 1.35,
+   "waste_min": 4.2,
+   "loaded": 0.85,
+   "action": 0.85
+  },
+  {
+   "row": "증상군 TW",
+   "line": "③ 지식그래프",
+   "n": 20,
+   "first": 0.4,
+   "waste_n": 1.4,
+   "waste_min": 4.5,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "증상군 TW",
+   "line": "③′ 근거 건수 순서",
+   "n": 20,
+   "first": 0.4,
+   "waste_n": 1.45,
+   "waste_min": 4.6,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "증상군 TW",
+   "line": "참고: 매뉴얼 차례만",
+   "n": 20,
+   "first": 0.15,
+   "waste_n": 2.0,
+   "waste_min": 7.2,
+   "loaded": 1.0,
+   "action": 0.0
+  },
+  {
+   "row": "갈래 몰래 넣은 예외 2",
+   "line": "① 관계표+RAG",
+   "n": 6,
+   "first": 0.333,
+   "waste_n": 0.67,
+   "waste_min": 2.5,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "갈래 몰래 넣은 예외 2",
+   "line": "② RAG만",
+   "n": 6,
+   "first": 0.333,
+   "waste_n": 0.67,
+   "waste_min": 2.5,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "갈래 몰래 넣은 예외 2",
+   "line": "③ 지식그래프",
+   "n": 6,
+   "first": 0.333,
+   "waste_n": 0.67,
+   "waste_min": 2.5,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "갈래 몰래 넣은 예외 2",
+   "line": "③′ 근거 건수 순서",
+   "n": 6,
+   "first": 0.833,
+   "waste_n": 0.17,
+   "waste_min": 0.5,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "갈래 몰래 넣은 예외 2",
+   "line": "참고: 매뉴얼 차례만",
+   "n": 6,
+   "first": 0.833,
+   "waste_n": 0.17,
+   "waste_min": 0.5,
+   "loaded": 1.0,
+   "action": 0.0
+  },
+  {
+   "row": "갈래 몰래 넣은 예외 3",
+   "line": "① 관계표+RAG",
+   "n": 8,
+   "first": 0.5,
+   "waste_n": 1.0,
+   "waste_min": 33.6,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "갈래 몰래 넣은 예외 3",
+   "line": "② RAG만",
+   "n": 8,
+   "first": 0.5,
+   "waste_n": 1.25,
+   "waste_min": 49.6,
+   "loaded": 0.75,
+   "action": 0.75
+  },
+  {
+   "row": "갈래 몰래 넣은 예외 3",
+   "line": "③ 지식그래프",
+   "n": 8,
+   "first": 0.5,
+   "waste_n": 1.0,
+   "waste_min": 33.6,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "갈래 몰래 넣은 예외 3",
+   "line": "③′ 근거 건수 순서",
+   "n": 8,
+   "first": 0.125,
+   "waste_n": 0.88,
+   "waste_min": 2.6,
+   "loaded": 1.0,
+   "action": 1.0
+  },
+  {
+   "row": "갈래 몰래 넣은 예외 3",
+   "line": "참고: 매뉴얼 차례만",
+   "n": 8,
+   "first": 0.125,
+   "waste_n": 0.88,
+   "waste_min": 2.6,
+   "loaded": 1.0,
+   "action": 0.0
+  }
+ ],
+ "not_confirmed": {
+  "숙련자 인계": 7,
+  "이상 없음·감시": 8
+ },
+ "overlap": {
+  "② RAG만": {
+   "같음": 483,
+   "다름": 0,
+   "없음": 81
+  },
+  "③ 지식그래프": {
+   "같음": 564,
+   "다름": 0,
+   "없음": 0
+  },
+  "③′ 근거 건수 순서": {
+   "같음": 564,
+   "다름": 0,
+   "없음": 0
+  }
+ }
+}

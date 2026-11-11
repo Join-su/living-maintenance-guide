@@ -1,0 +1,76 @@
+# 시험용 Pack: 고정 흐름 목록 · 구조 검사(EV-016) — START 갈래 · 이력 리트리버 · 예측 · 결과 검사 · 사람 관문 · 보고서
+ir_version: 1
+runtime_contract: {min_runtime_version: 0.1.0}
+pack: {id: ff_min, version: V1, title: "고정 흐름 시험"}
+env: {required: [OPENAI_API_KEY], optional: [OPENAI_BASE_URL]}
+stores:
+  history: {type: table, schema: Record, key: record_id}
+  notes: {type: table, schema: Record, key: record_id}
+schemas:
+  Request: schemas/request.json
+  Prediction: schemas/prediction.json
+  EvidenceRef: schemas/evidence_ref.json
+  Record: schemas/record.json
+  Draft: schemas/draft.json
+  Result: schemas/result.json
+graphs:
+  run:
+    state:
+      request: Request
+      prediction: Prediction
+      evidence: {type: "list[EvidenceRef]", merge: append, order_by: [source_type, score_desc, id]}
+      notes_found: {type: "list[EvidenceRef]", merge: append, order_by: [source_type, score_desc, id]}
+      evidence_check: dict
+      draft: Draft
+      draft_check: dict
+      review: dict
+      result: Result
+    nodes:
+      - {id: route_request, kind: router@1, params: {by: state.request.kind, cases: {alarm: predict_kind, start: predict_kind}, default: predict_kind}, reads: [request], writes: []}
+      - {id: predict_kind, kind: predict@1, params: {model: kind_classifier, features: {from: request}, output: Prediction}, reads: [request], writes: [prediction]}
+      - id: find_history
+        kind: retrieve@1
+        params: {store: history, where: {kind: "{state.prediction.type}"}, limit: 5}
+        capabilities: {network: none, side_effect: none}
+        reads: [prediction]
+        writes: [evidence]
+      - id: find_notes
+        kind: retrieve@1
+        params: {store: notes, where: {kind: "{state.prediction.type}"}, limit: 3}
+        reads: [prediction]
+        writes: [notes_found]
+      - id: evidence_check
+        kind: validate@1
+        params: {rules: [{evidence: {min_items: 1}}]}
+        reads: [evidence]
+        writes: [evidence_check]
+      - {id: draft, kind: llm@1, params: {provider: openai, model: gpt-4.1-mini, prompt: prompts/draft.md, output: Draft}, reads: [request, evidence], writes: [draft]}
+      - id: tidy
+        kind: llm@1
+        params: {provider: openai, model: gpt-4.1-mini, prompt: prompts/tidy.md, output: Draft}
+        reads: [draft]
+        writes: [draft]
+      - id: draft_check
+        kind: validate@1
+        params: {rules: [{schema: Draft}]}
+        reads: [draft]
+        writes: [draft_check]
+      - id: review
+        kind: human_review@1
+        params: {subject: draft, actions: [approve, reject], routes: {approve: finish, reject: END}}
+        reads: [draft, draft_check]
+        writes: [review]
+      - {id: finish, kind: render@1, params: {template: templates/result.md, format: md, to: result}, reads: [request, draft, review], writes: [result]}
+    edges:
+      - [START, route_request]
+      - [predict_kind, find_history]
+      - [find_history, find_notes]
+      - [find_notes, evidence_check]
+      - [evidence_check, draft]
+      - [draft, tidy]
+      - [tidy, draft_check]
+      - [draft_check, review]
+      - [finish, END]
+entrypoints:
+  - {graph: run, input: Request, output: Result}
+trace: {contract: 1}

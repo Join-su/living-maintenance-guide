@@ -1,0 +1,2 @@
+{"$schema": "https://json-schema.org/draft/2020-12/schema", "title": "GroundedResponse", "type": "object", "required": ["causes", "steps", "evidence_ids"],
+ "properties": {"causes": {"type": "array", "items": {"type": "string"}}, "steps": {"type": "array", "items": {"type": "string"}}, "evidence_ids": {"type": "array", "items": {"type": "string"}}, "escalate": {"type": "boolean"}}}

@@ -1,0 +1,8 @@
+# 평가 suite — Pack revision 밖. 보고서 8항목 초안 20건(시연 10 + 카드 val 10)의 원인 · 조치 문장 — 기대값 = 앱 report_written 문장(가짜 provider)
+# 만든 도구: tools/make_report_suite.py(앱 내보내기 D-290 c1a15-report-20.jsonl sha256 318dc991e026d03ad30648a38bf7d78ae3815c4e6e54c8343565421e3a0e44f0 — test 카드 0 · 이름 · ID · 답 메모 0)
+suite: c1a15_report
+split: fixture
+graph: run
+dataset: dataset.jsonl
+expectations: expectations.jsonl
+review_policy: {default: fixture, missing_fixture: stop_before}

@@ -1,0 +1,36 @@
+# 시험용 Pack(EV-007 S0): retrieve@1의 0.11.0 결과를 고정한다 — 경우 C1 ~ C6을 한 그래프로. 가짜 임베딩만(실제 호출 0).
+ir_version: 1
+runtime_contract: {min_runtime_version: 0.11.0}
+pack: {id: retrieve_min, version: V0, title: "retrieve@1 결과 고정"}
+env: {required: [], optional: []}
+stores:
+  docs: {type: vector, index: {embedding: {provider: openai, model: text-embedding-3-small}}, metadata_required: [group, kind]}
+  rows: {type: table, schema: Row, key: row_id}
+schemas:
+  Query: schemas/query.json
+  Hit: schemas/hit.json
+  Row: schemas/row.json
+  Note: schemas/note.json
+graphs:
+  probe:
+    state:
+      q: Query
+      c1: {type: "list[Hit]"}
+      c2: {type: "list[Hit]"}
+      c3: {type: "list[Hit]"}
+      c4: {type: "list[Hit]"}
+      c5: {type: "list[Hit]"}
+      c6: {type: "list[Hit]"}
+      note: Note
+    nodes:
+      - {id: c1_plain, kind: retrieve@1, params: {store: docs, query: "{state.q.text}", top_k: 4}, reads: [q], writes: [c1]}
+      - {id: c2_filter, kind: retrieve@1, params: {store: docs, query: "{state.q.text}", top_k: 3, filter: {group: "{state.q.group}"}}, reads: [q], writes: [c2]}
+      - {id: c3_filter_list, kind: retrieve@1, params: {store: docs, query: "{state.q.text}", top_k: 3, filter: {group: "{state.q.groups}"}}, reads: [q], writes: [c3]}
+      - {id: c4_relax, kind: retrieve@1, params: {store: docs, query: "{state.q.text}", top_k: 3, filter: {group: "{state.q.rare}"}, fallback: {min_results: 2, relax: [group]}}, reads: [q], writes: [c4]}
+      - {id: c5_mmr, kind: retrieve@1, params: {store: docs, query: "{state.q.text}", top_k: 3, search: mmr, mmr: {fetch_k: 6, lambda: 0.5}, score_threshold: 0.0}, reads: [q], writes: [c5]}
+      - {id: c6_table, kind: retrieve@1, params: {store: rows, where: {group: "{state.q.rare}"}, limit: 2, fallback: {min_results: 1, relax: [group]}}, reads: [q], writes: [c6]}
+      - {id: summary, kind: render@1, params: {template: templates/summary.md, format: md, to: note}, reads: [q, c1, c2, c3, c4, c5, c6], writes: [note]}
+    edges: [[START, c1_plain], [c1_plain, c2_filter], [c2_filter, c3_filter_list], [c3_filter_list, c4_relax], [c4_relax, c5_mmr], [c5_mmr, c6_table], [c6_table, summary], [summary, END]]
+entrypoints:
+  - {graph: probe, input: Query, output: Note}
+trace: {contract: 1}

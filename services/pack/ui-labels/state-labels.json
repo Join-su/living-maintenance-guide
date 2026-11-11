@@ -1,0 +1,30 @@
+{
+ "format": "task10-pack/state-labels@1",
+ "pack": "c1a15",
+ "input_summary": {
+  "state": "request",
+  "fields": ["group", "kind", "session_id", "event_card.equipment_id"],
+  "names": {
+   "group": {"TW": "공구 마모 경고", "PW": "출력 이탈", "CL": "온도 차 저하", "LD": "토크 과부하"},
+   "kind": {"alarm": "알람", "start": "첫 판정", "judge": "다음 판정", "report": "보고서 문장"}
+  }
+ },
+ "run_kind": "request.kind",
+ "group": "request.group",
+ "check_minutes": "request.minutes",
+ "chosen_check": "result.decision.section",
+ "exception_check": "result.exception_guide.section",
+ "check_cause": {"2.3": "TW-3", "2.4": "TW-2", "2.5": "TW-1", "2.6": "TW-4", "3.3": "PW-1", "3.4": "PW-3", "3.5": "PW-2", "3.6": "PW-2", "4.3": "CL-1", "4.4": "CL-2", "4.5": "CL-3", "4.6": "CL-4", "5.3": "LD-1", "5.4": "LD-3", "5.5": "LD-2", "5.6": "LD-2"},
+ "diagnose": {
+  "retrieve_history_cl": {"measure": "cause_share", "items": "history_hits", "cause": "metadata.cause", "min": 0.5},
+  "retrieve_history": {"measure": "cause_share", "items": "history_hits", "cause": "metadata.cause", "min": 0.5},
+  "first_judge": {"measure": "cause_rank", "ranks": "result.decision.probabilities", "max": 1}
+ },
+ "review_target": {
+  "any": [
+   {"request.kind": ["start", "report"]},
+   {"request.kind": ["judge"], "result.decision.kind": ["instruct", "instruct_after_checklist", "action", "action_after_checklist"]},
+   {"request.kind": ["judge"], "result.decision.kind": ["call"], "result.decision.reason": ["top_cause_cd_only", "no_ab_left"]}
+  ]
+ }
+}

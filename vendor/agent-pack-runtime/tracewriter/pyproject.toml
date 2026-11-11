@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tracewriter"
+dynamic = ["version"]
+description = "Shared trace writer: stores trace contract 2 run events in PostgreSQL `trace` (append only) with redaction and content-addressed raw payloads"
+requires-python = ">=3.12"
+dependencies = [
+  "psycopg[binary]>=3.2",
+  "jsonschema>=4.26.0",
+]
+
+[tool.setuptools.dynamic]
+version = {attr = "tracewriter.__version__"}
+
+[tool.setuptools.packages.find]
+include = ["tracewriter", "tracewriter.*"]

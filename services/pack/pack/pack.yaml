@@ -1,0 +1,299 @@
+# C1-a15 Pack(c1a15-pack) — 정비 길잡이 알람 · 첫 Run · 판정 · 보고서 문장(약속 v4 = contracts/v4, Pack EV-001 PS-01 · PS-05 · PS-02). packrt v0.15.0(d3bc887) 표준 node + custom_code@3 확장 지점만.
+# 입력은 요청 본문으로만(C1-a15 앱 모듈 · 앱 DB import 0). 갈래: alarm(알람 앞단) · start(첫 Run — 이력 리트리버 retrieve@2 상위 10건, 다리 칸 similar는 받되 쓰지 않음) · judge(다음 Run) · report(보고서 cause · action 문장).
+ir_version: 1
+runtime_contract: {min_runtime_version: 0.12.1}
+pack:
+  id: c1a15
+  version: V1
+  title: "정비 길잡이 알람 · 판정 (C1-a15)"
+  description: "센서 행(EventCard)으로 알람을 켤지 · 증상군을 정하고(alarm), 세션 시작 때 상위 10건과 첫 단계를(start), 정비자 입력마다 매뉴얼 규칙(R1 ~ R13)대로 다음 단계 하나를(judge) 정하고, 보고서 원인 · 조치 문장을 근거 검사와 함께 쓴다(report). 매뉴얼 · 이력 · 자리 모델은 synthetic."
+env: {required: []}
+stores:
+  history:   # 이력 DB(store 선언 = 약속 v4 README 3절 · D-287 받은 편지 문서 칸) — release는 packrt-1 build(D-301), Pack은 실행 설정으로 고름
+    type: vector
+    index:
+      embedding: {provider: openai, model: text-embedding-3-small}   # D-303(매뉴얼 store도 같음) — release id에 들어감
+      split: record
+      metadata: [evidence_type, source, symptom_group, cause, air_temperature_k, process_temperature_k, rotational_speed_rpm, torque_nm, tool_wear_min, temp_diff_k, power_w]
+      rerank_norm: {fields: [air_temperature_k, process_temperature_k, rotational_speed_rpm, torque_nm, tool_wear_min, temp_diff_k, power_w], from: {source: generated}}
+    filterable: [symptom_group]   # store 바로 아래(index 안이면 schema 오류). cause는 filterable 밖 — 고른 뒤 return_metadata로만(D-305)
+  manuals:   # 매뉴얼 DB(MG-MM 절 하나 = 조각 하나, 증상군 필터 없음 — c1a15 012-09) — release는 packrt-1 build(D-301), 결과는 state · trace에만(출력 칸 0, PC-05)
+    type: vector
+    index:
+      embedding: {provider: openai, model: text-embedding-3-small}   # D-303(이력 store와 같음)
+      split: section
+      metadata: [evidence_type, source]
+schemas:
+  RunRequest: schemas/run_request.json
+  RunResult: schemas/run_result.json
+  AlarmBasis: schemas/alarm_basis.json
+  ModelInput: schemas/model_input.json
+  Prediction: schemas/prediction.json
+  ReportSentences: schemas/report_sentences.json
+  ExceptionSplit: schemas/exception_split.json
+  ReportCheck: schemas/report_check.json
+  HistoryQuery: schemas/history_query.json
+  Hit: schemas/hit.json
+graphs:
+  run:
+    state:
+      request: RunRequest
+      alarm_basis: AlarmBasis
+      model_input: ModelInput
+      prediction: Prediction
+      report_text: ReportSentences
+      report_check: ReportCheck
+      report_text_2: ReportSentences
+      report_check_2: ReportCheck
+      split_text: ExceptionSplit
+      history_query: HistoryQuery
+      history_hits: {type: "list[Hit]"}
+      manual_hits: {type: "list[Hit]"}
+      result: RunResult
+    nodes:
+      - id: route_request
+        kind: router@1
+        params: {by: state.request.kind, cases: {"alarm": prepare_alarm, "start": prepare_history_query, "judge": judge, "report": write_report, "exception_similar": exception_similar, "exception_split": split_exception}, default: unsupported}
+        reads: [request]
+        writes: []
+        expect: {text: "요청 종류로 갈래를 고른다 — 알람(alarm) · 첫 Run(start) · 다음 Run(judge) · 보고서 문장(report) · 예외 비슷한 것 찾기(exception_similar) · 예외 칸 AI 나눔(exception_split)"}
+      - id: prepare_alarm
+        kind: custom_code@3
+        params: {fn: "custom.alarm:prepare_alarm"}
+        capabilities: {network: none, side_effect: none}
+        reads: [request]
+        writes: [alarm_basis]
+        expect: {text: "센서 5칸에서 출력 · 온도 차를 계산하고 train 경계를 넘었는지 본다 — 앱 경계 판정과 같은 값"}
+      - id: route_alarm_mode
+        kind: router@1
+        params: {by: state.request.event_card.source_mode, cases: {"ml_predicted": prepare_features, "sensor_boundary": decide_alarm_boundary}, default: unsupported}
+        reads: [request]
+        writes: []
+        expect: {text: "알람을 정하는 길로 가른다 — 경계 규칙만(sensor_boundary) · ML 예측 + 경계(ml_predicted)"}
+      - id: prepare_features
+        kind: custom_code@3
+        params: {fn: "custom.features:prepare"}
+        capabilities: {network: none, side_effect: none}
+        reads: [request]
+        writes: [model_input]
+        expect: {text: "모델 입력 칸을 만든다 — 정답을 쓰지 않음"}
+      - id: predict_failure
+        kind: predict@1
+        params:
+          model: failure_classifier
+          features: {from: model_input}
+          output: Prediction
+        reads: [model_input]
+        writes: [prediction]
+        expect: {text: "고장 유형(NONE 포함)과 확률을 낸다 — 실패하면 Run 실패(앱이 알람 없음 사유 model_failure로 읽음, D-275)"}
+      - id: decide_alarm
+        kind: custom_code@3
+        params: {fn: "custom.alarm:decide_alarm"}
+        capabilities: {network: none, side_effect: none}
+        reads: [request, alarm_basis, prediction]
+        writes: [result]
+        expect: {text: "알람을 켤지 · 증상군 · 알람 없음 사유를 정한다 — 위험도 ≥ 요청 문턱(앱 사용자 설정), 증상군은 경계 먼저"}
+      - id: prepare_history_query
+        kind: custom_code@3
+        params:
+          fn: "custom.judge:history_query"
+          options:   # D-476 ① 이력 질의 글 꼴 — 이력 · 매뉴얼 두 리트리버가 같은 글
+            query_text: {type: choice, choices: [group_direction, sensor_words, sensor_boundary], value: group_direction, label: "이력 질의 글 꼴"}
+        capabilities: {network: none, side_effect: none}
+        reads: [request]
+        writes: [history_query]
+        expect: {text: "이력 리트리버 질의를 만든다 — 글(증상군 이름 · 알람 방향) · 필터(증상군) · 재정렬 센서 7칸. 요청 similar는 쓰지 않음"}
+      - id: route_history   # D-525 덧 10(v20): 증상군 갈래 — 냉각(CL)만 냉각 전용 이력 node로, 자동 개선이 냉각 node 옵션만 바꿀 수 있게
+        kind: router@1
+        params: {by: state.history_query.group, cases: {"CL": retrieve_history_cl}, default: retrieve_history}
+        reads: [history_query]
+        writes: []
+        expect: {text: "증상군에 따라 이력 찾기를 고른다 — 냉각은 '이력 찾기 · 냉각', 나머지 증상군은 '이력 찾기'(설정은 따로 바꿀 수 있음)"}
+      - id: retrieve_history
+        kind: retrieve@2
+        params:
+          store: history
+          query: "{state.history_query.text}"
+          filter: {symptom_group: "{state.history_query.group}"}
+          method: hybrid   # 옵션 기본값 = 앱 R3 값(앱 7b79da9 data/retriever.json — ES-18에서 지움, G-9 대조 기록 PS-02) — 바퀴 ① 손잡이
+          lexical: {tokenizer: ko-bigram-1, k1: 1.5, b: 0.75}
+          fuse: {method: rrf, k: 60, pool: 300}
+          rerank: {fields: [air_temperature_k, process_temperature_k, rotational_speed_rpm, torque_nm, tool_wear_min, temp_diff_k, power_w], query: "{state.history_query.sensors}", weights: {retrieval: 0.5, sensor: 0.5}}
+          top_k: 10
+          score_threshold: null
+          return_metadata: [cause]
+        reads: [history_query]
+        writes: [history_hits]
+        expect: {text: "이력 DB에서 같은 증상군의 비슷한 이력 상위 10건을 고른다(BM25 + 벡터 → RRF → 센서 재정렬)"}
+      - id: retrieve_history_cl   # D-525 덧 10(v20): 시작 값 = retrieve_history와 같음(v19 출력 그대로) — 냉각 증상군만 지남
+        kind: retrieve@2
+        params:
+          store: history
+          query: "{state.history_query.text}"
+          filter: {symptom_group: "{state.history_query.group}"}
+          method: hybrid
+          lexical: {tokenizer: ko-bigram-1, k1: 1.5, b: 0.75}
+          fuse: {method: rrf, k: 60, pool: 300}
+          rerank: {fields: [air_temperature_k, process_temperature_k, rotational_speed_rpm, torque_nm, tool_wear_min, temp_diff_k, power_w], query: "{state.history_query.sensors}", weights: {retrieval: 0.5, sensor: 0.5}}
+          top_k: 10
+          score_threshold: null
+          return_metadata: [cause]
+        reads: [history_query]
+        writes: [history_hits]
+        expect: {text: "이력 찾기 · 냉각 — 이력 DB에서 냉각 증상군의 비슷한 이력 상위 10건을 고른다(BM25 + 벡터 → RRF → 센서 재정렬)"}
+      - id: retrieve_manual
+        kind: retrieve@2
+        params:
+          store: manuals
+          query: "{state.history_query.text}"
+          method: hybrid   # 옵션 = 이력 node와 같은 기본값(앱 R3) — 바퀴 ② 손잡이(청크 크기 · 오버랩은 다음 release)
+          lexical: {tokenizer: ko-bigram-1, k1: 1.5, b: 0.75}
+          fuse: {method: rrf, k: 60, pool: 300}
+          top_k: 10
+          score_threshold: null
+        reads: [history_query]
+        writes: [manual_hits]
+        expect: {text: "매뉴얼 DB에서 관련 절 상위 10개를 고른다 — 결과는 trace에 남고, 판정 옵션 use_manual을 켤 때만 첫 판정이 원인 몫으로 씀(바퀴 ② 채점 자리)"}
+      - id: first_judge
+        kind: custom_code@3
+        params:
+          fn: "custom.judge:start"
+          options:   # D-476 판정 셈(③) · 매뉴얼 결과(④) — first_judge · judge 같은 선언 · 같은 값(packrt 0.15.0 한 그래프 한 값). 안전 규칙은 옵션 밖
+            score_rule: {type: choice, choices: [sum, rank_weighted, near_only], value: rank_weighted, label: "판정 셈 꼴"}
+            near_min: {type: number, min: 0.5, max: 0.95, step: 0.05, value: 0.8, label: "아주 비슷한 기록 기준(near_only)"}
+            base_score: {type: number, min: 0.1, max: 2, step: 0.1, value: 0.5, label: "원인 기본 점수"}
+            call_threshold: {type: integer, min: 30, max: 90, step: 5, value: 50, loosen: up, label: "파트장 호출 기준(1순위 %)"}
+            use_manual: {type: switch, value: false, label: "매뉴얼 결과를 판정에 씀"}
+            manual_weight: {type: number, min: 0, max: 1, step: 0.1, value: 0.3, label: "매뉴얼 결과 비중"}
+            order_signal: {type: choice, choices: [count_equipment, count_group, evidence, similar], value: count_equipment, label: "원인 확률 셈"}   # D-546 덧 4(dev-2 사용자 결정): 범위 안 개수 비율 · 같은 설비(칸 없으면 같은 증상군)
+            check_first_tw: {type: choice, choices: [none, s2_3, s2_4, s2_5, s2_6], value: none, label: "먼저 볼 점검(TW)"}   # D-565 덧 3: 헛걸음 고침 — 그 증상군 A · B 점검 하나를 먼저 · none = 지금과 같음 · 절은 s<번호>(packrt choice 이름 꼴)
+            check_first_pw: {type: choice, choices: [none, s3_3, s3_4, s3_5], value: none, label: "먼저 볼 점검(PW)"}   # D-565 덧 3: 헛걸음 고침 — 그 증상군 A · B 점검 하나를 먼저 · none = 지금과 같음 · 절은 s<번호>(packrt choice 이름 꼴)
+            check_first_cl: {type: choice, choices: [none, s4_3, s4_5, s4_6], value: none, label: "먼저 볼 점검(CL)"}   # D-565 덧 3: 헛걸음 고침 — 그 증상군 A · B 점검 하나를 먼저 · none = 지금과 같음 · 절은 s<번호>(packrt choice 이름 꼴)
+            check_first_ld: {type: choice, choices: [none, s5_3, s5_4, s5_5], value: none, label: "먼저 볼 점검(LD)"}   # D-565 덧 3: 헛걸음 고침 — 그 증상군 A · B 점검 하나를 먼저 · none = 지금과 같음 · 절은 s<번호>(packrt choice 이름 꼴)
+        capabilities: {network: none, side_effect: none}
+        reads: [request, history_hits, manual_hits]
+        writes: [result]
+        expect: {text: "세션 시작 — 리트리버가 고른 상위 10건과 첫 단계를 정한다(retrieval 넷은 조각 값만)"}
+      - id: judge
+        kind: custom_code@3
+        params:
+          fn: "custom.judge:judge"
+          options:   # D-476 판정 셈(③) · 매뉴얼 결과(④) — first_judge · judge 같은 선언 · 같은 값(packrt 0.15.0 한 그래프 한 값). 안전 규칙은 옵션 밖
+            score_rule: {type: choice, choices: [sum, rank_weighted, near_only], value: rank_weighted, label: "판정 셈 꼴"}
+            near_min: {type: number, min: 0.5, max: 0.95, step: 0.05, value: 0.8, label: "아주 비슷한 기록 기준(near_only)"}
+            base_score: {type: number, min: 0.1, max: 2, step: 0.1, value: 0.5, label: "원인 기본 점수"}
+            call_threshold: {type: integer, min: 30, max: 90, step: 5, value: 50, loosen: up, label: "파트장 호출 기준(1순위 %)"}
+            use_manual: {type: switch, value: false, label: "매뉴얼 결과를 판정에 씀"}
+            manual_weight: {type: number, min: 0, max: 1, step: 0.1, value: 0.3, label: "매뉴얼 결과 비중"}
+            order_signal: {type: choice, choices: [count_equipment, count_group, evidence, similar], value: count_equipment, label: "원인 확률 셈"}   # D-546 덧 4(dev-2 사용자 결정): 범위 안 개수 비율 · 같은 설비(칸 없으면 같은 증상군)
+            check_first_tw: {type: choice, choices: [none, s2_3, s2_4, s2_5, s2_6], value: none, label: "먼저 볼 점검(TW)"}   # D-565 덧 3: 헛걸음 고침 — 그 증상군 A · B 점검 하나를 먼저 · none = 지금과 같음 · 절은 s<번호>(packrt choice 이름 꼴)
+            check_first_pw: {type: choice, choices: [none, s3_3, s3_4, s3_5], value: none, label: "먼저 볼 점검(PW)"}   # D-565 덧 3: 헛걸음 고침 — 그 증상군 A · B 점검 하나를 먼저 · none = 지금과 같음 · 절은 s<번호>(packrt choice 이름 꼴)
+            check_first_cl: {type: choice, choices: [none, s4_3, s4_5, s4_6], value: none, label: "먼저 볼 점검(CL)"}   # D-565 덧 3: 헛걸음 고침 — 그 증상군 A · B 점검 하나를 먼저 · none = 지금과 같음 · 절은 s<번호>(packrt choice 이름 꼴)
+            check_first_ld: {type: choice, choices: [none, s5_3, s5_4, s5_5], value: none, label: "먼저 볼 점검(LD)"}   # D-565 덧 3: 헛걸음 고침 — 그 증상군 A · B 점검 하나를 먼저 · none = 지금과 같음 · 절은 s<번호>(packrt choice 이름 꼴)
+        capabilities: {network: none, side_effect: none}
+        reads: [request]
+        writes: [result]
+        expect: {text: "업무 기록을 접어(fold) 매뉴얼 규칙으로 다음 단계 하나를 정한다(decide) — C1-a15 앱 inproc 길과 같은 값"}
+      - id: write_report
+        kind: llm@1
+        params: {provider: openai, model: gpt-4.1-mini-2025-04-14, prompt: prompts/report_sentence.md, output: ReportSentences, temperature: 0}
+        reads: [request]
+        writes: [report_text]
+        expect: {text: "보고서 초안의 원인 · 조치 두 칸을 초안 사실만으로 다듬는다"}
+      - id: check_report
+        kind: validate@2
+        params:
+          rules:
+            - custom: "custom.report:grounded"
+          on_fail: rewrite_report
+        reads: [request, report_text]
+        writes: [report_check]
+        expect: {text: "두 문장의 절 번호 · 근거 사례 ID · 수치가 초안 · 상위 10건 · 세션 절에 있는지 본다(앱 R8 규칙 사본) — 떨어지면 다시 쓰기로"}
+      - id: rewrite_report
+        kind: llm@1
+        params: {provider: openai, model: gpt-4.1-mini-2025-04-14, prompt: prompts/report_rewrite.md, output: ReportSentences, temperature: 0}
+        reads: [request, report_text, report_check]
+        writes: [report_text_2]
+        expect: {text: "근거 검사에 떨어진 칸만 한 번 다시 쓴다"}
+      - id: check_report_2
+        kind: validate@2
+        params:
+          rules:
+            - custom: "custom.report:grounded_2"
+          on_fail: finish_report
+        reads: [request, report_text, report_check, report_text_2]
+        writes: [report_check_2]
+        expect: {text: "다시 쓴 칸을 같은 규칙으로 본다 — 떨어진 칸은 원문으로"}
+      - id: finish_report
+        kind: custom_code@3
+        params: {fn: "custom.report:finish"}
+        capabilities: {network: none, side_effect: none}
+        reads: [request, report_text, report_check, report_text_2, report_check_2]
+        writes: [result]
+        expect: {text: "칸마다 통과한 문장 또는 원문 · 원문 대체 표시를 결과로 낸다"}
+      - id: decide_alarm_boundary
+        kind: custom_code@3
+        params: {fn: "custom.alarm:decide_alarm"}
+        capabilities: {network: none, side_effect: none}
+        reads: [request, alarm_basis]
+        writes: [result]
+        expect: {text: "경계 길 알람 — 경계 판정만(예측 없음)"}
+      - id: finish_report_1
+        kind: custom_code@3
+        params: {fn: "custom.report:finish"}
+        capabilities: {network: none, side_effect: none}
+        reads: [request, report_text, report_check]
+        writes: [result]
+        expect: {text: "첫 보고서가 근거 검사를 통과한 길 — 칸마다 첫 문장"}
+      - id: exception_similar   # D-556 약속 v9: 보고서 예외 칸 AI 나눔 결과 → 등록 예외 · 매뉴얼 절 중 비슷한 것(호출 0)
+        kind: custom_code@3
+        params: {fn: "custom.similar:find"}
+        capabilities: {network: none, side_effect: none}
+        reads: [request]
+        writes: [result]
+        expect: {text: "예외 글(점검 · 조치)마다 그 증상군의 등록 예외 · 매뉴얼 점검 · 조치 절 중 비슷한 것 상위 3을 고른다 — 정비자가 같음 / 아님을 고르게"}
+      - id: split_exception   # D-556 덧 7 약속 v9: 보고서 예외 칸 자유 글 → 점검 1 + 조치 1 짝 × n(AI 호출 1번 · 다시 묻기 0)
+        kind: llm@1
+        params: {provider: openai, model: gpt-4.1-mini-2025-04-14, prompt: prompts/exception_split.md, output: ExceptionSplit, temperature: 0, strict: true}   # 실제 1건(013-200) output_schema → strict 구조화 출력(꼴 밖 출력 0)
+        reads: [request]
+        writes: [split_text]
+        expect: {text: "예외 칸 글을 정비자가 본 것 하나 · 한 일 하나 짝으로 나눈다 — 글에 없는 수치 · 부품은 만들지 않음"}
+      - id: finish_split
+        kind: custom_code@3
+        params: {fn: "custom.split:finish"}
+        capabilities: {network: none, side_effect: none}
+        reads: [request, split_text]
+        writes: [result]
+        expect: {text: "나눈 짝을 약속 v9 items 꼴로 거른다 — 빈 칸 짝은 빼고, 남은 짝이 없으면 빈 items와 까닭(not_split · invalid_output)"}
+      - id: unsupported
+        kind: render@1
+        params: {template: templates/unsupported.json, format: json, to: result}
+        reads: [request]
+        writes: [result]
+        expect: {text: "모르는 요청 종류는 판정하지 않고 그렇다고 남긴다"}
+    edges:
+      - [START, route_request]
+      - [prepare_alarm, route_alarm_mode]
+      - [prepare_features, predict_failure]
+      - [predict_failure, decide_alarm]
+      - [decide_alarm, END]
+      - [decide_alarm_boundary, END]
+      - [finish_report_1, END]
+      - [prepare_history_query, route_history]
+      - [retrieve_history, retrieve_manual]
+      - [retrieve_history_cl, retrieve_manual]
+      - [retrieve_manual, first_judge]
+      - [first_judge, END]
+      - [judge, END]
+      - [write_report, check_report]
+      - [check_report, finish_report_1]
+      - [rewrite_report, check_report_2]
+      - [check_report_2, finish_report]
+      - [finish_report, END]
+      - [exception_similar, END]
+      - [split_exception, finish_split]
+      - [finish_split, END]
+      - [unsupported, END]
+entrypoints:
+  - {graph: run, input: RunRequest, output: RunResult}
+trace: {contract: 1}

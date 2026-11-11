@@ -1,0 +1,230 @@
+
+*{box-sizing:border-box}body{margin:0;font:13px/1.45 -apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;color:#1f2937;background:#fff}
+.mode{background:#fef3c7;color:#92400e;font-size:11.5px;padding:4px 14px}
+.app{display:grid;grid-template-columns:210px 1fr;min-height:calc(100vh - 24px)}
+.side{background:#f7f7f8;border-right:1px solid #e5e7eb;padding:10px 8px;display:flex;flex-direction:column;gap:2px}
+.side .brand{font-weight:800;padding:4px 8px 8px}.side .proj{border:1px solid #d1d5db;background:#fff;border-radius:6px;padding:5px 8px;margin-bottom:8px;font-size:12.5px}
+.side .grp{color:#9ca3af;font-size:11px;padding:8px 8px 2px}.side a{display:block;padding:5px 8px;border-radius:5px;color:#374151;text-decoration:none}.side a.on{background:#e8eefc;color:#1d4ed8;font-weight:600}
+.side .foot{margin-top:auto}
+.content{min-width:0;display:flex;flex-direction:column}
+.bar{display:flex;align-items:center;gap:8px;padding:9px 16px;border-bottom:1px solid #e5e7eb}.bar .crumb{color:#6b7280}.bar .crumb b{color:#111827}
+main{padding:14px 16px;display:grid;gap:10px;align-content:start}
+h1{font-size:20px;margin:0}h3{margin:0 0 6px;font-size:13.5px}.muted{color:#6b7280}.small{font-size:11.5px}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.sp{flex:1}
+.rg{position:relative;background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:10px 12px}.rg.flat{border-color:transparent;padding:4px 0}.rg.band{background:#f9fafb}.rg.dash{border-style:dashed}.rg.err{border-color:#dc2626;background:#fef2f2}
+.rid{position:absolute;top:-8px;right:8px;background:#111827;color:#fff;font:600 10px/1 monospace;padding:3px 5px;border-radius:3px;opacity:.8}
+.btn{display:inline-block;border:1px solid #d1d5db;color:#1f2937;background:#fff;border-radius:6px;padding:4px 10px;font-size:12px;white-space:nowrap}.btn.p{background:#3056d3;border-color:#3056d3;color:#fff}.btn.d{border-color:#dc2626;color:#dc2626}.btn.off{opacity:.4}.link{color:#3056d3}
+.chip{display:inline-block;border:1px solid #d1d5db;border-radius:6px;padding:2px 8px;font-size:11.5px;background:#fff}.chip.on{border-color:#3056d3;color:#1d4ed8;background:#eff6ff}
+.badge{display:inline-block;border-radius:999px;padding:0 7px;font-size:11px;background:#f3f4f6}.badge.hold{background:#fef3c7;color:#92400e}.badge.ok{background:#dcfce7;color:#166534}.badge.run{background:#dbeafe;color:#1d4ed8}
+table{width:100%;border-collapse:collapse;font-size:12px}th,td{border-bottom:1px solid #eef0f3;padding:6px;text-align:left;vertical-align:top}th{color:#6b7280;font-weight:500;background:#fafafa}td.bad{color:#dc2626}
+input,textarea{font:inherit;font-size:12px;border:1px solid #d1d5db;border-radius:6px;padding:4px 6px;background:#fff}
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.card{border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#fff}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}.tile{border:1px solid #e5e7eb;border-radius:8px;background:#fff;display:flex;flex-direction:column}.tile .th{display:flex;gap:6px;align-items:center;padding:8px 10px;border-bottom:1px solid #eef0f3}.tile .tb{padding:8px 10px;flex:1}.tile .stripe{width:4px;align-self:stretch;border-radius:2px}
+.split{display:grid;grid-template-columns:280px 1fr;gap:12px;align-items:start}.split3{display:grid;grid-template-columns:240px 1fr 320px;gap:12px;align-items:start}.main-side{display:grid;grid-template-columns:1fr 320px;gap:12px;align-items:start}
+.lrow{display:flex;align-items:center;gap:6px;padding:7px 8px;border-radius:6px;border:1px solid transparent}.lrow.on{background:#eff6ff;border-color:#bfdbfe}.lrow+.lrow{margin-top:2px}
+.props td:first-child{color:#6b7280;width:110px;border:0}.props td{border:0;padding:4px 6px}
+.scrim{position:fixed;inset:0;background:rgba(17,24,39,.32);display:flex;align-items:flex-start;justify-content:center;padding-top:80px;z-index:3}.modal{background:#fff;border:1px solid #d1d5db;border-radius:10px;width:720px;box-shadow:0 20px 50px rgba(0,0,0,.25);position:relative}.modal .mh{padding:12px 14px;border-bottom:1px solid #eef0f3;display:flex;gap:6px}.modal .mb{padding:12px 14px;display:grid;gap:10px}.modal .mf{padding:10px 14px;border-top:1px solid #eef0f3;display:flex;gap:6px;justify-content:flex-end;align-items:center}
+.bg{opacity:.55;pointer-events:none}
+.editor{display:grid;grid-template-rows:auto 1fr auto;border:1px solid #e5e7eb;border-radius:8px;min-height:540px;background:#fbfbfc}.editor .eb{display:flex;align-items:center;gap:8px;padding:8px 10px;border-bottom:1px solid #e5e7eb;background:#fff;border-radius:8px 8px 0 0}
+.seg{display:inline-flex;border:1px solid #d1d5db;border-radius:6px;overflow:hidden}.seg span{padding:3px 10px;font-size:12px}.seg .on{background:#eef2ff;color:#1d4ed8;font-weight:600}
+.canvas{position:relative;display:grid;grid-template-columns:1fr;gap:10px;padding:12px}.canvas.p3{grid-template-columns:230px 1fr 300px}.canvas.p2{grid-template-columns:1fr 300px}
+.status{display:flex;align-items:center;gap:8px;justify-content:center;padding:8px;border-top:1px solid #e5e7eb;background:#fff;border-radius:0 0 8px 8px}.status .pill{border:1px solid #e5e7eb;border-radius:8px;padding:6px 10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;box-shadow:0 2px 6px rgba(0,0,0,.06)}.status.err .pill{border-color:#dc2626;background:#fef2f2}
+.panel{background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:10px}.tabs{display:flex;gap:14px;border-bottom:1px solid #e5e7eb;margin-bottom:8px}.tab{padding:4px 0;color:#6b7280;font-size:12px}.tab.on{color:#1d4ed8;border-bottom:2px solid #3056d3;font-weight:600}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.kpi{border:1px solid #e5e7eb;border-radius:8px;padding:10px}.kpi b{font-size:18px;display:block}
+.empty{border:1px solid #e5e7eb;border-radius:8px;padding:24px;text-align:center;background:#fff}.empty h2{font-size:17px;margin:0 0 6px}
+.drop{border:1.5px dashed #9ca3af;border-radius:8px;padding:12px;text-align:center;color:#6b7280}
+.note{font-size:11.5px;color:#92400e;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:5px 9px}
+.banner{display:flex;gap:8px;align-items:center;background:#eef2ff;border:1px solid #c7d2fe;border-radius:8px;padding:8px 12px}.banner.err{background:#fef2f2;border-color:#fecaca}
+.choice{border:1px solid #d1d5db;border-radius:10px;padding:16px;text-align:center}.choice.off{opacity:.45}.choice.on{border-color:#3056d3;box-shadow:0 0 0 2px #bfdbfe}
+.mon{border:1px solid #e5e7eb;border-radius:8px;background:#fff;min-width:340px;min-height:230px;display:flex;flex-direction:column}.mon .mh{display:flex;gap:6px;align-items:center;padding:7px 10px;border-bottom:1px solid #eef0f3}.mon .mb{padding:8px 10px;display:grid;gap:6px}.mon .out{font-size:11.5px;background:#f9fafb;border-radius:6px;padding:6px 8px;color:#374151}
+.mgrid{display:grid;gap:10px;overflow:auto}.strip{display:flex;gap:6px;align-items:center;padding:8px 10px;border:1px solid #e5e7eb;border-radius:8px;background:#fff}
+.sect{display:grid;grid-template-columns:200px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid #eef0f3}.sect h3{margin:0}
+.field{display:grid;gap:3px;margin-bottom:8px}.field label{font-size:12px;color:#374151;font-weight:600}.box{border:1px solid #d1d5db;border-radius:6px;min-height:28px;padding:5px 7px;font-size:12px;color:#6b7280}
+.toc a{display:block;padding:4px 8px;border-left:2px solid #e5e7eb;color:#374151;text-decoration:none;font-size:12px}.toc a.on{border-left-color:#3056d3;color:#1d4ed8;font-weight:600}
+svg text{font-family:inherit}
+
+.wb{display:grid;grid-template-rows:auto 1fr;border:1px solid #e5e7eb;border-radius:8px;min-height:600px;background:#fbfbfc}
+.wtabs{display:flex;align-items:center;gap:2px;padding:6px 8px 0;border-bottom:1px solid #e5e7eb;background:#fff;border-radius:8px 8px 0 0}.wtab{padding:6px 12px;font-size:12.5px;color:#6b7280;border:1px solid transparent;border-bottom:0;border-radius:6px 6px 0 0}.wtab.on{background:#fbfbfc;border-color:#e5e7eb;color:#111827;font-weight:600;margin-bottom:-1px}.wsep{width:1px;height:18px;background:#d1d5db;margin:0 6px}
+.wbody{display:grid;grid-template-columns:1fr 330px;min-height:560px}.wcenter{position:relative;padding:12px;min-width:0}.insp{border-left:1px solid #e5e7eb;background:#fff;padding:10px 12px}
+.helpcards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.helpcard{border:1px solid #c4b5fd;background:#f5f3ff;border-radius:8px;padding:10px;text-align:center;font-size:12px}
+.board{display:flex;gap:10px;overflow-x:auto;align-items:flex-start;padding-bottom:6px}.col{flex:0 0 215px;background:#f1f2f4;border-radius:10px;padding:8px}.col .chd{display:flex;align-items:center;gap:6px;font-weight:600;font-size:12.5px;padding:2px 4px 8px}.kcard{background:#fff;border-radius:8px;box-shadow:0 1px 1px rgba(0,0,0,.15);padding:8px;margin-bottom:6px;font-size:12px}.kcard.on{outline:2px solid #3056d3}.addc{color:#6b7280;font-size:12px;padding:4px}
+.bwrap{display:grid;grid-template-columns:1fr 290px;gap:12px;align-items:start}.info{background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:10px 12px}
+.bigm{background:#fff;border-radius:10px;width:1000px;box-shadow:0 20px 50px rgba(0,0,0,.3);display:grid;grid-template-columns:1fr 250px;gap:14px;padding:16px;position:relative}.bigm .side h3{font-size:12px;color:#6b7280}.act{background:#f1f2f4;border-radius:6px;padding:6px 8px;margin-bottom:6px;font-size:12px}
+.queue-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.rid{display:none}svg[style]{background:transparent!important}
+:root{--bg:#eef1f6;--ink:#1d2433;--mute:#667085;--acc:#3056d3;--line:#e3e7ee;--bad:#c4320a}
+body{font-size:14.5px;line-height:1.55;background:var(--bg);color:var(--ink)}.small{font-size:12.5px}h3{font-size:15.5px}
+.side{background:#f8f9fc;border-color:var(--line)}.side a{border-radius:10px;padding:7px 10px}.side a.on{background:#e4e9ff;color:var(--acc)}.side .proj{border-radius:10px;padding:8px 10px}
+.bar{background:transparent;border:0;padding:12px 20px}main{padding:4px 20px 20px}
+.wb{background:transparent;border:0}.wtabs{background:transparent;border:0;gap:6px;padding:0 0 12px}
+.wtab{border:1px solid var(--line)!important;border-radius:999px;background:#fff;padding:6px 14px}.wtab.on{background:var(--ink);color:#fff;margin:0}.wsep{background:transparent}
+.wbody{gap:16px;min-height:560px}.wcenter{background:#fff;border-radius:18px;box-shadow:0 1px 2px rgba(16,24,40,.06),0 4px 12px rgba(16,24,40,.06);padding:20px}
+.insp{border:0;border-radius:18px;background:#fff;box-shadow:0 1px 2px rgba(16,24,40,.06),0 4px 12px rgba(16,24,40,.06);padding:16px 18px}
+.insp > .row:first-child{border:0!important;background:#f2f4f8;border-radius:999px;padding:3px;gap:0}.insp > .row:first-child span{margin:0!important;padding:5px 12px!important;border:0!important;border-radius:999px;color:var(--mute)!important}.insp > .row:first-child span[style*="font-weight:600"]{background:#fff;color:var(--ink)!important;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+svg rect{rx:14px}svg text[font-weight="700"]{font-size:12px}svg rect[stroke="#9ca3af"]{fill:#f8f9fb}
+.lrow{border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin-bottom:8px}.lrow.on{border:2px solid var(--acc);background:#f3f6ff}
+.btn{border-radius:999px;padding:7px 16px;font-size:13.5px}.btn.p{background:var(--acc);border-color:var(--acc);font-weight:600}
+.badge{border-radius:999px;padding:2px 10px;font-size:12px}
+.note{border-radius:14px;background:#f6f8fc;border-color:var(--line);color:#344054;padding:10px 12px}
+.rg.err,.banner.err{border-radius:14px;padding:12px 14px}
+textarea,input{border-radius:12px;padding:8px 10px;font-size:14px}textarea[style*="dc2626"]{border-width:2px!important;border-color:var(--bad)!important}
+div[style*="color:#dc2626"]{background:#fff4ed;border-radius:10px;padding:6px 10px;color:var(--bad)!important;font-weight:600}div[style*="color:#dc2626"]::before{content:"↑ "}
+table{font-size:13.5px}th{background:transparent;border-bottom:2px solid var(--line)}td,th{padding:9px 8px}td.bad{color:var(--bad);font-weight:600}
+.seg{border-radius:999px;border-color:var(--line)}.seg span{padding:5px 14px}.seg .on{background:var(--ink);color:#fff;border-radius:999px}
+/* many release tabs wrap to the next line instead of widening the page (AC-37: no horizontal scroll) */
+.wtabs{flex-wrap:wrap;row-gap:6px}
+.insp select{max-width:100%}
+/* EV-001: case-list status badges keep one shape; a long case text wraps in its own column instead of squeezing the badge */
+#case-list .lrow .badge{flex-shrink:0;white-space:nowrap}
+#case-list .lrow .small{min-width:0}
+/* EV-005: provider key cards (stack on a narrow window), provider choice in the new Project window */
+.keycards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-bottom:8px}
+.keycard{display:flex;flex-direction:column;gap:8px;border:1px solid var(--line);border-radius:14px;background:#fff;padding:14px 16px;min-height:170px}
+.keycard code{font-size:12px}
+.picon{width:22px;height:22px;flex-shrink:0;vertical-align:middle}
+.pchoice{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:4px 12px 4px 8px;font-size:13px}.pchoice.on{border-color:var(--acc);background:#f3f6ff}
+/* EV-011 visual quality — each rule names its change id (change-contract). Every color, font size, radius, shadow and filter value comes from the approved visual rules (prototype-slice 'Compiled selected visual rules') or the baseline web/app.css (checked by V-RULES, evidence/scripts/vrules.py). */
+/* V-01 surface: the outer flat regions have no surface of their own (approved: R-01 frame without border/background) */
+.rg.flat{background:transparent}
+/* V-02 cards: P01 Project cards, empty-state boxes and windows use the rounded card surface (radius 18, approved shadow) */
+.card,.empty{border:0;border-radius:18px;box-shadow:0 1px 2px rgba(16,24,40,.06),0 4px 12px rgba(16,24,40,.06)}
+.modal{border:0;border-radius:18px}
+.modal .mh{padding:14px 18px}.modal .mb{padding:14px 18px}.modal .mf{padding:12px 18px}
+/* D-610 (c1a15-ui 19:16): a window taller than the screen scrolls inside — the head stays, the buttons at the end of the body are reached */
+.modal{max-height:calc(100vh - 96px);display:flex;flex-direction:column}.modal .mh,.modal .mf{flex:none}.modal .mb{overflow-y:auto;min-height:0}
+/* V-03 controls: selects take the input form (radius 12, 14px, padding 8px 10px as the approved input rule, at least the 40px height of an input); property/how chips are pills like the segments */
+select{font:inherit;font-size:14px;color:var(--ink);background:#fff;border:1px solid #d1d5db;border-radius:12px;padding:8px 10px;min-width:96px;min-height:40px;max-width:100%}
+.chip{border-radius:999px;padding:3px 12px;font-size:12.5px;border-color:var(--line)}.chip.on{border-color:var(--acc);color:var(--acc);background:#f3f6ff}
+/* V-04 segment labels never break inside a word; a long segment wraps to a second row inside its track (radius 18: a one-row track still reads as a pill, a two-row track becomes a rounded card, since 999 would turn it into a lozenge) */
+.seg{flex-wrap:wrap;border-radius:18px}.seg span{white-space:nowrap}
+/* V-05 inspector banner: title on its own line, message and button below (no three squeezed columns) */
+.insp .banner{flex-wrap:wrap;row-gap:4px}.insp .banner>b{flex-basis:100%}
+/* V-06 run summary numbers: three equal tiles */
+#run-kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}#run-kpi .kpi{border-color:var(--line);border-radius:14px;padding:8px 10px!important}
+/* V-07 verdict form: 제외 범위·다음 가설 stack like the other fields of the vertical form (label above a full-width input) */
+span:has(> #v-excl),span:has(> #v-hyp){display:grid;gap:4px;flex:1 1 100%}#v-excl,#v-hyp{width:100%}
+/* V-08 states: hover on clickable surfaces, disabled cursor */
+.wtab:not(.on):hover,.btn:not(.p):not(.off):hover,.chip:not(.on):hover{background:#f2f4f8}.wtab:not(.on):hover,.btn:not(.p):not(.off):not(.d):hover,.chip:not(.on):hover{border-color:#9ca3af!important}.btn.p:not(.off):hover{background:#1d4ed8;border-color:#1d4ed8}
+.card:hover{outline:1px solid #d1d5db}.lrow:not(.on):hover{border-color:#d1d5db}
+.btn.off{cursor:not-allowed}
+/* V-09 empty-state choice cards and the frame around them follow the list-card radius (14) */
+.helpcard{border-radius:14px}
+#no-release{border-radius:14px}
+/* V-10 graph readability: the graph placed directly on a canvas card keeps readable labels (min width = its viewBox width, --gw) and only that canvas scrolls sideways; monitor graphs and every other canvas are untouched */
+.wcenter:has(> svg[data-graph]){overflow-x:auto}.wcenter > svg[data-graph]{min-width:var(--gw,0)}
+/* D-459: a tidy-laid graph fits its card (top to bottom it reads whole; a wider one is drawn smaller, never under the next column) */
+.wcenter{min-width:0}.wcenter > svg[data-graph][data-tidy],#reg-graph > svg[data-graph][data-tidy]{min-width:0;max-width:100%}
+/* D-467 (lead's choice, line shape C): a left-to-right graph keeps one readable size (0.85 of its own units) on the workbench, the
+   registration preview and the wheel's detail (0.7 in the monitor's smaller panels) — a deep one scrolls sideways inside its card */
+#reg-graph > svg[data-graph][data-flow="lr"],#auto-graph > svg[data-graph][data-flow="lr"]{width:calc(var(--gw,0px) * .85);min-width:0;max-width:none}
+/* D-652 덧 O-4: the version screen's left-to-right graph fits its card (it was cut on the right · scroll and fade, ORCH 231 ①); the edit
+   canvas keeps the old width — it needs room to drop a node (e2e CANVAS 14a found no empty spot on the fitted one) */
+.wcenter > svg[data-graph][data-flow="lr"]:not(.cv-edit){width:100%;min-width:0;max-width:100%}
+.wcenter > svg[data-graph][data-flow="lr"].cv-edit{width:calc(var(--gw,0px) * .85);min-width:0;max-width:none}
+svg[data-graph][data-flow="lr"][data-more]{-webkit-mask-image:linear-gradient(to right,#000 calc(var(--fade-at,100%) - 64px),rgba(0,0,0,.12) var(--fade-at,100%));mask-image:linear-gradient(to right,#000 calc(var(--fade-at,100%) - 64px),rgba(0,0,0,.12) var(--fade-at,100%))}
+.mon .mb:has(> svg[data-graph][data-flow="lr"]){overflow-x:auto}.mon .mb > svg[data-graph][data-flow="lr"]{width:calc(var(--gw,0px) * .7);min-width:0;max-width:none}
+/* answer 021-06: the P04 registration preview keeps the whole Pack graph at its own size inside the card — the graph alone scrolls sideways and the bar always shows (no shrinking: 10 px names stay readable) */
+#reg-graph{overflow-x:auto;padding-bottom:2px}#reg-graph > svg[data-graph]{min-width:var(--gw,0)}
+#reg-graph::-webkit-scrollbar{height:10px}#reg-graph::-webkit-scrollbar-track{background:#eef0f4;border-radius:5px}#reg-graph::-webkit-scrollbar-thumb{background:#aab2bf;border-radius:5px}
+/* V-03 (table) a select inside a table row stays compact so the row keeps one baseline (13px as the baseline .pchoice, radius 10 as the approved error notice box) */
+td select{padding:2px 8px;font-size:13px;min-width:0;min-height:0;border-radius:10px}
+/* V-11 new Project window: the borderless title and description fields keep inner space, so the text never touches the focus ring */
+#np-name,#np-desc{padding:6px 10px!important}
+/* V-12 label/value grids (case result, node detail): a long unbroken value (JSON, hash) wraps inside its cell instead of widening the page (AC-37) */
+.kv > *{min-width:0;overflow-wrap:anywhere}
+/* EV-012 node shapes and legend (CHG-72, CHG-73) — colors and sizes come from the approved visual rules or the baseline web/app.css */
+/* idle node fill follows the existing rule for the rounded box (svg rect[stroke="#9ca3af"]{fill:#f8f9fb}) on every outline shape */
+.graph-node [data-outline][stroke="#9ca3af"]{fill:#f8f9fb}
+/* legend under a canvas graph: one row of shape samples, wraps on narrow canvases */
+.graph-legend{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:6px;align-items:center}.graph-legend>span{display:inline-flex;align-items:center;gap:4px}.graph-legend svg{flex:none}
+/* EV-013 UI defect fixes (CHG-74, CHG-75, CHG-77; CHG-78 replaced the old link/selection blue in the rules above with the approved accent #3056d3) — values come from the approved visual rules or the baseline web/app.css */
+/* the chosen run input's whole label under the compare / monitor select (the closed select can cut it) */
+.sel-full{margin-top:4px;overflow-wrap:anywhere}
+/* P12 case table and generated-input table: a long JSON value wraps inside its cell (as V-12 .kv), so the table stays in the canvas card */
+#sets-table ~ table td:last-child,#gen-result td:nth-child(2){overflow-wrap:anywhere}
+/* monitor tiles take the approved card surface (radius 18, approved shadow) like the empty-state boxes inside a canvas (CHG-58); the release colour line on top stays */
+.mon{border:0;border-radius:18px;box-shadow:0 1px 2px rgba(16,24,40,.06),0 4px 12px rgba(16,24,40,.06)}
+/* EV-016 node detail panel (exec tab, Agent Pack release) — values from the approved visual rules or the baseline web/app.css */
+.node-detail h3{margin:10px 0 4px}
+.node-detail ul{margin:0;padding-left:16px;display:grid;gap:4px}
+.node-detail li[aria-disabled="true"]{color:#667085}
+.node-detail table td,.node-detail table th{padding:4px 6px}
+.node-detail #node-run-value>*{min-width:0;overflow-wrap:anywhere}
+/* long values (rule lists, JSON) wrap inside the panel, so the page never scrolls sideways (AC-37) */
+.node-detail{min-width:0}.node-detail li,.node-detail td,.node-detail #node-head,.node-detail #node-expect{overflow-wrap:anywhere}
+/* EV-018 edit form + preview result (exec tab node detail) — values from the approved visual rules or the baseline web/app.css */
+.node-detail #node-edit-list li{display:grid;gap:4px}
+.node-detail #node-edit-list li .btn{justify-self:start}
+.node-detail #node-edit-list textarea,.node-detail #node-edit-list input{width:100%;box-sizing:border-box}
+.node-detail #node-edit-list li.off textarea{opacity:.4}
+.node-detail #nd-preview{display:grid;gap:6px;margin-top:6px}
+.node-detail .nd-hunk{display:grid;gap:2px;white-space:pre-wrap;overflow-wrap:anywhere}
+.node-detail .nd-del{color:#c4320a}.node-detail .nd-add{color:#059669}
+/* EV-022 manual p.21: the change view's hunks as blocks with line numbers */
+#edit-diff .ed-hunk{display:grid;gap:2px;white-space:pre-wrap;overflow-wrap:anywhere;font-family:ui-monospace,Menlo,monospace;font-size:12px;margin:4px 0 8px}
+#edit-diff .nd-del{color:#c4320a}#edit-diff .nd-add{color:#059669}#edit-diff #ed-files{margin-bottom:8px}
+
+/* EV-022 E-S-03: version badges (manual p.2 · 5 · 9 · 23 · 27 · 29), the version band, verdict target, P09 details, monitor reasons */
+.vb{display:inline-block;margin-left:5px;padding:0 6px;border-radius:9px;font-size:10.5px;font-weight:600;line-height:16px;vertical-align:1px;background:#ede9fe;color:#5b21b6}
+.vb[data-vb="op"]{background:#dcfce7;color:#166534}.vb[data-vb="ok"]{background:#dbeafe;color:#1d4ed8}.vb[data-vb="no"]{background:#fee2e2;color:#b91c1c}
+.vb[data-vb="old"]{background:#f3f4f6;color:#6b7280}.vb[data-vb="edit"]{background:#fef3c7;color:#92400e}
+.vband{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:6px 10px;margin-bottom:8px;border-radius:6px;font-size:12px;background:#f5f3ff;border:1px solid #ddd6fe}
+.vband[data-state="운영"]{background:#ecfdf5;border-color:#bbf7d0}.vband[data-state="승인됨"]{background:#eff6ff;border-color:#bfdbfe}
+.vband[data-state="거절"]{background:#fef2f2;border-color:#fecaca}.vband[data-state="이전"]{background:#f9fafb;border-color:#e5e7eb}
+.vt{font-size:12px;padding:6px 8px;margin-bottom:6px;border-radius:6px;background:#f5f3ff;border:1px solid #ddd6fe}
+#v-approval{background:#eff6ff;border-color:#bfdbfe}
+.cmp-cond{font-size:12px;color:#374151;margin-bottom:6px}
+#cmp-table td.chg{color:#b91c1c;font-weight:600}#cmp-auto-table tr.cmp-other{background:#fff7ed}#cmp-auto-table td,#cmp-auto-table th{white-space:nowrap}.err-text{color:#b91c1c}#auto-resp th,#auto-hyps th,#auto-rows th{white-space:nowrap}   /* EV-035 FINAL: the detail tables' heads stay on one line */.vb[data-vb="await"]{background:#dbeafe;color:#1d4ed8}#cmp-table tr.cmp-other{background:#fff7ed}
+#cmp-table td[data-state-cell]{white-space:nowrap}   /* E-S-09 FI-07: the state badge stays on one line; the wide table scrolls sideways (H1) */
+#cmp-details{margin-top:12px;border:1px solid #e5e7eb;border-radius:6px;padding:8px 10px;background:#f9fafb}
+#cmp-details table{font-size:11.5px;white-space:nowrap;min-width:max-content;margin-top:6px}
+#cmp-details tr.chg td{color:#b91c1c;font-weight:600}#cmp-details .cmp-only{color:#b91c1c;font-weight:700}
+#cmp-details .nd-hunk{display:grid;gap:2px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:11.5px;margin-top:4px}
+#cmp-details .nd-del{color:#c4320a}#cmp-details .nd-add{color:#059669}
+#cmp-changed .cmp-bar{margin-top:6px}#cmp-changed .barrow{gap:6px}
+#mon-reasons table{font-size:12px;margin-top:4px}#mon-reasons td.chg,#mon-reasons tr.chg td{color:#b91c1c;font-weight:600}
+.cf-items{display:grid;gap:8px;margin-top:10px}.cf-item{display:grid;grid-template-columns:20px minmax(0,1fr) auto;gap:8px;align-items:start;font-size:12.5px}
+.cf-mark{width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;border:1px solid #9ca3af;color:#6b7280}
+.cf-mark.ok{background:#059669;border-color:#059669;color:#fff}.cf-mark.bad{background:#dc2626;border-color:#dc2626;color:#fff}.cf-right{font-size:12px;font-weight:600;white-space:nowrap}
+.cf-note{margin-top:8px;padding:6px 8px;border-radius:6px;font-size:12px;background:#f9fafb;border:1px solid #e5e7eb}.cf-note.warn{background:#fef2f2;border-color:#fecaca}
+#edit-diff .nd-ctx{color:#374151}#edit-diff .ed-hhead{color:#6b7280}#ed-pack-diff table td{padding:2px 6px}
+#cmp-details .nd-ctx{color:#374151}
+#sc-compare td.chg{color:#b91c1c;font-weight:600}
+
+/* EV-022 E-S-04: deploy approval window and steps (manual p.28 · 29), version history */
+.dep-steps{display:inline-flex;flex-wrap:wrap;gap:4px;margin-left:6px}
+.dep-step{font-size:11px;padding:1px 6px;border-radius:9px;background:#f3f4f6;color:#6b7280}
+.dep-step[data-state="done"]{background:#dcfce7;color:#166534}.dep-step[data-state="active"]{background:#dbeafe;color:#1d4ed8}.dep-step[data-state="failed"]{background:#fee2e2;color:#b91c1c}
+.dep-list{display:grid;gap:8px;margin:10px 0}.dep-row{display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px;font-size:12.5px}
+.dep-mark{width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;border:1px solid #9ca3af;color:#6b7280}
+.dep-row[data-state="done"] .dep-mark{background:#059669;border-color:#059669;color:#fff}.dep-row[data-state="active"] .dep-mark{background:#3056d3;border-color:#3056d3;color:#fff}
+.dep-row[data-state="failed"] .dep-mark{background:#dc2626;border-color:#dc2626;color:#fff}
+#version-history td,#version-history th{padding:3px 6px;text-align:left}#version-history tr.on td{font-weight:600}
+#v-result[data-state="거절"]{background:#fef2f2;border-color:#fecaca}
+.dep-row{grid-template-columns:22px minmax(0,1fr) auto}.dep-say{font-size:11.5px;color:#6b7280;white-space:nowrap}
+#ops-table tr.on td{background:#fff7ed}#ops-table tr[data-ops-row]:hover td{background:#f8fafc}   /* EV-025 p.30: the chosen Run row */
+/* EV-030 CHG-152 (supplement A1 · A2): the automatic diagnosis on the 운영 Run screen — purple band, pink failure cells */
+.auto-band{background:#f5f3ff;border:1px solid #ddd6fe;color:#4c1d95;border-radius:8px;padding:7px 12px;font-size:12px}
+.auto-band b{color:#6d28d9;margin-right:6px}
+.auto-fail{background:#fdf2f8;color:#be185d;border-radius:4px;padding:1px 6px}
+.auto-err{color:#b91c1c}
+/* EV-030 CHG-153: the node the judge suspects — pink outline, on the 운영 Run screen only */
+.graph-node.suspect [data-outline]{stroke:#db2777;stroke-width:3px}
+/* EV-035 CHG-189: the responsible node of an improvement wheel — purple outline, on the wheel detail only (supplement A6 · 09/26) */
+.graph-node.responsible [data-outline]{stroke:#7c3aed;stroke-width:3px}
+/* EV-030 CHG-156 (supplement A5): the wheel list — 8 cells, colour by state */
+.wrow.on{border-color:#f59e0b}.wbar{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;margin-top:6px}
+.wcell{font-size:11px;text-align:center;border-radius:5px;padding:3px 0;background:#f3f4f6;color:#9ca3af;white-space:nowrap;overflow:hidden}
+.wcell[data-c=done]{background:#dcfce7;color:#166534}.wcell[data-c=now]{background:#d97706;color:#fff}.wcell[data-c=human]{background:#dbeafe;color:#1d4ed8}
+.wcell[data-c=stopped]{background:#be123c;color:#fff}.wcell[data-c=waiting]{background:#e5e7eb;color:#374151;border:1px dashed #9ca3af}
+/* EV-070 (D-431 · D-432 덧 3): the workbench's right box stays within the window and scrolls inside; the page height comes from the left body */
+.insp{position:sticky;top:12px;align-self:start;max-height:calc(100vh - 40px);overflow-y:auto}
+
+/* EV-075 (R2): words with more when the mouse is over them */
+.hv{text-decoration:underline dotted #6b7686;text-underline-offset:3px;cursor:help}
+/* D-432 덧 8: the one black bubble of every mouse-over (web/app.js Tip) */
+#tip{position:fixed;z-index:10000;max-width:360px;padding:6px 9px;border-radius:6px;background:#111827;color:#f9fafb;font-size:12px;line-height:1.5;white-space:pre-line;overflow-wrap:anywhere;box-shadow:0 4px 14px rgba(0,0,0,.18);pointer-events:none}#tip[hidden]{display:none}
+.hv:focus-visible{outline:2px solid #93b4f5;outline-offset:1px;border-radius:2px}
+.unreached{color:#6b7686}
+.fold-h{color:#1d4fd8;cursor:pointer}.fold-pre{margin:6px 0 0;padding:8px 10px;background:#f4f6f9;border:1px solid #e1e5eb;border-radius:6px;color:#1b2430;font:11px/1.45 ui-monospace,Menlo,monospace;white-space:pre-wrap;max-height:260px;overflow:auto}
+/* D-560 (dev-2 · 정답지 32쪽): the graph-version table fits the Project tab on one line a row */
+#kg-versions{white-space:nowrap;font-size:12px}#kg-versions td,#kg-versions th{padding:6px 4px}

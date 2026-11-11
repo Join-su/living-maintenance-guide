@@ -1,0 +1,3 @@
+{"doc": "R-0001", "metadata": {"source": "generated", "symptom_group": "TW", "tool_wear_min": 210, "torque_nm": 41.0}, "record_id": "R-0001", "text": "공구 마모 경고 뒤 공구를 바꿈. 마모 폭 0.35mm."}
+{"doc": "R-0002", "metadata": {"source": "generated", "symptom_group": "LD", "tool_wear_min": 80, "torque_nm": 62.5}, "record_id": "R-0002", "text": "토크 과부하로 이송 속도를 낮춤. 10분 뒤 정상."}
+{"doc": "R-0003", "metadata": {"source": "generated", "symptom_group": "TW", "tool_wear_min": 190, "torque_nm": 38.2}, "record_id": "R-0003", "text": "마모 경고, 공구 교체 뒤 시험 가공 정상."}

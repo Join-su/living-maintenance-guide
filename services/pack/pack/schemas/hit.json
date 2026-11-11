@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Hit",
+  "description": "retrieve@2 결과 조각 하나(packrt 0.12.x — Pack 안 state, 약속 밖)",
+  "type": "object"
+}

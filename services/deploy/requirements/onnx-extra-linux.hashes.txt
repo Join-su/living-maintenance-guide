@@ -1,0 +1,19 @@
+# VPS 배포 이미지 덧목록(C1-a15 VPS 배포 V-3 · D-334 Q-2 (가) · D-363 (2) ②): ONNX 모델 release를 packrt predict@1이 돌리려면 onnxruntime이 필요.
+# 판 = 맥 덧목록 requirements/onnx-extra.txt와 같음. packaging은 deploy-image.hashes.txt에 같은 판이 있어 뺌. 이미지의 모든 배포 서비스가 같은 이미지(task10 Pack은 부르지 않음).
+# 설치(Dockerfile): pip install --no-deps -r requirements/onnx-extra-linux.hashes.txt --require-hashes --only-binary :all:
+# 만든 법(2026-10-25): uv pip compile (onnxruntime==1.31.0) -c packaging==26.3 --python-version 3.14 --python-platform x86_64-manylinux_2_36 --only-binary :all: --generate-hashes
+#   → 해시는 PyPI 파일 중 VPS(linux x86_64 · CPython 3.14 · glibc 2.36)에 맞는 wheel만(scripts/hash-requirements.py fits_vps와 같은 규칙):
+#   flatbuffers-25.12.19-py2.py3-none-any.whl
+#   numpy-2.5.4-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl
+#   onnxruntime-1.31.0-cp314-cp314-manylinux_2_28_x86_64.whl
+#   protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl
+#   protobuf-7.36.2-py3-none-any.whl
+flatbuffers==25.12.19 \
+    --hash=sha256:7634f50c427838bb021c2d66a3d1168e9d199b0607e6329399f04846d42e20b4
+numpy==2.5.4 \
+    --hash=sha256:d549420b8858885cea8838a727842249218b9c1da24dd517e25c9c7a948310a3
+onnxruntime==1.31.0 \
+    --hash=sha256:e4efa4a1a0bb0b5173c6a3292c181d518b8323f9d56e978635d0c09d38c94d1a
+protobuf==7.36.2 \
+    --hash=sha256:89f23aa53c24553a2416fd4fd1ec06f74fa42b14b546d8883128813f775bbfd2 \
+    --hash=sha256:bdb3a345d48db958e6ce1f18e508beb0cc981d64f24088427549c866cd039f1e

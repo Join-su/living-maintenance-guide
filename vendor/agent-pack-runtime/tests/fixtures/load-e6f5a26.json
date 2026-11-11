@@ -1,0 +1,35 @@
+{
+ "about": "EV-007 P-01 · P-02 — packrt 0.11.0(e6f5a26) fixture 불러오기 기대값",
+ "packs": {
+  "decide_min": {
+   "errors": [],
+   "ok": true,
+   "revision": "sha256:312c38e31be7c7f23f523336b0e37dd30b58f770b7161b79f083a731bd01f297",
+   "warnings": []
+  },
+  "llm_min": {
+   "errors": [],
+   "ok": true,
+   "revision": "sha256:3836c56828fc1794d4f52869dbadb00b46103588f7f72c3f56bdc9fb4a8cac97",
+   "warnings": []
+  },
+  "predict_min": {
+   "errors": [],
+   "ok": true,
+   "revision": "sha256:7ca9aa2bbabda45333d7aadfe68b8db2df0ad399b1f210071c94c29261e84e55",
+   "warnings": []
+  },
+  "retrieve_min": {
+   "errors": [],
+   "ok": true,
+   "revision": "sha256:fa7ec3afcc73eedc879b6440f3e76b7fec0b392dbe5eaeae0c3f6821db4508bc",
+   "warnings": []
+  },
+  "task10_min": {
+   "errors": [],
+   "ok": true,
+   "revision": "sha256:1f573d6fbf764b0f12d35702fcf289b8836856248a220c9d17a2ee2f22f4f419",
+   "warnings": []
+  }
+ }
+}

@@ -1,0 +1,45 @@
+/* 보고서 최종본(D-528 · 구현 부록 2): 문서 꼴 하나 · 두 앱 같음 · 각지고 차분 · 아이콘 0. 값은 prototype-final/app.css 의 .fdoc 줄. */
+.fwrap { padding: 16px 28px 28px; }
+.fdoc { background: #fff; border: 1px solid #d5d8dd; max-width: 960px; margin: 0 auto; font-family: "Noto Sans KR", sans-serif; color: #1a1d21; font-size: 14px; line-height: 1.55; border-radius: 0; }
+.fdoc * { border-radius: 0; }
+.fd-h { display: flex; align-items: flex-start; justify-content: space-between; background: #22262b; color: #fff; padding: 20px 26px; }
+.fd-h h1 { margin: 0; font-size: 24px; font-weight: 800; }
+.fd-h p { margin: 4px 0 0; font-size: 13.5px; color: #c9cdd3; }
+.fd-st { display: flex; gap: 8px; flex: none; }
+.fd-st span { font-size: 13px; font-weight: 700; border: 1px solid #6b7178; padding: 3px 10px; color: #e6e8eb; white-space: nowrap; }
+.fd-st span.wait { border-color: #d9a54c; color: #f2c879; }
+.fd-st span.ok { border-color: #5fb385; color: #9adbb5; }
+.fd-st span.bad { border-color: #e07a72; color: #f2a9a2; }
+.fd-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid #d5d8dd; background: #f6f6f5; }
+.fd-steps li { display: flex; align-items: center; gap: 8px; padding: 10px 26px; font-size: 13.5px; color: #7a7f86; }
+.fd-steps li b { width: 20px; height: 20px; border: 1.5px solid #b9bdc2; display: grid; place-items: center; font-size: 11.5px; flex: none; }
+.fd-steps li.done { color: #1a1d21; font-weight: 600; }
+.fd-steps li.done b { background: #3d4045; border-color: #3d4045; color: #fff; }
+.fd-steps li.now { color: #1a1d21; font-weight: 800; }
+.fd-steps li.now b { border: 2px solid #1a1d21; }
+.fdoc section { padding: 16px 26px; border-bottom: 1px solid #e3e5e8; }
+.fd-2 { display: grid; grid-template-columns: 1fr 1fr; }
+.fd-2 section:first-child { border-right: 1px solid #e3e5e8; }
+.fdoc h2 { margin: 0 0 8px; font-size: 15px; font-weight: 800; }
+.fdoc table { width: 100%; border-collapse: collapse; }
+.fdoc th { text-align: left; font-size: 12.5px; font-weight: 600; color: #5a5f66; padding: 6px; border-bottom: 1px solid #d5d8dd; }
+.fdoc td { font-size: 13.5px; padding: 7px 6px; border-bottom: 1px solid #eeeff1; vertical-align: top; }
+.fdoc .n { text-align: right; font-variant-numeric: tabular-nums; }
+.fdoc tr.hot td { background: #f7f1ec; }
+.fdoc tr.hot td:last-child { font-weight: 700; }
+/* 4번 구역 이름 · 값 표 — 공용 .kv(guide-a.css · grid)와 이름이 겹치지 않게 fd-kv(답장 001-zzv-1) */
+.fdoc table.fd-kv th { width: 90px; border-bottom: 1px solid #eeeff1; color: #5a5f66; font-weight: 600; vertical-align: top; }
+.fd-note { font-size: 13px; color: #3a3f45; margin: 8px 0 0; }
+.fd-note b { font-weight: 700; color: #1a1d21; }
+.fd-g { display: inline-grid; place-items: center; width: 20px; height: 20px; background: #3d4045; color: #fff; font-size: 11.5px; font-weight: 800; }
+.fd-open { border-left: 3px solid #3d4045; background: #f6f6f5; padding: 10px 12px; font-size: 13.5px; }
+.fd-ex th { width: 96px; } /* D-538 6. 예외 상황 기록(보기만) */
+.fd-exs { max-height: 320px; overflow-y: auto; } /* 정답지 고침A 21쪽: 넘치면 이 구역만 스크롤 */
+.fd-ex .fd-xk { display: inline-block; margin-left: 6px; padding: 0 8px; border-radius: 2px; font-size: 12.5px; font-weight: 700; } /* D-556 같음(놓침) · 새 예외 */
+.fd-ex .fd-xk.miss { background: #f0f0ef; color: #4b5563; }
+.fd-ex .fd-xk.new { background: #e8effa; color: #1d4ed8; }
+.fd-ex .fd-xk.miss.edit { background: #fff4e5; color: #b45309; } /* 정답지 30쪽 같음 + 고침 */
+.fd-f { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 14px 26px 18px; }
+.fd-f div { border: 1px dashed #b9bdc2; padding: 8px 12px; }
+.fd-f span { display: block; font-size: 12.5px; color: #5a5f66; }
+.fd-f b { font-size: 14.5px; }

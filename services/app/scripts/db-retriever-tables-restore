@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# 0009 되돌림(EV-001 CH-40 · D-335): **지금 이미지**의 migrate로 `alembic downgrade 0008`(빈 표) 뒤, 백업 자료를 되살린다(한 transaction).
+#   docker compose --profile migrate run --rm migrate alembic downgrade 0008
+# ES-21 이전 이미지는 운영 DB에 `up` 금지 — 그 init은 0009를 모르고, 적재기로 운영 자료를 지우고 다시 넣는다.
+# 사용: scripts/db-retriever-tables-restore <백업 파일>   — 되살린 행 수를 백업 때 행 수(<파일>.counts)와 대조
+set -euo pipefail
+IN=${1:?백업 파일 경로가 필요합니다}
+[ -f "$IN" ] && [ -f "$IN.counts" ] || { echo "백업 파일 · 행 수 파일이 없음: $IN"; exit 1; }
+D=$(cd "$(dirname "$IN")" && pwd) || { echo "백업 폴더가 없음"; exit 1; }
+IN="$D/$(basename "$IN")"  # 절대 경로로(아래 cd 뒤에도 같은 파일)
+cd "$(dirname "$0")/.."
+q() { docker compose exec -T db psql -U c1a15 -d c1a15 -tAc "$1"; }
+[ "$(q "select version_num from alembic_version")" = "0008" ] || { echo "DB 판이 0008이 아님 — 먼저 alembic downgrade 0008"; exit 1; }
+for t in data_releases release_chunks active_releases history_embeddings; do
+  [ "$(q "select count(*) from knowledge.$t")" = 0 ] || { echo "knowledge.$t 가 비어 있지 않음 — 되살리지 않음"; exit 1; }
+done
+docker compose exec -T db psql -U c1a15 -d c1a15 -v ON_ERROR_STOP=1 -1 -q < "$IN" >/dev/null
+for t in data_releases release_chunks active_releases history_embeddings; do echo "$t $(q "select count(*) from knowledge.$t")"; done | diff - "$IN.counts" \
+  || { echo "되살린 행 수가 백업과 다름"; exit 1; }
+echo "되살리기: 행 수 백업과 같음"

@@ -1,0 +1,92 @@
+# 테스트용 Pack: 명세 v0.3 18.1 예시(P0 범위, 2026-10-05 정정본)
+ir_version: 1
+runtime_contract: {min_runtime_version: 0.1.0}
+pack: {id: task10, version: V0, title: "제조 설비 이상 대응"}
+env: {required: [OPENAI_API_KEY], optional: []}
+stores:
+  history:   {type: table,  schema: MaintenanceRecord, key: record_id}
+  manuals:   {type: vector, index: {embedding: {provider: openai, model: text-embedding-3-small}, chunk: {size: 800, overlap: 100}}, metadata_required: [evidence_type, failure_type, doc_id]}
+  documents: {type: files}
+schemas:
+  EventCard: schemas/event_card.json
+  Prediction: schemas/prediction.json
+  EvidenceRef: schemas/evidence_ref.json
+  GroundedResponse: schemas/grounded_response.json
+  MaintenanceReport: schemas/maintenance_report.json
+  DocumentBatch: schemas/document_batch.json
+  IngestSummary: schemas/ingest_summary.json
+  MaintenanceRecord: schemas/maintenance_record.json
+graphs:
+  ingest:
+    state: {batch: DocumentBatch, summary: IngestSummary}
+    nodes:
+      - id: index_manuals
+        kind: custom_code@3
+        params: {fn: "custom.index:build_manual_index"}
+        capabilities: {network: allowlisted, side_effect: none}
+        reads: [batch]
+        writes: [summary]
+    edges: [[START, index_manuals], [index_manuals, END]]
+  respond:
+    state:
+      event: EventCard
+      prediction: Prediction
+      evidence: {type: "list[EvidenceRef]", merge: append, order_by: [source_type, score_desc, id]}
+      evidence_check: dict
+      answer: GroundedResponse
+      answer_check: dict
+      review: dict
+      report: MaintenanceReport
+    nodes:
+      - {id: predict_failure, kind: predict@1, params: {model: failure_classifier, features: {from: event}, output: Prediction}, reads: [event], writes: [prediction]}
+      - id: find_history
+        kind: retrieve@1
+        params: {store: history, where: {failure_type: "{state.prediction.type}"}, limit: 5, fallback: {min_results: 1, relax: [failure_type]}}
+        reads: [prediction]
+        writes: [evidence]
+        expect: {text: "같은 고장 유형의 과거 고장·정비 이력을 찾는다"}
+      - id: find_manuals
+        kind: retrieve@1
+        params: {store: manuals, query: "{state.event.summary}", top_k: 4, search: mmr, score_threshold: 0.3, filter: {failure_type: "{state.prediction.type}"}, fallback: {min_results: 2, relax: [failure_type]}}
+        reads: [event, prediction]
+        writes: [evidence]
+        expect: {text: "같은 고장 유형의 매뉴얼 근거를 1개 이상 찾는다", checks: [{min_items: 1}]}
+      - id: evidence_check
+        kind: validate@1
+        params: {rules: [{evidence: {min_items: 2, min_score: 0.3, require_source_types: [manual]}}]}
+        reads: [evidence]
+        writes: [evidence_check]
+      - {id: route_evidence, kind: router@1, params: {by: state.evidence_check.passed, cases: {"true": draft, "false": escalation_draft}, default: escalation_draft}, reads: [evidence_check], writes: []}
+      - {id: draft, kind: llm@1, params: {provider: openai, model: gpt-4.1-mini, prompt: prompts/draft.md, output: GroundedResponse}, reads: [event, prediction, evidence], writes: [answer]}
+      - {id: escalation_draft, kind: llm@1, params: {provider: openai, model: gpt-4.1-mini, prompt: prompts/escalation.md, output: GroundedResponse}, reads: [event, prediction, evidence, evidence_check], writes: [answer]}
+      - id: answer_check
+        kind: validate@1
+        params: {rules: [{schema: GroundedResponse}, {evidence_ids: answer}, {unsafe_assertion: answer}]}
+        reads: [answer, evidence]
+        writes: [answer_check]
+      - id: review
+        kind: human_review@1
+        params:
+          subject: answer
+          actions: [approve, edit, escalate, reject]
+          editable: [answer]
+          revalidate: [answer_check]
+          states: [DRAFT, REVIEWED, APPROVED, ESCALATED, REJECTED]
+          routes: {approve: report, edit: report, escalate: report, reject: END}
+        reads: [answer, answer_check, evidence]
+        writes: [review]
+      - {id: report, kind: render@1, params: {template: templates/report.md, format: md, to: report}, reads: [event, answer, review, evidence], writes: [report]}
+    edges:
+      - [START, predict_failure]
+      - [predict_failure, find_history]
+      - [predict_failure, find_manuals]
+      - {join: [find_history, find_manuals], to: evidence_check}
+      - [evidence_check, route_evidence]
+      - [draft, answer_check]
+      - [escalation_draft, answer_check]
+      - [answer_check, review]
+      - [report, END]
+entrypoints:
+  - {graph: respond, input: EventCard, output: MaintenanceReport}
+  - {graph: ingest, input: DocumentBatch, output: IngestSummary}
+trace: {contract: 1}

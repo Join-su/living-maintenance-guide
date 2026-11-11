@@ -1,0 +1,44 @@
+@font-face{font-family:P;src:url("fonts/PretendardVariable.woff2") format("woff2-variations");font-weight:45 920}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:P,-apple-system,"Malgun Gothic",sans-serif;color:#0f1b2d;background:#eef1f5;word-break:keep-all;line-height:1.6;-webkit-font-smoothing:antialiased}
+.page{max-width:1040px;margin:0 auto;padding:40px 48px 80px;background:#fff;min-height:100vh}
+.top{display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:700;color:#6b7686;border-bottom:1px solid #e3e7ec;padding-bottom:12px}
+.top a{color:#2457f5;text-decoration:none}
+h1{font-size:36px;font-weight:800;letter-spacing:-1px;margin:28px 0 8px}
+h1 .no{color:#2457f5;margin-right:12px}
+.purpose{font-size:18px;font-weight:600;color:#4b5768}
+.box{border-radius:12px;padding:16px 20px;margin:20px 0}
+.prep{background:#f6f7f9}
+.prep b{display:block;font-size:15px;color:#4b5768;margin-bottom:6px}
+.prep b.btn{display:inline;font-size:inherit;color:#2457f5;margin-bottom:0}
+.prep li,.check li{margin-left:20px}
+.toc{background:#f4f7ff;border:1px solid #d5e0fd}
+.toc b{font-size:15px;color:#2457f5}
+.toc ol{margin:6px 0 0 22px}
+.toc a{color:#0f1b2d;text-decoration:none}
+.legend{font-size:14px;color:#4b5768;background:#fff;border:1px dashed #cfd5dd}
+.step{border:1.5px solid #e3e7ec;border-radius:14px;padding:22px 24px;margin:22px 0;page-break-inside:avoid}
+.step h2{font-size:22px;font-weight:800;letter-spacing:-.4px;display:flex;align-items:center;gap:12px}
+.sn{flex:none;width:34px;height:34px;border-radius:17px;background:#0f1b2d;color:#fff;font-size:17px;display:flex;align-items:center;justify-content:center}
+.who{font-style:normal;font-size:13px;font-weight:800;color:#fff;background:#6b7686;border-radius:6px;padding:2px 8px}
+.row{display:grid;grid-template-columns:92px 1fr;gap:6px 14px;margin-top:14px;font-size:16.5px}
+.row>.k{font-weight:800;color:#4b5768;font-size:15px;padding-top:2px}
+.row ol{margin-left:20px}
+b.btn{color:#2457f5;background:#eef3ff;border:1px solid #c9d7fd;border-radius:6px;padding:0 6px;font-weight:800}
+code,.type{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14.5px;background:#fff7d6;border:1px solid #f0e2a6;border-radius:5px;padding:0 5px}
+pre.cmd{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14.5px;background:#0f1b2d;color:#e6edf6;border-radius:10px;padding:12px 16px;margin:8px 0;white-space:pre-wrap;word-break:break-all}
+.see{color:#0b6b4f;font-weight:700}
+.stuck{color:#a3361f}
+.fig{margin-top:16px;border:2px dashed #e45b5b;border-radius:12px;background:#fff6f6;min-height:150px;display:flex;flex-direction:column;justify-content:center;padding:18px 22px;font-size:15.5px;color:#7a2a2a}
+.fig b{font-size:16px}
+.fig .red{margin-top:6px;font-weight:700}
+.fig img{max-width:100%;border-radius:8px}
+.todo{display:inline-block;background:#fff3cd;border:1px solid #f1c75b;color:#7a5200;border-radius:6px;padding:0 6px;font-size:14px;font-weight:700}
+table.t{border-collapse:collapse;width:100%;margin:12px 0;font-size:15.5px}
+table.t th{background:#eef0f3;text-align:left;padding:8px 10px;font-size:14.5px;color:#4b5768}
+table.t td{border-top:1px solid #e3e7ec;padding:8px 10px;vertical-align:top}
+.check{background:#effaf5;border:1px solid #bfe6d4}
+.check b{color:#0b6b4f}
+.next{display:flex;justify-content:space-between;margin-top:36px;font-weight:800}
+.next a{color:#2457f5;text-decoration:none}
+@media print{body{background:#fff}.page{padding:0}.step{border-color:#cfd5dd}}

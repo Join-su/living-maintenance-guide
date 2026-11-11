@@ -1,0 +1,2 @@
+{"$schema": "https://json-schema.org/draft/2020-12/schema", "title": "Prediction", "type": "object", "required": ["type", "probability"],
+ "properties": {"type": {"type": "string"}, "probability": {"type": "number", "minimum": 0, "maximum": 1}}}

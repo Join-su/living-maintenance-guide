@@ -1,0 +1,4 @@
+{"$schema": "https://json-schema.org/draft/2020-12/schema", "title": "EventCard", "type": "object",
+ "required": ["event_id", "machine_id", "summary"],
+ "properties": {"event_id": {"type": "string"}, "machine_id": {"type": "string"}, "summary": {"type": "string"},
+  "air_temp": {"type": "number"}, "process_temp": {"type": "number"}, "rpm": {"type": "number"}, "torque": {"type": "number"}, "tool_wear": {"type": "number"}}}

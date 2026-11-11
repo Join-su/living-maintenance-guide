@@ -1,0 +1,6 @@
+suite: c1a15_report_work_v2
+split: fixture
+graph: run
+dataset: dataset.jsonl
+expectations: expectations.jsonl
+review_policy: {default: fixture, missing_fixture: stop_before}

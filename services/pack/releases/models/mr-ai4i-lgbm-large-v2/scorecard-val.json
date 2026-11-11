@@ -1,0 +1,133 @@
+{
+ "split": "val",
+ "independent": false,
+ "note": "val은 AutoGluon tuning_data(학습 중 조기 멈춤 · 모델 고르기)로 쓰임 — 독립 점수 아님(D-265)",
+ "threshold": 0.5,
+ "rows": 1912,
+ "per_class": {
+  "HDF": {
+   "support": 15,
+   "predicted": 15,
+   "precision": 0.933,
+   "recall": 0.933,
+   "f1": 0.933
+  },
+  "NONE": {
+   "support": 1861,
+   "predicted": 1859,
+   "precision": 0.999,
+   "recall": 0.998,
+   "f1": 0.999
+  },
+  "OSF": {
+   "support": 17,
+   "predicted": 17,
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0
+  },
+  "PWF": {
+   "support": 19,
+   "predicted": 21,
+   "precision": 0.905,
+   "recall": 1.0,
+   "f1": 0.95
+  }
+ },
+ "macro_f1": 0.97,
+ "alarm_rules": {
+  "task10_top_class": {
+   "alarms": 53,
+   "failure_rows": 51,
+   "caught": 50,
+   "recall": 0.98,
+   "false_alarms": 3,
+   "false_alarm_rate_of_normal": 0.0016
+  },
+  "c1a15_risk": {
+   "alarms": 53,
+   "failure_rows": 51,
+   "caught": 50,
+   "recall": 0.98,
+   "false_alarms": 3,
+   "false_alarm_rate_of_normal": 0.0016
+  },
+  "rows_rules_disagree": 0
+ },
+ "calibration_top_class": {
+  "ece": 0.0028,
+  "bins": [
+   {
+    "bin": "0.5-0.6",
+    "n": 2,
+    "mean_prob": 0.549,
+    "actual": 1.0
+   },
+   {
+    "bin": "0.7-0.8",
+    "n": 4,
+    "mean_prob": 0.726,
+    "actual": 1.0
+   },
+   {
+    "bin": "0.8-0.9",
+    "n": 1,
+    "mean_prob": 0.816,
+    "actual": 1.0
+   },
+   {
+    "bin": "0.9-1.0",
+    "n": 1905,
+    "mean_prob": 1.0,
+    "actual": 0.998
+   }
+  ]
+ },
+ "calibration_risk_vs_failure": {
+  "ece": 0.0028,
+  "bins": [
+   {
+    "bin": "0.0-0.1",
+    "n": 1857,
+    "mean_prob": 0.0,
+    "actual": 0.001
+   },
+   {
+    "bin": "0.2-0.3",
+    "n": 1,
+    "mean_prob": 0.235,
+    "actual": 0.0
+   },
+   {
+    "bin": "0.4-0.5",
+    "n": 1,
+    "mean_prob": 0.49,
+    "actual": 0.0
+   },
+   {
+    "bin": "0.5-0.6",
+    "n": 1,
+    "mean_prob": 0.59,
+    "actual": 1.0
+   },
+   {
+    "bin": "0.7-0.8",
+    "n": 3,
+    "mean_prob": 0.716,
+    "actual": 1.0
+   },
+   {
+    "bin": "0.8-0.9",
+    "n": 1,
+    "mean_prob": 0.82,
+    "actual": 1.0
+   },
+   {
+    "bin": "0.9-1.0",
+    "n": 48,
+    "mean_prob": 0.999,
+    "actual": 0.938
+   }
+  ]
+ }
+}

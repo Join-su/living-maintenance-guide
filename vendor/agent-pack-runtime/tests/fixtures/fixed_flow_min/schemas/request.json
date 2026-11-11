@@ -1,0 +1,2 @@
+{"$schema": "https://json-schema.org/draft/2020-12/schema", "title": "Request", "type": "object", "required": ["kind", "text"],
+ "properties": {"kind": {"type": "string"}, "text": {"type": "string"}}}

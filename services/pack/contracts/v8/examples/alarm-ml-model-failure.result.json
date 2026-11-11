@@ -1,0 +1,15 @@
+{
+  "alarm": {
+    "event_id": "C1A-E8b21d4e07a5c",
+    "alarm": false,
+    "group": null,
+    "group_source": null,
+    "alarm_block": null,
+    "sensor_derived": {
+      "power_w": 6952,
+      "temp_diff_k": 10.5
+    },
+    "ml": null,
+    "no_alarm_reason": "model_failure"
+  }
+}

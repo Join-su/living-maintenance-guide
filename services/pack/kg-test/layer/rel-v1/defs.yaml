@@ -1,0 +1,14 @@
+# D-533 관계 정의(관계 층 틀) — build_layer.py가 이 정의로 원본 층에서 관계 층을 다시 만든다.
+# 여기 숫자를 바꾸면 = '저장한 관계 정의 바꿈'(바뀐 것별 처리 ③): 관계 층만 새 버전으로 다시 만듦 · 원본 층 손 0.
+# 예외 규칙(exceptions.csv)의 숫자는 여기 없다 — 찾을 때 적용(관계 층 손 0).
+version: rel-v1
+same_line:      # 같은 라인 · 다른 설비의 앞 알람을 잇는다(창 안만) · 칸: 몇 분 앞
+  window_min: 30
+machine_work:   # 같은 설비의 앞 정비 기록을 잇는다(창 안만) · 칸: 무슨 정비(replace 부품 교체 · deferred 미룸) · 며칠 앞
+  max_days: 21
+  replace_sections: ["5.1", "5.2"]
+season:         # 알람 칸: 계절(월 → 계절)
+  winter: [12, 1, 2]
+  spring: [3, 4, 5]
+  summer: [6, 7, 8]
+  fall: [9, 10, 11]

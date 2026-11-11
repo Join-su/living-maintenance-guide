@@ -1,0 +1,8 @@
+# 평가 suite v3 = v2 10 case(바이트 그대로) + 다시 쓰기 길 부르기 3 case(RF01 ~ RF03) — c1a15-eval D-463 ③
+# RF case 초안 원인 · 조치 칸의 '(참고 기록 H-xxxx)'는 앱 초안에 없는 글(앱 초안 = 코드 사실뿐) — 상위 10건 밖 기록 ID로 첫 근거 검사를 떨어뜨려 다시 쓰기 길을 부르는 시험 꼴
+suite: c1a15_report_work_v3
+split: fixture
+graph: run
+dataset: dataset.jsonl
+expectations: expectations.jsonl
+review_policy: {default: fixture, missing_fixture: stop_before}

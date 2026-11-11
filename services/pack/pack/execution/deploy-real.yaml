@@ -1,0 +1,12 @@
+# 실제 DB 배포용 실행 설정(Pack EV-001 PS-02, D-301 ②-c · D-310) — deploy.yaml과 같고 store history · manuals만 실제 DB(PS-03에서 manuals 더함). 비밀 값 없음(키 환경 변수 이름만), Pack revision 밖.
+# Pack 쪽 필요 목록: 진입 graph · model release를 찾는 곳 · 고를 모델(onnx → 배포 환경에 onnxruntime 1.31.0, D-261 (2)). store `history`(이력 DB)는 PS-02부터 · `manuals`(매뉴얼 DB)는 PS-03부터: 이 맥은 packrt-1 자리 releases-c1a15(상대 경로) · 실제 DB(이력 ir-history-16d297d8 · 매뉴얼 ir-manuals-3ae4dcdf) — 배포 서버 자리 · release는 deploy 몫(R12).
+# 배포 서버는 자기 config(deploy 몫)에서 이 값을 그대로 옮겨 씀 — 다르면 deploy 세션이 c1a15-pack에 질문(규칙 06).
+config_version: 1
+entrypoint: run
+environment: {kind: local-python, python: ../../.venv/bin/python}
+release_roots: [../../releases, ../../../agent-pack-runtime-ingest/releases-c1a15]   # model release 폴더(Pack 저장소 안 사본) · 벡터 DB(packrt-1 자리, 읽기만)
+models:
+  failure_classifier: {release: mr-ai4i-lgbm-large-v2}   # 사용자 모델(task10-pack 2c74ac0 사본, D-268 · D-272) — 되돌림은 이 줄을 mr-c1a15-standin-v1로
+stores:
+  history: {backend: flat-local, release: ir-history-16d297d8, embedding: {mode: real, key_env: OPENAI_API_KEY}}   # 실제 DB(packrt-1 ②-c) — start 한 번에 실제 임베딩 2건(이력 · 매뉴얼). 이 run에서는 probe만(키 없이 · 망 막음), Run은 사용자 승인 뒤
+  manuals: {backend: flat-local, release: ir-manuals-3ae4dcdf, embedding: {mode: real, key_env: OPENAI_API_KEY}}   # 매뉴얼 v2 실제 DB(013-11 build · packrt-1 자리, 앞 a460593f)

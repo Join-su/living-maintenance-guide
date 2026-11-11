@@ -1,0 +1,77 @@
+{
+  "decision": {
+    "probabilities": {
+      "CL-1": 82,
+      "CL-2": 6,
+      "CL-3": 6,
+      "CL-4": 6
+    },
+    "evidence": {
+      "CL-1": 10,
+      "CL-2": 0,
+      "CL-3": 0,
+      "CL-4": 0
+    },
+    "low_evidence": false,
+    "kind": "lock",
+    "section": "1.2"
+  },
+  "similar": [
+    {
+      "record_id": "H-0226",
+      "cause": "CL-1",
+      "score": 0.797477
+    },
+    {
+      "record_id": "H-0241",
+      "cause": "CL-1",
+      "score": 0.751622
+    },
+    {
+      "record_id": "H-0162",
+      "cause": "CL-1",
+      "score": 0.713234
+    },
+    {
+      "record_id": "H-0158",
+      "cause": "CL-1",
+      "score": 0.707778
+    },
+    {
+      "record_id": "H-0202",
+      "cause": "CL-1",
+      "score": 0.670396
+    },
+    {
+      "record_id": "H-0167",
+      "cause": "CL-1",
+      "score": 0.645234
+    },
+    {
+      "record_id": "H-0157",
+      "cause": "CL-1",
+      "score": 0.615536
+    },
+    {
+      "record_id": "H-0171",
+      "cause": "CL-1",
+      "score": 0.61481
+    },
+    {
+      "record_id": "H-0184",
+      "cause": "CL-1",
+      "score": 0.53271
+    },
+    {
+      "record_id": "H-0222",
+      "cause": "CL-1",
+      "score": 0.483458
+    }
+  ],
+  "retrieval": {
+    "source": "packrt",
+    "vector_db_version": "ir-history-0a1b2c3d",
+    "query_from": "embed",
+    "fallback_used": false
+  }
+}

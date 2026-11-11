@@ -1,0 +1,46 @@
+[project]
+name = "c1a15-server"
+version = "0.1.0"
+description = "정비 길잡이 API 서버 · agent 패키지 · 적재기"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "alembic>=1.20.0",
+    "argon2-cffi>=25.1.0",
+    "fastapi>=0.143.0",
+    "langgraph>=1.2.15",
+    "langgraph-checkpoint-postgres>=3.1.3",
+    "openai>=3.29.0",
+    "pgvector>=0.5.1",
+    "psycopg[binary]>=3.3.6",
+    "sqlalchemy>=2.1.4",
+    "uvicorn>=0.54.0",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+markers = ["db: 실제 PostgreSQL(DATABASE_URL)이 필요한 통합 시험"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+src = ["src", "tests"]
+# c1a15-pack custom/exception.py(D-545) · switch.py(D-556 약속 v9 · d9b562b) 사본 — Pack 원본과 import 줄만 다르게 그대로 둠(줄 길이 · 형식 검사 밖)
+extend-exclude = ["src/c1a15/engine/exception.py", "src/c1a15/engine/switch.py"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "hypothesis>=6.169.0",
+    "pytest>=9.1.1",
+    "ruff>=0.17.0",
+]
+
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = ["fastapi.Depends"]

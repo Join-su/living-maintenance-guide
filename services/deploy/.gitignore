@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+.packs/
+var/
+.venv/
+status/
+# 맥 운영 설정(R12 r12-update가 config/에서 복사해 store release를 바꿈) — VPS는 /srv/llmopsagent/deploy-config
+/config-live/
+docker/env/*.env
+# 작업 기록 · 문서 · 다른 저장소 초안 — 로컬에만 둠(규칙 02, 이력에서도 뺌 10-18). .vibe-factory는 기록 전용 로컬 git
+/.vibe-factory/
+/docs/
+/ci/

@@ -1,0 +1,12 @@
+# Optional: give the OpenAI key by file path instead of writing it into .env.
+#   in .env: COMPOSE_FILE=docker-compose.yml:compose.key-file.yml and OPENAI_KEY_FILE=<absolute path>, then docker compose up -d
+#   (in .env, not on one command line — the scripts restart containers with plain docker compose and must keep the key; guide 11)
+# The file holds a line OPENAI_API_KEY=… (or only the key). It is mounted read-only; the start scripts read it inside the containers.
+services:
+  agentops:
+    secrets: [openai_key]
+  pack-server:
+    secrets: [openai_key]
+secrets:
+  openai_key:
+    file: ${OPENAI_KEY_FILE:?OPENAI_KEY_FILE — 키 파일 경로}

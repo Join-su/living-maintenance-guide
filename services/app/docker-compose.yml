@@ -1,0 +1,83 @@
+# 실행 순서: db(healthcheck) → init(빈 DB면 migration · 적재, 있으면 판 대조만 — CH-39) → api → web(EP-C1-RUN-001).
+# 포트는 127.0.0.1에만 연다. api 포트는 밖에 열지 않는다. 값은 .env(Git 제외)에서 받는다.
+services:
+  db:
+    image: pgvector/pgvector:0.8.6-pg16-bookworm
+    environment:
+      POSTGRES_USER: c1a15
+      POSTGRES_DB: c1a15
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?.env에 POSTGRES_PASSWORD 필요}
+    ports:
+      - "127.0.0.1:${DB_HOST_PORT:-55432}:5432"
+    # 이름 volume(EV-001 ES-21 · D-335): `down`(-v 없이) 뒤 `up`에도 같은 자료 — 익명 volume이면 빈 DB로 다시 첫 설치가 됨
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U c1a15 -d c1a15"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  init:
+    build: ./server
+    # EV-001 CH-39: 빈 DB(첫 설치)만 migration · 적재. 이미 있는 DB는 판 대조만 — 다르면 멈춤(사람 migration: 아래 migrate)
+    command: python -m c1a15.dbinit
+    environment:
+      DATABASE_URL: postgresql+psycopg://c1a15:${POSTGRES_PASSWORD}@db:5432/c1a15
+      DATA_DIR: /data
+      C1A15_TECH_PASSWORD: ${C1A15_TECH_PASSWORD:?.env에 C1A15_TECH_PASSWORD 필요}
+      C1A15_LEAD_PASSWORD: ${C1A15_LEAD_PASSWORD:?.env에 C1A15_LEAD_PASSWORD 필요}
+    volumes:
+      - ./data:/data:ro
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # 사람 migration(일회용): docker compose --profile migrate run --rm migrate — 0009는 C1A15_ALLOW_0009=yes(백업 뒤, CH-40)
+  migrate:
+    build: ./server
+    profiles: ["migrate"]
+    command: alembic upgrade head
+    environment:
+      DATABASE_URL: postgresql+psycopg://c1a15:${POSTGRES_PASSWORD}@db:5432/c1a15
+      C1A15_ALLOW_0009: ${C1A15_ALLOW_0009:-}
+    depends_on:
+      db:
+        condition: service_healthy
+
+  api:
+    build: ./server
+    command: uvicorn c1a15.api.main:app --host 0.0.0.0 --port 8000
+    environment:
+      DATABASE_URL: postgresql+psycopg://c1a15:${POSTGRES_PASSWORD}@db:5432/c1a15
+      APP_MODE: ${APP_MODE:-fixture}
+      DATA_DIR: /data
+      C1A15_INTERNAL_TOKEN: ${C1A15_INTERNAL_TOKEN:?.env에 C1A15_INTERNAL_TOKEN 필요}
+      # 배포 서버 한 곳(EV-001 CH-38 · CH-41): 컨테이너는 내부망 이름 — 값은 .env(비면 앱 서버가 시작을 거절)
+      C1A15_DEPLOY_URL: ${C1A15_DEPLOY_URL:-}
+      C1A15_DEPLOY_HOST: ${C1A15_DEPLOY_HOST:-}
+      C1A15_ALARM: ${C1A15_ALARM:-ml}  # D-546 dev-2 = ML만(공구 마모만 센서 경계)
+      C1A15_R12_INBOX: ${C1A15_R12_INBOX:-}
+      C1A15_KG_INBOX: ${C1A15_KG_INBOX:-}  # D-543 그래프 적재기 받은 편지함(절대 경로 · 비면 쓰지 않음)
+      C1A15_CHECKS: ${C1A15_CHECKS:-off}  # EV-006 사람 체크 기록 보내기: off(기본) | deploy
+    # 경계 판정 표 · 시연 각본(읽기만). 알람 발생: docker compose exec api python -m c1a15.alarms DEMO-01
+    volumes:
+      - ./data:/data:ro
+    depends_on:
+      init:
+        condition: service_completed_successfully
+
+  web:
+    image: nginx:latest
+    volumes:
+      - ./infra/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./apps/tech/dist:/srv/tech:ro
+      - ./apps/lead/dist:/srv/lead:ro
+    ports:
+      - "127.0.0.1:8081:8081"
+      - "127.0.0.1:8082:8082"
+    depends_on:
+      - api
+
+volumes:
+  pgdata:

@@ -1,0 +1,121 @@
+{
+ "now": "2026-10-13T12:40:44.334944+00:00",
+ "date": "2026-10-13",
+ "filters": {
+  "equipment": "M-01",
+  "user_id": "tech.kim"
+ },
+ "options": {
+  "equipment": [
+   "M-01",
+   "M-03",
+   "M-04",
+   "M-05",
+   "M-06"
+  ],
+  "users": [
+   {
+    "user_id": "lead.park",
+    "name": "박 파트장"
+   },
+   {
+    "user_id": "tech.choi",
+    "name": "최 정비"
+   },
+   {
+    "user_id": "tech.jung",
+    "name": "정 정비"
+   },
+   {
+    "user_id": "tech.kim",
+    "name": "김 정비"
+   },
+   {
+    "user_id": "tech.lee",
+    "name": "이 정비"
+   }
+  ]
+ },
+ "rows": [
+  {
+   "audit_id": 465,
+   "at": "2026-10-13T12:40:42.321895+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "보고서 확정",
+   "target": "M-01 세션",
+   "equipment_id": "M-01"
+  },
+  {
+   "audit_id": 464,
+   "at": "2026-10-13T12:40:42.305840+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "재가동 확인 · 경계 이내",
+   "target": "M-01 세션",
+   "equipment_id": "M-01"
+  },
+  {
+   "audit_id": 463,
+   "at": "2026-10-13T12:40:42.290467+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "재가동 · 6.1",
+   "target": "M-01 세션",
+   "equipment_id": "M-01"
+  },
+  {
+   "audit_id": 462,
+   "at": "2026-10-13T12:40:42.275790+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "조치 완료 · 4.3.2",
+   "target": "M-01 세션",
+   "equipment_id": "M-01"
+  },
+  {
+   "audit_id": 460,
+   "at": "2026-10-13T12:40:42.260487+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "결과 입력 · 4.3 이상",
+   "target": "M-01 세션",
+   "equipment_id": "M-01"
+  },
+  {
+   "audit_id": 458,
+   "at": "2026-10-13T12:40:42.245468+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "사전 확인 완료",
+   "target": "M-01 세션",
+   "equipment_id": "M-01"
+  },
+  {
+   "audit_id": 456,
+   "at": "2026-10-13T12:40:42.231067+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "잠금 완료 · 1.2",
+   "target": "M-01 세션",
+   "equipment_id": "M-01"
+  },
+  {
+   "audit_id": 455,
+   "at": "2026-10-13T12:40:42.210688+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "점검 시작",
+   "target": "M-01 세션",
+   "equipment_id": "M-01"
+  }
+ ]
+}

@@ -1,0 +1,8 @@
+# 평가 suite — Pack revision 밖. 시연 10건(DEMO-01 ~ 10) 각 세션의 첫 '보고서' 판정 단계 입력(그때까지 업무 기록 전체).
+# 기대값 = C1-a15 앱 inproc 판정 값(EV-001 ES-02 VC-01 기록 capture-e2e — 분할 v2 데이터 · 앱 data/ 시연 각본, eval/ 카드 아님).
+suite: c1a15_judge_demo
+split: fixture
+graph: run
+dataset: dataset.jsonl
+expectations: expectations.jsonl
+review_policy: {default: fixture, missing_fixture: stop_before}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HistoryQuery",
+  "description": "이력 리트리버 · 그래프 질의 질의(Pack 안 state — 약속 밖): 글 · 증상군(필터) · 센서 7칸(재정렬) · 약속 v7 선택 칸(설비 · 알람 시각 · 라인 — 요청에 있을 때만)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "text",
+    "group",
+    "sensors"
+  ],
+  "properties": {
+    "text": {
+      "type": "string"
+    },
+    "group": {
+      "enum": [
+        "TW",
+        "PW",
+        "CL",
+        "LD"
+      ]
+    },
+    "sensors": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "equipment_id": {
+      "type": "string"
+    },
+    "occurred_at": {
+      "type": "string"
+    },
+    "line_id": {
+      "type": "string"
+    }
+  }
+}

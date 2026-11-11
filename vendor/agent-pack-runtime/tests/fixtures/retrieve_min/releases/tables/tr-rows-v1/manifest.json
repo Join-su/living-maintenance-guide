@@ -1,0 +1,10 @@
+{
+ "file": "rows.sqlite",
+ "files": {
+  "rows.sqlite": "45f8352b2762b25e845849a0781d6c48885c55865eee8598533424a3e05602c9"
+ },
+ "format": "sqlite",
+ "kind": "table",
+ "release_id": "tr-rows-v1",
+ "store": "rows"
+}

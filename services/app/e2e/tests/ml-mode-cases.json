@@ -1,0 +1,170 @@
+{
+ "M3-18": {
+  "udi": 4640,
+  "split": "demo",
+  "product_type": "L",
+  "sensor_snapshot": {
+   "air_temperature_k": 303.1,
+   "process_temperature_k": 311.3,
+   "rotational_speed_rpm": 1657.0,
+   "torque_nm": 31.8,
+   "tool_wear_min": 217.0
+  },
+  "output": {
+   "alarm": {
+    "event_id": "x",
+    "alarm": true,
+    "group": "TW",
+    "group_source": "sensor_boundary",
+    "alarm_block": {
+     "sensor": "공구 마모 시간",
+     "value": 217.0,
+     "unit": "분",
+     "boundary": 215.0,
+     "direction": "경계 위",
+     "trend_title": "공구 마모 시간 추이 · 최근 12회 측정"
+    },
+    "sensor_derived": {
+     "power_w": 5518,
+     "temp_diff_k": 8.2
+    },
+    "ml": {
+     "model_release": "mr-ai4i-lgbm-large-v2",
+     "risk": 0.000314,
+     "alarm": false,
+     "top_k": [
+      {
+       "type": "HDF",
+       "probability": 0.000105,
+       "group_suggestion": "CL"
+      },
+      {
+       "type": "OSF",
+       "probability": 0.000105,
+       "group_suggestion": "LD"
+      },
+      {
+       "type": "PWF",
+       "probability": 0.000105,
+       "group_suggestion": "PW"
+      }
+     ],
+     "confidence": 0.000105,
+     "threshold": 0.5,
+     "confirmed": false
+    },
+    "no_alarm_reason": null
+   }
+  }
+ },
+ "M3-16": {
+  "udi": 4471,
+  "split": "demo",
+  "product_type": "L",
+  "sensor_snapshot": {
+   "air_temperature_k": 302.7,
+   "process_temperature_k": 310.6,
+   "rotational_speed_rpm": 1564.0,
+   "torque_nm": 34.3,
+   "tool_wear_min": 0.0
+  },
+  "output": {
+   "alarm": {
+    "event_id": "x",
+    "alarm": false,
+    "group": null,
+    "group_source": null,
+    "alarm_block": {
+     "sensor": "온도 차",
+     "value": 7.9,
+     "unit": "K",
+     "boundary": 8.2,
+     "direction": "경계 아래",
+     "trend_title": "온도 차 추이 · 최근 12회 측정"
+    },
+    "sensor_derived": {
+     "power_w": 5618,
+     "temp_diff_k": 7.9
+    },
+    "ml": {
+     "model_release": "mr-ai4i-lgbm-large-v2",
+     "risk": 0.000314,
+     "alarm": false,
+     "top_k": [
+      {
+       "type": "OSF",
+       "probability": 0.000105,
+       "group_suggestion": "LD"
+      },
+      {
+       "type": "PWF",
+       "probability": 0.000105,
+       "group_suggestion": "PW"
+      },
+      {
+       "type": "HDF",
+       "probability": 0.000104,
+       "group_suggestion": "CL"
+      }
+     ],
+     "confidence": 0.000105,
+     "threshold": 0.5,
+     "confirmed": false
+    },
+    "no_alarm_reason": null
+   }
+  }
+ },
+ "M3-01": {
+  "udi": 4580,
+  "split": "demo",
+  "product_type": "L",
+  "sensor_snapshot": {
+   "air_temperature_k": 303.0,
+   "process_temperature_k": 311.2,
+   "rotational_speed_rpm": 1374.0,
+   "torque_nm": 48.2,
+   "tool_wear_min": 65.0
+  },
+  "output": {
+   "alarm": {
+    "event_id": "x",
+    "alarm": true,
+    "group": "CL",
+    "group_source": "ml_type",
+    "alarm_block": null,
+    "sensor_derived": {
+     "power_w": 6935,
+     "temp_diff_k": 8.2
+    },
+    "ml": {
+     "model_release": "mr-ai4i-lgbm-large-v2",
+     "risk": 0.99866,
+     "alarm": true,
+     "top_k": [
+      {
+       "type": "HDF",
+       "probability": 0.997885,
+       "group_suggestion": "CL"
+      },
+      {
+       "type": "OSF",
+       "probability": 0.000388,
+       "group_suggestion": "LD"
+      },
+      {
+       "type": "PWF",
+       "probability": 0.000388,
+       "group_suggestion": "PW"
+      }
+     ],
+     "confidence": 0.997885,
+     "threshold": 0.5,
+     "confirmed": false,
+     "group_source": "ml_type"
+    },
+    "no_alarm_reason": null
+   }
+  }
+ }
+}

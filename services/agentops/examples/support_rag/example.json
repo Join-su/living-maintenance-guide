@@ -1,0 +1,4 @@
+{"name": "기술지원 문서 RAG", "desc": "제품 지원 문서를 검색해 고객 질문에 답하는 Agent",
+ "releases": [{"name": "rag v1", "dir": "rag_v1"}, {"name": "rag v2", "dir": "rag_v2"}],
+ "validation": {"name": "support-qa.json", "file": "validation.json"},
+ "scoring": {"skip": false, "rule": true, "llm": false}, "rule": {"pass": 0.8, "below": "hold"}}

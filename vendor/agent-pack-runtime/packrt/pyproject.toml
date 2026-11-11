@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "packrt"
+dynamic = ["version"]
+description = "Agent Pack runtime: reads and checks pack.yaml (packrt.ir) and runs the Pack graph with trace events (packrt.run, packrt.trace)"
+requires-python = ">=3.12"
+dependencies = [
+  "langgraph==1.2.13",
+  "langsmith==0.14.4",   # the pair langgraph 1.2.13 brings in, fixed here too (D-70 · D-71)
+  "pyyaml>=6.0.3",
+  "jsonschema>=4.26.0",
+]
+
+[tool.setuptools.dynamic]
+version = {attr = "packrt.__version__"}
+
+[tool.setuptools.packages.find]
+include = ["packrt", "packrt.*"]
+
+[tool.setuptools.package-data]
+"packrt.ir" = ["*.json"]

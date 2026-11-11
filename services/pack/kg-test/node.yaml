@@ -1,0 +1,7 @@
+# D-533 관계 질의 노드 실행 설정 — 옵션 셋(일반적인 것만 · 자동 개선이 바꿀 수 있는 값). 예외별 숫자는 옵션이 아님(exceptions.csv).
+layer: layer/rel-v1        # 읽을 관계 층 버전(벡터 DB release처럼 바꿔 끼움 · 옵션 아님)
+rules: exceptions.csv      # 예외 규칙 표(사람이 정함 · 찾을 때 적용 · 옵션 아님)
+options:
+  scope: plant             # 근거 범위: machine 같은 설비 · line 같은 라인 · plant 같은 기종(이 가상 공장 30대 = 한 기종)
+  half_life_days: null     # 최근 기록 무게: 며칠마다 무게 반(null = 같은 무게)
+  min_support: 3           # 최소 근거 수: 모자라면 매뉴얼 순서(dev 사례로 3 · 5 · 10 중 고름)

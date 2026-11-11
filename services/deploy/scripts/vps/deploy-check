@@ -1,0 +1,1024 @@
+#!/usr/bin/env python3
+"""배포 승인 ③ 등록 · ④ 운영 전환 · 운영 되돌리기 확인 스크립트(VFE EV-005 ES-B · ES-G0 · ES-R, CHG-04 · CHG-09 · D-61 · D-140) — 사용자가 VPS 호스트에서 한 줄로 실행합니다.
+10-15 실제 배포 때 deploy 세션이 손으로 한 순서(EV-002 ES-2 ~ ES-4)를 묶을 뿐, 판단 규칙은 그 도구들 그대로입니다.
+
+두 자리로 나뉩니다(GAP-007 B):
+  호스트 쪽(기본) — 표준 라이브러리만(`python3 -I -S`로도 돎). compose 조작(ps · build · up · stop), 응답 기다리기, C01 HTTP.
+  안쪽(--inner)   — 서버와 같은 deploy 이미지의 일회용 컨테이너 deploy-tools(또는 새 서비스 안). V-17 · V-04 · deploy-status 등 판단 코드.
+
+  register --id <change id> --version <V2> --tag <v2> --commit <40자> --revision <sha256:…> --config <config-live/설정> --status-dir <상태 폴더>
+           [--template <config/설정>] [--drs <drs:…>]
+      (deploy-tools 안) 0 운영 설정이 없으면 이미지의 설정(--template)을 복사   1 git fetch --tags(열쇠 ②)   2 V-17(실패면 상태 파일 안 씀, ③ 대기)
+                        3 묶기 대조 `scripts/r12-update check`(D-291 덧 · D-323 U-4 — 실패면 상태 파일 안 씀, ③ 대기. PostgreSQL store면 DB도 봄)
+                        4 운영 설정에만 expect_revision   5 V-04 → registered / failed "배포단 등록 실패 — …"
+  seed --config <config-live/설정> --template <config/설정>
+      (deploy-tools 안) 값(expect_revision)이 이미 든 이미지 설정을 운영 설정으로 복사만. 있으면 덮지 않음, 상태 파일은 쓰지 않음(VPS 첫 기동 · v0 되돌리기)
+  switch --id <change id> --version <V2> --config <config-live/설정> --status-dir <상태 폴더> --service <새 서비스> [--old-service <옛 서비스>]
+         [--url <새 서버 주소>] [--case-file <C01 입력 JSON>]
+      1 첫 확인(deploy-tools): registered · 같은 배포 id · 운영 설정 expect_revision = 상태 파일 revision(N4) — 아니면 아무것도 하지 않음
+      2 새 서비스 빌드 · 기동(빌드 전 DEPLOY_TAG · PACKRT_TAG · DEPLOY_COMMIT(40자) 확인 — 빌드가 F-10 ① ② 대조)   3 C01 입력(새 서비스 안) → C01 HTTP(호스트)
+      4 switched 기록(새 서비스 안 — 그 서버 data_dir에서 run 확인)   5 그 뒤에만 옛 서비스 내림(Q-N5)
+      실패면 failed "운영 전환 실패 — …"(deploy-tools) + 새 서비스 내림(전환 전부터 켜져 있었으면 그대로), 옛 서비스는 그대로.
+  rollback --id <되돌리기 id> --version <V0> --config <config-live/설정> --status-dir <상태 폴더> --service <대상 서비스> --old-service <옛 서비스>
+           [--drs <drs:…>] [--url …] [--case-file …] [--wait …]
+      운영 되돌리기(D-140 안 A) — 이미 등록된 버전으로 전환. fetch · V-17 없음(새 태그가 아님, V-17은 register에만).
+      (deploy-tools 안 restore-check) 1 운영 설정 · expect_revision(seed로 채운 것)   2 되돌리기 id 파일(switched · 다른 배포 id면 멈춤)
+                        · 지금 운영(switched 중 updated_at 시각이 가장 늦은 것 = 대상이면 멈춤, 상태 폴더 없음 · 못 읽는 상태 파일 ·
+                          같은 시각에 배포가 갈림이면 판단할 수 없어 멈춤)
+                        3 Pack 캐시 태그 commit(읽기만)   4 V-04 → registered / failed "배포단 등록 실패 — …"
+      그 뒤는 switch와 같음(--old-service 필수 — 되돌린 뒤 두 버전이 함께 상주하지 않게).
+  reconfigure --service <배포 서비스> --config <config-live/설정> --template <config/새 설정> --case-file <C01 입력 JSON> [--url …] [--wait …]
+      같은 서비스 · 같은 장부 줄에서 운영 설정만 바꿈(D-375, 예: 단계 B store 줄 flat-local → pgvector): 0 지금 /info(배포 id · revision · drs)
+      → 1 안쪽 reconfigure-apply(템플릿 + 지금 expect_revision · 배포 id · Pack 저장소 · ref · revision 같은지 · 묶기 대조 → 옛 글
+      .<설정>.before-reconfigure · 운영 설정 바꿈, 같은 글이면 손 0) → 2 restart → 3 /info 배포 id · revision · drs가 0과 같은지 → C01 201
+      → 실패면 안쪽 reconfigure-revert(옛 글) → 다시 restart. 상태 파일은 쓰지 않음(같은 버전).
+  r12 --service <배포 서비스> --config <config-live/설정> --graph <graph> --node <retrieve@2 node> [--store history]
+      [--inbox-dir <호스트 받은 편지 폴더, 기본 /srv/llmopsagent/r12-inbox/<서비스>>] [--loader-env <호스트 적재 비밀 파일>] [--ledger-cmd …] [--url …] [--wait …]
+      VPS R12 한 번(D-325 W-1 · cron 10분 + flock이 깨움): 1 안쪽(deploy-tools + docker/compose.r12.yaml: data volume · 받은 편지 읽기만 · 적재 비밀 읽기만)
+      에서 r12-update update → 2 운영 설정이 바뀌었으면 호스트가 그 서비스 compose restart → 3 /info drs 대조, 다르거나 응답 없으면 안쪽 r12-revert
+      (옛 설정) → 다시 restart. 새 보고서 없음 = 서비스 손 0.
+바꿀 수 있는 명령(시험은 가짜): DEPLOY_CHECK_COMPOSE(기본 "docker compose -f <이 저장소>/docker/compose.yaml"),
+  DEPLOY_CHECK_TOOLS(기본 "<compose> run --rm --no-deps --build deploy-tools python scripts/vps/deploy-check --inner"),
+  DEPLOY_CHECK_EXEC(기본 "<compose> exec -T {service} python scripts/vps/deploy-check --inner"), DEPLOY_CHECK_GIT(안쪽 fetch, 기본 "git"),
+  DEPLOY_CHECK_KEY_DIR(안쪽 fetch 열쇠 폴더, 기본 /run/keys — Pack 캐시 이름 → 열쇠 표 PACK_KEYS, V-4),
+  DEPLOY_CHECK_BIND(안쪽 묶기 대조, 기본 "<python> scripts/r12-update" — 뒤에 check --config <운영 설정>을 붙임),
+  DEPLOY_CHECK_R12_TOOLS(기본 "<compose> -f docker/compose.r12.yaml --profile tools run --rm --no-deps deploy-tools python scripts/vps/deploy-check --inner"),
+  DEPLOY_CHECK_R12(안쪽 R12 작업, 기본 "<python> scripts/r12-update"),
+  DEPLOY_CHECK_LEDGER(r12 --ledger-at-host의 장부 요청, 기본 "<compose> exec -T -e LLMOPS_STORE=pg llmops python -m llmops.admin data-release-auto
+  --deployment-id {deployment_id} --pack-revision {pack_revision} --drs {drs} --evidence -" — 증거 JSON은 stdin, G-5 · D-328).
+빌드 태그: DEPLOY_TAG · PACKRT_TAG(호스트 환경 변수, deploy-tools도 이 태그로 빌드). 비밀 값은 출력하지 않습니다.
+종료: 0 완료 / 1 멈춤(이유 출력) / 2 사용 오류(아무것도 쓰지 않음)."""
+import argparse
+import json
+import os
+import re
+import shlex
+import subprocess
+import sys
+import time
+import urllib.error
+import urllib.request
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parents[2]
+ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._:\-]{0,63}$")
+REV_LINE = re.compile(r'^  expect_revision: "(sha256:[0-9a-f]{64})"', re.M)
+STEP4 = "운영 전환 실패 — "
+
+
+# ---------------------------------------------------------------- 공통(표준 라이브러리)
+def out(msg):
+    print(msg, flush=True)
+
+
+def run(argv, **kw):
+    return subprocess.run(argv, capture_output=True, text=True, **kw)
+
+
+def last_line(text):
+    lines = [l for l in (text or "").strip().splitlines() if l.strip()]
+    return lines[-1][:200] if lines else ""
+
+
+def cmd(env, default):
+    return shlex.split(os.environ.get(env) or default)
+
+
+# V-4(D-366 (가)): GitHub deploy key는 저장소마다 하나 — 열쇠 둘을 함께 주면 GitHub이 첫 열쇠로 인증한 뒤 '저장소 없음'으로 끝남.
+# 그래서 안쪽 fetch가 Pack 캐시 이름으로 열쇠를 고름. 표에 없는 캐시는 compose의 GIT_SSH_COMMAND(열쇠 ② pack_read) 그대로.
+PACK_KEYS = {"c1a15-pack": "c1a15_pack_read"}   # 열쇠 ⑦(c1a15-pack read-only, VPS /srv/llmopsagent/keys/c1a15_pack_read → deploy-tools /run/keys)
+
+
+def pack_git_env(repo):
+    """(환경, 멈춤 이유). 표에 있는 캐시면 그 열쇠만 쓰는 GIT_SSH_COMMAND(호스트 키 확인 그대로), 열쇠 파일이 없으면 멈춤."""
+    name = PACK_KEYS.get(Path(repo).name)
+    if not name:
+        return None, None
+    key = Path(os.environ.get("DEPLOY_CHECK_KEY_DIR") or "/run/keys") / name
+    if not key.is_file():
+        return None, f"{Path(repo).name} 읽기 열쇠 {key}가 없음(compose deploy-tools 붙이기 · VPS 열쇠 파일 확인)"
+    return {**os.environ, "GIT_SSH_COMMAND": f"ssh -i {key} -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes"}, None
+
+
+def atomic_write(p, text):
+    p = Path(p)
+    tmp = p.with_name(f".{p.name}.tmp-{os.getpid()}")      # 임시 파일 → rename(원자적, 같은 폴더)
+    tmp.write_text(text, encoding="utf-8")
+    os.replace(tmp, p)
+
+
+def fill_expect_revision(config, revision):
+    """설정 파일의 pack.expect_revision 한 칸만 바꾼다(주석 줄이면 값 줄로, 이미 같으면 그대로). 다른 줄은 그대로."""
+    p = Path(config)
+    text = p.read_text(encoding="utf-8")
+    line = f'  expect_revision: "{revision}"   # 태그 알림 값 — scripts/vps/deploy-check register(V-17 뒤)'
+    if re.search(rf'^  expect_revision: "{re.escape(revision)}"', text, re.M):
+        return "그대로(이미 같음)"
+    new, n = re.subn(r"^  #? ?expect_revision:.*$", line, text, count=1, flags=re.M)
+    if n == 0:
+        new, n = re.subn(r"^(  pack_subdir: .*)$", r"\1\n" + line, text, count=1, flags=re.M)
+    if n == 0:
+        raise SystemExit(f"설정에 expect_revision을 넣을 자리가 없음: {p.name}")
+    atomic_write(p, new)
+    return "채움"
+
+
+# ---------------------------------------------------------------- 호스트 쪽(표준 라이브러리만, 저장소 뿌리를 sys.path에 넣지 않음)
+def compose_cmd():
+    return cmd("DEPLOY_CHECK_COMPOSE", f"docker compose -f {shlex.quote(str(HERE / 'docker' / 'compose.yaml'))}")
+
+
+def tools_runner():
+    default = " ".join(shlex.quote(c) for c in compose_cmd()) + " run --rm --no-deps --build deploy-tools python scripts/vps/deploy-check --inner"
+    return cmd("DEPLOY_CHECK_TOOLS", default)
+
+
+def exec_runner(service):
+    default = " ".join(shlex.quote(c) for c in compose_cmd()) + " exec -T {service} python scripts/vps/deploy-check --inner"
+    return [c.replace("{service}", service) for c in cmd("DEPLOY_CHECK_EXEC", default)]
+
+
+def inner(runner, sub, *args, show=True):
+    r = run([*runner, sub, *args])
+    if show and r.stdout.strip():
+        out(r.stdout.rstrip())
+    return r
+
+
+def need_tags():
+    missing = [n for n in ("DEPLOY_TAG", "PACKRT_TAG", "DEPLOY_COMMIT") if not os.environ.get(n)]
+    if missing:
+        out(f"멈춤: 빌드 태그 환경 변수가 비어 있음({' · '.join(missing)}) — 아무것도 하지 않음")
+        return False
+    if not re.fullmatch(r"[0-9a-f]{40}", os.environ["DEPLOY_COMMIT"]):   # F-10 ②: 빌드가 받은 태그 commit과 대조할 값
+        out(f"멈춤: DEPLOY_COMMIT은 deploy 태그의 40자 commit이어야 함(받은 값 {len(os.environ['DEPLOY_COMMIT'])}자) — 아무것도 하지 않음")
+        return False
+    return True
+
+
+def port_of(service):
+    """compose config --format json <서비스>(정규화된 긴 문법)에서 127.0.0.1에 연 포트. 서비스를 이름으로 주면 profile(standby)이어도 나옴."""
+    r = run([*compose_cmd(), "config", "--format", "json", service])
+    try:
+        svc = (json.loads(r.stdout or "{}").get("services") or {}).get(service) or {}
+    except ValueError:
+        svc = {}
+    for p in svc.get("ports") or []:
+        if isinstance(p, dict):
+            host, pub = str(p.get("host_ip") or ""), str(p.get("published") or "")
+        else:
+            parts = str(p).split(":")
+            host, pub = (parts[0], parts[1]) if len(parts) == 3 else ("", "")
+        if host == "127.0.0.1" and pub.isdigit():
+            return int(pub)
+    raise SystemExit(f"compose에서 {service}의 127.0.0.1 포트를 찾지 못함 — --url을 주세요")
+
+
+def wait_up(url, timeout=120):
+    end = time.time() + timeout
+    while time.time() < end:
+        try:
+            urllib.request.urlopen(f"{url}/runs/run_ping", timeout=5)
+            return True
+        except urllib.error.HTTPError as e:
+            if e.code == 404:          # 서버가 켜져 응답함(없는 run)
+                return True
+        except (urllib.error.URLError, OSError):
+            pass
+        time.sleep(1)
+    return False
+
+
+def post_c01(url, body, key):
+    req = urllib.request.Request(f"{url}/runs", method="POST", data=json.dumps(body, ensure_ascii=False).encode(),
+                                 headers={"Content-Type": "application/json", "Idempotency-Key": key})
+    try:
+        with urllib.request.urlopen(req, timeout=180) as r:
+            return r.status, json.loads(r.read() or b"{}")
+    except urllib.error.HTTPError as e:
+        try:
+            return e.code, json.loads(e.read() or b"{}")
+        except ValueError:
+            return e.code, {}
+
+
+def host_register(a):
+    if not need_tags():
+        return 2
+    args = ["--id", a.id, "--version", a.version, "--tag", a.tag, "--commit", a.commit, "--revision", a.revision,
+            "--config", a.config, "--status-dir", a.status_dir, "--drs", a.drs]
+    if a.template:
+        args += ["--template", a.template]
+    out("(deploy-tools 안에서 확인)")
+    r = inner(tools_runner(), "register", *args)
+    if r.returncode == 1 and r.stderr.strip():
+        out(f"  (안쪽 오류) {last_line(r.stderr)}")
+    if r.returncode not in (0, 1):
+        out(f"멈춤: deploy-tools 오류(종료 {r.returncode}) — {last_line(r.stderr) or '(출력 없음)'}")
+        return 1
+    return r.returncode
+
+
+def host_seed(a):
+    if not need_tags():
+        return 2
+    r = inner(tools_runner(), "seed", "--config", a.config, "--template", a.template)
+    if r.returncode and not r.stdout.strip():
+        out(f"멈춤: deploy-tools 오류(종료 {r.returncode}) — {last_line(r.stderr) or '(출력 없음)'}")
+    return 0 if r.returncode == 0 else 1
+
+
+def host_rollback(a):
+    if not need_tags():
+        return 2
+    args = ["--id", a.id, "--version", a.version, "--config", a.config, "--status-dir", a.status_dir, "--drs", a.drs]
+    out("(deploy-tools 안에서 되돌리기 확인)")
+    r = inner(tools_runner(), "restore-check", *args)
+    if r.returncode == 1 and r.stderr.strip():
+        out(f"  (안쪽 오류) {last_line(r.stderr)}")
+    if r.returncode not in (0, 1):
+        out(f"멈춤: deploy-tools 오류(종료 {r.returncode}) — {last_line(r.stderr) or '(출력 없음)'}")
+        return 1
+    if r.returncode:
+        return 1
+    return host_switch(a)
+
+
+def r12_runner():
+    """R12 일회용 실행(D-325 W-1): deploy-tools에 덧파일 compose.r12.yaml(data volume · 받은 편지 · 적재 비밀)을 더해 부름. 빌드는 하지 않음(지금 이미지)."""
+    default = (" ".join(shlex.quote(c) for c in compose_cmd()) + f" -f {shlex.quote(str(HERE / 'docker' / 'compose.r12.yaml'))}"
+               " --profile tools run --rm --no-deps deploy-tools python scripts/vps/deploy-check --inner")
+    return cmd("DEPLOY_CHECK_R12_TOOLS", default)
+
+
+def data_volume_of(service):
+    """compose config --format json <서비스>에서 /var/lib/deploy/data에 붙은 named volume 이름(없으면 None)."""
+    r = run([*compose_cmd(), "config", "--format", "json", service])
+    try:
+        svc = (json.loads(r.stdout or "{}").get("services") or {}).get(service) or {}
+    except ValueError:
+        return None
+    for v in svc.get("volumes") or []:
+        if isinstance(v, dict) and v.get("target") == "/var/lib/deploy/data" and v.get("type") == "volume":
+            return v.get("source")
+    return None
+
+
+def get_info(url):
+    with urllib.request.urlopen(f"{url}/info", timeout=10) as r:
+        return json.loads(r.read() or b"{}")
+
+
+R12_MARK = "R12 결과: "
+R12_PENDING = "R12 대기: "   # r12-update --until-ledger 출력(장부 요청 증거)
+
+
+def ledger_cmd_host():
+    default = (" ".join(shlex.quote(c) for c in compose_cmd()) + " exec -T -e LLMOPS_STORE=pg llmops python -m llmops.admin data-release-auto"
+               " --deployment-id {deployment_id} --pack-revision {pack_revision} --drs {drs} --evidence -")
+    return os.environ.get("DEPLOY_CHECK_LEDGER") or default
+
+
+def host_ledger(a, runner, env, res):
+    """G-5: 장부 요청(llmops data-release-auto, 증거 JSON = stdin) → 성공이면 안쪽 r12-after-ledger, 실패면 r12-abort-ledger(운영 설정 그대로)."""
+    cmd = ledger_cmd_host().format(deployment_id=shlex.quote(res["deployment_id"]), pack_revision=shlex.quote(res.get("pack_revision") or ""),
+                                   drs=shlex.quote(res["drs"]))
+    out(f"[1b/3] 장부 요청(llmops data-release-auto) · drs {res['drs']}")
+    lr = run(shlex.split(cmd), input=json.dumps(res["evidence"], ensure_ascii=False))
+    if lr.stdout.strip():
+        out("  " + last_line(lr.stdout))
+    if lr.returncode:
+        why = last_line(lr.stdout + "\n" + lr.stderr) or f"종료 {lr.returncode}"
+        ab = run([*runner, "r12-abort-ledger", "--config", a.config, "--reason", why[:200]], env=env)
+        if ab.stdout.strip():
+            out(ab.stdout.rstrip())
+        out(f"결과: 멈춤 — 장부 요청 실패(종료 {lr.returncode}: {why}) · 운영 설정 · 서비스 그대로")
+        return None
+    r = run([*runner, "r12-after-ledger", "--config", a.config], env=env)
+    if r.stdout.strip():
+        out(r.stdout.rstrip())
+    line = next((l for l in reversed(r.stdout.splitlines()) if l.startswith(R12_MARK)), None)
+    if line is None:
+        out(f"멈춤: 장부 뒤 R12 작업이 결과를 내지 못함(종료 {r.returncode}) — {last_line(r.stderr) or '(출력 없음)'}. 장부 줄은 쓰였음 — 확인해 주세요")
+        return None
+    return json.loads(line[len(R12_MARK):])
+
+
+def host_r12(a):
+    """VPS R12 한 번(D-325 W-1 · Q-1 (가)): 안쪽(deploy-tools + 덧파일)에서 r12-update update → 운영 설정이 바뀌었으면 호스트가 그 서비스를
+    compose restart → 응답 · /info drs = 작업 기록 drs 대조 → 맞지 않으면 안쪽 r12-revert(옛 설정) → 다시 restart(W-3). 새 보고서 없으면 손 0."""
+    vol = data_volume_of(a.service)
+    if not vol:
+        out(f"멈춤: compose에서 {a.service}의 data volume(/var/lib/deploy/data)을 찾지 못함 — 아무것도 하지 않음")
+        return 1
+    inbox = a.inbox_dir or f"/srv/llmopsagent/r12-inbox/{a.service}"
+    if not Path(inbox).is_dir():   # 없는 호스트 폴더를 붙이면 Docker가 root 빈 폴더를 만듦 — 먼저 멈춤
+        out(f"멈춤: 받은 편지 폴더 {inbox}가 없음(앱 쪽 붙이기 · D-325 Q-2 (ㄱ)) — 아무것도 하지 않음")
+        return 1
+    if a.loader_env and not Path(a.loader_env).is_file():
+        out(f"멈춤: 적재 비밀 파일 {a.loader_env}가 없음(사용자 손) — 아무것도 하지 않음")
+        return 1
+    env = {**os.environ, "R12_DATA_VOLUME": vol, "R12_INBOX_DIR": inbox, "R12_LOADER_ENV": a.loader_env or "/dev/null"}
+    runner = r12_runner()
+    args = ["--config", a.config, "--store", a.store, "--graph", a.graph, "--node", a.node]
+    args += ["--with-loader"] if a.loader_env else []
+    args += ["--ledger-cmd", a.ledger_cmd] if a.ledger_cmd else []
+    args += ["--ledger-at-host"] if a.ledger_at_host else []
+    out(f"[1/3] R12 작업(deploy-tools · volume {vol} · 받은 편지 {inbox} · 적재 비밀 {'있음' if a.loader_env else '없음'})")
+    r = run([*runner, "r12", *args], env=env)
+    if r.stdout.strip():
+        out(r.stdout.rstrip())
+    line = next((l for l in reversed(r.stdout.splitlines()) if l.startswith(R12_MARK)), None)
+    if line is None:
+        out(f"멈춤: R12 작업이 결과를 내지 못함(종료 {r.returncode}) — {last_line(r.stderr) or '(출력 없음)'}. 운영 설정 · 서비스 그대로")
+        return 1
+    res = json.loads(line[len(R12_MARK):])
+    if res.get("status") == "awaiting_ledger":   # G-5(D-328 Q-2 (가)): 장부는 호스트가 llmops 컨테이너에서(증거 = stdin)
+        res = host_ledger(a, runner, env, res)
+        if res is None:
+            return 1
+    if res.get("status") == "no_news":
+        out("결과: 새 보고서 없음 — 서비스 그대로")
+        return 0
+    if res.get("status") not in ("restart_needed", "config_changed"):
+        out(f"결과: 멈춤 — 운영 설정 그대로({res.get('status')}: {str(res.get('reason') or '')[:200]})")
+        return 1
+    compose = compose_cmd()
+    url = a.url or f"http://127.0.0.1:{port_of(a.service)}"
+
+    def restart_and_check():
+        rr = run([*compose, "restart", a.service])
+        if rr.returncode:
+            return f"restart 종료 {rr.returncode}"
+        if not wait_up(url, a.wait):
+            return f"응답 없음({a.wait}초)"
+        try:
+            got = get_info(url).get("data_release_id")
+        except Exception as e:      # 연결 끊김 · JSON 아님
+            return f"/info 오류({type(e).__name__})"
+        return None if got == res.get("drs") else f"drs 다름(서버 {got} · 작업 {res.get('drs')})"
+
+    out(f"[2/3] 서비스 다시 시작: {a.service} → drs {res.get('drs')} · version {res.get('version')}")
+    why = restart_and_check()
+    if why is None:
+        out(f"[3/3] /info drs 맞음 — 결과: R12 반영({a.service} · {res.get('version')})")
+        return 0
+    out(f"[3/3] 맞지 않음: {why} — 옛 설정으로 되돌림")
+    rv = run([*runner, "r12-revert", "--config", a.config, "--reason", f"호스트 확인 실패: {why}"[:200]], env=env)
+    if rv.stdout.strip():
+        out(rv.stdout.rstrip())
+    if rv.returncode:
+        out(f"결과: 멈춤 — 되돌리기 실패(종료 {rv.returncode}) · 서비스는 새 설정 그대로일 수 있음. 손으로 확인해 주세요")
+        return 1
+    back = run([*compose, "restart", a.service])
+    up = back.returncode == 0 and wait_up(url, a.wait)
+    if res.get("ledger_drs"):   # G-2(D-328 Q-3 (가)): 장부 줄은 먼저 썼으므로 남음 — 알림
+        out(f"주의: 장부에 쓴 R12 줄(drs {res['ledger_drs']})이 돌지 않음 — 다음 배포 승인 전에 확인(오케 · llmops 알림)")
+    out("결과: 멈춤 — 옛 설정으로 되돌려 다시 띄움" if up else "결과: 멈춤 — 옛 설정으로 되돌렸으나 서비스가 응답하지 않음. 손으로 확인해 주세요")
+    return 1
+
+
+RECONF_MARK = "RECONF 결과: "
+
+
+def host_reconfigure(a):
+    """D-375: 같은 서비스 · 같은 장부 줄에서 운영 설정만 바꿈 + 자동 되돌림(R12 W-3 틀)."""
+    if not need_tags():
+        return 2
+    if not Path(a.case_file).is_file():
+        out(f"멈춤: C01 입력 파일 {a.case_file}가 없음 — 아무것도 하지 않음")
+        return 1
+    compose, tools = compose_cmd(), tools_runner()
+    url = a.url or f"http://127.0.0.1:{port_of(a.service)}"
+    try:
+        before = get_info(url)
+    except Exception as e:      # 서비스가 안 떠 있음 — 운영 중인 서비스만 바꿈
+        out(f"멈춤: {a.service}가 응답하지 않음({type(e).__name__}) — 아무것도 하지 않음")
+        return 1
+    key = (before.get("deployment_id"), (before.get("pack") or {}).get("pack_revision"), before.get("data_release_id"))
+    out(f"[0/4] 지금: {key[0]} · revision {str(key[1])[:15]} · drs {key[2]}")
+    out("(deploy-tools 안에서 바꿀 설정 확인)")
+    r = inner(tools, "reconfigure-apply", "--config", a.config, "--template", a.template)
+    line = next((l for l in reversed(r.stdout.splitlines()) if l.startswith(RECONF_MARK)), None)
+    if r.returncode or line is None:
+        if r.stderr.strip():
+            out(f"  (안쪽 오류) {last_line(r.stderr)}")
+        out("결과: 멈춤 — 운영 설정 · 서비스 그대로")
+        return 1
+    res = json.loads(line[len(RECONF_MARK):])
+    if res.get("status") == "same":
+        out("결과: 운영 설정이 이미 템플릿과 같음 — 서비스 그대로")
+        return 0
+
+    def check():
+        rr = run([*compose, "restart", a.service])
+        if rr.returncode:
+            return f"restart 종료 {rr.returncode}"
+        if not wait_up(url, a.wait):
+            return f"응답 없음({a.wait}초)"
+        try:
+            info = get_info(url)
+        except Exception as e:
+            return f"/info 오류({type(e).__name__})"
+        got = (info.get("deployment_id"), (info.get("pack") or {}).get("pack_revision"), info.get("data_release_id"))
+        if got != key:
+            return f"배포 id · revision · drs가 바뀜(전 {key[0]} · {key[2]} / 뒤 {got[0]} · {got[2]}) — 같은 장부 줄이 아님"
+        try:
+            body = json.loads(Path(a.case_file).read_text(encoding="utf-8"))
+            code, resp = post_c01(url, body, f"deploy-check-reconfigure-{int(time.time())}")
+        except Exception as e:
+            return f"C01 요청 오류({type(e).__name__})"
+        out(f"[3/4] /info 같음 · C01 → {code} {resp.get('run_id') or ''}")
+        return None if code == 201 else f"C01 응답 {code}"
+
+    out(f"[2/4] 서비스 다시 시작: {a.service}(운영 설정 바꿈 — 옛 글 {res.get('before')})")
+    why = check()
+    if why is None:
+        out(f"[4/4] 결과: 운영 설정 바꿈 반영({a.service} · drs {key[2]} 그대로)")
+        return 0
+    out(f"[4/4] 맞지 않음: {why} — 옛 설정으로 되돌림")
+    rv = inner(tools, "reconfigure-revert", "--config", a.config)
+    if rv.returncode:
+        out(f"결과: 멈춤 — 되돌리기 실패(종료 {rv.returncode}) · 서비스는 새 설정일 수 있음. 손으로 확인해 주세요")
+        return 1
+    back = run([*compose, "restart", a.service])
+    up = back.returncode == 0 and wait_up(url, a.wait)
+    out("결과: 멈춤 — 옛 설정으로 되돌려 다시 띄움" if up else "결과: 멈춤 — 옛 설정으로 되돌렸으나 서비스가 응답하지 않음. 손으로 확인해 주세요")
+    return 1
+
+
+def host_switch(a):
+    if not need_tags():
+        return 2
+    tools = tools_runner()
+    base = ["--id", a.id, "--version", a.version, "--config", a.config, "--status-dir", a.status_dir]
+    r = inner(tools, "precheck", *base)
+    if r.returncode:
+        if r.stderr.strip():
+            out(f"  (안쪽 오류) {last_line(r.stderr)}")
+        if not r.stdout.strip():
+            out(f"멈춤: deploy-tools 오류(종료 {r.returncode}) — {last_line(r.stderr) or '(출력 없음)'}")
+        return 1
+    compose = compose_cmd()
+    url = a.url or f"http://127.0.0.1:{port_of(a.service)}"
+    before = run([*compose, "ps", "--status", "running", "--quiet", a.service])
+    if before.returncode == 0 and before.stdout.strip():
+        out(f"주의: {a.service}가 이미 켜져 있음 — 실패해도 내리지 않음(운영 중일 수 있음)")
+        stop_new = False
+    else:
+        stop_new = True
+
+    def failed(detail):
+        if stop_new:
+            s = run([*compose, "stop", a.service])
+            out(f"새 서비스 내림: {a.service} (종료 {s.returncode})")
+        inner(tools, "mark-failed", *base, "--detail", (STEP4 + detail)[:200])
+        out("결과: 멈춤 — 새 서비스는 내리고 옛 서비스는 그대로 운영" if stop_new else "결과: 멈춤 — 옛 서비스는 그대로 운영")
+        return 1
+
+    out(f"[2/5] 새 서비스 빌드 · 기동: {a.service} (DEPLOY_TAG {os.environ['DEPLOY_TAG']} · PACKRT_TAG {os.environ['PACKRT_TAG']})")
+    for step in (["build", a.service], ["up", "-d", a.service]):
+        r = run([*compose, *step])
+        if r.returncode:
+            out(f"  {step[0]} 오류: {last_line(r.stderr) or '(출력 없음)'}")
+            return failed(f"새 서비스가 켜지지 않음({step[0]} 종료 {r.returncode})")
+    if not wait_up(url, a.wait):
+        return failed(f"새 서비스가 응답하지 않음({a.wait}초)")
+    try:
+        if a.case_file:
+            body = json.loads(Path(a.case_file).read_text(encoding="utf-8"))
+        else:
+            r = inner(exec_runner(a.service), "c01-input", "--config", a.config, show=False)
+            if r.returncode:
+                raise RuntimeError(last_line(r.stderr) or f"종료 {r.returncode}")
+            body = json.loads(r.stdout)
+        code, resp = post_c01(url, body, f"deploy-check-{a.id}-C01-{int(time.time())}")
+    except Exception as e:      # 입력 못 만듦 · 연결 끊김 · 시간 초과 · JSON 아님 — 모두 ④ 실패로 남김(V-32 b)
+        return failed(f"C01 요청 오류({type(e).__name__})")
+    rid = resp.get("run_id") or (resp.get("error") or {}).get("run_id")
+    out(f"[3/5] C01 → {code} {rid or ''}")
+    if code != 201 or not rid:
+        return failed(f"C01 응답 {code}")
+    r = inner(exec_runner(a.service), "mark-switched", *base, "--run-id", rid, show=False)
+    out(f"[4/5] 상태 파일: {r.stdout.strip() or last_line(r.stderr)}")
+    if r.returncode not in (0, 1):     # exec 자체 실패 · 사용 오류 — deploy-status가 failed를 쓰지 못했으므로 deploy-tools에서 씀
+        return failed(f"switched 기록 실패(종료 {r.returncode})")
+    if r.returncode and inner(tools, "precheck", *base, show=False).returncode == 0:
+        return failed("switched 기록 실패(종료 1, 상태 그대로 registered)")   # 안쪽이 failed를 못 쓴 채 끝남 — deploy-tools에서 씀
+    if r.returncode:                   # 1 = deploy-status가 대조 실패로 failed를 이미 씀
+        if stop_new:
+            s = run([*compose, "stop", a.service])
+            out(f"새 서비스 내림: {a.service} (종료 {s.returncode})")
+        out("결과: 멈춤 — 상태 파일 failed(④), 옛 서비스는 그대로 운영")
+        return 1
+    if a.old_service:
+        r = run([*compose, "stop", a.old_service])
+        out(f"[5/5] 옛 서비스 내림: {a.old_service} (종료 {r.returncode})")
+        if r.returncode:
+            out("주의: 옛 서비스를 내리지 못함 — 운영은 새 서비스(switched). 손으로 내려 주세요")
+    else:
+        out("[5/5] 옛 서비스 없음")
+    out("결과: switched(④ 완료)")
+    return 0
+
+
+# ---------------------------------------------------------------- 안쪽(--inner, deploy 이미지 안 — deploy_server · packrt를 씀)
+def inner_py(script, *args):
+    return run([sys.executable, str(HERE / "scripts" / script), *args])
+
+
+py = inner_py          # 시험이 바꿔 끼우는 이름(도구 부르기)
+
+
+def inner_crashed(r):
+    """도구가 판정을 내지 못하고 죽음(파이썬 오류 · 판정 줄 없음)."""
+    return "Traceback" in r.stderr or not r.stdout.strip()
+
+
+def inner_stage(a):
+    try:
+        return json.loads((Path(a.status_dir) / f"{a.id}.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+
+def inner_settings(config):
+    from deploy_server.settings import load_settings
+    return load_settings(config)
+
+
+LEDGER_ENV_NAMES = ["LLMOPSAGENT_RUNTIME_DSN"]   # deploy-tools 장부 접속 파일에 허용하는 이름(D-146 — runtime_reader 하나만)
+
+
+def inner_ledger_env_problem(s):
+    """registration llmops_pg일 때 장부 접속 파일(runtime_db.env_file)이 runtime_reader DSN 한 이름만 담았는지 — 이름만 읽고 값은 읽지 · 내지 않음.
+    문제가 있으면 한 줄 이유, 없으면 None. 파일이 없으면 V-04가 판단(환경 변수일 수 있음)."""
+    if s.registration.get("mode") != "llmops_pg" or not s.runtime_db.get("env_file"):
+        return None
+    p = Path(s.runtime_db["env_file"])
+    if p.is_dir():
+        return f"장부 접속 파일 자리 {p}가 폴더임(VPS에 파일이 없을 때 Docker가 만든 빈 폴더 — 폴더를 지우고 deploy-tools.env를 만들어 주세요)"
+    if not p.exists():
+        return None
+    try:
+        names = [re.sub(r"^export\s+", "", l.strip()).partition("=")[0].strip() for l in p.read_text(encoding="utf-8").splitlines()
+                 if l.strip() and not l.lstrip().startswith("#")]
+    except OSError as e:
+        return f"장부 접속 파일 {p.name}을 읽을 수 없음({type(e).__name__}) — 소유 uid 10001 · 600인지 확인해 주세요"
+    if names != LEDGER_ENV_NAMES:
+        return f"장부 접속 파일 {p.name}의 이름이 {names} — runtime_reader DSN 한 이름({LEDGER_ENV_NAMES[0]})만 둡니다(D-146)"
+    return None
+
+
+def inner_copy_template(config, template):
+    """운영 설정이 없을 때만 이미지 설정을 복사(원자적). 있으면 그대로."""
+    c = Path(config)
+    if c.exists():
+        return False
+    if not template or not Path(template).is_file():
+        raise SystemExit(f"멈춤: 운영 설정 {c.name}이 없고 복사할 이미지 설정(--template)도 없음")
+    c.parent.mkdir(parents=True, exist_ok=True)
+    atomic_write(c, Path(template).read_text(encoding="utf-8"))
+    return True
+
+
+def inner_register(a):
+    if inner_stage(a).get("stage") == "switched":
+        out("멈춤: 이 change id는 이미 switched(④ 완료) — 다시 등록하지 않음(상태 파일 그대로)")
+        return 1
+    if inner_copy_template(a.config, a.template):
+        out(f"[0/5] 운영 설정 만듦: {Path(a.template).name} → {a.config}")
+    else:
+        out(f"[0/5] 운영 설정 그대로(이미 있음): {a.config}")
+        if a.template and Path(a.template).is_file():
+            strip = lambda s: [l for l in s.splitlines() if not re.match(r"^  #? ?expect_revision:", l)]
+            if strip(Path(a.config).read_text(encoding="utf-8")) != strip(Path(a.template).read_text(encoding="utf-8")):
+                out("  주의: 운영 설정이 이미지 설정과 다름(expect_revision 줄 말고) — 이전 시도에서 남은 것인지 확인해 주세요")
+    s = inner_settings(a.config)
+    bad = inner_ledger_env_problem(s)
+    if bad:
+        out(f"멈춤: {bad} — 상태 파일은 쓰지 않음(③ 대기)")
+        return 1
+    genv, bad = pack_git_env(s.pack_repo)
+    out(f"[1/5] 태그 받기: {s.pack_repo.name} fetch --tags" + (f"(열쇠 {PACK_KEYS[s.pack_repo.name]})" if genv or bad else ""))
+    if bad:
+        out(f"멈춤: {bad} — 상태 파일은 쓰지 않음(③ 대기)")
+        return 1
+    r = run([*cmd("DEPLOY_CHECK_GIT", "git"), "-C", str(s.pack_repo), "fetch", "--tags", "origin"], env=genv)
+    if r.returncode:
+        out(f"멈춤: 태그를 받지 못함(종료 {r.returncode}) — 상태 파일은 쓰지 않음(③ 대기)")
+        return 1
+    out("[2/5] V-17")
+    r = py("v17_check.py", "--config", a.config, "--commit", a.commit, "--revision", a.revision, "--tag", a.tag)
+    out(r.stdout.strip())
+    if r.returncode and inner_crashed(r):
+        out(f"멈춤: V-17 도구 오류 — {last_line(r.stderr)}. 상태 파일은 쓰지 않음(③ 대기)")
+        return 1
+    if r.returncode and "Pack을 읽지 못함" in r.stdout:   # 이미지의 packrt가 이 Pack보다 옛 판(038 1-1, 넘김 H-12)
+        out("멈춤: V-17 — 이 이미지가 Pack을 읽지 못함. 새 packrt 판 이미지로 먼저 다시 빌드(상태 파일은 쓰지 않음, ③ 대기)")
+        return 1
+    if r.returncode:
+        out("멈춤: V-17 불일치 — 상태 파일은 쓰지 않음(③ 대기). 알림 값을 확인해 주세요")
+        return 1
+    out("[3/5] 묶기 대조(D-291 덧 — packrt가 이 설정으로 시작할 수 있는지 · 쓰기 0)")
+    r = run([*cmd("DEPLOY_CHECK_BIND", f"{shlex.quote(sys.executable)} {shlex.quote(str(HERE / 'scripts' / 'r12-update'))}"), "check", "--config", a.config])
+    out(r.stdout.strip())
+    if r.returncode:
+        why = f" — 도구 오류 {last_line(r.stderr)}" if inner_crashed(r) else ""
+        out(f"멈춤: 묶기 대조 실패{why} — 상태 파일은 쓰지 않음(③ 대기). 서버가 이 설정으로 시작하지 못함(release · recipe · DB 줄 확인)")
+        return 1
+    out(f"[4/5] expect_revision: {fill_expect_revision(a.config, a.revision)} ({Path(a.config).name})")
+    out("[5/5] V-04 장부 줄")
+    r = py("es3_check.py", "--config", a.config, "--id", a.id, "--version", a.version, "--commit", a.commit,
+           "--revision", a.revision, "--tag", a.tag, "--drs", a.drs, "--status-dir", a.status_dir)
+    out(r.stdout.strip())
+    stage = inner_stage(a).get("stage")
+    if r.returncode == 0 and stage == "registered":
+        out("결과: registered(배포 승인 창 ③ 완료)")
+        return 0
+    if stage == "failed":
+        out(f"결과: 멈춤(종료 {r.returncode}) — 상태 파일 failed(③)")
+    else:
+        out(f"결과: 멈춤 — V-04 도구 오류({last_line(r.stderr) or f'종료 {r.returncode}'}), 상태 파일 {stage or '없음'}")
+    return 1
+
+
+def read_status(p):
+    """상태 파일 하나 → dict. JSON이 아니거나 updated_at이 시간대 있는 시각이 아니면 ValueError."""
+    from datetime import datetime
+    d = json.loads(p.read_text(encoding="utf-8"))
+    if not isinstance(d, dict):
+        raise ValueError("JSON 객체가 아님")
+    at = datetime.fromisoformat(d.get("updated_at") or "")
+    if at.tzinfo is None:
+        raise ValueError("updated_at에 시간대가 없음")
+    return d, at
+
+
+def inner_restore_check(a):
+    c = Path(a.config)
+    s = inner_settings(a.config) if c.is_file() else None
+    if s is None or not s.expect_revision:
+        out(f"멈춤: 운영 설정 {a.config}이 없거나 expect_revision이 비어 있음 — seed를 먼저 돌려 주세요(상태 파일 · 서비스 그대로)")
+        return 1
+    bad = inner_ledger_env_problem(s)
+    if bad:
+        out(f"멈춤: {bad} — 상태 파일 · 서비스 그대로")
+        return 1
+    out(f"[1/4] 운영 설정: {c.name} · {s.deployment_id} · expect_revision {s.expect_revision[:15]}…")
+    folder, mine = Path(a.status_dir), Path(a.status_dir) / f"{a.id}.json"
+    if not folder.is_dir():          # 볼륨이 새로 생겼거나 경로가 틀림 — LLMOps가 못 보는 곳에 쓰고 V1을 내리지 않게(F-6, 답장 019-14 L0)
+        out(f"멈춤: 상태 폴더 {a.status_dir}이 없음 — 지금 운영을 판단할 수 없음(상태 파일 · 서비스 그대로)")
+        return 1
+    found = {}
+    for p in sorted(folder.glob("*.json")):
+        try:
+            found[p] = read_status(p)
+        except (OSError, ValueError, TypeError) as e:
+            out(f"멈춤: 상태 파일 {p.name}을 읽을 수 없음({e}) — 지금 운영을 판단할 수 없음(상태 파일 · 서비스 그대로)")
+            return 1
+    if mine in found:
+        d = found[mine][0]
+        out(f"[2/4] 되돌리기 id 상태: {d.get('stage')}({d.get('deployment_id')})")
+        if d.get("deployment_id") != s.deployment_id:
+            out(f"멈춤: 다른 배포의 상태 파일 — 덮지 않음(대상 {s.deployment_id}, 상태 파일 · 서비스 그대로)")
+            return 1
+        if d.get("stage") == "switched":
+            out("멈춤: 이 되돌리기 id는 이미 switched(④ 완료) — 다시 하지 않음(상태 파일 그대로)")
+            return 1
+    else:
+        out("[2/4] 되돌리기 id 상태: 없음")
+    live = [(at, d) for d, at in found.values() if d.get("stage") == "switched"]
+    latest = max((at for at, _ in live), default=None)
+    tops = {d.get("deployment_id") for at, d in live if at == latest}
+    if len(tops) > 1:                # 같은 시각에 배포 id가 다른 switched — 고를 근거가 없음(F-7, 답장 019-14 L0)
+        out(f"멈춤: 같은 시각({latest.isoformat()})의 switched 파일이 배포 {', '.join(sorted(map(str, tops)))}로 갈림 — 지금 운영을 판단할 수 없음(상태 파일 · 서비스 그대로)")
+        return 1
+    now = tops.pop() if tops else None
+    out(f"  지금 운영: {now or '없음'}")
+    if now == s.deployment_id:
+        out("멈춤: 이미 운영 중인 배포 — 되돌릴 것 없음(상태 파일 · 서비스 그대로)")
+        return 1
+    r = run([*cmd("DEPLOY_CHECK_GIT", "git"), "-C", str(s.pack_repo), "rev-parse", "--verify", "--quiet", f"refs/tags/{s.pack_ref}^{{commit}}"])
+    commit = r.stdout.strip()
+    if r.returncode or not re.fullmatch(r"[0-9a-f]{40}", commit):
+        out(f"멈춤: Pack 캐시에 태그 {s.pack_ref}가 없음(fetch는 하지 않음) — 상태 파일은 쓰지 않음(③ 대기)")
+        return 1
+    out(f"[3/4] 태그 {s.pack_ref} → commit {commit[:12]}(Pack 캐시, fetch 없음)")
+    out("[4/4] V-04 장부 줄")
+    r = py("es3_check.py", "--config", a.config, "--id", a.id, "--version", a.version, "--commit", commit,
+           "--revision", s.expect_revision, "--tag", s.pack_ref, "--drs", a.drs, "--status-dir", a.status_dir)
+    out(r.stdout.strip())
+    stage = inner_stage(a).get("stage")
+    if r.returncode == 0 and stage == "registered":
+        out("결과: registered(되돌리기 확인)")
+        return 0
+    if stage == "failed":
+        out(f"결과: 멈춤(종료 {r.returncode}) — 상태 파일 failed(③)")
+    else:
+        out(f"결과: 멈춤 — V-04 도구 오류({last_line(r.stderr) or f'종료 {r.returncode}'}), 상태 파일 {stage or '없음'}")
+    return 1
+
+
+def inner_seed(a):
+    c, t = Path(a.config), Path(a.template)
+    if c.exists():
+        out(f"그대로: 운영 설정 {c.name}이 이미 있음 — 덮지 않음")
+        return 0
+    if not t.is_file() or not REV_LINE.search(t.read_text(encoding="utf-8")):
+        out(f"멈춤: seed는 expect_revision이 이미 든 이미지 설정만 복사함({t.name}) — 새 버전은 register로")
+        return 1
+    inner_copy_template(c, t)
+    out(f"seed: {t.name} → {c}(상태 파일은 쓰지 않음)")
+    return 0
+
+
+def inner_precheck(a):
+    cur = inner_stage(a)
+    s = inner_settings(a.config) if Path(a.config).is_file() else None
+    out(f"[1/5] 첫 확인(deploy-tools): 상태 파일 {cur.get('stage') or '없음'}")
+    if s is None:
+        out(f"멈춤: 운영 설정 {a.config}이 없음 — register(또는 seed)를 먼저 돌려 주세요(상태 파일 · 서비스 그대로)")
+        return 1
+    if cur.get("stage") != "registered" or cur.get("deployment_id") != s.deployment_id:
+        out("멈춤: registered(같은 배포 id) 뒤에만 운영 전환을 시작함 — 아무것도 하지 않음")
+        return 1
+    if s.expect_revision != cur.get("revision"):
+        out(f"멈춤: 운영 설정 expect_revision({(s.expect_revision or '없음')[:15]})이 상태 파일 revision({(cur.get('revision') or '')[:15]})과 다름"
+            " — 서버가 revision 대조 없이 켜질 수 있어 시작하지 않음. register를 다시 돌려 주세요(상태 파일 · 서비스 그대로)")
+        return 1
+    out("  registered · 같은 배포 id · 운영 설정 revision = 상태 파일 revision")
+    return 0
+
+
+def inner_c01_input(a):
+    from deploy_server.pack_source import materialize
+    s = inner_settings(a.config)
+    copy = materialize(s.pack_repo, s.pack_ref, s.packs_dir, s.pack_subdir, s.releases_subdir)
+    rows = [json.loads(l) for l in (copy.pack_dir / "evals/task10-holdout/dataset.jsonl").read_text(encoding="utf-8").splitlines() if l.strip()]
+    print(json.dumps({r["case_id"]: r["input"] for r in rows}["C01"], ensure_ascii=False))
+    return 0
+
+
+def inner_mark(a, stage):
+    extra = ["--run-id", a.run_id] if stage == "switched" else ["--detail", a.detail]
+    r = py("deploy-status.py", stage, "--id", a.id, "--version", a.version, "--config", a.config, "--status-dir", a.status_dir, *extra)
+    out(r.stdout.strip() or last_line(r.stderr))
+    return r.returncode
+
+
+R12_LOADER_IN = os.environ.get("DEPLOY_CHECK_R12_LOADER_IN", "/run/deploy/index-loader.env")   # compose.r12.yaml이 붙이는 자리(맥 예행은 바꿔 끼움)
+
+
+def r12_cli():
+    return cmd("DEPLOY_CHECK_R12", f"{shlex.quote(sys.executable)} {shlex.quote(str(HERE / 'scripts' / 'r12-update'))}")
+
+
+def r12_result(sp, n0, r):
+    """r12-update 한 번의 결과 한 줄: 장부 대기(R12 대기:) · 새 보고서 없음 · 작업 기록의 새 줄 · 기록 전에 멈춤."""
+    pend = next((l for l in reversed(r.stdout.splitlines()) if l.startswith(R12_PENDING)), None)
+    if r.returncode == 0 and pend:
+        return {"status": "awaiting_ledger", **json.loads(pend[len(R12_PENDING):])}
+    if r.returncode == 0 and "새 보고서 없음" in r.stdout:
+        return {"status": "no_news"}
+    hist = (json.loads(sp.read_text(encoding="utf-8")).get("history") or []) if sp.exists() else []
+    if len(hist) > n0:
+        h = hist[-1]
+        return {k: h.get(k) for k in ("status", "drs", "version", "corpus", "reports", "reason", "ledger_drs")}
+    return {"status": "failed", "reason": last_line(r.stdout) or last_line(r.stderr) or f"종료 {r.returncode}"}   # 기록 전에 멈춤(받은 편지 모양 등)
+
+
+def inner_r12_step(a, args):
+    s = inner_settings(a.config)
+    sp = Path(s.data_dir) / "r12-state.json"
+    n0 = len(json.loads(sp.read_text(encoding="utf-8")).get("history") or []) if sp.exists() else 0
+    r = run([*r12_cli(), *args])
+    if r.stdout.strip():
+        out("\n".join(l for l in r.stdout.rstrip().splitlines() if not l.startswith(R12_PENDING)))
+    res = r12_result(sp, n0, r)
+    out(R12_MARK + json.dumps(res, ensure_ascii=False))
+    return 0 if res["status"] in ("no_news", "awaiting_ledger", "restart_needed", "config_changed", "switched") else 1
+
+
+def inner_r12(a):
+    """안쪽 R12(D-325 W-1): r12-update update 한 번 → `R12 결과: …` 한 줄. --ledger-at-host면 장부 요청 앞에서 멈추고 증거를 냄(G-5, D-328 Q-2 (가))."""
+    args = ["update", "--config", a.config, "--store", a.store, "--graph", a.graph, "--node", a.node]
+    args += ["--loader-env-file", R12_LOADER_IN] if a.with_loader else []
+    args += ["--ledger-cmd", a.ledger_cmd] if a.ledger_cmd else []
+    args += ["--until-ledger"] if a.ledger_at_host else []
+    return inner_r12_step(a, args)
+
+
+def inner_r12_after_ledger(a):
+    return inner_r12_step(a, ["after-ledger", "--config", a.config])
+
+
+def inner_r12_abort_ledger(a):
+    r = run([*r12_cli(), "abort-ledger", "--config", a.config, "--reason", a.reason])
+    out(r.stdout.strip() or last_line(r.stderr) or f"종료 {r.returncode}")
+    return r.returncode
+
+
+def inner_r12_revert(a):
+    r = run([*r12_cli(), "revert", "--config", a.config, "--reason", a.reason])
+    out((r.stdout.strip() or last_line(r.stderr) or f"종료 {r.returncode}"))
+    return r.returncode
+
+
+def before_reconfigure(config):
+    p = Path(config)
+    return p.with_name(f".{p.name}.before-reconfigure")
+
+
+def inner_reconfigure_apply(a):
+    """D-375 안쪽: 템플릿 + 지금 expect_revision → 같은 배포 id · Pack 저장소 · ref · revision인지 → 묶기 대조 → 옛 글 보관 · 운영 설정 바꿈."""
+    live, tmpl = Path(a.config), Path(a.template)
+    if not live.is_file():
+        out(f"멈춤: 운영 설정 {live}이 없음 — register로 먼저(손 0)")
+        return 1
+    if not tmpl.is_file():
+        out(f"멈춤: 템플릿 {tmpl}이 없음(이미지 config/) — 손 0")
+        return 1
+    m = REV_LINE.search(live.read_text(encoding="utf-8"))
+    if not m:
+        out("멈춤: 운영 설정에 expect_revision이 없음 — register를 마친 설정만 바꿈(손 0)")
+        return 1
+    cand = live.with_name(f".{live.name}.reconfigure-candidate")
+    try:
+        atomic_write(cand, tmpl.read_text(encoding="utf-8"))
+        fill_expect_revision(cand, m.group(1))
+        if cand.read_text(encoding="utf-8") == live.read_text(encoding="utf-8"):
+            print(RECONF_MARK + json.dumps({"status": "same"}))
+            return 0
+        old, new = inner_settings(str(live)), inner_settings(str(cand))
+        for what, x, y in (("배포 id", old.deployment_id, new.deployment_id), ("Pack 저장소", str(old.pack_repo), str(new.pack_repo)),
+                           ("Pack ref", old.pack_ref, new.pack_ref), ("expect_revision", old.expect_revision, new.expect_revision)):
+            if x != y:
+                out(f"멈춤: 템플릿의 {what}이 운영 설정과 다름({x} / {y}) — reconfigure는 같은 버전 · 같은 장부 줄만(새 버전은 register · switch)")
+                return 1
+        out("[1/4] 묶기 대조(바꿀 설정 — packrt가 이 설정으로 시작할 수 있는지 · DB store면 DB도)")
+        r = run([*cmd("DEPLOY_CHECK_BIND", f"{shlex.quote(sys.executable)} {shlex.quote(str(HERE / 'scripts' / 'r12-update'))}"), "check", "--config", str(cand)])
+        out(r.stdout.strip())
+        if r.returncode:
+            out(f"멈춤: 묶기 대조 실패 — 운영 설정 그대로{(' · ' + last_line(r.stderr)) if r.stderr.strip() else ''}")
+            return 1
+        keep = before_reconfigure(live)
+        atomic_write(keep, live.read_text(encoding="utf-8"))
+        atomic_write(live, cand.read_text(encoding="utf-8"))
+        print(RECONF_MARK + json.dumps({"status": "changed", "before": keep.name}, ensure_ascii=False))
+        return 0
+    finally:
+        cand.unlink(missing_ok=True)
+
+
+def inner_reconfigure_revert(a):
+    keep = before_reconfigure(a.config)
+    if not keep.is_file():
+        out(f"멈춤: 옛 글 {keep.name}이 없음 — 되돌릴 수 없음")
+        return 1
+    atomic_write(a.config, keep.read_text(encoding="utf-8"))
+    out(f"되돌림: {Path(a.config).name} ← {keep.name}")
+    return 0
+
+
+def inner_main(argv):
+    sys.path.insert(0, str(HERE))          # 저장소 뿌리는 안쪽에서만(호스트 쪽은 표준 라이브러리만)
+    ap = argparse.ArgumentParser(prog="deploy-check --inner")
+    sub = ap.add_subparsers(dest="cmd", required=True)
+    for name in ("register", "seed", "precheck", "c01-input", "mark-switched", "mark-failed", "restore-check"):
+        p = sub.add_parser(name)
+        p.add_argument("--config", required=True)
+        if name in ("register", "seed"):
+            p.add_argument("--template", required=(name == "seed"))
+        if name in ("register", "precheck", "mark-switched", "mark-failed", "restore-check"):
+            p.add_argument("--id", required=True)
+            p.add_argument("--version", required=True)
+            p.add_argument("--status-dir", required=True)
+        if name == "register":
+            p.add_argument("--tag", required=True)
+            p.add_argument("--commit", required=True)
+            p.add_argument("--revision", required=True)
+            p.add_argument("--drs", default="drs:54e2537743f7fa9c")
+        if name == "restore-check":
+            p.add_argument("--drs", default="drs:54e2537743f7fa9c")
+        if name == "mark-switched":
+            p.add_argument("--run-id", required=True)
+        if name == "mark-failed":
+            p.add_argument("--detail", required=True)
+    p = sub.add_parser("r12")
+    p.add_argument("--config", required=True)
+    p.add_argument("--store", default="history")
+    p.add_argument("--graph", required=True)
+    p.add_argument("--node", required=True)
+    p.add_argument("--with-loader", action="store_true")
+    p.add_argument("--ledger-cmd")
+    p.add_argument("--ledger-at-host", action="store_true")
+    p = sub.add_parser("r12-after-ledger")
+    p.add_argument("--config", required=True)
+    p = sub.add_parser("r12-abort-ledger")
+    p.add_argument("--config", required=True)
+    p.add_argument("--reason", required=True)
+    p = sub.add_parser("r12-revert")
+    p.add_argument("--config", required=True)
+    p.add_argument("--reason", required=True)
+    p = sub.add_parser("reconfigure-apply")
+    p.add_argument("--config", required=True)
+    p.add_argument("--template", required=True)
+    p = sub.add_parser("reconfigure-revert")
+    p.add_argument("--config", required=True)
+    a = ap.parse_args(argv)
+    if a.cmd == "reconfigure-apply":
+        return inner_reconfigure_apply(a)
+    if a.cmd == "reconfigure-revert":
+        return inner_reconfigure_revert(a)
+    if a.cmd == "r12":
+        return inner_r12(a)
+    if a.cmd == "r12-revert":
+        return inner_r12_revert(a)
+    if a.cmd == "r12-after-ledger":
+        return inner_r12_after_ledger(a)
+    if a.cmd == "r12-abort-ledger":
+        return inner_r12_abort_ledger(a)
+    fn = {"register": inner_register, "seed": inner_seed, "precheck": inner_precheck, "c01-input": inner_c01_input, "restore-check": inner_restore_check,
+          "mark-switched": lambda a: inner_mark(a, "switched"), "mark-failed": lambda a: inner_mark(a, "failed")}[a.cmd]
+    return fn(a)
+
+
+# ---------------------------------------------------------------- 시작
+def main(argv=None):
+    argv = sys.argv[1:] if argv is None else argv
+    if argv[:1] == ["--inner"]:
+        return inner_main(argv[1:])
+    ap = argparse.ArgumentParser(prog="deploy-check")
+    sub = ap.add_subparsers(dest="cmd", required=True)
+    for name in ("register", "seed", "switch", "rollback"):
+        p = sub.add_parser(name)
+        p.add_argument("--config", required=True)
+        if name == "seed":
+            p.add_argument("--template", required=True)
+            continue
+        p.add_argument("--id", required=True)
+        p.add_argument("--version", required=True)
+        p.add_argument("--status-dir", required=True)
+        if name == "register":
+            p.add_argument("--template")
+            p.add_argument("--tag", required=True)
+            p.add_argument("--commit", required=True)
+            p.add_argument("--revision", required=True)
+            p.add_argument("--drs", default="drs:54e2537743f7fa9c")
+        else:
+            p.add_argument("--service", required=True)
+            p.add_argument("--old-service", required=(name == "rollback"))   # 되돌린 뒤 두 버전이 함께 상주하지 않게(PRS-07)
+            if name == "rollback":
+                p.add_argument("--drs", default="drs:54e2537743f7fa9c")
+            p.add_argument("--url")
+            p.add_argument("--case-file")
+            p.add_argument("--wait", type=int, default=120)
+    p = sub.add_parser("r12")
+    p.add_argument("--service", required=True)
+    p.add_argument("--config", required=True)
+    p.add_argument("--store", default="history")
+    p.add_argument("--graph", required=True)
+    p.add_argument("--node", required=True)
+    p.add_argument("--inbox-dir")
+    p.add_argument("--loader-env")
+    p.add_argument("--ledger-cmd")
+    p.add_argument("--ledger-at-host", action="store_true", help="G-5: 장부를 호스트가 llmops 컨테이너에서 씀(VPS 장부 대조 llmops_pg)")
+    p.add_argument("--url")
+    p.add_argument("--wait", type=int, default=120)
+    p = sub.add_parser("reconfigure")   # D-375: 같은 서비스 · 같은 장부 줄에서 운영 설정만 바꿈
+    p.add_argument("--service", required=True)
+    p.add_argument("--config", required=True)
+    p.add_argument("--template", required=True)
+    p.add_argument("--case-file", required=True)
+    p.add_argument("--url")
+    p.add_argument("--wait", type=int, default=120)
+    a = ap.parse_args(argv)
+    for v in (a.config, getattr(a, "template", None)):
+        if v and v.startswith("/srv/"):
+            print(f"사용 오류: {v}는 호스트 경로 — 컨테이너 안 경로(config-live/… · config/…)를 주세요", file=sys.stderr)
+            return 2
+    if a.cmd == "seed":
+        return host_seed(a)
+    if a.cmd == "r12":
+        return host_r12(a)
+    if a.cmd == "reconfigure":
+        return host_reconfigure(a)
+    if not ID_RE.fullmatch(a.id) or not re.fullmatch(r"V\d+", a.version):
+        print("사용 오류: --id(change id) · --version(V1, V2 …) 모양", file=sys.stderr)
+        return 2
+    if a.cmd in ("switch", "rollback") and a.old_service and a.old_service == a.service:
+        print("사용 오류: --old-service가 --service와 같음(방금 켠 운영 서비스를 내리게 됨)", file=sys.stderr)
+        return 2
+    if a.cmd == "register":
+        if not re.fullmatch(r"[0-9a-f]{40}", a.commit) or not re.fullmatch(r"sha256:[0-9a-f]{64}", a.revision) or not re.fullmatch(r"v\d+", a.tag):
+            print("사용 오류: --commit 40자 · --revision sha256:<64자> · --tag v<n>", file=sys.stderr)
+            return 2
+        return host_register(a)
+    if a.cmd == "rollback":
+        return host_rollback(a)
+    return host_switch(a)
+
+
+if __name__ == "__main__":
+    sys.exit(main())

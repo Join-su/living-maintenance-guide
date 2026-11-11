@@ -1,0 +1,102 @@
+{
+ "tool": "eval/calibrate_ml.py",
+ "split": "val",
+ "split_file_sha256": "1929f57ea68b21bbdc90c8532ca27c3014e4ddc32b1b9cfeed68484e9e4bf376",
+ "source_sha256": "dc6630cd9b1f0f853922fad78a1b6436570d3f1ec863f1dd5c4340ac56bc8a8e",
+ "model_release": "mr-c1a15-standin-v1",
+ "pack_revision": "sha256:e39a370bdad8f863ecf1910ac04a05bda011641e896e0519388e1fb13598dedb",
+ "rows": 1912,
+ "failures": 60,
+ "brier": 0.05046,
+ "bins": [
+  {
+   "risk": "0.0–0.1",
+   "rows": 1423,
+   "mean_risk": 0.0138,
+   "actual_failure_rate": 0.0
+  },
+  {
+   "risk": "0.1–0.2",
+   "rows": 147,
+   "mean_risk": 0.1471,
+   "actual_failure_rate": 0.0204
+  },
+  {
+   "risk": "0.2–0.3",
+   "rows": 98,
+   "mean_risk": 0.241,
+   "actual_failure_rate": 0.102
+  },
+  {
+   "risk": "0.3–0.4",
+   "rows": 57,
+   "mean_risk": 0.3438,
+   "actual_failure_rate": 0.0702
+  },
+  {
+   "risk": "0.4–0.5",
+   "rows": 47,
+   "mean_risk": 0.4465,
+   "actual_failure_rate": 0.1064
+  },
+  {
+   "risk": "0.5–0.6",
+   "rows": 39,
+   "mean_risk": 0.5354,
+   "actual_failure_rate": 0.1538
+  },
+  {
+   "risk": "0.6–0.7",
+   "rows": 12,
+   "mean_risk": 0.6496,
+   "actual_failure_rate": 0.25
+  },
+  {
+   "risk": "0.7–0.8",
+   "rows": 16,
+   "mean_risk": 0.747,
+   "actual_failure_rate": 0.1875
+  },
+  {
+   "risk": "0.8–0.9",
+   "rows": 24,
+   "mean_risk": 0.8452,
+   "actual_failure_rate": 0.2083
+  },
+  {
+   "risk": "0.9–1.0",
+   "rows": 49,
+   "mean_risk": 0.9651,
+   "actual_failure_rate": 0.4286
+  }
+ ],
+ "at_threshold": {
+  "threshold": 0.5,
+  "tp": 38,
+  "fp": 102,
+  "fn": 22,
+  "tn": 1750,
+  "precision": 0.2714,
+  "recall": 0.6333
+ },
+ "predicted_type_vs_label(risk ≥ 문턱)": {
+  "PWF → 정상": 54,
+  "NONE → 정상": 20,
+  "OSF → 정상": 13,
+  "TWF → 정상": 13,
+  "PWF → PWF": 12,
+  "OSF → OSF": 5,
+  "OSF → PWF": 5,
+  "TWF → OSF": 3,
+  "TWF → TWF": 3,
+  "PWF → PWF+OSF": 2,
+  "NONE → OSF": 2,
+  "PWF → HDF": 2,
+  "OSF → HDF": 2,
+  "NONE → TWF": 1,
+  "PWF → RNF": 1,
+  "NONE → RNF": 1,
+  "PWF → OSF": 1
+ },
+ "note": "자리 모델(손 가중치, 학습 0)은 경계 규칙을 확률 모양으로 옮긴 것 — 이 표는 보정 '확인'용, 성능 주장 아님. 사용자 ONNX가 오면 같은 도구로 다시."
+}

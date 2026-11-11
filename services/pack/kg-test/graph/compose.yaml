@@ -1,0 +1,22 @@
+# D-534 kg-test 그래프 DB 사본(dev-2 전용) — 관계 층만 둠(원본 층은 data/ · 앱에서는 PostgreSQL 그대로).
+# 띄우기: docker compose -p c1a15-kgdb -f kg-test/graph/compose.yaml up -d
+# 내리기: docker compose -p c1a15-kgdb -f kg-test/graph/compose.yaml down -v
+# 비밀번호: ${HOME}/.c1a15-kgdb/neo4j.env(저장소 밖 · 모드 600 · NEO4J_AUTH 한 줄) — 값은 어디에도 출력하지 않음.
+name: c1a15-kgdb
+services:
+  neo4j:
+    image: neo4j:2026.09.0-community@sha256:d6269a020149934597c8c3df926d080a612796dbbb48861ca9d5b1109cabf0d8
+    env_file: ${HOME}/.c1a15-kgdb/neo4j.env
+    environment:
+      NEO4J_dbms_usage__report_enabled: "false"           # 사용 보고(밖 연결) 끔
+      NEO4J_server_memory_heap_initial__size: 512m
+      NEO4J_server_memory_heap_max__size: 512m
+      NEO4J_server_memory_pagecache_size: 256m
+    ports:
+      - "127.0.0.1:27474:7474"   # 그래프 화면(브라우저)
+      - "127.0.0.1:27687:7687"   # bolt
+    volumes:
+      - c1a15-kgdb-data:/data
+volumes:
+  c1a15-kgdb-data:
+    name: c1a15-kgdb-data

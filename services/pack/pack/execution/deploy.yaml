@@ -1,0 +1,12 @@
+# 배포용 실행 설정(배포 서버 C1-a15 배포 c1a15@v1-local · c1a15@v1-pg-local, D-265) — 비밀 값 없음, Pack revision 밖.
+# Pack 쪽 필요 목록: 진입 graph · model release를 찾는 곳 · 고를 모델(onnx → 배포 환경에 onnxruntime 1.31.0, D-261 (2)). store `history`(이력 DB)는 PS-02부터 · `manuals`(매뉴얼 DB)는 PS-03부터: 이 맥은 packrt-1 자리 releases-c1a15(상대 경로) · 가짜 DB — 배포 서버 자리 · release는 deploy 몫(R12).
+# 배포 서버는 자기 config(deploy 몫)에서 이 값을 그대로 옮겨 씀 — 다르면 deploy 세션이 c1a15-pack에 질문(규칙 06).
+config_version: 1
+entrypoint: run
+environment: {kind: local-python, python: ../../.venv/bin/python}
+release_roots: [../../releases, ../../../agent-pack-runtime-ingest/releases-c1a15]   # model release 폴더(Pack 저장소 안 사본) · 벡터 DB(packrt-1 자리, 읽기만)
+models:
+  failure_classifier: {release: mr-ai4i-lgbm-large-v2}   # 사용자 모델(task10-pack 2c74ac0 사본, D-268 · D-272) — 되돌림은 이 줄을 mr-c1a15-standin-v1로
+stores:
+  history: {backend: flat-local, release: ir-history-412ea43e, embedding: {mode: fake}}   # 가짜 DB(packrt-1 ②-b, 질의 임베딩도 가짜 — 망 0). 실제 DB는 execution/deploy-real.yaml
+  manuals: {backend: flat-local, release: ir-manuals-a5c07752, embedding: {mode: fake}}   # 매뉴얼 v2 가짜 DB(013-11 build · packrt-1 자리, 앞 f8b7fe33) — 결과는 trace에만

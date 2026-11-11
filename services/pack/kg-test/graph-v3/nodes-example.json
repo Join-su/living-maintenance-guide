@@ -1,0 +1,4 @@
+{"sections": [{"no": "EX-R-0001", "app_no": null, "kind": "예외", "grade": "C", "name": "필터 덮개 고정 나사 확인", "guide": "덮개 나사를 확인하고 빠졌으면 새로 끼운다", "group": "온도 차 저하", "minutes": null, "checklist": [], "records": ["R-0001"]},
+              {"no": "EX-R-0002", "kind": "예외", "grade": "C", "name": "x", "guide": "y", "group": "없는 증상군", "records": []}],
+ "exception_relations": [{"id": "EX-R-0001", "step": "EX-R-0001", "mode": "안내", "grade": "C", "when": {"group": "온도 차 저하", "sensors": [["temp_diff_k", "<=", 8.2]]}, "where": "temp_diff_k<=8.2", "cause": "CL-1", "cause_name": "냉각 필터 막힘", "records": ["R-0001"], "n": 1, "text_sha256": "ab", "context": {"equipment_id": "M-01"}, "extractor": {"mode": "fake", "model": null}},
+                         {"id": "EX-R-0003", "step": "EX-R-0001", "mode": "안내", "grade": "C", "when": {"group": "온도 차 저하", "sensors": [["vibration", "<=", 1]]}}]}

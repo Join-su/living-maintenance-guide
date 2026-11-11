@@ -1,0 +1,576 @@
+{
+ "alarms": [
+  {
+   "alarm_id": 43,
+   "equipment_id": "M-06",
+   "symptom_group": "CL",
+   "group_name": "온도 차 저하",
+   "alarm": {
+    "sensor": "온도 차",
+    "value": 7.9,
+    "unit": "K",
+    "boundary": 8.3,
+    "direction": "경계 아래",
+    "trend_title": "온도 차 추이 · 최근 12회 측정"
+   },
+   "sensor_snapshot": {
+    "power_w": 6051,
+    "torque_nm": 36.0,
+    "temp_diff_k": 7.9,
+    "tool_wear_min": 69.0,
+    "air_temperature_k": 302.5,
+    "rotational_speed_rpm": 1605.0,
+    "process_temperature_k": 310.4
+   },
+   "trend": [
+    {
+     "at": "2026-09-22T10:37:00+09:00",
+     "value": 8.4
+    },
+    {
+     "at": "2026-09-23T04:08:00+09:00",
+     "value": 8.2
+    },
+    {
+     "at": "2026-09-23T21:40:00+09:00",
+     "value": 8.4
+    },
+    {
+     "at": "2026-09-24T15:11:00+09:00",
+     "value": 8.6
+    },
+    {
+     "at": "2026-09-25T08:42:00+09:00",
+     "value": 8.3
+    },
+    {
+     "at": "2026-09-26T02:13:00+09:00",
+     "value": 7.8
+    },
+    {
+     "at": "2026-09-26T19:44:00+09:00",
+     "value": 7.7
+    },
+    {
+     "at": "2026-09-27T13:16:00+09:00",
+     "value": 7.8
+    },
+    {
+     "at": "2026-09-28T06:47:00+09:00",
+     "value": 7.8
+    },
+    {
+     "at": "2026-09-29T00:18:00+09:00",
+     "value": 7.7
+    },
+    {
+     "at": "2026-09-29T17:49:00+09:00",
+     "value": 7.8
+    },
+    {
+     "at": "2026-09-30T11:20:00+09:00",
+     "value": 7.8
+    }
+   ],
+   "occurred_at": "2026-10-13T12:40:43.908653+00:00",
+   "status": "in_progress",
+   "change_seq": 810,
+   "session_id": 43,
+   "progress": {
+    "check_no": 4,
+    "check_max": 4
+   },
+   "report_status": null,
+   "report_session_id": null
+  },
+  {
+   "alarm_id": 42,
+   "equipment_id": "M-05",
+   "symptom_group": "CL",
+   "group_name": "온도 차 저하",
+   "alarm": {
+    "sensor": "온도 차",
+    "value": 7.8,
+    "unit": "K",
+    "boundary": 8.3,
+    "direction": "경계 아래",
+    "trend_title": "온도 차 추이 · 최근 12회 측정"
+   },
+   "sensor_snapshot": {
+    "power_w": 8140,
+    "torque_nm": 57.2,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 67.0,
+    "air_temperature_k": 302.6,
+    "rotational_speed_rpm": 1359.0,
+    "process_temperature_k": 310.4
+   },
+   "trend": [
+    {
+     "at": "2026-09-22T09:45:00+09:00",
+     "value": 8.5
+    },
+    {
+     "at": "2026-09-23T03:16:00+09:00",
+     "value": 8.1
+    },
+    {
+     "at": "2026-09-23T20:47:00+09:00",
+     "value": 8.4
+    },
+    {
+     "at": "2026-09-24T14:18:00+09:00",
+     "value": 8.6
+    },
+    {
+     "at": "2026-09-25T07:49:00+09:00",
+     "value": 8.2
+    },
+    {
+     "at": "2026-09-26T01:21:00+09:00",
+     "value": 7.8
+    },
+    {
+     "at": "2026-09-26T18:52:00+09:00",
+     "value": 7.7
+    },
+    {
+     "at": "2026-09-27T12:23:00+09:00",
+     "value": 7.8
+    },
+    {
+     "at": "2026-09-28T05:54:00+09:00",
+     "value": 7.8
+    },
+    {
+     "at": "2026-09-28T23:25:00+09:00",
+     "value": 7.8
+    },
+    {
+     "at": "2026-09-29T16:57:00+09:00",
+     "value": 7.7
+    },
+    {
+     "at": "2026-09-30T10:28:00+09:00",
+     "value": 7.8
+    }
+   ],
+   "occurred_at": "2026-10-13T12:40:43.498657+00:00",
+   "status": "in_progress",
+   "change_seq": 792,
+   "session_id": 42,
+   "progress": {
+    "check_no": 2,
+    "check_max": 3
+   },
+   "report_status": null,
+   "report_session_id": null
+  },
+  {
+   "alarm_id": 39,
+   "equipment_id": "M-01",
+   "symptom_group": "CL",
+   "group_name": "온도 차 저하",
+   "alarm": {
+    "sensor": "온도 차",
+    "value": 7.8,
+    "unit": "K",
+    "boundary": 8.3,
+    "direction": "경계 아래",
+    "trend_title": "온도 차 추이 · 최근 12회 측정"
+   },
+   "sensor_snapshot": {
+    "power_w": 7864,
+    "torque_nm": 53.3,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 52.0,
+    "air_temperature_k": 302.6,
+    "rotational_speed_rpm": 1409.0,
+    "process_temperature_k": 310.4
+   },
+   "trend": [
+    {
+     "at": "2026-09-22T06:14:00+09:00",
+     "value": 8.4
+    },
+    {
+     "at": "2026-09-22T23:46:00+09:00",
+     "value": 8.2
+    },
+    {
+     "at": "2026-09-23T17:17:00+09:00",
+     "value": 8.2
+    },
+    {
+     "at": "2026-09-24T10:48:00+09:00",
+     "value": 8.6
+    },
+    {
+     "at": "2026-09-25T04:19:00+09:00",
+     "value": 8.3
+    },
+    {
+     "at": "2026-09-25T21:50:00+09:00",
+     "value": 7.8
+    },
+    {
+     "at": "2026-09-26T15:22:00+09:00",
+     "value": 7.8
+    },
+    {
+     "at": "2026-09-27T08:53:00+09:00",
+     "value": 7.9
+    },
+    {
+     "at": "2026-09-28T02:24:00+09:00",
+     "value": 7.8
+    },
+    {
+     "at": "2026-09-28T19:55:00+09:00",
+     "value": 7.9
+    },
+    {
+     "at": "2026-09-29T13:26:00+09:00",
+     "value": 7.8
+    },
+    {
+     "at": "2026-09-30T06:58:00+09:00",
+     "value": 7.8
+    }
+   ],
+   "occurred_at": "2026-10-13T12:40:42.194860+00:00",
+   "status": "in_progress",
+   "change_seq": 846,
+   "session_id": 39,
+   "progress": {
+    "check_no": 1,
+    "check_max": 3
+   },
+   "report_status": "rejected",
+   "report_session_id": 39
+  }
+ ],
+ "new_since": [
+  {
+   "alarm_id": 43,
+   "equipment_id": "M-06",
+   "symptom_group": "CL",
+   "group_name": "온도 차 저하",
+   "alarm": {
+    "sensor": "온도 차",
+    "value": 7.9,
+    "unit": "K",
+    "boundary": 8.3,
+    "direction": "경계 아래",
+    "trend_title": "온도 차 추이 · 최근 12회 측정"
+   },
+   "sensor_snapshot": {
+    "power_w": 6051,
+    "torque_nm": 36.0,
+    "temp_diff_k": 7.9,
+    "tool_wear_min": 69.0,
+    "air_temperature_k": 302.5,
+    "rotational_speed_rpm": 1605.0,
+    "process_temperature_k": 310.4
+   },
+   "trend": [
+    {
+     "at": "2026-09-22T10:37:00+09:00",
+     "value": 8.4
+    },
+    {
+     "at": "2026-09-23T04:08:00+09:00",
+     "value": 8.2
+    },
+    {
+     "at": "2026-09-23T21:40:00+09:00",
+     "value": 8.4
+    },
+    {
+     "at": "2026-09-24T15:11:00+09:00",
+     "value": 8.6
+    },
+    {
+     "at": "2026-09-25T08:42:00+09:00",
+     "value": 8.3
+    },
+    {
+     "at": "2026-09-26T02:13:00+09:00",
+     "value": 7.8
+    },
+    {
+     "at": "2026-09-26T19:44:00+09:00",
+     "value": 7.7
+    },
+    {
+     "at": "2026-09-27T13:16:00+09:00",
+     "value": 7.8
+    },
+    {
+     "at": "2026-09-28T06:47:00+09:00",
+     "value": 7.8
+    },
+    {
+     "at": "2026-09-29T00:18:00+09:00",
+     "value": 7.7
+    },
+    {
+     "at": "2026-09-29T17:49:00+09:00",
+     "value": 7.8
+    },
+    {
+     "at": "2026-09-30T11:20:00+09:00",
+     "value": 7.8
+    }
+   ],
+   "occurred_at": "2026-10-13T12:40:43.908653+00:00",
+   "status": "in_progress",
+   "change_seq": 810,
+   "session_id": 43,
+   "progress": {
+    "check_no": 4,
+    "check_max": 4
+   },
+   "report_status": null,
+   "report_session_id": null
+  },
+  {
+   "alarm_id": 42,
+   "equipment_id": "M-05",
+   "symptom_group": "CL",
+   "group_name": "온도 차 저하",
+   "alarm": {
+    "sensor": "온도 차",
+    "value": 7.8,
+    "unit": "K",
+    "boundary": 8.3,
+    "direction": "경계 아래",
+    "trend_title": "온도 차 추이 · 최근 12회 측정"
+   },
+   "sensor_snapshot": {
+    "power_w": 8140,
+    "torque_nm": 57.2,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 67.0,
+    "air_temperature_k": 302.6,
+    "rotational_speed_rpm": 1359.0,
+    "process_temperature_k": 310.4
+   },
+   "trend": [
+    {
+     "at": "2026-09-22T09:45:00+09:00",
+     "value": 8.5
+    },
+    {
+     "at": "2026-09-23T03:16:00+09:00",
+     "value": 8.1
+    },
+    {
+     "at": "2026-09-23T20:47:00+09:00",
+     "value": 8.4
+    },
+    {
+     "at": "2026-09-24T14:18:00+09:00",
+     "value": 8.6
+    },
+    {
+     "at": "2026-09-25T07:49:00+09:00",
+     "value": 8.2
+    },
+    {
+     "at": "2026-09-26T01:21:00+09:00",
+     "value": 7.8
+    },
+    {
+     "at": "2026-09-26T18:52:00+09:00",
+     "value": 7.7
+    },
+    {
+     "at": "2026-09-27T12:23:00+09:00",
+     "value": 7.8
+    },
+    {
+     "at": "2026-09-28T05:54:00+09:00",
+     "value": 7.8
+    },
+    {
+     "at": "2026-09-28T23:25:00+09:00",
+     "value": 7.8
+    },
+    {
+     "at": "2026-09-29T16:57:00+09:00",
+     "value": 7.7
+    },
+    {
+     "at": "2026-09-30T10:28:00+09:00",
+     "value": 7.8
+    }
+   ],
+   "occurred_at": "2026-10-13T12:40:43.498657+00:00",
+   "status": "in_progress",
+   "change_seq": 792,
+   "session_id": 42,
+   "progress": {
+    "check_no": 2,
+    "check_max": 3
+   },
+   "report_status": null,
+   "report_session_id": null
+  },
+  {
+   "alarm_id": 39,
+   "equipment_id": "M-01",
+   "symptom_group": "CL",
+   "group_name": "온도 차 저하",
+   "alarm": {
+    "sensor": "온도 차",
+    "value": 7.8,
+    "unit": "K",
+    "boundary": 8.3,
+    "direction": "경계 아래",
+    "trend_title": "온도 차 추이 · 최근 12회 측정"
+   },
+   "sensor_snapshot": {
+    "power_w": 7864,
+    "torque_nm": 53.3,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 52.0,
+    "air_temperature_k": 302.6,
+    "rotational_speed_rpm": 1409.0,
+    "process_temperature_k": 310.4
+   },
+   "trend": [
+    {
+     "at": "2026-09-22T06:14:00+09:00",
+     "value": 8.4
+    },
+    {
+     "at": "2026-09-22T23:46:00+09:00",
+     "value": 8.2
+    },
+    {
+     "at": "2026-09-23T17:17:00+09:00",
+     "value": 8.2
+    },
+    {
+     "at": "2026-09-24T10:48:00+09:00",
+     "value": 8.6
+    },
+    {
+     "at": "2026-09-25T04:19:00+09:00",
+     "value": 8.3
+    },
+    {
+     "at": "2026-09-25T21:50:00+09:00",
+     "value": 7.8
+    },
+    {
+     "at": "2026-09-26T15:22:00+09:00",
+     "value": 7.8
+    },
+    {
+     "at": "2026-09-27T08:53:00+09:00",
+     "value": 7.9
+    },
+    {
+     "at": "2026-09-28T02:24:00+09:00",
+     "value": 7.8
+    },
+    {
+     "at": "2026-09-28T19:55:00+09:00",
+     "value": 7.9
+    },
+    {
+     "at": "2026-09-29T13:26:00+09:00",
+     "value": 7.8
+    },
+    {
+     "at": "2026-09-30T06:58:00+09:00",
+     "value": 7.8
+    }
+   ],
+   "occurred_at": "2026-10-13T12:40:42.194860+00:00",
+   "status": "in_progress",
+   "change_seq": 846,
+   "session_id": 39,
+   "progress": {
+    "check_no": 1,
+    "check_max": 3
+   },
+   "report_status": "rejected",
+   "report_session_id": 39
+  }
+ ],
+ "in_progress": [
+  {
+   "session_id": 43,
+   "alarm_id": 43,
+   "progress": {
+    "check_no": 4,
+    "check_max": 4
+   }
+  },
+  {
+   "session_id": 39,
+   "alarm_id": 39,
+   "progress": {
+    "check_no": 1,
+    "check_max": 3
+   }
+  },
+  {
+   "session_id": 42,
+   "alarm_id": 42,
+   "progress": {
+    "check_no": 2,
+    "check_max": 3
+   }
+  }
+ ],
+ "change_seq": 846,
+ "shift": {
+  "label": "야간",
+  "start": "2026-10-13T22:00:00+09:00",
+  "end": "2026-10-14T06:00:00+09:00",
+  "start_text": "22:00",
+  "end_text": "06:00",
+  "done": 0,
+  "in_progress": 3,
+  "calls": 0
+ },
+ "recent_reports": [
+  {
+   "report_id": 8,
+   "session_id": 41,
+   "equipment_id": "M-04",
+   "cause": "냉각 필터 막힘",
+   "confirmed_at": "2026-10-13T12:40:43.257112+00:00",
+   "status": "awaiting_approval",
+   "reject_reason": null,
+   "rejected_by_name": null,
+   "rejected_at": null
+  },
+  {
+   "report_id": 7,
+   "session_id": 40,
+   "equipment_id": "M-03",
+   "cause": "냉각 필터 막힘",
+   "confirmed_at": "2026-10-13T12:40:42.693263+00:00",
+   "status": "approved",
+   "reject_reason": null,
+   "rejected_by_name": null,
+   "rejected_at": null
+  },
+  {
+   "report_id": 6,
+   "session_id": 39,
+   "equipment_id": "M-01",
+   "cause": "냉각 필터 막힘",
+   "confirmed_at": "2026-10-13T12:40:42.323471+00:00",
+   "status": "rejected",
+   "reject_reason": "필터 표면 상태를 메모로 다시 적어 주세요",
+   "rejected_by_name": "박 파트장",
+   "rejected_at": "2026-10-13T12:40:44.280307+00:00"
+  }
+ ]
+}

@@ -1,0 +1,8 @@
+# 평가 suite — Pack revision 밖. D-647 B 예외 나누기(split_exception node · 약속 v10 kind exception_split) work 묶음
+# 입력 = 승인 정비 이력 원문 글 그대로(tools/make_split_suite.py · 시연 기기 · 시연 줄 0 · 작업 · 확인 겹침 0) · 기대값 = c1a15-eval이 원문에서 정함 · 채점 칸 = README.md
+suite: c1a15_split_work
+split: fixture
+graph: run
+dataset: dataset.jsonl
+expectations: expectations.jsonl
+review_policy: {default: fixture, missing_fixture: stop_before}

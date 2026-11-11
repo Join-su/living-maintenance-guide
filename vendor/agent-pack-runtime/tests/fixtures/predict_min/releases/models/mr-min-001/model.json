@@ -1,0 +1,1 @@
+{"format": "json-linear", "classes": ["OSF", "HDF", "PWF", "TWF", "NONE"], "features": ["air_temp", "process_temp", "rpm", "torque", "tool_wear"], "weights": [[0, 0, 0, 0.02, 0.01], [0.05, -0.05, 0, 0, 0], [0, 0, 0.001, 0.01, 0], [0, 0, 0, 0, 0.02], [0, 0, 0, 0, 0]], "bias": [0, 0, 0, 0, 0.5]}

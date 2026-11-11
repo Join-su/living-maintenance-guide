@@ -1,0 +1,9655 @@
+{
+ "components": {
+  "schemas": {
+   "ActionBlock": {
+    "additionalProperties": false,
+    "properties": {
+     "cause_code": {
+      "title": "Cause Code",
+      "type": "string"
+     },
+     "cause_name": {
+      "title": "Cause Name",
+      "type": "string"
+     },
+     "checklist": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Checklist",
+      "type": "array"
+     },
+     "checklist_done": {
+      "title": "Checklist Done",
+      "type": "boolean"
+     },
+     "done_at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Done At"
+     },
+     "evidence_record_ids": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Evidence Record Ids",
+      "type": "array"
+     },
+     "grade": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Grade"
+     },
+     "minutes": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Minutes"
+     },
+     "section": {
+      "title": "Section",
+      "type": "string"
+     },
+     "steps": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Steps",
+      "type": "array"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     },
+     "verb": {
+      "title": "Verb",
+      "type": "string"
+     }
+    },
+    "required": [
+     "cause_code",
+     "cause_name",
+     "evidence_record_ids",
+     "section",
+     "title",
+     "verb",
+     "grade",
+     "minutes",
+     "done_at",
+     "checklist",
+     "checklist_done",
+     "steps"
+    ],
+    "title": "ActionBlock",
+    "type": "object"
+   },
+   "ActionDone": {
+    "additionalProperties": false,
+    "properties": {
+     "at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "At"
+     },
+     "section": {
+      "title": "Section",
+      "type": "string"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     }
+    },
+    "required": [
+     "section",
+     "title",
+     "at"
+    ],
+    "title": "ActionDone",
+    "type": "object"
+   },
+   "AlarmBlock": {
+    "additionalProperties": false,
+    "properties": {
+     "ai_reading": {
+      "$ref": "#/components/schemas/Reading"
+     },
+     "alarm": {
+      "$ref": "#/components/schemas/AlarmValue"
+     },
+     "alarm_id": {
+      "title": "Alarm Id",
+      "type": "integer"
+     },
+     "boundary_text": {
+      "title": "Boundary Text",
+      "type": "string"
+     },
+     "equipment_id": {
+      "title": "Equipment Id",
+      "type": "string"
+     },
+     "equipment_type": {
+      "title": "Equipment Type",
+      "type": "string"
+     },
+     "group_name": {
+      "title": "Group Name",
+      "type": "string"
+     },
+     "ml": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/AlarmMl"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "occurred_at": {
+      "title": "Occurred At",
+      "type": "string"
+     },
+     "out_of_range_count": {
+      "title": "Out Of Range Count",
+      "type": "integer"
+     },
+     "sensors": {
+      "items": {
+       "$ref": "#/components/schemas/SensorRow"
+      },
+      "title": "Sensors",
+      "type": "array"
+     },
+     "similar_count": {
+      "title": "Similar Count",
+      "type": "integer"
+     },
+     "symptom_group": {
+      "title": "Symptom Group",
+      "type": "string"
+     },
+     "system": {
+      "title": "System",
+      "type": "string"
+     },
+     "trend": {
+      "items": {
+       "$ref": "#/components/schemas/TrendPoint"
+      },
+      "title": "Trend",
+      "type": "array"
+     },
+     "trend_title": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Trend Title"
+     }
+    },
+    "required": [
+     "alarm_id",
+     "equipment_id",
+     "equipment_type",
+     "occurred_at",
+     "symptom_group",
+     "group_name",
+     "system",
+     "alarm",
+     "boundary_text",
+     "out_of_range_count",
+     "trend",
+     "trend_title",
+     "sensors",
+     "ai_reading",
+     "similar_count"
+    ],
+    "title": "AlarmBlock",
+    "type": "object"
+   },
+   "AlarmBody": {
+    "additionalProperties": false,
+    "description": "시연 알람 발생기 → 알람 등록. 증상군 · 경계 판정 · 시각은 서버가 정한다.",
+    "properties": {
+     "data_lineage": {
+      "anyOf": [
+       {
+        "additionalProperties": {
+         "anyOf": [
+          {
+           "type": "integer"
+          },
+          {
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Data Lineage"
+     },
+     "equipment_id": {
+      "title": "Equipment Id",
+      "type": "string"
+     },
+     "eval_mode": {
+      "default": false,
+      "title": "Eval Mode",
+      "type": "boolean"
+     },
+     "product_type": {
+      "anyOf": [
+       {
+        "enum": [
+         "L",
+         "M",
+         "H"
+        ],
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Product Type"
+     },
+     "scenario_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Scenario Id"
+     },
+     "sensor_snapshot": {
+      "additionalProperties": {
+       "anyOf": [
+        {
+         "type": "integer"
+        },
+        {
+         "type": "number"
+        }
+       ]
+      },
+      "title": "Sensor Snapshot",
+      "type": "object"
+     },
+     "trend": {
+      "default": [],
+      "items": {
+       "$ref": "#/components/schemas/TrendPoint"
+      },
+      "title": "Trend",
+      "type": "array"
+     }
+    },
+    "required": [
+     "equipment_id",
+     "sensor_snapshot"
+    ],
+    "title": "AlarmBody",
+    "type": "object"
+   },
+   "AlarmMl": {
+    "additionalProperties": false,
+    "description": "D-546 U5 화면 칸: 알람 행에 저장한 Pack ML 값 중 예측 유형(확률 1위) · 위험도.",
+    "properties": {
+     "risk": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Risk"
+     },
+     "type": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Type"
+     },
+     "type_name": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Type Name"
+     }
+    },
+    "required": [
+     "type",
+     "type_name",
+     "risk"
+    ],
+    "title": "AlarmMl",
+    "type": "object"
+   },
+   "AlarmRow": {
+    "additionalProperties": false,
+    "properties": {
+     "alarm": {
+      "$ref": "#/components/schemas/AlarmValue"
+     },
+     "alarm_id": {
+      "title": "Alarm Id",
+      "type": "integer"
+     },
+     "call_sent": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Call Sent"
+     },
+     "change_seq": {
+      "title": "Change Seq",
+      "type": "integer"
+     },
+     "equipment_id": {
+      "title": "Equipment Id",
+      "type": "string"
+     },
+     "exception_progress": {
+      "default": false,
+      "title": "Exception Progress",
+      "type": "boolean"
+     },
+     "group_name": {
+      "title": "Group Name",
+      "type": "string"
+     },
+     "ml": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/AlarmMl"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "occurred_at": {
+      "title": "Occurred At",
+      "type": "string"
+     },
+     "progress": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/Progress"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "report_session_id": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Report Session Id"
+     },
+     "report_status": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Report Status"
+     },
+     "sensor_snapshot": {
+      "additionalProperties": {
+       "anyOf": [
+        {
+         "type": "integer"
+        },
+        {
+         "type": "number"
+        }
+       ]
+      },
+      "title": "Sensor Snapshot",
+      "type": "object"
+     },
+     "session_id": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Session Id"
+     },
+     "status": {
+      "title": "Status",
+      "type": "string"
+     },
+     "symptom_group": {
+      "title": "Symptom Group",
+      "type": "string"
+     },
+     "system": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "System"
+     },
+     "trend": {
+      "items": {
+       "$ref": "#/components/schemas/TrendPoint"
+      },
+      "title": "Trend",
+      "type": "array"
+     }
+    },
+    "required": [
+     "alarm_id",
+     "equipment_id",
+     "symptom_group",
+     "group_name",
+     "alarm",
+     "sensor_snapshot",
+     "trend",
+     "occurred_at",
+     "status",
+     "change_seq",
+     "session_id",
+     "progress",
+     "report_status",
+     "report_session_id"
+    ],
+    "title": "AlarmRow",
+    "type": "object"
+   },
+   "AlarmValue": {
+    "additionalProperties": false,
+    "properties": {
+     "boundary": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "number"
+       }
+      ],
+      "title": "Boundary"
+     },
+     "crossed": {
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Crossed"
+     },
+     "direction": {
+      "title": "Direction",
+      "type": "string"
+     },
+     "origin": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Origin"
+     },
+     "sensor": {
+      "title": "Sensor",
+      "type": "string"
+     },
+     "trend_title": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Trend Title"
+     },
+     "unit": {
+      "title": "Unit",
+      "type": "string"
+     },
+     "value": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "number"
+       }
+      ],
+      "title": "Value"
+     }
+    },
+    "required": [
+     "sensor",
+     "value",
+     "unit",
+     "boundary",
+     "direction"
+    ],
+    "title": "AlarmValue",
+    "type": "object"
+   },
+   "AnswerBody": {
+    "additionalProperties": false,
+    "description": "L04 답 저장: 파트장 호출 approved · daytime · direct, 숙련자 인계 assign · direct + 처리 메모.",
+    "properties": {
+     "answer": {
+      "enum": [
+       "approved",
+       "daytime",
+       "direct",
+       "assign"
+      ],
+      "title": "Answer",
+      "type": "string"
+     },
+     "note": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Note"
+     }
+    },
+    "required": [
+     "answer"
+    ],
+    "title": "AnswerBody",
+    "type": "object"
+   },
+   "AnswerOption": {
+    "additionalProperties": false,
+    "properties": {
+     "hint": {
+      "title": "Hint",
+      "type": "string"
+     },
+     "label": {
+      "title": "Label",
+      "type": "string"
+     },
+     "value": {
+      "title": "Value",
+      "type": "string"
+     }
+    },
+    "required": [
+     "value",
+     "label",
+     "hint"
+    ],
+    "title": "AnswerOption",
+    "type": "object"
+   },
+   "AnswerResult": {
+    "additionalProperties": false,
+    "properties": {
+     "answer": {
+      "title": "Answer",
+      "type": "string"
+     },
+     "status": {
+      "title": "Status",
+      "type": "string"
+     }
+    },
+    "required": [
+     "status",
+     "answer"
+    ],
+    "title": "AnswerResult",
+    "type": "object"
+   },
+   "Approval": {
+    "additionalProperties": true,
+    "properties": {
+     "at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "At"
+     },
+     "by": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "By"
+     },
+     "status": {
+      "title": "Status",
+      "type": "string"
+     }
+    },
+    "required": [
+     "status"
+    ],
+    "title": "Approval",
+    "type": "object"
+   },
+   "AuditFilters": {
+    "additionalProperties": false,
+    "properties": {
+     "equipment": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Equipment"
+     },
+     "user_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "User Id"
+     }
+    },
+    "required": [
+     "equipment",
+     "user_id"
+    ],
+    "title": "AuditFilters",
+    "type": "object"
+   },
+   "AuditOptions": {
+    "additionalProperties": false,
+    "properties": {
+     "equipment": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Equipment",
+      "type": "array"
+     },
+     "users": {
+      "items": {
+       "$ref": "#/components/schemas/AuditUser"
+      },
+      "title": "Users",
+      "type": "array"
+     }
+    },
+    "required": [
+     "equipment",
+     "users"
+    ],
+    "title": "AuditOptions",
+    "type": "object"
+   },
+   "AuditRow": {
+    "additionalProperties": false,
+    "properties": {
+     "action": {
+      "title": "Action",
+      "type": "string"
+     },
+     "app": {
+      "title": "App",
+      "type": "string"
+     },
+     "at": {
+      "title": "At",
+      "type": "string"
+     },
+     "audit_id": {
+      "title": "Audit Id",
+      "type": "integer"
+     },
+     "equipment_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Equipment Id"
+     },
+     "report_id": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Report Id"
+     },
+     "target": {
+      "title": "Target",
+      "type": "string"
+     },
+     "user_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "User Id"
+     },
+     "user_name": {
+      "title": "User Name",
+      "type": "string"
+     }
+    },
+    "required": [
+     "audit_id",
+     "at",
+     "user_id",
+     "user_name",
+     "app",
+     "action",
+     "target",
+     "equipment_id"
+    ],
+    "title": "AuditRow",
+    "type": "object"
+   },
+   "AuditUser": {
+    "additionalProperties": false,
+    "properties": {
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "user_id": {
+      "title": "User Id",
+      "type": "string"
+     }
+    },
+    "required": [
+     "user_id",
+     "name"
+    ],
+    "title": "AuditUser",
+    "type": "object"
+   },
+   "CallAnswer": {
+    "additionalProperties": false,
+    "properties": {
+     "answer": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Answer"
+     },
+     "at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "At"
+     },
+     "by": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "By"
+     },
+     "by_name": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "By Name"
+     },
+     "note": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Note"
+     }
+    },
+    "required": [
+     "answer",
+     "by",
+     "by_name",
+     "at",
+     "note"
+    ],
+    "title": "CallAnswer",
+    "type": "object"
+   },
+   "CallBlock": {
+    "additionalProperties": false,
+    "properties": {
+     "actions_done": {
+      "default": [],
+      "items": {
+       "$ref": "#/components/schemas/ActionDone"
+      },
+      "title": "Actions Done",
+      "type": "array"
+     },
+     "answer": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/CallAnswer"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "candidates": {
+      "items": {
+       "$ref": "#/components/schemas/Candidate"
+      },
+      "title": "Candidates",
+      "type": "array"
+     },
+     "checks_done": {
+      "items": {
+       "$ref": "#/components/schemas/CheckDone"
+      },
+      "title": "Checks Done",
+      "type": "array"
+     },
+     "correction": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/CallCorrection"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "exception_guide": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ExceptionGuide"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "grade": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Grade"
+     },
+     "head": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Head"
+     },
+     "kind": {
+      "title": "Kind",
+      "type": "string"
+     },
+     "minutes": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Minutes"
+     },
+     "reason": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Reason"
+     },
+     "section": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Section"
+     },
+     "sent_at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Sent At"
+     },
+     "status": {
+      "title": "Status",
+      "type": "string"
+     },
+     "summary": {
+      "$ref": "#/components/schemas/Reading"
+     },
+     "title": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Title"
+     },
+     "waiting_at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Waiting At"
+     }
+    },
+    "required": [
+     "kind",
+     "reason",
+     "head",
+     "section",
+     "title",
+     "grade",
+     "minutes",
+     "checks_done",
+     "candidates",
+     "summary",
+     "status",
+     "waiting_at",
+     "sent_at",
+     "answer"
+    ],
+    "title": "CallBlock",
+    "type": "object"
+   },
+   "CallCorrection": {
+    "additionalProperties": false,
+    "description": "정정 호출을 연 정정(조치 뒤 결과 정정, AC-47-C1).",
+    "properties": {
+     "after": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "After"
+     },
+     "at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "At"
+     },
+     "before": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Before"
+     },
+     "reason": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Reason"
+     },
+     "section": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Section"
+     },
+     "title": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Title"
+     }
+    },
+    "required": [
+     "section",
+     "title",
+     "before",
+     "after",
+     "reason",
+     "at"
+    ],
+    "title": "CallCorrection",
+    "type": "object"
+   },
+   "CallCorrectionBox": {
+    "additionalProperties": false,
+    "description": "L04 / call_corrected '보낸 뒤 정비자 정정' 상자 한 줄.",
+    "properties": {
+     "after": {
+      "anyOf": [
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "After"
+     },
+     "at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "At"
+     },
+     "before": {
+      "anyOf": [
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Before"
+     },
+     "reason": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Reason"
+     },
+     "section": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Section"
+     },
+     "title": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Title"
+     }
+    },
+    "required": [
+     "at",
+     "section",
+     "title",
+     "before",
+     "after",
+     "reason"
+    ],
+    "title": "CallCorrectionBox",
+    "type": "object"
+   },
+   "Candidate": {
+    "additionalProperties": false,
+    "properties": {
+     "code": {
+      "title": "Code",
+      "type": "string"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "pct": {
+      "title": "Pct",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "code",
+     "name",
+     "pct"
+    ],
+    "title": "Candidate",
+    "type": "object"
+   },
+   "CheckDone": {
+    "additionalProperties": false,
+    "properties": {
+     "note": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Note"
+     },
+     "section": {
+      "title": "Section",
+      "type": "string"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     },
+     "value": {
+      "title": "Value",
+      "type": "string"
+     }
+    },
+    "required": [
+     "section",
+     "title",
+     "value"
+    ],
+    "title": "CheckDone",
+    "type": "object"
+   },
+   "CheckRecord": {
+    "additionalProperties": false,
+    "description": "약속 v9 3절 기록 줄(앱 → LLMOps): 헛걸음 · 놓침 · 새 예외 + 사람이 고른 점검.",
+    "properties": {
+     "at_seq": {
+      "title": "At Seq",
+      "type": "integer"
+     },
+     "how": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "How"
+     },
+     "human_check": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/HumanCheck"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "kind": {
+      "title": "Kind",
+      "type": "string"
+     },
+     "relation_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Relation Id"
+     },
+     "run_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Run Id"
+     },
+     "session_id": {
+      "title": "Session Id",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "kind",
+     "session_id",
+     "human_check",
+     "at_seq"
+    ],
+    "title": "CheckRecord",
+    "type": "object"
+   },
+   "CheckRecordList": {
+    "additionalProperties": false,
+    "properties": {
+     "items": {
+      "items": {
+       "$ref": "#/components/schemas/CheckRecord"
+      },
+      "title": "Items",
+      "type": "array"
+     }
+    },
+    "required": [
+     "items"
+    ],
+    "title": "CheckRecordList",
+    "type": "object"
+   },
+   "Correction": {
+    "additionalProperties": false,
+    "properties": {
+     "after": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "After"
+     },
+     "at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "At"
+     },
+     "before": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Before"
+     },
+     "section": {
+      "title": "Section",
+      "type": "string"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     }
+    },
+    "required": [
+     "section",
+     "title",
+     "at",
+     "before",
+     "after"
+    ],
+    "title": "Correction",
+    "type": "object"
+   },
+   "CorrectionBody": {
+    "additionalProperties": false,
+    "description": "T15 '이 기록 정정'(AC-45): 대상 기록 seq · 정정 값(결과 · 메모 또는 사전 확인 측정값) · 사유(필수) · 확인.",
+    "properties": {
+     "confirmed": {
+      "default": false,
+      "title": "Confirmed",
+      "type": "boolean"
+     },
+     "memo": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Memo"
+     },
+     "reason": {
+      "title": "Reason",
+      "type": "string"
+     },
+     "target_seq": {
+      "title": "Target Seq",
+      "type": "integer"
+     },
+     "value": {
+      "anyOf": [
+       {
+        "enum": [
+         "정상",
+         "이상",
+         "확인 불가"
+        ],
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Value"
+     },
+     "values": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Values"
+     }
+    },
+    "required": [
+     "target_seq",
+     "reason"
+    ],
+    "title": "CorrectionBody",
+    "type": "object"
+   },
+   "DecisionBody": {
+    "additionalProperties": false,
+    "description": "L03 결정 저장: 그대로 승인 · 수정 후 승인(고친 문장) · 반려(memo = 사유, 필수).",
+    "properties": {
+     "decision": {
+      "enum": [
+       "approve",
+       "edit",
+       "reject"
+      ],
+      "title": "Decision",
+      "type": "string"
+     },
+     "edits": {
+      "additionalProperties": {
+       "type": "string"
+      },
+      "default": {},
+      "title": "Edits",
+      "type": "object"
+     },
+     "memo": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Memo"
+     }
+    },
+    "required": [
+     "decision"
+    ],
+    "title": "DecisionBody",
+    "type": "object"
+   },
+   "DecisionResult": {
+    "additionalProperties": false,
+    "properties": {
+     "history_record_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "History Record Id"
+     },
+     "status": {
+      "title": "Status",
+      "type": "string"
+     }
+    },
+    "required": [
+     "status"
+    ],
+    "title": "DecisionResult",
+    "type": "object"
+   },
+   "EditCheck": {
+    "additionalProperties": false,
+    "properties": {
+     "fields": {
+      "items": {
+       "$ref": "#/components/schemas/EditCheckField"
+      },
+      "title": "Fields",
+      "type": "array"
+     },
+     "messages": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Messages",
+      "type": "array"
+     },
+     "ok": {
+      "title": "Ok",
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "fields",
+     "ok",
+     "messages"
+    ],
+    "title": "EditCheck",
+    "type": "object"
+   },
+   "EditCheckField": {
+    "additionalProperties": false,
+    "properties": {
+     "key": {
+      "title": "Key",
+      "type": "string"
+     },
+     "ok": {
+      "title": "Ok",
+      "type": "boolean"
+     },
+     "unsupported_numbers": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Unsupported Numbers",
+      "type": "array"
+     }
+    },
+    "required": [
+     "key",
+     "ok",
+     "unsupported_numbers"
+    ],
+    "title": "EditCheckField",
+    "type": "object"
+   },
+   "EditsBody": {
+    "additionalProperties": false,
+    "description": "수정 후 승인 문장 검사(R8): 고친 보고서 항목 키 → 문장.",
+    "properties": {
+     "edits": {
+      "additionalProperties": {
+       "type": "string"
+      },
+      "title": "Edits",
+      "type": "object"
+     }
+    },
+    "required": [
+     "edits"
+    ],
+    "title": "EditsBody",
+    "type": "object"
+   },
+   "EventBody": {
+    "additionalProperties": false,
+    "description": "정비자 입력 하나. seq = 마지막으로 본 seq + 1(idempotency key = 세션 ID + seq).",
+    "properties": {
+     "checked": {
+      "anyOf": [
+       {
+        "items": {
+         "type": "string"
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Checked"
+     },
+     "choice": {
+      "anyOf": [
+       {
+        "enum": [
+         "handover",
+         "continue"
+        ],
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Choice"
+     },
+     "equipment_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Equipment Id"
+     },
+     "exception_record": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ExceptionInput"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "exception_review": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ExceptionReview"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "exception_text": {
+      "anyOf": [
+       {
+        "maxLength": 2000,
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Exception Text"
+     },
+     "field": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Field"
+     },
+     "memo": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Memo"
+     },
+     "mode": {
+      "anyOf": [
+       {
+        "enum": [
+         "call_first",
+         "act_now"
+        ],
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Mode"
+     },
+     "outcome": {
+      "anyOf": [
+       {
+        "enum": [
+         "within",
+         "outside"
+        ],
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Outcome"
+     },
+     "section": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Section"
+     },
+     "seq": {
+      "title": "Seq",
+      "type": "integer"
+     },
+     "summary": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Summary"
+     },
+     "text": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Text"
+     },
+     "type": {
+      "enum": [
+       "alarm_ack",
+       "lock",
+       "equipment_change",
+       "precheck_done",
+       "b_checklist_done",
+       "result",
+       "confirm_answer",
+       "out_of_scope_choice",
+       "action_done",
+       "restart",
+       "restart_result",
+       "monitor_close",
+       "call_send",
+       "call_wait",
+       "report_edit",
+       "report_confirm",
+       "handover_request",
+       "exception_draft",
+       "exception_split",
+       "switch_check",
+       "exception_start",
+       "exception_apply"
+      ],
+      "title": "Type",
+      "type": "string"
+     },
+     "value": {
+      "anyOf": [
+       {
+        "enum": [
+         "정상",
+         "이상",
+         "확인 불가"
+        ],
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Value"
+     },
+     "values": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "additionalProperties": {
+         "type": "string"
+        },
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Values"
+     },
+     "yes": {
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Yes"
+     }
+    },
+    "required": [
+     "seq",
+     "type"
+    ],
+    "title": "EventBody",
+    "type": "object"
+   },
+   "ExceptionActionFields": {
+    "additionalProperties": false,
+    "description": "D-554 ④ 한 조치(c1a15-pack 꼴 정본 fields-gate 1절).",
+    "properties": {
+     "instruction": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Instruction"
+     },
+     "minutes": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Minutes"
+     },
+     "parts": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Parts",
+      "type": "array"
+     },
+     "what": {
+      "title": "What",
+      "type": "string"
+     }
+    },
+    "required": [
+     "what",
+     "parts",
+     "minutes"
+    ],
+    "title": "ExceptionActionFields",
+    "type": "object"
+   },
+   "ExceptionActionIn": {
+    "additionalProperties": false,
+    "description": "약속 v10 1절 조치 칸(what만 필수).",
+    "properties": {
+     "instruction": {
+      "default": "",
+      "maxLength": 500,
+      "title": "Instruction",
+      "type": "string"
+     },
+     "minutes": {
+      "anyOf": [
+       {
+        "minimum": 1.0,
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Minutes"
+     },
+     "parts": {
+      "default": [],
+      "items": {
+       "type": "string"
+      },
+      "maxItems": 10,
+      "title": "Parts",
+      "type": "array"
+     },
+     "what": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "What",
+      "type": "string"
+     }
+    },
+    "required": [
+     "what"
+    ],
+    "title": "ExceptionActionIn",
+    "type": "object"
+   },
+   "ExceptionApplied": {
+    "additionalProperties": false,
+    "description": "정답지 18 · 19쪽: 팝업에서 「보고서에 적용」한 예외 상황(확정 전).",
+    "properties": {
+     "exception": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ExceptionOne"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "exception_review": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ExceptionReviewOut"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "split_error": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Split Error"
+     },
+     "text": {
+      "title": "Text",
+      "type": "string"
+     }
+    },
+    "required": [
+     "text",
+     "exception",
+     "exception_review"
+    ],
+    "title": "ExceptionApplied",
+    "type": "object"
+   },
+   "ExceptionAuto": {
+    "additionalProperties": false,
+    "description": "D-554 ④ 자동 두 칸(입력 0): 상황 = 설비 · 알람 + 센서 근거, 결과 = 재가동 판정.",
+    "properties": {
+     "result": {
+      "title": "Result",
+      "type": "string"
+     },
+     "situation": {
+      "title": "Situation",
+      "type": "string"
+     }
+    },
+    "required": [
+     "situation",
+     "result"
+    ],
+    "title": "ExceptionAuto",
+    "type": "object"
+   },
+   "ExceptionCheck": {
+    "additionalProperties": false,
+    "properties": {
+     "section": {
+      "title": "Section",
+      "type": "string"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     }
+    },
+    "required": [
+     "section",
+     "title"
+    ],
+    "title": "ExceptionCheck",
+    "type": "object"
+   },
+   "ExceptionCheckFields": {
+    "additionalProperties": false,
+    "description": "D-554 ④ 한 점검(c1a15-pack 꼴 정본 fields-gate 1절).",
+    "properties": {
+     "criteria": {
+      "title": "Criteria",
+      "type": "string"
+     },
+     "how": {
+      "title": "How",
+      "type": "string"
+     },
+     "instruction": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Instruction"
+     },
+     "minutes": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Minutes"
+     },
+     "what": {
+      "title": "What",
+      "type": "string"
+     }
+    },
+    "required": [
+     "what",
+     "how",
+     "criteria",
+     "minutes"
+    ],
+    "title": "ExceptionCheckFields",
+    "type": "object"
+   },
+   "ExceptionCheckIn": {
+    "additionalProperties": false,
+    "description": "약속 v10 1절 점검 칸(what만 필수).",
+    "properties": {
+     "criteria": {
+      "default": "",
+      "maxLength": 200,
+      "title": "Criteria",
+      "type": "string"
+     },
+     "how": {
+      "default": "",
+      "maxLength": 500,
+      "title": "How",
+      "type": "string"
+     },
+     "instruction": {
+      "default": "",
+      "maxLength": 500,
+      "title": "Instruction",
+      "type": "string"
+     },
+     "minutes": {
+      "anyOf": [
+       {
+        "minimum": 1.0,
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Minutes"
+     },
+     "what": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "What",
+      "type": "string"
+     }
+    },
+    "required": [
+     "what"
+    ],
+    "title": "ExceptionCheckIn",
+    "type": "object"
+   },
+   "ExceptionContext": {
+    "additionalProperties": false,
+    "description": "D-538 자동 정보 여덟 — 데이터에 없는 칸은 null(지어내기 0).",
+    "properties": {
+     "ai_first_check": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ExceptionCheck"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "confirmed_cause": {
+      "title": "Confirmed Cause",
+      "type": "string"
+     },
+     "equipment_id": {
+      "title": "Equipment Id",
+      "type": "string"
+     },
+     "occurred_at": {
+      "title": "Occurred At",
+      "type": "string"
+     },
+     "previous_maintenance": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ExceptionPrev"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "recent_maintenance": {
+      "default": [],
+      "items": {
+       "$ref": "#/components/schemas/ExceptionRecent"
+      },
+      "title": "Recent Maintenance",
+      "type": "array"
+     },
+     "report_id": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Report Id"
+     },
+     "sensor_values": {
+      "additionalProperties": true,
+      "title": "Sensor Values",
+      "type": "object"
+     },
+     "symptom_group": {
+      "additionalProperties": {
+       "type": "string"
+      },
+      "title": "Symptom Group",
+      "type": "object"
+     }
+    },
+    "required": [
+     "equipment_id",
+     "symptom_group",
+     "occurred_at",
+     "sensor_values",
+     "previous_maintenance",
+     "ai_first_check",
+     "confirmed_cause",
+     "report_id"
+    ],
+    "title": "ExceptionContext",
+    "type": "object"
+   },
+   "ExceptionDraft": {
+    "additionalProperties": false,
+    "description": "D-543 「노하우 등록」 초안(D-556: 글 하나) — 보고서 '예외 상황 기록' 칸에 채워짐.",
+    "properties": {
+     "text": {
+      "title": "Text",
+      "type": "string"
+     }
+    },
+    "required": [
+     "text"
+    ],
+    "title": "ExceptionDraft",
+    "type": "object"
+   },
+   "ExceptionEdit": {
+    "additionalProperties": false,
+    "description": "same-edit.md 1절 exception_review.edit(정답지 30쪽 같음 + 고침/보탬):\n고친 뒤 대상 예외의 점검 목록 · 조치 목록 전체.",
+    "properties": {
+     "actions": {
+      "items": {
+       "$ref": "#/components/schemas/ExceptionActionIn"
+      },
+      "maxItems": 10,
+      "minItems": 1,
+      "title": "Actions",
+      "type": "array"
+     },
+     "checks": {
+      "items": {
+       "$ref": "#/components/schemas/ExceptionCheckIn"
+      },
+      "maxItems": 10,
+      "minItems": 1,
+      "title": "Checks",
+      "type": "array"
+     }
+    },
+    "required": [
+     "checks",
+     "actions"
+    ],
+    "title": "ExceptionEdit",
+    "type": "object"
+   },
+   "ExceptionEditOut": {
+    "additionalProperties": false,
+    "description": "same-edit.md 1절 edit(정답지 30쪽 같음 + 고침): 고친 뒤 대상 예외의 점검 목록 · 조치 목록 전체.",
+    "properties": {
+     "actions": {
+      "items": {
+       "$ref": "#/components/schemas/ExceptionActionFields"
+      },
+      "title": "Actions",
+      "type": "array"
+     },
+     "checks": {
+      "items": {
+       "$ref": "#/components/schemas/ExceptionCheckFields"
+      },
+      "title": "Checks",
+      "type": "array"
+     }
+    },
+    "required": [
+     "checks",
+     "actions"
+    ],
+    "title": "ExceptionEditOut",
+    "type": "object"
+   },
+   "ExceptionGuide": {
+    "additionalProperties": false,
+    "description": "D-543 예외 안내(호출 단계) = 약속 v8 결과 exception_guide 칸 그대로 + 출처(앱 원본) · 원래 순서 다음(null).",
+    "properties": {
+     "actions": {
+      "default": [],
+      "items": {
+       "$ref": "#/components/schemas/ExceptionActionFields"
+      },
+      "title": "Actions",
+      "type": "array"
+     },
+     "basis": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Basis",
+      "type": "array"
+     },
+     "checks": {
+      "default": [],
+      "items": {
+       "$ref": "#/components/schemas/ExceptionCheckFields"
+      },
+      "title": "Checks",
+      "type": "array"
+     },
+     "criteria": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Criteria"
+     },
+     "grade": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Grade"
+     },
+     "next": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ExceptionGuideNext"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "relation_id": {
+      "title": "Relation Id",
+      "type": "string"
+     },
+     "section": {
+      "title": "Section",
+      "type": "string"
+     },
+     "source": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ExceptionGuideSource"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "steps": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Steps",
+      "type": "array"
+     },
+     "text": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Text"
+     },
+     "title": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Title"
+     },
+     "topic": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Topic"
+     }
+    },
+    "required": [
+     "section",
+     "relation_id",
+     "grade",
+     "title",
+     "text",
+     "steps",
+     "criteria",
+     "basis",
+     "source",
+     "next"
+    ],
+    "title": "ExceptionGuide",
+    "type": "object"
+   },
+   "ExceptionGuideNext": {
+    "additionalProperties": false,
+    "properties": {
+     "section": {
+      "title": "Section",
+      "type": "string"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     }
+    },
+    "required": [
+     "section",
+     "title"
+    ],
+    "title": "ExceptionGuideNext",
+    "type": "object"
+   },
+   "ExceptionGuideSource": {
+    "additionalProperties": false,
+    "description": "출처 한 줄 = 앱 원본(승인 이력)의 예외 상황 기록.",
+    "properties": {
+     "equipment_id": {
+      "title": "Equipment Id",
+      "type": "string"
+     },
+     "occurred_at": {
+      "title": "Occurred At",
+      "type": "string"
+     },
+     "record_id": {
+      "title": "Record Id",
+      "type": "string"
+     },
+     "situation": {
+      "title": "Situation",
+      "type": "string"
+     }
+    },
+    "required": [
+     "record_id",
+     "equipment_id",
+     "occurred_at",
+     "situation"
+    ],
+    "title": "ExceptionGuideSource",
+    "type": "object"
+   },
+   "ExceptionInput": {
+    "additionalProperties": false,
+    "description": "D-538 · D-556 예외 상황 기록: 정비자가 예외라고 판단할 때만 적는 글 하나.\n확정 · 적용 때는 그 글의 「AI 나눔」 예외 전체에 한 번 같음 / 아님(exception_review)\n— 상황 · 결과 · 자동 정보는 서버가 붙임.",
+    "properties": {
+     "text": {
+      "default": "",
+      "maxLength": 2000,
+      "title": "Text",
+      "type": "string"
+     }
+    },
+    "title": "ExceptionInput",
+    "type": "object"
+   },
+   "ExceptionMatch": {
+    "additionalProperties": false,
+    "description": "약속 v10 3절: 비슷한 것 하나(exception_similar 결과 matches 줄의 kind · no).",
+    "properties": {
+     "kind": {
+      "enum": [
+       "예외",
+       "매뉴얼"
+      ],
+      "title": "Kind",
+      "type": "string"
+     },
+     "no": {
+      "maxLength": 40,
+      "title": "No",
+      "type": "string"
+     }
+    },
+    "required": [
+     "kind",
+     "no"
+    ],
+    "title": "ExceptionMatch",
+    "type": "object"
+   },
+   "ExceptionMatchRef": {
+    "additionalProperties": false,
+    "properties": {
+     "kind": {
+      "title": "Kind",
+      "type": "string"
+     },
+     "no": {
+      "title": "No",
+      "type": "string"
+     }
+    },
+    "required": [
+     "kind",
+     "no"
+    ],
+    "title": "ExceptionMatchRef",
+    "type": "object"
+   },
+   "ExceptionNote": {
+    "additionalProperties": false,
+    "description": "D-543 참고 알림: 같은 설비 · 같은 증상군의 승인된 예외 상황 기록.",
+    "properties": {
+     "action": {
+      "title": "Action",
+      "type": "string"
+     },
+     "occurred_at": {
+      "title": "Occurred At",
+      "type": "string"
+     },
+     "record_id": {
+      "title": "Record Id",
+      "type": "string"
+     },
+     "situation": {
+      "title": "Situation",
+      "type": "string"
+     },
+     "text": {
+      "title": "Text",
+      "type": "string"
+     },
+     "topic": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Topic"
+     }
+    },
+    "required": [
+     "record_id",
+     "occurred_at",
+     "situation",
+     "action",
+     "text"
+    ],
+    "title": "ExceptionNote",
+    "type": "object"
+   },
+   "ExceptionOne": {
+    "additionalProperties": false,
+    "description": "예외 하나(약속 v10 1절) = 주제 + 점검 목록 + 조치 목록 + 비슷한 것(3절) + 확정 · 적용 뒤 같음 / 아님.",
+    "properties": {
+     "actions": {
+      "items": {
+       "$ref": "#/components/schemas/ExceptionActionFields"
+      },
+      "title": "Actions",
+      "type": "array"
+     },
+     "checks": {
+      "items": {
+       "$ref": "#/components/schemas/ExceptionCheckFields"
+      },
+      "title": "Checks",
+      "type": "array"
+     },
+     "decision": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Decision"
+     },
+     "edit": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ExceptionEditOut"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "kind": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Kind"
+     },
+     "match": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ExceptionMatchRef"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "matches": {
+      "default": [],
+      "items": {
+       "$ref": "#/components/schemas/ExceptionSimilar"
+      },
+      "title": "Matches",
+      "type": "array"
+     },
+     "topic": {
+      "title": "Topic",
+      "type": "string"
+     }
+    },
+    "required": [
+     "topic",
+     "checks",
+     "actions"
+    ],
+    "title": "ExceptionOne",
+    "type": "object"
+   },
+   "ExceptionPrev": {
+    "additionalProperties": false,
+    "properties": {
+     "action": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Action"
+     },
+     "occurred_at": {
+      "title": "Occurred At",
+      "type": "string"
+     },
+     "outcome": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Outcome"
+     },
+     "record_id": {
+      "title": "Record Id",
+      "type": "string"
+     }
+    },
+    "required": [
+     "record_id",
+     "occurred_at",
+     "outcome",
+     "action"
+    ],
+    "title": "ExceptionPrev",
+    "type": "object"
+   },
+   "ExceptionRecent": {
+    "additionalProperties": false,
+    "description": "D-570 최근 N일 정비 이력 한 건(recent-condition.md: did · checked = 앱 번호 · 적은 차례).",
+    "properties": {
+     "checked": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Checked",
+      "type": "array"
+     },
+     "days_before": {
+      "title": "Days Before",
+      "type": "integer"
+     },
+     "did": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Did",
+      "type": "array"
+     },
+     "occurred_at": {
+      "title": "Occurred At",
+      "type": "string"
+     },
+     "outcome": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Outcome"
+     },
+     "record_id": {
+      "title": "Record Id",
+      "type": "string"
+     }
+    },
+    "required": [
+     "record_id",
+     "occurred_at",
+     "days_before",
+     "did",
+     "checked",
+     "outcome"
+    ],
+    "title": "ExceptionRecent",
+    "type": "object"
+   },
+   "ExceptionRecord": {
+    "additionalProperties": false,
+    "properties": {
+     "action": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Action"
+     },
+     "context": {
+      "$ref": "#/components/schemas/ExceptionContext"
+     },
+     "exception": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ExceptionOne"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "exception_review": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ExceptionReviewOut"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "result": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Result"
+     },
+     "situation": {
+      "title": "Situation",
+      "type": "string"
+     },
+     "split_error": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Split Error"
+     },
+     "text": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Text"
+     }
+    },
+    "required": [
+     "situation",
+     "context"
+    ],
+    "title": "ExceptionRecord",
+    "type": "object"
+   },
+   "ExceptionRecordItem": {
+    "additionalProperties": false,
+    "properties": {
+     "approved_at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Approved At"
+     },
+     "exception_record": {
+      "$ref": "#/components/schemas/ExceptionRecord"
+     },
+     "record_id": {
+      "title": "Record Id",
+      "type": "string"
+     },
+     "report_id": {
+      "title": "Report Id",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "record_id",
+     "report_id",
+     "approved_at",
+     "exception_record"
+    ],
+    "title": "ExceptionRecordItem",
+    "type": "object"
+   },
+   "ExceptionRecordList": {
+    "additionalProperties": false,
+    "description": "D-538: 승인된 예외 상황 기록(정비 이력 원본 층) — LLMOps ⑥이 읽음.",
+    "properties": {
+     "items": {
+      "items": {
+       "$ref": "#/components/schemas/ExceptionRecordItem"
+      },
+      "title": "Items",
+      "type": "array"
+     }
+    },
+    "required": [
+     "items"
+    ],
+    "title": "ExceptionRecordList",
+    "type": "object"
+   },
+   "ExceptionReview": {
+    "additionalProperties": false,
+    "description": "약속 v10 3 · 6절 exception_review: 예외 전체에 한 번 같음(그 match = 놓침) / 아님(새 예외).\nedit = 2단계 같음 + 고침(same-edit.md 1절 · 기존 예외 match만 · 고친 뒤 목록 전체).",
+    "properties": {
+     "decision": {
+      "enum": [
+       "same",
+       "not"
+      ],
+      "title": "Decision",
+      "type": "string"
+     },
+     "edit": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ExceptionEdit"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "match": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ExceptionMatch"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "required": [
+     "decision"
+    ],
+    "title": "ExceptionReview",
+    "type": "object"
+   },
+   "ExceptionReviewOut": {
+    "additionalProperties": false,
+    "description": "약속 v10 6절 exception_record.exception_review(한 번 · 확정 기록 · 승인 기록 파일에 그대로).",
+    "properties": {
+     "decision": {
+      "title": "Decision",
+      "type": "string"
+     },
+     "edit": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ExceptionEditOut"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "match": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ExceptionMatchRef"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "required": [
+     "decision",
+     "match"
+    ],
+    "title": "ExceptionReviewOut",
+    "type": "object"
+   },
+   "ExceptionSimilar": {
+    "additionalProperties": false,
+    "description": "약속 v10 3절 비슷한 것 하나(exception_similar matches 줄): 등록 예외 절 · 매뉴얼 점검 · 조치 절.",
+    "properties": {
+     "actions": {
+      "anyOf": [
+       {
+        "items": {
+         "$ref": "#/components/schemas/ExceptionActionFields"
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Actions"
+     },
+     "checks": {
+      "anyOf": [
+       {
+        "items": {
+         "$ref": "#/components/schemas/ExceptionCheckFields"
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Checks"
+     },
+     "kind": {
+      "title": "Kind",
+      "type": "string"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "no": {
+      "title": "No",
+      "type": "string"
+     },
+     "score": {
+      "title": "Score",
+      "type": "number"
+     }
+    },
+    "required": [
+     "kind",
+     "no",
+     "name",
+     "score"
+    ],
+    "title": "ExceptionSimilar",
+    "type": "object"
+   },
+   "ExceptionSplit": {
+    "additionalProperties": false,
+    "description": "「AI 나눔」 마지막 결과(확정 전) — text가 지금 글과 다르면 다시 눌러야 함 · 나누지 못함이면 exception null.",
+    "properties": {
+     "error": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Error"
+     },
+     "exception": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ExceptionOne"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "similar_error": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Similar Error"
+     },
+     "text": {
+      "title": "Text",
+      "type": "string"
+     }
+    },
+    "required": [
+     "text",
+     "exception",
+     "error"
+    ],
+    "title": "ExceptionSplit",
+    "type": "object"
+   },
+   "ExceptionWalkStep": {
+    "additionalProperties": false,
+    "description": "정답지 26쪽 '안내 차례' 한 줄(약속 v10 5절 걸음): c1 … 점검 → a1 … 조치.",
+    "properties": {
+     "done": {
+      "title": "Done",
+      "type": "boolean"
+     },
+     "now": {
+      "title": "Now",
+      "type": "boolean"
+     },
+     "say": {
+      "title": "Say",
+      "type": "string"
+     },
+     "side": {
+      "title": "Side",
+      "type": "string"
+     },
+     "step": {
+      "title": "Step",
+      "type": "string"
+     },
+     "what": {
+      "title": "What",
+      "type": "string"
+     }
+    },
+    "required": [
+     "step",
+     "side",
+     "what",
+     "say",
+     "done",
+     "now"
+    ],
+    "title": "ExceptionWalkStep",
+    "type": "object"
+   },
+   "FinalCause": {
+    "additionalProperties": false,
+    "properties": {
+     "confirmed": {
+      "title": "Confirmed",
+      "type": "boolean"
+     },
+     "evidence": {
+      "title": "Evidence",
+      "type": "integer"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "probability": {
+      "title": "Probability",
+      "type": "integer"
+     },
+     "result": {
+      "title": "Result",
+      "type": "string"
+     }
+    },
+    "required": [
+     "name",
+     "probability",
+     "evidence",
+     "result",
+     "confirmed"
+    ],
+    "title": "FinalCause",
+    "type": "object"
+   },
+   "FinalCauseBasis": {
+    "additionalProperties": false,
+    "properties": {
+     "memo": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Memo"
+     },
+     "section": {
+      "title": "Section",
+      "type": "string"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     },
+     "value": {
+      "title": "Value",
+      "type": "string"
+     }
+    },
+    "required": [
+     "section",
+     "title",
+     "value",
+     "memo"
+    ],
+    "title": "FinalCauseBasis",
+    "type": "object"
+   },
+   "FinalDecision": {
+    "additionalProperties": false,
+    "properties": {
+     "at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "At"
+     },
+     "by_name": {
+      "title": "By Name",
+      "type": "string"
+     },
+     "kind": {
+      "title": "Kind",
+      "type": "string"
+     },
+     "memo": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Memo"
+     }
+    },
+    "required": [
+     "kind",
+     "by_name",
+     "at"
+    ],
+    "title": "FinalDecision",
+    "type": "object"
+   },
+   "FinalReport": {
+    "additionalProperties": false,
+    "description": "보고서 최종본(D-528 · 부록 5): 구역 1 ~ 5 값 — 두 앱이 같은 문서 화면(FinalReport.tsx)으로 그린다.",
+    "properties": {
+     "action": {
+      "title": "Action",
+      "type": "string"
+     },
+     "approved_calls": {
+      "default": [],
+      "items": {
+       "type": "string"
+      },
+      "title": "Approved Calls",
+      "type": "array"
+     },
+     "author_name": {
+      "title": "Author Name",
+      "type": "string"
+     },
+     "author_role": {
+      "title": "Author Role",
+      "type": "string"
+     },
+     "cause": {
+      "title": "Cause",
+      "type": "string"
+     },
+     "cause_basis": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/FinalCauseBasis"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "causes": {
+      "items": {
+       "$ref": "#/components/schemas/FinalCause"
+      },
+      "title": "Causes",
+      "type": "array"
+     },
+     "check_path": {
+      "title": "Check Path",
+      "type": "string"
+     },
+     "confirmed_at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Confirmed At"
+     },
+     "decision": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/FinalDecision"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "downtime": {
+      "title": "Downtime",
+      "type": "string"
+     },
+     "equipment_id": {
+      "title": "Equipment Id",
+      "type": "string"
+     },
+     "equipment_type": {
+      "title": "Equipment Type",
+      "type": "string"
+     },
+     "evidence_records": {
+      "title": "Evidence Records",
+      "type": "string"
+     },
+     "exception_record": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ExceptionRecord"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "grade_use": {
+      "additionalProperties": {
+       "type": "integer"
+      },
+      "title": "Grade Use",
+      "type": "object"
+     },
+     "group_name": {
+      "title": "Group Name",
+      "type": "string"
+     },
+     "lock_at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Lock At"
+     },
+     "occurred_at": {
+      "title": "Occurred At",
+      "type": "string"
+     },
+     "rejected_before": {
+      "title": "Rejected Before",
+      "type": "boolean"
+     },
+     "report_id": {
+      "title": "Report Id",
+      "type": "integer"
+     },
+     "restart": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Restart"
+     },
+     "sensor_evidence": {
+      "title": "Sensor Evidence",
+      "type": "string"
+     },
+     "sensors": {
+      "items": {
+       "$ref": "#/components/schemas/FinalSensor"
+      },
+      "title": "Sensors",
+      "type": "array"
+     },
+     "session_id": {
+      "title": "Session Id",
+      "type": "integer"
+     },
+     "status": {
+      "title": "Status",
+      "type": "string"
+     },
+     "timeline": {
+      "items": {
+       "$ref": "#/components/schemas/FinalStep"
+      },
+      "title": "Timeline",
+      "type": "array"
+     },
+     "unresolved": {
+      "title": "Unresolved",
+      "type": "string"
+     }
+    },
+    "required": [
+     "report_id",
+     "session_id",
+     "status",
+     "equipment_id",
+     "equipment_type",
+     "group_name",
+     "occurred_at",
+     "confirmed_at",
+     "author_name",
+     "author_role",
+     "lock_at",
+     "rejected_before",
+     "decision",
+     "sensors",
+     "sensor_evidence",
+     "causes",
+     "cause",
+     "cause_basis",
+     "check_path",
+     "evidence_records",
+     "timeline",
+     "action",
+     "restart",
+     "downtime",
+     "grade_use",
+     "unresolved",
+     "exception_record"
+    ],
+    "title": "FinalReport",
+    "type": "object"
+   },
+   "FinalSensor": {
+    "additionalProperties": false,
+    "properties": {
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "out_of_range": {
+      "title": "Out Of Range",
+      "type": "boolean"
+     },
+     "range_text": {
+      "title": "Range Text",
+      "type": "string"
+     },
+     "status": {
+      "title": "Status",
+      "type": "string"
+     },
+     "value_text": {
+      "title": "Value Text",
+      "type": "string"
+     }
+    },
+    "required": [
+     "name",
+     "value_text",
+     "range_text",
+     "status",
+     "out_of_range"
+    ],
+    "title": "FinalSensor",
+    "type": "object"
+   },
+   "FinalStep": {
+    "additionalProperties": false,
+    "properties": {
+     "at": {
+      "title": "At",
+      "type": "string"
+     },
+     "grade": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Grade"
+     },
+     "section": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Section"
+     },
+     "text": {
+      "title": "Text",
+      "type": "string"
+     },
+     "who": {
+      "title": "Who",
+      "type": "string"
+     }
+    },
+    "required": [
+     "at",
+     "who",
+     "text",
+     "section",
+     "grade"
+    ],
+    "title": "FinalStep",
+    "type": "object"
+   },
+   "GradeBody": {
+    "additionalProperties": false,
+    "description": "L05 등급 변경: 경고를 확인했을 때만(confirmed = true) 저장.",
+    "properties": {
+     "confirmed": {
+      "default": false,
+      "title": "Confirmed",
+      "type": "boolean"
+     },
+     "grade": {
+      "enum": [
+       "A",
+       "B",
+       "C",
+       "D"
+      ],
+      "title": "Grade",
+      "type": "string"
+     }
+    },
+    "required": [
+     "grade"
+    ],
+    "title": "GradeBody",
+    "type": "object"
+   },
+   "GradeChangeRow": {
+    "additionalProperties": false,
+    "properties": {
+     "after": {
+      "title": "After",
+      "type": "string"
+     },
+     "at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "At"
+     },
+     "before": {
+      "title": "Before",
+      "type": "string"
+     },
+     "by_name": {
+      "title": "By Name",
+      "type": "string"
+     },
+     "section": {
+      "title": "Section",
+      "type": "string"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     }
+    },
+    "required": [
+     "section",
+     "title",
+     "before",
+     "after",
+     "by_name",
+     "at"
+    ],
+    "title": "GradeChangeRow",
+    "type": "object"
+   },
+   "GradeResult": {
+    "additionalProperties": false,
+    "properties": {
+     "after": {
+      "title": "After",
+      "type": "string"
+     },
+     "before": {
+      "title": "Before",
+      "type": "string"
+     },
+     "section": {
+      "title": "Section",
+      "type": "string"
+     }
+    },
+    "required": [
+     "section",
+     "before",
+     "after"
+    ],
+    "title": "GradeResult",
+    "type": "object"
+   },
+   "GradeRow": {
+    "additionalProperties": false,
+    "properties": {
+     "grade": {
+      "title": "Grade",
+      "type": "string"
+     },
+     "label": {
+      "title": "Label",
+      "type": "string"
+     },
+     "section": {
+      "title": "Section",
+      "type": "string"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     }
+    },
+    "required": [
+     "section",
+     "title",
+     "grade",
+     "label"
+    ],
+    "title": "GradeRow",
+    "type": "object"
+   },
+   "GradeWarning": {
+    "additionalProperties": false,
+    "properties": {
+     "body": {
+      "title": "Body",
+      "type": "string"
+     },
+     "direction": {
+      "title": "Direction",
+      "type": "string"
+     },
+     "head": {
+      "title": "Head",
+      "type": "string"
+     }
+    },
+    "required": [
+     "direction",
+     "head",
+     "body"
+    ],
+    "title": "GradeWarning",
+    "type": "object"
+   },
+   "HTTPValidationError": {
+    "properties": {
+     "detail": {
+      "items": {
+       "$ref": "#/components/schemas/ValidationError"
+      },
+      "title": "Detail",
+      "type": "array"
+     }
+    },
+    "title": "HTTPValidationError",
+    "type": "object"
+   },
+   "Home": {
+    "additionalProperties": false,
+    "properties": {
+     "alarms": {
+      "items": {
+       "$ref": "#/components/schemas/AlarmRow"
+      },
+      "title": "Alarms",
+      "type": "array"
+     },
+     "cautions": {
+      "items": {
+       "$ref": "#/components/schemas/ToolCaution"
+      },
+      "title": "Cautions",
+      "type": "array"
+     },
+     "change_seq": {
+      "title": "Change Seq",
+      "type": "integer"
+     },
+     "in_progress": {
+      "items": {
+       "$ref": "#/components/schemas/InProgress"
+      },
+      "title": "In Progress",
+      "type": "array"
+     },
+     "new_since": {
+      "items": {
+       "$ref": "#/components/schemas/AlarmRow"
+      },
+      "title": "New Since",
+      "type": "array"
+     },
+     "prechecks": {
+      "items": {
+       "$ref": "#/components/schemas/PrecheckCard"
+      },
+      "title": "Prechecks",
+      "type": "array"
+     },
+     "recent_reports": {
+      "items": {
+       "$ref": "#/components/schemas/RecentReport"
+      },
+      "title": "Recent Reports",
+      "type": "array"
+     },
+     "shift": {
+      "$ref": "#/components/schemas/Shift"
+     }
+    },
+    "required": [
+     "alarms",
+     "new_since",
+     "in_progress",
+     "change_seq",
+     "shift",
+     "recent_reports",
+     "cautions",
+     "prechecks"
+    ],
+    "title": "Home",
+    "type": "object"
+   },
+   "HumanCheck": {
+    "additionalProperties": false,
+    "properties": {
+     "from_section": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "From Section"
+     },
+     "section": {
+      "title": "Section",
+      "type": "string"
+     }
+    },
+    "required": [
+     "section",
+     "from_section"
+    ],
+    "title": "HumanCheck",
+    "type": "object"
+   },
+   "InProgress": {
+    "additionalProperties": false,
+    "properties": {
+     "alarm_id": {
+      "title": "Alarm Id",
+      "type": "integer"
+     },
+     "progress": {
+      "$ref": "#/components/schemas/Progress"
+     },
+     "session_id": {
+      "title": "Session Id",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "session_id",
+     "alarm_id",
+     "progress"
+    ],
+    "title": "InProgress",
+    "type": "object"
+   },
+   "Instruction": {
+    "additionalProperties": false,
+    "properties": {
+     "check_max": {
+      "title": "Check Max",
+      "type": "integer"
+     },
+     "check_no": {
+      "title": "Check No",
+      "type": "integer"
+     },
+     "checklist": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Checklist",
+      "type": "array"
+     },
+     "checklist_common": {
+      "title": "Checklist Common",
+      "type": "boolean"
+     },
+     "checklist_done": {
+      "title": "Checklist Done",
+      "type": "boolean"
+     },
+     "criterion": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Criterion"
+     },
+     "evidence_record_ids": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Evidence Record Ids",
+      "type": "array"
+     },
+     "fallback": {
+      "title": "Fallback",
+      "type": "boolean"
+     },
+     "fallback_label": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Fallback Label"
+     },
+     "grade": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Grade"
+     },
+     "minutes": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Minutes"
+     },
+     "original": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Original"
+     },
+     "section": {
+      "title": "Section",
+      "type": "string"
+     },
+     "steps": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Steps",
+      "type": "array"
+     },
+     "text": {
+      "title": "Text",
+      "type": "string"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     },
+     "unable": {
+      "items": {
+       "$ref": "#/components/schemas/Unable"
+      },
+      "title": "Unable",
+      "type": "array"
+     }
+    },
+    "required": [
+     "section",
+     "title",
+     "text",
+     "checklist",
+     "checklist_done",
+     "checklist_common",
+     "grade",
+     "minutes",
+     "steps",
+     "fallback",
+     "fallback_label",
+     "original",
+     "criterion",
+     "check_no",
+     "check_max",
+     "evidence_record_ids",
+     "unable"
+    ],
+    "title": "Instruction",
+    "type": "object"
+   },
+   "LeadActedRow": {
+    "additionalProperties": false,
+    "description": "약속 v9 lead_notice acted_without_call: 정비자가 [예외] 바로 조치를 고른 세션 한 줄.",
+    "properties": {
+     "at": {
+      "title": "At",
+      "type": "string"
+     },
+     "equipment_id": {
+      "title": "Equipment Id",
+      "type": "string"
+     },
+     "group_name": {
+      "title": "Group Name",
+      "type": "string"
+     },
+     "session_id": {
+      "title": "Session Id",
+      "type": "integer"
+     },
+     "tech_name": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Tech Name"
+     }
+    },
+    "required": [
+     "session_id",
+     "equipment_id",
+     "group_name",
+     "tech_name",
+     "at"
+    ],
+    "title": "LeadActedRow",
+    "type": "object"
+   },
+   "LeadAudit": {
+    "additionalProperties": false,
+    "properties": {
+     "date": {
+      "title": "Date",
+      "type": "string"
+     },
+     "filters": {
+      "$ref": "#/components/schemas/AuditFilters"
+     },
+     "now": {
+      "title": "Now",
+      "type": "string"
+     },
+     "options": {
+      "$ref": "#/components/schemas/AuditOptions"
+     },
+     "rows": {
+      "items": {
+       "$ref": "#/components/schemas/AuditRow"
+      },
+      "title": "Rows",
+      "type": "array"
+     }
+    },
+    "required": [
+     "now",
+     "date",
+     "filters",
+     "options",
+     "rows"
+    ],
+    "title": "LeadAudit",
+    "type": "object"
+   },
+   "LeadCall": {
+    "additionalProperties": false,
+    "properties": {
+     "answer": {
+      "anyOf": [
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Answer"
+     },
+     "answered": {
+      "title": "Answered",
+      "type": "boolean"
+     },
+     "call_id": {
+      "title": "Call Id",
+      "type": "integer"
+     },
+     "corrections": {
+      "default": [],
+      "items": {
+       "$ref": "#/components/schemas/CallCorrectionBox"
+      },
+      "title": "Corrections",
+      "type": "array"
+     },
+     "equipment_id": {
+      "title": "Equipment Id",
+      "type": "string"
+     },
+     "grade": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Grade"
+     },
+     "group_name": {
+      "title": "Group Name",
+      "type": "string"
+     },
+     "kind": {
+      "title": "Kind",
+      "type": "string"
+     },
+     "need": {
+      "title": "Need",
+      "type": "string"
+     },
+     "options": {
+      "items": {
+       "$ref": "#/components/schemas/AnswerOption"
+      },
+      "title": "Options",
+      "type": "array"
+     },
+     "section": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Section"
+     },
+     "sender_name": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Sender Name"
+     },
+     "sent_at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Sent At"
+     },
+     "summary": {
+      "title": "Summary",
+      "type": "string"
+     }
+    },
+    "required": [
+     "call_id",
+     "kind",
+     "equipment_id",
+     "group_name",
+     "sent_at",
+     "section",
+     "grade",
+     "summary",
+     "options",
+     "answered",
+     "answer",
+     "need"
+    ],
+    "title": "LeadCall",
+    "type": "object"
+   },
+   "LeadCallRow": {
+    "additionalProperties": false,
+    "properties": {
+     "call_id": {
+      "title": "Call Id",
+      "type": "integer"
+     },
+     "equipment_id": {
+      "title": "Equipment Id",
+      "type": "string"
+     },
+     "group_name": {
+      "title": "Group Name",
+      "type": "string"
+     },
+     "kind": {
+      "title": "Kind",
+      "type": "string"
+     },
+     "need": {
+      "title": "Need",
+      "type": "string"
+     },
+     "sender_name": {
+      "title": "Sender Name",
+      "type": "string"
+     },
+     "sent_at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Sent At"
+     }
+    },
+    "required": [
+     "call_id",
+     "kind",
+     "equipment_id",
+     "group_name",
+     "sent_at",
+     "need",
+     "sender_name"
+    ],
+    "title": "LeadCallRow",
+    "type": "object"
+   },
+   "LeadCalls": {
+    "additionalProperties": false,
+    "properties": {
+     "now": {
+      "title": "Now",
+      "type": "string"
+     },
+     "rows": {
+      "items": {
+       "$ref": "#/components/schemas/LeadCallRow"
+      },
+      "title": "Rows",
+      "type": "array"
+     }
+    },
+    "required": [
+     "now",
+     "rows"
+    ],
+    "title": "LeadCalls",
+    "type": "object"
+   },
+   "LeadField": {
+    "additionalProperties": false,
+    "properties": {
+     "key": {
+      "title": "Key",
+      "type": "string"
+     },
+     "label": {
+      "title": "Label",
+      "type": "string"
+     },
+     "text": {
+      "title": "Text",
+      "type": "string"
+     }
+    },
+    "required": [
+     "key",
+     "label",
+     "text"
+    ],
+    "title": "LeadField",
+    "type": "object"
+   },
+   "LeadGrades": {
+    "additionalProperties": false,
+    "properties": {
+     "changes": {
+      "items": {
+       "$ref": "#/components/schemas/GradeChangeRow"
+      },
+      "title": "Changes",
+      "type": "array"
+     },
+     "now": {
+      "title": "Now",
+      "type": "string"
+     },
+     "rows": {
+      "items": {
+       "$ref": "#/components/schemas/GradeRow"
+      },
+      "title": "Rows",
+      "type": "array"
+     },
+     "total": {
+      "title": "Total",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "now",
+     "total",
+     "rows",
+     "changes"
+    ],
+    "title": "LeadGrades",
+    "type": "object"
+   },
+   "LeadOverview": {
+    "additionalProperties": false,
+    "properties": {
+     "acted": {
+      "default": [],
+      "items": {
+       "$ref": "#/components/schemas/LeadActedRow"
+      },
+      "title": "Acted",
+      "type": "array"
+     },
+     "now": {
+      "title": "Now",
+      "type": "string"
+     },
+     "prechecks": {
+      "default": [],
+      "items": {
+       "$ref": "#/components/schemas/PrecheckCard"
+      },
+      "title": "Prechecks",
+      "type": "array"
+     },
+     "rows": {
+      "items": {
+       "$ref": "#/components/schemas/LeadReportRow"
+      },
+      "title": "Rows",
+      "type": "array"
+     },
+     "tiles": {
+      "$ref": "#/components/schemas/LeadTiles"
+     }
+    },
+    "required": [
+     "now",
+     "tiles",
+     "rows"
+    ],
+    "title": "LeadOverview",
+    "type": "object"
+   },
+   "LeadReport": {
+    "additionalProperties": false,
+    "properties": {
+     "author_name": {
+      "title": "Author Name",
+      "type": "string"
+     },
+     "equipment_id": {
+      "title": "Equipment Id",
+      "type": "string"
+     },
+     "fields": {
+      "items": {
+       "$ref": "#/components/schemas/LeadField"
+      },
+      "title": "Fields",
+      "type": "array"
+     },
+     "group_name": {
+      "title": "Group Name",
+      "type": "string"
+     },
+     "low_evidence": {
+      "title": "Low Evidence",
+      "type": "boolean"
+     },
+     "occurred_at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Occurred At"
+     },
+     "report_id": {
+      "title": "Report Id",
+      "type": "integer"
+     },
+     "session_id": {
+      "title": "Session Id",
+      "type": "integer"
+     },
+     "status": {
+      "title": "Status",
+      "type": "string"
+     },
+     "violations": {
+      "title": "Violations",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "report_id",
+     "session_id",
+     "status",
+     "equipment_id",
+     "group_name",
+     "occurred_at",
+     "author_name",
+     "low_evidence",
+     "fields",
+     "violations"
+    ],
+    "title": "LeadReport",
+    "type": "object"
+   },
+   "LeadReportRow": {
+    "additionalProperties": false,
+    "properties": {
+     "author_name": {
+      "title": "Author Name",
+      "type": "string"
+     },
+     "cause": {
+      "title": "Cause",
+      "type": "string"
+     },
+     "confirmed_at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Confirmed At"
+     },
+     "equipment_id": {
+      "title": "Equipment Id",
+      "type": "string"
+     },
+     "evidence_count": {
+      "title": "Evidence Count",
+      "type": "integer"
+     },
+     "group_name": {
+      "title": "Group Name",
+      "type": "string"
+     },
+     "line": {
+      "default": "",
+      "title": "Line",
+      "type": "string"
+     },
+     "low_evidence": {
+      "title": "Low Evidence",
+      "type": "boolean"
+     },
+     "report_id": {
+      "title": "Report Id",
+      "type": "integer"
+     },
+     "session_id": {
+      "title": "Session Id",
+      "type": "integer"
+     },
+     "violations": {
+      "title": "Violations",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "report_id",
+     "session_id",
+     "equipment_id",
+     "group_name",
+     "cause",
+     "author_name",
+     "confirmed_at",
+     "evidence_count",
+     "low_evidence",
+     "violations"
+    ],
+    "title": "LeadReportRow",
+    "type": "object"
+   },
+   "LeadSessionHold": {
+    "additionalProperties": false,
+    "properties": {
+     "call_id": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Call Id"
+     },
+     "kind": {
+      "title": "Kind",
+      "type": "string"
+     },
+     "label": {
+      "title": "Label",
+      "type": "string"
+     },
+     "minutes": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Minutes"
+     },
+     "since": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Since"
+     }
+    },
+    "required": [
+     "kind",
+     "label",
+     "since",
+     "minutes",
+     "call_id"
+    ],
+    "title": "LeadSessionHold",
+    "type": "object"
+   },
+   "LeadSessionRow": {
+    "additionalProperties": false,
+    "properties": {
+     "alarm_at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Alarm At"
+     },
+     "alarm_id": {
+      "title": "Alarm Id",
+      "type": "integer"
+     },
+     "check_max": {
+      "title": "Check Max",
+      "type": "integer"
+     },
+     "check_no": {
+      "title": "Check No",
+      "type": "integer"
+     },
+     "elapsed_min": {
+      "title": "Elapsed Min",
+      "type": "integer"
+     },
+     "equipment_id": {
+      "title": "Equipment Id",
+      "type": "string"
+     },
+     "grade": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Grade"
+     },
+     "group_code": {
+      "title": "Group Code",
+      "type": "string"
+     },
+     "group_name": {
+      "title": "Group Name",
+      "type": "string"
+     },
+     "hold": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/LeadSessionHold"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "last_input_at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Last Input At"
+     },
+     "report_rejected": {
+      "title": "Report Rejected",
+      "type": "boolean"
+     },
+     "section": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Section"
+     },
+     "section_title": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Section Title"
+     },
+     "session_id": {
+      "title": "Session Id",
+      "type": "integer"
+     },
+     "stage": {
+      "title": "Stage",
+      "type": "string"
+     },
+     "stage_label": {
+      "title": "Stage Label",
+      "type": "string"
+     },
+     "started_at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Started At"
+     },
+     "step_kind": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Step Kind"
+     },
+     "step_no": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Step No"
+     },
+     "technician_name": {
+      "title": "Technician Name",
+      "type": "string"
+     }
+    },
+    "required": [
+     "session_id",
+     "alarm_id",
+     "equipment_id",
+     "group_code",
+     "group_name",
+     "technician_name",
+     "stage",
+     "stage_label",
+     "step_no",
+     "step_kind",
+     "section",
+     "section_title",
+     "grade",
+     "check_no",
+     "check_max",
+     "hold",
+     "alarm_at",
+     "started_at",
+     "last_input_at",
+     "elapsed_min",
+     "report_rejected"
+    ],
+    "title": "LeadSessionRow",
+    "type": "object"
+   },
+   "LeadSessions": {
+    "additionalProperties": false,
+    "properties": {
+     "counts": {
+      "additionalProperties": {
+       "type": "integer"
+      },
+      "title": "Counts",
+      "type": "object"
+     },
+     "now": {
+      "title": "Now",
+      "type": "string"
+     },
+     "rows": {
+      "items": {
+       "$ref": "#/components/schemas/LeadSessionRow"
+      },
+      "title": "Rows",
+      "type": "array"
+     }
+    },
+    "required": [
+     "now",
+     "counts",
+     "rows"
+    ],
+    "title": "LeadSessions",
+    "type": "object"
+   },
+   "LeadTiles": {
+    "additionalProperties": false,
+    "properties": {
+     "awaiting": {
+      "title": "Awaiting",
+      "type": "integer"
+     },
+     "calls_open": {
+      "title": "Calls Open",
+      "type": "integer"
+     },
+     "violations": {
+      "title": "Violations",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "awaiting",
+     "calls_open",
+     "violations"
+    ],
+    "title": "LeadTiles",
+    "type": "object"
+   },
+   "LockInstruction": {
+    "additionalProperties": false,
+    "properties": {
+     "grade": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Grade"
+     },
+     "minutes": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Minutes"
+     },
+     "section": {
+      "title": "Section",
+      "type": "string"
+     },
+     "steps": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Steps",
+      "type": "array"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     }
+    },
+    "required": [
+     "section",
+     "title",
+     "grade",
+     "minutes",
+     "steps"
+    ],
+    "title": "LockInstruction",
+    "type": "object"
+   },
+   "LoginBody": {
+    "additionalProperties": false,
+    "properties": {
+     "password": {
+      "title": "Password",
+      "type": "string"
+     },
+     "user_id": {
+      "title": "User Id",
+      "type": "string"
+     }
+    },
+    "required": [
+     "user_id",
+     "password"
+    ],
+    "title": "LoginBody",
+    "type": "object"
+   },
+   "MonitorBlock": {
+    "additionalProperties": false,
+    "properties": {
+     "closed": {
+      "title": "Closed",
+      "type": "boolean"
+     },
+     "grade": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Grade"
+     },
+     "section": {
+      "title": "Section",
+      "type": "string"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     }
+    },
+    "required": [
+     "section",
+     "title",
+     "grade",
+     "closed"
+    ],
+    "title": "MonitorBlock",
+    "type": "object"
+   },
+   "NoteBody": {
+    "additionalProperties": false,
+    "description": "T15 '메모 덧붙이기'(AC-48-C1): 정정하지 않는 기록에 덧붙일 메모.",
+    "properties": {
+     "memo": {
+      "title": "Memo",
+      "type": "string"
+     },
+     "target_seq": {
+      "title": "Target Seq",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "target_seq",
+     "memo"
+    ],
+    "title": "NoteBody",
+    "type": "object"
+   },
+   "Notifications": {
+    "additionalProperties": false,
+    "properties": {
+     "empty": {
+      "title": "Empty",
+      "type": "boolean"
+     },
+     "items": {
+      "items": {
+       "$ref": "#/components/schemas/NotifyItem"
+      },
+      "title": "Items",
+      "type": "array"
+     }
+    },
+    "required": [
+     "items",
+     "empty"
+    ],
+    "title": "Notifications",
+    "type": "object"
+   },
+   "NotifyItem": {
+    "additionalProperties": false,
+    "properties": {
+     "alarm_id": {
+      "title": "Alarm Id",
+      "type": "integer"
+     },
+     "answer": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Answer"
+     },
+     "answered_at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Answered At"
+     },
+     "answered_by": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Answered By"
+     },
+     "answered_by_name": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Answered By Name"
+     },
+     "call_grade": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Call Grade"
+     },
+     "call_section": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Call Section"
+     },
+     "call_title": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Call Title"
+     },
+     "equipment_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Equipment Id"
+     },
+     "group_name": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Group Name"
+     },
+     "kind": {
+      "title": "Kind",
+      "type": "string"
+     },
+     "occurred_at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Occurred At"
+     },
+     "progress": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/Progress"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "reject_reason": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Reject Reason"
+     },
+     "rejected_at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Rejected At"
+     },
+     "rejected_by_name": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Rejected By Name"
+     },
+     "report_cause": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Report Cause"
+     },
+     "session_id": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Session Id"
+     }
+    },
+    "required": [
+     "kind",
+     "alarm_id"
+    ],
+    "title": "NotifyItem",
+    "type": "object"
+   },
+   "PastBox": {
+    "additionalProperties": false,
+    "description": "보낸 뒤 정비자 정정(호출 기록에 붙은 것).",
+    "properties": {
+     "after": {
+      "anyOf": [
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "After"
+     },
+     "at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "At"
+     },
+     "before": {
+      "anyOf": [
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Before"
+     },
+     "reason": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Reason"
+     },
+     "section": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Section"
+     },
+     "title": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Title"
+     }
+    },
+    "required": [
+     "at",
+     "section",
+     "title",
+     "before",
+     "after",
+     "reason"
+    ],
+    "title": "PastBox",
+    "type": "object"
+   },
+   "PastCorrection": {
+    "additionalProperties": false,
+    "properties": {
+     "after": {
+      "anyOf": [
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "After"
+     },
+     "at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "At"
+     },
+     "before": {
+      "anyOf": [
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Before"
+     },
+     "reason": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Reason"
+     }
+    },
+    "required": [
+     "at",
+     "before",
+     "after",
+     "reason"
+    ],
+    "title": "PastCorrection",
+    "type": "object"
+   },
+   "PastNote": {
+    "additionalProperties": false,
+    "properties": {
+     "at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "At"
+     },
+     "memo": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Memo"
+     }
+    },
+    "required": [
+     "at",
+     "memo"
+    ],
+    "title": "PastNote",
+    "type": "object"
+   },
+   "PastRecord": {
+    "additionalProperties": false,
+    "description": "지난 화면 한 장: 기록 종류와 그때 화면 값.\n\n종류 = alarm · diagnosis · lock · precheck · check · call · action · restart · monitor_close.\n정정 · 메모 덧붙이기 가능 여부 · 정정 이력 · 덧붙인 메모 · 무효는 서버가 정한다.",
+    "properties": {
+     "alarm": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/AlarmBlock"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "At"
+     },
+     "b_checklist": {
+      "anyOf": [
+       {
+        "items": {
+         "type": "string"
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "B Checklist"
+     },
+     "b_checklist_common": {
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "B Checklist Common"
+     },
+     "band": {
+      "title": "Band",
+      "type": "string"
+     },
+     "box": {
+      "anyOf": [
+       {
+        "items": {
+         "$ref": "#/components/schemas/PastBox"
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Box"
+     },
+     "call_kind": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Call Kind"
+     },
+     "cause_name": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Cause Name"
+     },
+     "cause_names": {
+      "anyOf": [
+       {
+        "additionalProperties": {
+         "type": "string"
+        },
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Cause Names"
+     },
+     "check_max": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Check Max"
+     },
+     "check_no": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Check No"
+     },
+     "checklist": {
+      "anyOf": [
+       {
+        "items": {
+         "type": "string"
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Checklist"
+     },
+     "correctable": {
+      "title": "Correctable",
+      "type": "boolean"
+     },
+     "corrections": {
+      "items": {
+       "$ref": "#/components/schemas/PastCorrection"
+      },
+      "title": "Corrections",
+      "type": "array"
+     },
+     "count_prior": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Count Prior"
+     },
+     "count_scope": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Count Scope"
+     },
+     "criterion": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Criterion"
+     },
+     "equipment_counts": {
+      "anyOf": [
+       {
+        "additionalProperties": {
+         "type": "integer"
+        },
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Equipment Counts"
+     },
+     "equipment_total": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Equipment Total"
+     },
+     "evidence": {
+      "anyOf": [
+       {
+        "additionalProperties": {
+         "type": "integer"
+        },
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Evidence"
+     },
+     "evidence_record_ids": {
+      "anyOf": [
+       {
+        "items": {
+         "type": "string"
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Evidence Record Ids"
+     },
+     "grade": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Grade"
+     },
+     "kind": {
+      "title": "Kind",
+      "type": "string"
+     },
+     "lock_at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Lock At"
+     },
+     "low_evidence": {
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Low Evidence"
+     },
+     "memo": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Memo"
+     },
+     "minutes": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Minutes"
+     },
+     "next": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/Preview"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "notable": {
+      "title": "Notable",
+      "type": "boolean"
+     },
+     "notes": {
+      "items": {
+       "$ref": "#/components/schemas/PastNote"
+      },
+      "title": "Notes",
+      "type": "array"
+     },
+     "position": {
+      "title": "Position",
+      "type": "string"
+     },
+     "probabilities": {
+      "anyOf": [
+       {
+        "additionalProperties": {
+         "type": "integer"
+        },
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Probabilities"
+     },
+     "record": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Record"
+     },
+     "restart": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/PastRestart"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "section": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Section"
+     },
+     "seq": {
+      "title": "Seq",
+      "type": "integer"
+     },
+     "similar_cards": {
+      "anyOf": [
+       {
+        "items": {
+         "$ref": "#/components/schemas/RecordCard"
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Similar Cards"
+     },
+     "steps": {
+      "anyOf": [
+       {
+        "items": {
+         "type": "string"
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Steps"
+     },
+     "summary": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Summary"
+     },
+     "title": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Title"
+     },
+     "top_cards": {
+      "anyOf": [
+       {
+        "items": {
+         "$ref": "#/components/schemas/RecordCard"
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Top Cards"
+     },
+     "value": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Value"
+     },
+     "values": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Values"
+     },
+     "void": {
+      "title": "Void",
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "seq",
+     "kind",
+     "at",
+     "band",
+     "position",
+     "void",
+     "correctable",
+     "notable",
+     "corrections",
+     "notes"
+    ],
+    "title": "PastRecord",
+    "type": "object"
+   },
+   "PastRestart": {
+    "additionalProperties": false,
+    "properties": {
+     "at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "At"
+     },
+     "checklist": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Checklist",
+      "type": "array"
+     },
+     "grade": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Grade"
+     },
+     "section": {
+      "title": "Section",
+      "type": "string"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     }
+    },
+    "required": [
+     "section",
+     "title",
+     "grade",
+     "at",
+     "checklist"
+    ],
+    "title": "PastRestart",
+    "type": "object"
+   },
+   "PastStep": {
+    "additionalProperties": false,
+    "properties": {
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "no": {
+      "title": "No",
+      "type": "integer"
+     },
+     "records": {
+      "items": {
+       "$ref": "#/components/schemas/PastRecord"
+      },
+      "title": "Records",
+      "type": "array"
+     }
+    },
+    "required": [
+     "no",
+     "name",
+     "records"
+    ],
+    "title": "PastStep",
+    "type": "object"
+   },
+   "PathEntry": {
+    "additionalProperties": false,
+    "properties": {
+     "at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "At"
+     },
+     "detail": {
+      "title": "Detail",
+      "type": "string"
+     },
+     "status": {
+      "title": "Status",
+      "type": "string"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     }
+    },
+    "required": [
+     "at",
+     "title",
+     "detail",
+     "status"
+    ],
+    "title": "PathEntry",
+    "type": "object"
+   },
+   "PickedBy": {
+    "additionalProperties": false,
+    "description": "D-652 12-f Pack reason_facts.picked_by — 옵션 check_first_<증상군>이 첫 점검을 바꾼 판정.",
+    "properties": {
+     "instead_of": {
+      "title": "Instead Of",
+      "type": "string"
+     },
+     "instead_title": {
+      "title": "Instead Title",
+      "type": "string"
+     },
+     "option": {
+      "title": "Option",
+      "type": "string"
+     },
+     "section": {
+      "title": "Section",
+      "type": "string"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     }
+    },
+    "required": [
+     "option",
+     "section",
+     "title",
+     "instead_of",
+     "instead_title"
+    ],
+    "title": "PickedBy",
+    "type": "object"
+   },
+   "PrecheckAck": {
+    "additionalProperties": false,
+    "properties": {
+     "pattern": {
+      "title": "Pattern",
+      "type": "string"
+     },
+     "record_id": {
+      "title": "Record Id",
+      "type": "string"
+     }
+    },
+    "required": [
+     "pattern",
+     "record_id"
+    ],
+    "title": "PrecheckAck",
+    "type": "object"
+   },
+   "PrecheckBasis": {
+    "additionalProperties": false,
+    "properties": {
+     "at": {
+      "title": "At",
+      "type": "string"
+     },
+     "equipment_id": {
+      "title": "Equipment Id",
+      "type": "string"
+     },
+     "follow_days": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Follow Days"
+     },
+     "record_id": {
+      "title": "Record Id",
+      "type": "string"
+     },
+     "result": {
+      "title": "Result",
+      "type": "string"
+     }
+    },
+    "required": [
+     "record_id",
+     "equipment_id",
+     "at",
+     "result",
+     "follow_days"
+    ],
+    "title": "PrecheckBasis",
+    "type": "object"
+   },
+   "PrecheckBody": {
+    "additionalProperties": false,
+    "description": "D-619 사전 점검 후보: 살펴봄 · 이번엔 제외(이유) — 기록만.",
+    "properties": {
+     "choice": {
+      "enum": [
+       "look",
+       "skip"
+      ],
+      "title": "Choice",
+      "type": "string"
+     },
+     "reason": {
+      "anyOf": [
+       {
+        "maxLength": 200,
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Reason"
+     }
+    },
+    "required": [
+     "choice"
+    ],
+    "title": "PrecheckBody",
+    "type": "object"
+   },
+   "PrecheckCard": {
+    "additionalProperties": false,
+    "description": "D-619 사전 점검 후보(고장 판단 아님): 건수는 코드가 이력에서 셈.",
+    "properties": {
+     "act_short": {
+      "title": "Act Short",
+      "type": "string"
+     },
+     "assignee": {
+      "title": "Assignee",
+      "type": "string"
+     },
+     "assignee_name": {
+      "title": "Assignee Name",
+      "type": "string"
+     },
+     "basis": {
+      "items": {
+       "$ref": "#/components/schemas/PrecheckBasis"
+      },
+      "title": "Basis",
+      "type": "array"
+     },
+     "clean": {
+      "title": "Clean",
+      "type": "integer"
+     },
+     "days_ago": {
+      "title": "Days Ago",
+      "type": "integer"
+     },
+     "equipment_id": {
+      "title": "Equipment Id",
+      "type": "string"
+     },
+     "follow": {
+      "title": "Follow",
+      "type": "string"
+     },
+     "follow_short": {
+      "title": "Follow Short",
+      "type": "string"
+     },
+     "hits": {
+      "title": "Hits",
+      "type": "integer"
+     },
+     "look_at": {
+      "title": "Look At",
+      "type": "string"
+     },
+     "mark": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/PrecheckMark"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "pattern": {
+      "title": "Pattern",
+      "type": "string"
+     },
+     "record_id": {
+      "title": "Record Id",
+      "type": "string"
+     },
+     "section": {
+      "title": "Section",
+      "type": "string"
+     },
+     "section_title": {
+      "title": "Section Title",
+      "type": "string"
+     },
+     "total": {
+      "title": "Total",
+      "type": "integer"
+     },
+     "within_days": {
+      "title": "Within Days",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "pattern",
+     "record_id",
+     "equipment_id",
+     "section",
+     "section_title",
+     "days_ago",
+     "within_days",
+     "follow",
+     "look_at",
+     "act_short",
+     "follow_short",
+     "total",
+     "hits",
+     "clean",
+     "basis",
+     "mark",
+     "assignee",
+     "assignee_name"
+    ],
+    "title": "PrecheckCard",
+    "type": "object"
+   },
+   "PrecheckMark": {
+    "additionalProperties": false,
+    "properties": {
+     "at": {
+      "title": "At",
+      "type": "string"
+     },
+     "by": {
+      "title": "By",
+      "type": "string"
+     },
+     "choice": {
+      "title": "Choice",
+      "type": "string"
+     },
+     "reason": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Reason"
+     }
+    },
+    "required": [
+     "choice",
+     "by",
+     "at",
+     "reason"
+    ],
+    "title": "PrecheckMark",
+    "type": "object"
+   },
+   "Preview": {
+    "additionalProperties": false,
+    "properties": {
+     "call_reason": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Call Reason"
+     },
+     "candidates": {
+      "default": [],
+      "items": {
+       "$ref": "#/components/schemas/SwitchCandidate"
+      },
+      "title": "Candidates",
+      "type": "array"
+     },
+     "cause": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Cause"
+     },
+     "grade": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Grade"
+     },
+     "kind": {
+      "title": "Kind",
+      "type": "string"
+     },
+     "minutes": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Minutes"
+     },
+     "picked": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/PreviewPick"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "picked_by": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/PickedBy"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "reason": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Reason"
+     },
+     "reason_fallback": {
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Reason Fallback"
+     },
+     "reason_label": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Reason Label"
+     },
+     "section": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Section"
+     },
+     "title": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Title"
+     }
+    },
+    "required": [
+     "kind",
+     "section",
+     "grade",
+     "cause"
+    ],
+    "title": "Preview",
+    "type": "object"
+   },
+   "PreviewPick": {
+    "additionalProperties": false,
+    "properties": {
+     "grade": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Grade"
+     },
+     "section": {
+      "title": "Section",
+      "type": "string"
+     },
+     "title": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Title"
+     }
+    },
+    "required": [
+     "section",
+     "title",
+     "grade"
+    ],
+    "title": "PreviewPick",
+    "type": "object"
+   },
+   "Progress": {
+    "additionalProperties": false,
+    "properties": {
+     "check_max": {
+      "title": "Check Max",
+      "type": "integer"
+     },
+     "check_no": {
+      "title": "Check No",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "check_no",
+     "check_max"
+    ],
+    "title": "Progress",
+    "type": "object"
+   },
+   "Reading": {
+    "additionalProperties": false,
+    "properties": {
+     "fallback": {
+      "title": "Fallback",
+      "type": "boolean"
+     },
+     "label": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Label"
+     },
+     "text": {
+      "title": "Text",
+      "type": "string"
+     }
+    },
+    "required": [
+     "text",
+     "fallback",
+     "label"
+    ],
+    "title": "Reading",
+    "type": "object"
+   },
+   "RecentReport": {
+    "additionalProperties": false,
+    "properties": {
+     "cause": {
+      "title": "Cause",
+      "type": "string"
+     },
+     "confirmed_at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Confirmed At"
+     },
+     "equipment_id": {
+      "title": "Equipment Id",
+      "type": "string"
+     },
+     "line": {
+      "default": "",
+      "title": "Line",
+      "type": "string"
+     },
+     "reject_reason": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Reject Reason"
+     },
+     "rejected_at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Rejected At"
+     },
+     "rejected_by_name": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Rejected By Name"
+     },
+     "report_id": {
+      "title": "Report Id",
+      "type": "integer"
+     },
+     "session_id": {
+      "title": "Session Id",
+      "type": "integer"
+     },
+     "status": {
+      "title": "Status",
+      "type": "string"
+     },
+     "system": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "System"
+     }
+    },
+    "required": [
+     "report_id",
+     "session_id",
+     "equipment_id",
+     "cause",
+     "confirmed_at",
+     "status"
+    ],
+    "title": "RecentReport",
+    "type": "object"
+   },
+   "Record": {
+    "additionalProperties": false,
+    "properties": {
+     "alarm": {
+      "additionalProperties": true,
+      "title": "Alarm",
+      "type": "object"
+     },
+     "approval": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/Approval"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "downtime_min": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "number"
+       }
+      ],
+      "title": "Downtime Min"
+     },
+     "equipment_id": {
+      "title": "Equipment Id",
+      "type": "string"
+     },
+     "equipment_type": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Equipment Type"
+     },
+     "narrative": {
+      "title": "Narrative",
+      "type": "string"
+     },
+     "occurred_at": {
+      "title": "Occurred At",
+      "type": "string"
+     },
+     "outcome": {
+      "additionalProperties": true,
+      "title": "Outcome",
+      "type": "object"
+     },
+     "provenance": {
+      "title": "Provenance",
+      "type": "string"
+     },
+     "record_id": {
+      "title": "Record Id",
+      "type": "string"
+     },
+     "sensor_snapshot": {
+      "additionalProperties": {
+       "anyOf": [
+        {
+         "type": "integer"
+        },
+        {
+         "type": "number"
+        }
+       ]
+      },
+      "title": "Sensor Snapshot",
+      "type": "object"
+     },
+     "source": {
+      "title": "Source",
+      "type": "string"
+     },
+     "steps": {
+      "items": {
+       "$ref": "#/components/schemas/RecordStepOut"
+      },
+      "title": "Steps",
+      "type": "array"
+     },
+     "symptom": {
+      "additionalProperties": true,
+      "title": "Symptom",
+      "type": "object"
+     }
+    },
+    "required": [
+     "record_id",
+     "equipment_id",
+     "equipment_type",
+     "approval",
+     "source",
+     "provenance",
+     "occurred_at",
+     "symptom",
+     "alarm",
+     "sensor_snapshot",
+     "steps",
+     "outcome",
+     "downtime_min",
+     "narrative"
+    ],
+    "title": "Record",
+    "type": "object"
+   },
+   "RecordCard": {
+    "additionalProperties": false,
+    "properties": {
+     "action_name": {
+      "title": "Action Name",
+      "type": "string"
+     },
+     "cause_code": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Cause Code"
+     },
+     "downtime_min": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Downtime Min"
+     },
+     "equipment_id": {
+      "title": "Equipment Id",
+      "type": "string"
+     },
+     "month": {
+      "title": "Month",
+      "type": "integer"
+     },
+     "outcome_label": {
+      "title": "Outcome Label",
+      "type": "string"
+     },
+     "outcome_type": {
+      "title": "Outcome Type",
+      "type": "string"
+     },
+     "record_id": {
+      "title": "Record Id",
+      "type": "string"
+     },
+     "similarity_pct": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Similarity Pct"
+     }
+    },
+    "required": [
+     "record_id",
+     "equipment_id",
+     "month",
+     "similarity_pct",
+     "outcome_type",
+     "cause_code",
+     "outcome_label",
+     "action_name",
+     "downtime_min"
+    ],
+    "title": "RecordCard",
+    "type": "object"
+   },
+   "RecordStepOut": {
+    "additionalProperties": true,
+    "properties": {
+     "kind": {
+      "title": "Kind",
+      "type": "string"
+     },
+     "name": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Name"
+     },
+     "result": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Result"
+     },
+     "section": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Section"
+     }
+    },
+    "required": [
+     "kind"
+    ],
+    "title": "RecordStepOut",
+    "type": "object"
+   },
+   "Rejection": {
+    "additionalProperties": false,
+    "properties": {
+     "at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "At"
+     },
+     "by": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "By"
+     },
+     "by_name": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "By Name"
+     },
+     "reason": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Reason"
+     }
+    },
+    "required": [
+     "reason",
+     "by",
+     "by_name",
+     "at"
+    ],
+    "title": "Rejection",
+    "type": "object"
+   },
+   "ReportBlock": {
+    "additionalProperties": false,
+    "properties": {
+     "can_confirm": {
+      "title": "Can Confirm",
+      "type": "boolean"
+     },
+     "checks": {
+      "items": {
+       "$ref": "#/components/schemas/ReportCheck"
+      },
+      "title": "Checks",
+      "type": "array"
+     },
+     "confirmed_at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Confirmed At"
+     },
+     "exception_applied": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ExceptionApplied"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "exception_auto": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ExceptionAuto"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "exception_draft": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ExceptionDraft"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "exception_record": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ExceptionRecord"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "exception_session": {
+      "default": false,
+      "title": "Exception Session",
+      "type": "boolean"
+     },
+     "exception_split": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ExceptionSplit"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "fields": {
+      "items": {
+       "$ref": "#/components/schemas/ReportField"
+      },
+      "title": "Fields",
+      "type": "array"
+     },
+     "low_evidence": {
+      "title": "Low Evidence",
+      "type": "boolean"
+     },
+     "messages": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Messages",
+      "type": "array"
+     },
+     "rejection": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/Rejection"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "report_id": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Report Id"
+     },
+     "status": {
+      "title": "Status",
+      "type": "string"
+     }
+    },
+    "required": [
+     "status",
+     "fields",
+     "checks",
+     "messages",
+     "can_confirm",
+     "confirmed_at",
+     "low_evidence"
+    ],
+    "title": "ReportBlock",
+    "type": "object"
+   },
+   "ReportCheck": {
+    "additionalProperties": false,
+    "properties": {
+     "key": {
+      "title": "Key",
+      "type": "string"
+     },
+     "label": {
+      "title": "Label",
+      "type": "string"
+     },
+     "ok": {
+      "title": "Ok",
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "key",
+     "label",
+     "ok"
+    ],
+    "title": "ReportCheck",
+    "type": "object"
+   },
+   "ReportField": {
+    "additionalProperties": false,
+    "properties": {
+     "edited": {
+      "title": "Edited",
+      "type": "boolean"
+     },
+     "fallback": {
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Fallback"
+     },
+     "key": {
+      "title": "Key",
+      "type": "string"
+     },
+     "label": {
+      "title": "Label",
+      "type": "string"
+     },
+     "ok": {
+      "title": "Ok",
+      "type": "boolean"
+     },
+     "source": {
+      "title": "Source",
+      "type": "string"
+     },
+     "text": {
+      "title": "Text",
+      "type": "string"
+     },
+     "unsupported_numbers": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Unsupported Numbers",
+      "type": "array"
+     }
+    },
+    "required": [
+     "key",
+     "label",
+     "source",
+     "text",
+     "edited",
+     "ok",
+     "unsupported_numbers"
+    ],
+    "title": "ReportField",
+    "type": "object"
+   },
+   "RestartBlock": {
+    "additionalProperties": false,
+    "properties": {
+     "checklist": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Checklist",
+      "type": "array"
+     },
+     "grade": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Grade"
+     },
+     "outcome": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Outcome"
+     },
+     "restarted_at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Restarted At"
+     },
+     "section": {
+      "title": "Section",
+      "type": "string"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     },
+     "value": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/RestartValue"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "required": [
+     "section",
+     "title",
+     "grade",
+     "checklist",
+     "restarted_at",
+     "outcome"
+    ],
+    "title": "RestartBlock",
+    "type": "object"
+   },
+   "RestartValue": {
+    "additionalProperties": false,
+    "properties": {
+     "basis": {
+      "title": "Basis",
+      "type": "string"
+     },
+     "boundary_text": {
+      "title": "Boundary Text",
+      "type": "string"
+     },
+     "rule_text": {
+      "title": "Rule Text",
+      "type": "string"
+     },
+     "sensor": {
+      "title": "Sensor",
+      "type": "string"
+     },
+     "value": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "number"
+       }
+      ],
+      "title": "Value"
+     },
+     "value_text": {
+      "title": "Value Text",
+      "type": "string"
+     }
+    },
+    "required": [
+     "sensor",
+     "value",
+     "value_text",
+     "boundary_text",
+     "rule_text",
+     "basis"
+    ],
+    "title": "RestartValue",
+    "type": "object"
+   },
+   "ResultRow": {
+    "additionalProperties": false,
+    "properties": {
+     "memo": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Memo"
+     },
+     "section": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Section"
+     },
+     "seq": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Seq"
+     },
+     "value": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Value"
+     }
+    },
+    "required": [
+     "seq",
+     "section",
+     "value",
+     "memo"
+    ],
+    "title": "ResultRow",
+    "type": "object"
+   },
+   "SensorRow": {
+    "additionalProperties": false,
+    "properties": {
+     "is_alarm_sensor": {
+      "title": "Is Alarm Sensor",
+      "type": "boolean"
+     },
+     "key": {
+      "title": "Key",
+      "type": "string"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "out_of_range": {
+      "title": "Out Of Range",
+      "type": "boolean"
+     },
+     "range_text": {
+      "title": "Range Text",
+      "type": "string"
+     },
+     "status": {
+      "title": "Status",
+      "type": "string"
+     },
+     "unit": {
+      "title": "Unit",
+      "type": "string"
+     },
+     "value": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "number"
+       }
+      ],
+      "title": "Value"
+     },
+     "value_text": {
+      "title": "Value Text",
+      "type": "string"
+     }
+    },
+    "required": [
+     "key",
+     "name",
+     "value",
+     "unit",
+     "value_text",
+     "range_text",
+     "status",
+     "is_alarm_sensor",
+     "out_of_range"
+    ],
+    "title": "SensorRow",
+    "type": "object"
+   },
+   "SessionPast": {
+    "additionalProperties": false,
+    "properties": {
+     "closed": {
+      "title": "Closed",
+      "type": "boolean"
+     },
+     "closed_at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Closed At"
+     },
+     "closed_note": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Closed Note"
+     },
+     "session_id": {
+      "title": "Session Id",
+      "type": "integer"
+     },
+     "steps": {
+      "items": {
+       "$ref": "#/components/schemas/PastStep"
+      },
+      "title": "Steps",
+      "type": "array"
+     }
+    },
+    "required": [
+     "session_id",
+     "closed",
+     "closed_at",
+     "closed_note",
+     "steps"
+    ],
+    "title": "SessionPast",
+    "type": "object"
+   },
+   "SessionView": {
+    "additionalProperties": false,
+    "properties": {
+     "action": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ActionBlock"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "alarm": {
+      "$ref": "#/components/schemas/AlarmBlock"
+     },
+     "alarm_ack_at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Alarm Ack At"
+     },
+     "alarm_id": {
+      "title": "Alarm Id",
+      "type": "integer"
+     },
+     "call": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/CallBlock"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "cause_names": {
+      "additionalProperties": {
+       "type": "string"
+      },
+      "title": "Cause Names",
+      "type": "object"
+     },
+     "correction": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/Correction"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "count_prior": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Count Prior"
+     },
+     "count_scope": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Count Scope"
+     },
+     "equipment_counts": {
+      "anyOf": [
+       {
+        "additionalProperties": {
+         "type": "integer"
+        },
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Equipment Counts"
+     },
+     "equipment_total": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Equipment Total"
+     },
+     "evidence": {
+      "additionalProperties": {
+       "type": "integer"
+      },
+      "title": "Evidence",
+      "type": "object"
+     },
+     "exception_draft": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ExceptionDraft"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "exception_miss": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Exception Miss"
+     },
+     "exception_notes": {
+      "default": [],
+      "items": {
+       "$ref": "#/components/schemas/ExceptionNote"
+      },
+      "title": "Exception Notes",
+      "type": "array"
+     },
+     "exception_topic": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Exception Topic"
+     },
+     "exception_walk": {
+      "anyOf": [
+       {
+        "items": {
+         "$ref": "#/components/schemas/ExceptionWalkStep"
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Exception Walk"
+     },
+     "exception_why": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Exception Why"
+     },
+     "instruction": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/Instruction"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "last_seq": {
+      "title": "Last Seq",
+      "type": "integer"
+     },
+     "lock_at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Lock At"
+     },
+     "lock_instruction": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/LockInstruction"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "locked": {
+      "title": "Locked",
+      "type": "boolean"
+     },
+     "low_evidence": {
+      "title": "Low Evidence",
+      "type": "boolean"
+     },
+     "monitor": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/MonitorBlock"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "path": {
+      "default": [],
+      "items": {
+       "$ref": "#/components/schemas/PathEntry"
+      },
+      "title": "Path",
+      "type": "array"
+     },
+     "probabilities": {
+      "additionalProperties": {
+       "type": "integer"
+      },
+      "title": "Probabilities",
+      "type": "object"
+     },
+     "recommend_handover": {
+      "title": "Recommend Handover",
+      "type": "boolean"
+     },
+     "report": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ReportBlock"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "restart": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/RestartBlock"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "results": {
+      "items": {
+       "$ref": "#/components/schemas/ResultRow"
+      },
+      "title": "Results",
+      "type": "array"
+     },
+     "session_id": {
+      "title": "Session Id",
+      "type": "integer"
+     },
+     "similar_basis": {
+      "title": "Similar Basis",
+      "type": "string"
+     },
+     "similar_cards": {
+      "items": {
+       "$ref": "#/components/schemas/RecordCard"
+      },
+      "title": "Similar Cards",
+      "type": "array"
+     },
+     "status": {
+      "title": "Status",
+      "type": "string"
+     },
+     "step": {
+      "$ref": "#/components/schemas/Step"
+     },
+     "switch_candidates": {
+      "default": [],
+      "items": {
+       "$ref": "#/components/schemas/SwitchCandidate"
+      },
+      "title": "Switch Candidates",
+      "type": "array"
+     },
+     "top_cards": {
+      "default": [],
+      "items": {
+       "$ref": "#/components/schemas/RecordCard"
+      },
+      "title": "Top Cards",
+      "type": "array"
+     },
+     "top_records": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Top Records",
+      "type": "array"
+     }
+    },
+    "required": [
+     "session_id",
+     "alarm_id",
+     "status",
+     "locked",
+     "lock_at",
+     "probabilities",
+     "evidence",
+     "low_evidence",
+     "top_records",
+     "similar_basis",
+     "cause_names",
+     "similar_cards",
+     "alarm",
+     "results",
+     "step",
+     "last_seq",
+     "recommend_handover"
+    ],
+    "title": "SessionView",
+    "type": "object"
+   },
+   "SessionWithPreview": {
+    "additionalProperties": false,
+    "properties": {
+     "action": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ActionBlock"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "alarm": {
+      "$ref": "#/components/schemas/AlarmBlock"
+     },
+     "alarm_ack_at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Alarm Ack At"
+     },
+     "alarm_id": {
+      "title": "Alarm Id",
+      "type": "integer"
+     },
+     "call": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/CallBlock"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "cause_names": {
+      "additionalProperties": {
+       "type": "string"
+      },
+      "title": "Cause Names",
+      "type": "object"
+     },
+     "correction": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/Correction"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "count_prior": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Count Prior"
+     },
+     "count_scope": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Count Scope"
+     },
+     "equipment_counts": {
+      "anyOf": [
+       {
+        "additionalProperties": {
+         "type": "integer"
+        },
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Equipment Counts"
+     },
+     "equipment_total": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Equipment Total"
+     },
+     "evidence": {
+      "additionalProperties": {
+       "type": "integer"
+      },
+      "title": "Evidence",
+      "type": "object"
+     },
+     "exception_draft": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ExceptionDraft"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "exception_miss": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Exception Miss"
+     },
+     "exception_notes": {
+      "default": [],
+      "items": {
+       "$ref": "#/components/schemas/ExceptionNote"
+      },
+      "title": "Exception Notes",
+      "type": "array"
+     },
+     "exception_topic": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Exception Topic"
+     },
+     "exception_walk": {
+      "anyOf": [
+       {
+        "items": {
+         "$ref": "#/components/schemas/ExceptionWalkStep"
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Exception Walk"
+     },
+     "exception_why": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Exception Why"
+     },
+     "instruction": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/Instruction"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "last_seq": {
+      "title": "Last Seq",
+      "type": "integer"
+     },
+     "lock_at": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Lock At"
+     },
+     "lock_instruction": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/LockInstruction"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "locked": {
+      "title": "Locked",
+      "type": "boolean"
+     },
+     "low_evidence": {
+      "title": "Low Evidence",
+      "type": "boolean"
+     },
+     "monitor": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/MonitorBlock"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "path": {
+      "default": [],
+      "items": {
+       "$ref": "#/components/schemas/PathEntry"
+      },
+      "title": "Path",
+      "type": "array"
+     },
+     "preview": {
+      "$ref": "#/components/schemas/Preview"
+     },
+     "probabilities": {
+      "additionalProperties": {
+       "type": "integer"
+      },
+      "title": "Probabilities",
+      "type": "object"
+     },
+     "recommend_handover": {
+      "title": "Recommend Handover",
+      "type": "boolean"
+     },
+     "report": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ReportBlock"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "restart": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/RestartBlock"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "results": {
+      "items": {
+       "$ref": "#/components/schemas/ResultRow"
+      },
+      "title": "Results",
+      "type": "array"
+     },
+     "session_id": {
+      "title": "Session Id",
+      "type": "integer"
+     },
+     "similar_basis": {
+      "title": "Similar Basis",
+      "type": "string"
+     },
+     "similar_cards": {
+      "items": {
+       "$ref": "#/components/schemas/RecordCard"
+      },
+      "title": "Similar Cards",
+      "type": "array"
+     },
+     "status": {
+      "title": "Status",
+      "type": "string"
+     },
+     "step": {
+      "$ref": "#/components/schemas/Step"
+     },
+     "switch_candidates": {
+      "default": [],
+      "items": {
+       "$ref": "#/components/schemas/SwitchCandidate"
+      },
+      "title": "Switch Candidates",
+      "type": "array"
+     },
+     "top_cards": {
+      "default": [],
+      "items": {
+       "$ref": "#/components/schemas/RecordCard"
+      },
+      "title": "Top Cards",
+      "type": "array"
+     },
+     "top_records": {
+      "items": {
+       "type": "string"
+      },
+      "title": "Top Records",
+      "type": "array"
+     }
+    },
+    "required": [
+     "session_id",
+     "alarm_id",
+     "status",
+     "locked",
+     "lock_at",
+     "probabilities",
+     "evidence",
+     "low_evidence",
+     "top_records",
+     "similar_basis",
+     "cause_names",
+     "similar_cards",
+     "alarm",
+     "results",
+     "step",
+     "last_seq",
+     "recommend_handover",
+     "preview"
+    ],
+    "title": "SessionWithPreview",
+    "type": "object"
+   },
+   "Shift": {
+    "additionalProperties": false,
+    "properties": {
+     "calls": {
+      "title": "Calls",
+      "type": "integer"
+     },
+     "done": {
+      "title": "Done",
+      "type": "integer"
+     },
+     "end": {
+      "title": "End",
+      "type": "string"
+     },
+     "end_text": {
+      "title": "End Text",
+      "type": "string"
+     },
+     "in_progress": {
+      "title": "In Progress",
+      "type": "integer"
+     },
+     "label": {
+      "title": "Label",
+      "type": "string"
+     },
+     "start": {
+      "title": "Start",
+      "type": "string"
+     },
+     "start_text": {
+      "title": "Start Text",
+      "type": "string"
+     }
+    },
+    "required": [
+     "label",
+     "start",
+     "end",
+     "start_text",
+     "end_text",
+     "done",
+     "in_progress",
+     "calls"
+    ],
+    "title": "Shift",
+    "type": "object"
+   },
+   "Step": {
+    "additionalProperties": false,
+    "properties": {
+     "call_status": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Call Status"
+     },
+     "cause": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Cause"
+     },
+     "corrected": {
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Corrected"
+     },
+     "grade": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Grade"
+     },
+     "interpretation": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Interpretation"
+     },
+     "kind": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Kind"
+     },
+     "outcome": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Outcome"
+     },
+     "quote": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Quote"
+     },
+     "reason": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Reason"
+     },
+     "section": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Section"
+     },
+     "step": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Step"
+     },
+     "step_index": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Step Index"
+     },
+     "steps_total": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Steps Total"
+     },
+     "unable_before": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Unable Before"
+     }
+    },
+    "required": [
+     "kind",
+     "section",
+     "grade",
+     "cause",
+     "reason",
+     "unable_before",
+     "interpretation",
+     "quote",
+     "outcome",
+     "call_status"
+    ],
+    "title": "Step",
+    "type": "object"
+   },
+   "SwitchCandidate": {
+    "additionalProperties": false,
+    "description": "D-556 [점검 바꾸기] 후보 한 줄(판정 reason_facts.alternatives).",
+    "properties": {
+     "exception": {
+      "default": false,
+      "title": "Exception",
+      "type": "boolean"
+     },
+     "grade": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Grade"
+     },
+     "section": {
+      "title": "Section",
+      "type": "string"
+     },
+     "summary": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Summary"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     }
+    },
+    "required": [
+     "section",
+     "title",
+     "grade"
+    ],
+    "title": "SwitchCandidate",
+    "type": "object"
+   },
+   "ToolCaution": {
+    "additionalProperties": false,
+    "description": "D-546 U6 공구 교체 주의(알람 아님): 설비마다 확인 전 최근 값 하나.",
+    "properties": {
+     "at": {
+      "title": "At",
+      "type": "string"
+     },
+     "caution_id": {
+      "title": "Caution Id",
+      "type": "integer"
+     },
+     "equipment_id": {
+      "title": "Equipment Id",
+      "type": "string"
+     },
+     "tool_wear_min": {
+      "title": "Tool Wear Min",
+      "type": "number"
+     }
+    },
+    "required": [
+     "caution_id",
+     "equipment_id",
+     "tool_wear_min",
+     "at"
+    ],
+    "title": "ToolCaution",
+    "type": "object"
+   },
+   "ToolCautionAck": {
+    "additionalProperties": false,
+    "properties": {
+     "caution_id": {
+      "title": "Caution Id",
+      "type": "integer"
+     },
+     "equipment_id": {
+      "title": "Equipment Id",
+      "type": "string"
+     }
+    },
+    "required": [
+     "caution_id",
+     "equipment_id"
+    ],
+    "title": "ToolCautionAck",
+    "type": "object"
+   },
+   "TrendPoint": {
+    "additionalProperties": false,
+    "properties": {
+     "at": {
+      "title": "At",
+      "type": "string"
+     },
+     "value": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "number"
+       }
+      ],
+      "title": "Value"
+     }
+    },
+    "required": [
+     "at",
+     "value"
+    ],
+    "title": "TrendPoint",
+    "type": "object"
+   },
+   "Unable": {
+    "additionalProperties": false,
+    "properties": {
+     "count": {
+      "title": "Count",
+      "type": "integer"
+     },
+     "section": {
+      "title": "Section",
+      "type": "string"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     }
+    },
+    "required": [
+     "section",
+     "title",
+     "count"
+    ],
+    "title": "Unable",
+    "type": "object"
+   },
+   "ValidationError": {
+    "properties": {
+     "ctx": {
+      "title": "Context",
+      "type": "object"
+     },
+     "input": {
+      "title": "Input"
+     },
+     "loc": {
+      "items": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "integer"
+        }
+       ]
+      },
+      "title": "Location",
+      "type": "array"
+     },
+     "msg": {
+      "title": "Message",
+      "type": "string"
+     },
+     "type": {
+      "title": "Error Type",
+      "type": "string"
+     }
+    },
+    "required": [
+     "loc",
+     "msg",
+     "type"
+    ],
+    "title": "ValidationError",
+    "type": "object"
+   }
+  }
+ },
+ "info": {
+  "title": "정비 길잡이 API",
+  "version": "0.2.0"
+ },
+ "openapi": "3.1.0",
+ "paths": {
+  "/api/health": {
+   "get": {
+    "operationId": "health_api_health_get",
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": {
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "title": "Response Health Api Health Get",
+         "type": "object"
+        }
+       }
+      },
+      "description": "Successful Response"
+     }
+    },
+    "summary": "Health"
+   }
+  },
+  "/api/internal/alarms": {
+   "post": {
+    "description": "시연 알람 발생기(FLOW-01)만 부른다. 경계 판정 · 증상군 = 서버, 시각 = 지금(AC-34-C1), 배정 = R9.",
+    "operationId": "register_alarm_api_internal_alarms_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/AlarmBody"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "title": "Response Register Alarm Api Internal Alarms Post",
+         "type": "object"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Register Alarm"
+   }
+  },
+  "/api/internal/check-records": {
+   "get": {
+    "description": "약속 v9 3절 기록 줄(헛걸음 · 놓침 · 새 예외 + 사람이 고른 점검) — LLMOps가 읽음. 읽기만.",
+    "operationId": "check_records_api_internal_check_records_get",
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CheckRecordList"
+        }
+       }
+      },
+      "description": "Successful Response"
+     }
+    },
+    "summary": "Check Records"
+   }
+  },
+  "/api/internal/exception-records": {
+   "get": {
+    "description": "D-538: 승인된 예외 상황 기록(정비 이력 원본 층) — LLMOps ⑥이 읽음. 읽기만.",
+    "operationId": "exception_records_api_internal_exception_records_get",
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ExceptionRecordList"
+        }
+       }
+      },
+      "description": "Successful Response"
+     }
+    },
+    "summary": "Exception Records"
+   }
+  },
+  "/api/lead/audit": {
+   "get": {
+    "description": "L06: 시간 역순 · 설비 · 사용자 · 기간(하루, 현장 시각) 필터(AC-26-C2).",
+    "operationId": "audit_api_lead_audit_get",
+    "parameters": [
+     {
+      "in": "query",
+      "name": "equipment",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Equipment"
+      }
+     },
+     {
+      "in": "query",
+      "name": "user_id",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "User Id"
+      }
+     },
+     {
+      "in": "query",
+      "name": "date",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Date"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/LeadAudit"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Audit"
+   }
+  },
+  "/api/lead/calls": {
+   "get": {
+    "operationId": "calls_api_lead_calls_get",
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/LeadCalls"
+        }
+       }
+      },
+      "description": "Successful Response"
+     }
+    },
+    "summary": "Calls"
+   }
+  },
+  "/api/lead/calls/{call_id}": {
+   "get": {
+    "operationId": "call_detail_api_lead_calls__call_id__get",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "call_id",
+      "required": true,
+      "schema": {
+       "title": "Call Id",
+       "type": "integer"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/LeadCall"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Call Detail"
+   }
+  },
+  "/api/lead/calls/{call_id}/answer": {
+   "post": {
+    "description": "답 저장(1.4 · 결정 018 ③ ④): ops.calls.answer + 업무 기록 call_answer + 정비자 세션 다음 단계 다시 열기.",
+    "operationId": "call_answer_api_lead_calls__call_id__answer_post",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "call_id",
+      "required": true,
+      "schema": {
+       "title": "Call Id",
+       "type": "integer"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/AnswerBody"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/AnswerResult"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Call Answer"
+   }
+  },
+  "/api/lead/grades": {
+   "get": {
+    "description": "결정 018 ②: 등급표에 있는 절 전부(절 번호 순), 변경 기록(누가 · 언제 · 전 · 후).",
+    "operationId": "grades_api_lead_grades_get",
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/LeadGrades"
+        }
+       }
+      },
+      "description": "Successful Response"
+     }
+    },
+    "summary": "Grades"
+   }
+  },
+  "/api/lead/grades/{section}": {
+   "post": {
+    "description": "R13: 경고를 확인해야 저장(AC-25-C3), 저장 즉시 다음 판정부터, 기록 · 감사.\n\n이미 열린 지시는 그대로다(step_opened 기록 — R13).",
+    "operationId": "grade_change_api_lead_grades__section__post",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "section",
+      "required": true,
+      "schema": {
+       "title": "Section",
+       "type": "string"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/GradeBody"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GradeResult"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Grade Change"
+   }
+  },
+  "/api/lead/grades/{section}/warning": {
+   "get": {
+    "operationId": "grade_warning_view_api_lead_grades__section__warning_get",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "section",
+      "required": true,
+      "schema": {
+       "title": "Section",
+       "type": "string"
+      }
+     },
+     {
+      "in": "query",
+      "name": "grade",
+      "required": true,
+      "schema": {
+       "title": "Grade",
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/GradeWarning"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Grade Warning View"
+   }
+  },
+  "/api/lead/overview": {
+   "get": {
+    "description": "L02: 요약 타일 3개(실제 건수 — AC-27-C1) · 승인 대기 행.\n\n행 = 설비 · 알람 · 확정 원인 · 작성 · 확정 시각 · 근거 기록 수 · 근거 적음 · 권한 위반.",
+    "operationId": "overview_api_lead_overview_get",
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/LeadOverview"
+        }
+       }
+      },
+      "description": "Successful Response"
+     }
+    },
+    "summary": "Overview"
+   }
+  },
+  "/api/lead/reports/{report_id}": {
+   "get": {
+    "description": "L03 R-REPORTVIEW: 제목(설비 · 알람 · 시각 · 작성자) · 확정 원인 · 점검 경로 · 조치 · 근거 사례 · 미확인.",
+    "operationId": "report_detail_api_lead_reports__report_id__get",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "report_id",
+      "required": true,
+      "schema": {
+       "title": "Report Id",
+       "type": "integer"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/LeadReport"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Report Detail"
+   }
+  },
+  "/api/lead/reports/{report_id}/check": {
+   "post": {
+    "operationId": "report_check_api_lead_reports__report_id__check_post",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "report_id",
+      "required": true,
+      "schema": {
+       "title": "Report Id",
+       "type": "integer"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/EditsBody"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/EditCheck"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Report Check"
+   }
+  },
+  "/api/lead/reports/{report_id}/decision": {
+   "post": {
+    "description": "L03 결정 저장: 그대로 승인 · 수정 후 승인(R8 — 실패면 거부) · 반려(사유 필수 — AC-24).",
+    "operationId": "report_decision_api_lead_reports__report_id__decision_post",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "report_id",
+      "required": true,
+      "schema": {
+       "title": "Report Id",
+       "type": "integer"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/DecisionBody"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/DecisionResult"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Report Decision"
+   }
+  },
+  "/api/lead/reports/{report_id}/final": {
+   "get": {
+    "description": "D-528 보고서 검토 = 최종본 문서(구역 1 ~ 5 · 읽기만).",
+    "operationId": "report_final_api_lead_reports__report_id__final_get",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "report_id",
+      "required": true,
+      "schema": {
+       "title": "Report Id",
+       "type": "integer"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/FinalReport"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Report Final"
+   }
+  },
+  "/api/lead/sessions": {
+   "get": {
+    "description": "진행 중 건: 세션마다 지금 단계 · 절 · 정지점 대기 · 시각(운영 기록만, D-227). 판정 · 기록은 읽기만.",
+    "operationId": "in_progress_sessions_api_lead_sessions_get",
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/LeadSessions"
+        }
+       }
+      },
+      "description": "Successful Response"
+     }
+    },
+    "summary": "In Progress Sessions"
+   }
+  },
+  "/api/login": {
+   "post": {
+    "description": "사전 등록 계정 · 앱별 역할(R9 · AC-12): 정비자 앱은 정비자만, 파트장 앱은 파트장만.",
+    "operationId": "login_api_login_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/LoginBody"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "title": "Response Login Api Login Post",
+         "type": "object"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Login"
+   }
+  },
+  "/api/logout": {
+   "post": {
+    "operationId": "logout_api_logout_post",
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "title": "Response Logout Api Logout Post",
+         "type": "object"
+        }
+       }
+      },
+      "description": "Successful Response"
+     }
+    },
+    "summary": "Logout"
+   }
+  },
+  "/api/records/{record_id}": {
+   "get": {
+    "description": "과거 기록 전체(AC-38): 설비 · 발생 시각 · 증상 · 센서 값 · 점검 경로 · 확정 원인 · 조치 · 정지 시간 · 서술.",
+    "operationId": "record_api_records__record_id__get",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "record_id",
+      "required": true,
+      "schema": {
+       "title": "Record Id",
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Record"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Record"
+   }
+  },
+  "/api/tech/alarms/{alarm_id}/session": {
+   "post": {
+    "operationId": "start_session_api_tech_alarms__alarm_id__session_post",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "alarm_id",
+      "required": true,
+      "schema": {
+       "title": "Alarm Id",
+       "type": "integer"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SessionWithPreview"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Start Session"
+   }
+  },
+  "/api/tech/cautions/{caution_id}/ack": {
+   "post": {
+    "description": "D-546 U6: 공구 교체 주의 「확인」 — 그 설비 주의가 다음 공구 교체 전까지 사라짐(같은 확인 두 번째는 그대로).",
+    "operationId": "tech_caution_ack_api_tech_cautions__caution_id__ack_post",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "caution_id",
+      "required": true,
+      "schema": {
+       "title": "Caution Id",
+       "type": "integer"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ToolCautionAck"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Tech Caution Ack"
+   }
+  },
+  "/api/tech/home": {
+   "get": {
+    "description": "주기 조회(EP-C1-SYNC-001): 내 알람과 진행 중 세션, 변경 순번.",
+    "operationId": "tech_home_api_tech_home_get",
+    "parameters": [
+     {
+      "in": "query",
+      "name": "since",
+      "required": false,
+      "schema": {
+       "default": 0,
+       "title": "Since",
+       "type": "integer"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Home"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Tech Home"
+   }
+  },
+  "/api/tech/notifications": {
+   "get": {
+    "description": "종 목록(FLOW-13, AC-37): 배정된 새 알람 · 진행 중 점검 · 답이 온 호출 · 반려된 보고서.\n\n뒤 두 종류는 S-03 · S-04에서 채운다.",
+    "operationId": "tech_notifications_api_tech_notifications_get",
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Notifications"
+        }
+       }
+      },
+      "description": "Successful Response"
+     }
+    },
+    "summary": "Tech Notifications"
+   }
+  },
+  "/api/tech/prechecks/{pattern}/{record_id}": {
+   "post": {
+    "description": "D-619 [살펴봄] · [이번엔 제외]: 기록만(건수 안 바뀜).",
+    "operationId": "tech_precheck_mark_api_tech_prechecks__pattern___record_id__post",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "pattern",
+      "required": true,
+      "schema": {
+       "title": "Pattern",
+       "type": "string"
+      }
+     },
+     {
+      "in": "path",
+      "name": "record_id",
+      "required": true,
+      "schema": {
+       "title": "Record Id",
+       "type": "string"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/PrecheckBody"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/PrecheckAck"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Tech Precheck Mark"
+   }
+  },
+  "/api/tech/reports/{report_id}/final": {
+   "get": {
+    "description": "D-528 정비자 보고서 최종본(가이드 정비자 14): 파트장 검토와 같은 문서 값.\n\n본인이 작성한 보고서만(D-530 답장 001-zzq) — 남의 보고서는 403 · 거부 감사.",
+    "operationId": "tech_report_final_api_tech_reports__report_id__final_get",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "report_id",
+      "required": true,
+      "schema": {
+       "title": "Report Id",
+       "type": "integer"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/FinalReport"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Tech Report Final"
+   }
+  },
+  "/api/tech/sessions/{sid}": {
+   "get": {
+    "operationId": "get_session_api_tech_sessions__sid__get",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "sid",
+      "required": true,
+      "schema": {
+       "title": "Sid",
+       "type": "integer"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SessionWithPreview"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Get Session"
+   }
+  },
+  "/api/tech/sessions/{sid}/corrections": {
+   "post": {
+    "description": "T15 정정(S-05 P-14): 덧붙임 기록 · 감사 · 다시 판정 또는 정정 호출 · 보낸 호출에 붙임.",
+    "operationId": "post_correction_api_tech_sessions__sid__corrections_post",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "sid",
+      "required": true,
+      "schema": {
+       "title": "Sid",
+       "type": "integer"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CorrectionBody"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SessionView"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Post Correction"
+   }
+  },
+  "/api/tech/sessions/{sid}/events": {
+   "post": {
+    "operationId": "post_event_api_tech_sessions__sid__events_post",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "sid",
+      "required": true,
+      "schema": {
+       "title": "Sid",
+       "type": "integer"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/EventBody"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SessionView"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Post Event"
+   }
+  },
+  "/api/tech/sessions/{sid}/history": {
+   "get": {
+    "description": "T15 지난 화면(S-05 P-14): 진행 표시 5단계의 제출 기록 · 그때 값 · 정정 · 덧붙인 메모.",
+    "operationId": "get_history_api_tech_sessions__sid__history_get",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "sid",
+      "required": true,
+      "schema": {
+       "title": "Sid",
+       "type": "integer"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SessionPast"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Get History"
+   }
+  },
+  "/api/tech/sessions/{sid}/manual/{section}": {
+   "get": {
+    "description": "매뉴얼 원문(AC-39): 잠금 뒤, 이 세션에서 지시된 절만(R1 · R2). 절차 · 판정 기준 · 현재 등급 · 소요 분.",
+    "operationId": "manual_section_api_tech_sessions__sid__manual__section__get",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "sid",
+      "required": true,
+      "schema": {
+       "title": "Sid",
+       "type": "integer"
+      }
+     },
+     {
+      "in": "path",
+      "name": "section",
+      "required": true,
+      "schema": {
+       "title": "Section",
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "title": "Response Manual Section Api Tech Sessions  Sid  Manual  Section  Get",
+         "type": "object"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Manual Section"
+   }
+  },
+  "/api/tech/sessions/{sid}/notes": {
+   "post": {
+    "description": "T15 메모 덧붙이기(S-05 P-14).",
+    "operationId": "post_note_api_tech_sessions__sid__notes_post",
+    "parameters": [
+     {
+      "in": "path",
+      "name": "sid",
+      "required": true,
+      "schema": {
+       "title": "Sid",
+       "type": "integer"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/NoteBody"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/SessionView"
+        }
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Post Note"
+   }
+  }
+ }
+}

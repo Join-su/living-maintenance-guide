@@ -1,0 +1,90 @@
+{
+ "record_id": "H-0248",
+ "equipment_id": "M-02",
+ "equipment_type": "회전 가공 설비",
+ "approval": {
+  "status": "승인",
+  "by": "박○○",
+  "at": "2026-09-29T09:30:00+09:00"
+ },
+ "source": "generated",
+ "provenance": "synthetic_c1a15_from_ai4i2020",
+ "occurred_at": "2026-09-28T21:00:00+09:00",
+ "symptom": {
+  "code": "CL",
+  "name": "온도 차 저하"
+ },
+ "alarm": {
+  "unit": "K",
+  "value": 7.8,
+  "sensor": "온도 차",
+  "boundary": 8.3,
+  "direction": "경계 아래"
+ },
+ "sensor_snapshot": {
+  "power_w": 7021,
+  "torque_nm": 46.4,
+  "temp_diff_k": 7.8,
+  "tool_wear_min": 125.0,
+  "air_temperature_k": 302.4,
+  "rotational_speed_rpm": 1445.0,
+  "process_temperature_k": 310.2
+ },
+ "steps": [
+  {
+   "kind": "lock",
+   "name": "잠금 확인",
+   "section": "1.2",
+   "result": "완료",
+   "at": "2026-09-28T21:03:00+09:00",
+   "by": "윤○○",
+   "grade": "A"
+  },
+  {
+   "kind": "precheck",
+   "name": "고온부 확인과 온도 기록",
+   "section": "4.2",
+   "result": "완료",
+   "at": "2026-09-28T21:05:00+09:00",
+   "by": "윤○○",
+   "grade": "A"
+  },
+  {
+   "kind": "check",
+   "name": "흡기 필터 육안 점검",
+   "section": "4.3",
+   "result": "이상",
+   "at": "2026-09-28T21:08:00+09:00",
+   "by": "윤○○",
+   "note": "기름때 두껍게 낌",
+   "grade": "A"
+  },
+  {
+   "kind": "action",
+   "name": "흡기 필터 교체",
+   "section": "4.3.2",
+   "result": "완료",
+   "at": "2026-09-28T21:11:00+09:00",
+   "by": "윤○○",
+   "note": "흡기 필터 교체 완료",
+   "grade": "A"
+  },
+  {
+   "kind": "restart",
+   "name": "재가동",
+   "section": "6.1",
+   "result": "완료",
+   "at": "2026-09-28T21:23:00+09:00",
+   "by": "윤○○",
+   "note": "온도 차 경계 이내로 돌아옴",
+   "grade": "B"
+  }
+ ],
+ "outcome": {
+  "type": "원인 확정",
+  "cause_code": "CL-1",
+  "cause_name": "냉각 필터 막힘"
+ },
+ "downtime_min": 26,
+ "narrative": "21:00 M-02 온도 차 저하 알람(온도 차 7.8 K, 경계 8.3 K) 확인. 잠금 후 흡기 필터 육안 점검, 기름때 두껍게 낌. 냉각 필터 막힘으로 판단, 흡기 필터 교체. 재가동, 온도 차 경계 이내로 돌아옴. 정지 26분."
+}

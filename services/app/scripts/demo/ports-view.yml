@@ -1,0 +1,10 @@
+# dev-2 보기 사본 전용(stack.sh view · D-546 F2): 화면 포트 28181 · 28182 · 그래프 받은 편지함 묶음(상태 폴더 kg-inbox → /inbox/kg)
+services:
+  api:
+    volumes:
+      - ./data:/data:ro
+      - ${VIEW_KG_INBOX:?stack.sh view up이 만든 받은 편지함 폴더}:/inbox/kg
+  web:
+    ports: !override
+      - "127.0.0.1:28181:8081"
+      - "127.0.0.1:28182:8082"

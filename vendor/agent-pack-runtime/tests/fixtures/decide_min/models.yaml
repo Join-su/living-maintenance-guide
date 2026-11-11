@@ -1,0 +1,3 @@
+# 시험용: 가짜 Jev로만 돈다(실제 호출 없음). 주소는 환경에서만(JEV_BASE_URL).
+providers:
+  jev: {env: JEV_API_KEY, base_url_env: JEV_BASE_URL, models: {decision: [jev-1.13.0]}}

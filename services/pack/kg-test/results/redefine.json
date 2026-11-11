@@ -1,0 +1,66 @@
+{
+ "가. 규칙 표만 바꿈(R1 age_min<=20)": {
+  "edges_machine_work": 1131,
+  "edges_same_line": 96,
+  "layer": "rel-v1",
+  "nodes_same_as_v1": true,
+  "raw_same": true,
+  "rel_v1_same": true,
+  "score": {
+   "E2": {
+    "first": 0.769,
+    "precision": 0.769,
+    "recall": 0.769
+   },
+   "all": {
+    "first": 0.56,
+    "precision": 0.497,
+    "recall": 0.62
+   }
+  }
+ },
+ "나. 관계 정의 바꿈(rel-v2 · 창 20분)": {
+  "edges_machine_work": 1131,
+  "edges_same_line": 70,
+  "layer": "rel-v2",
+  "nodes_same_as_v1": true,
+  "raw_same": true,
+  "rel_v1_same": true,
+  "score": {
+   "E2": {
+    "first": 0.769,
+    "precision": 0.769,
+    "recall": 0.769
+   },
+   "all": {
+    "first": 0.56,
+    "precision": 0.497,
+    "recall": 0.62
+   }
+  }
+ },
+ "되돌림": {
+  "how": "설정 layer 줄을 rel-v1로 — 관계 층 두 버전이 나란히 있음",
+  "rel_v1_kept": true
+ },
+ "지금(rel-v1 · 규칙 표 그대로)": {
+  "edges_machine_work": 1131,
+  "edges_same_line": 96,
+  "layer": "rel-v1",
+  "nodes_same_as_v1": true,
+  "raw_same": true,
+  "rel_v1_same": true,
+  "score": {
+   "E2": {
+    "first": 1.0,
+    "precision": 1.0,
+    "recall": 1.0
+   },
+   "all": {
+    "first": 0.59,
+    "precision": 0.527,
+    "recall": 0.65
+   }
+  }
+ }
+}

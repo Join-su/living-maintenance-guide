@@ -1,0 +1,283 @@
+# living-maintenance-guide — everything on one machine: docker compose up -d
+# Ports open on 127.0.0.1 only. Values come from .env (copy .env.example). Databases are not opened outside the compose network.
+# Services marked TODO(owner) are filled by their owners; the lines here are the agreed names, volumes and addresses.
+name: ${COMPOSE_PROJECT_NAME:-lmg}
+
+x-agentops-image: &agentops-image
+  build:
+    context: .
+    dockerfile: services/agentops/Dockerfile
+  image: lmg/agentops:local
+
+services:
+  # ---------------------------------------------------------------- run records (trace) · person checks — this repository's own DB
+  trace-db:
+    image: pgvector/pgvector:0.8.6-pg16-bookworm
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: ${TRACE_DB_PASSWORD:?TRACE_DB_PASSWORD 필요 — .env를 만드세요}
+    volumes:
+      - trace-pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  # one run, then exits: accounts · databases · tables (agentops db/dbadmin.py env → init → migrate); the account file stays in a volume
+  trace-db-init:
+    <<: *agentops-image
+    environment:
+      TRACE_DB_PASSWORD: ${TRACE_DB_PASSWORD}
+    command:
+      - sh
+      - -c
+      - |
+        set -e
+        f=/secrets/trace-db.env
+        [ -s "$$f" ] || { umask 077; printf 'LLMOPSAGENT_PG_PORT=5432\nLLMOPSAGENT_PG_HOST=trace-db\nPOSTGRES_PASSWORD=%s\n' "$$TRACE_DB_PASSWORD" > "$$f"; }
+        python db/dbadmin.py env --env-file "$$f"
+        python db/dbadmin.py init --env-file "$$f"
+        python db/dbadmin.py migrate --env-file "$$f"
+    volumes:
+      - db-secrets:/secrets
+    depends_on:
+      trace-db:
+        condition: service_healthy
+    restart: "no"
+
+  # ---------------------------------------------------------------- AgentOps — starts empty (no project, version or record)
+  agentops:
+    <<: *agentops-image
+    env_file:
+      - path: .env.agentops          # written by scripts/link-agentops.sh after the project is made on the screen
+        required: false
+    environment:
+      LLMOPS_LLM_MODE: ${LLMOPS_LLM_MODE:-real}
+      LLMOPS_ALLOW_REAL_ON_LINUX: "1"              # real mode inside the (Linux) container — services/agentops/FROZEN-DIFF.md
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}        # start.sh turns it into the key file a Pack process reads
+      LLMOPS_LLM_BASE_URL: ${LLMOPS_LLM_BASE_URL:-https://api.openai.com/v1}
+      JEV_API_KEY: ${JEV_API_KEY:-}              # quality review model key (efficiency ⑤) — start.sh turns it into the server's key file; or by file path: compose.jev-key-file.yml
+      LLMOPS_TYPESAFE_BASE_URL: ${JEV_BASE_URL:-}  # its address (no value in this repository)
+      LLMOPS_AUTO_REVIEW: ${LLMOPS_AUTO_REVIEW:-on}  # off = the efficiency wheel goes on without the quality review (its record says so)
+      LLMOPS_AUTO_BUDGET_USD: ${LLMOPS_AUTO_BUDGET_USD:-8}
+      LLMOPS_AUTO_HYPOTHESIS: ${LLMOPS_AUTO_HYPOTHESIS:-agent}
+      LLMOPS_DB_ENV_FILE: /secrets/trace-db.env
+      LLMOPS_OPS_PAYLOAD_ROOT: /shared/trace-payloads
+      LLMOPS_PACK_STATUS_DIR: /shared/status/approved-changes
+      LLMOPS_DEPLOY_STATUS_DIR: /shared/status/deployments
+      LLMOPS_KG_SIGNAL_DIR: /shared/signal
+      LLMOPS_KG_PACK_REPO: /srv/pack-repo/c1a15-pack
+    cap_drop: [ALL]
+    cap_add: [SETUID, SETGID, DAC_READ_SEARCH, CHOWN]   # CHOWN: the key file's group (start.sh)
+    tmpfs:
+      - /run/lmg
+    ports:
+      - "127.0.0.1:${AGENTOPS_PORT:-18868}:18868"
+    volumes:
+      - agentops-data:/var/lib/llmops
+      - db-secrets:/secrets:ro
+      - trace-payloads:/shared/trace-payloads:ro
+      - status:/shared/status:ro
+      - kg-signal:/shared/signal:ro
+      - pack-repo:/srv/pack-repo:ro    # the Pack git repository and, beside it, the vector DB copy (agent-pack-runtime-ingest)
+      - packs:/packs:ro                # Pack folders to register on the screen ('＋ release' · local folder path)
+    depends_on:
+      trace-db-init:
+        condition: service_completed_successfully
+      kg-init:
+        condition: service_completed_successfully
+
+  # ---------------------------------------------------------------- knowledge graph
+  neo4j:
+    image: neo4j:2026.09.0-community@sha256:d6269a020149934597c8c3df926d080a612796dbbb48861ca9d5b1109cabf0d8
+    environment:
+      NEO4J_AUTH: ${NEO4J_AUTH:?NEO4J_AUTH 필요 — .env를 만드세요(neo4j/<비밀번호>)}
+      NEO4J_dbms_usage__report_enabled: "false"
+      NEO4J_server_memory_heap_initial__size: 512m
+      NEO4J_server_memory_heap_max__size: 512m
+      NEO4J_server_memory_pagecache_size: 256m
+    ports:
+      - "127.0.0.1:${NEO4J_HTTP_PORT:-28576}:7474"   # graph screen (browser)
+      - "127.0.0.1:${NEO4J_BOLT_PORT:-28789}:7687"   # bolt
+    volumes:
+      - neo4j-data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:7474 >/dev/null 2>&1 || curl -fsS http://127.0.0.1:7474 >/dev/null 2>&1"]
+      interval: 3s
+      timeout: 3s
+      retries: 60
+
+  # one run, then exits: seed history → graph (Neo4j) → Pack graph file → the Pack git repository with its first tag (pack-repo)
+  # and the first Pack folder to register on the AgentOps screen (/packs/first). Already made → exits 0 at once.
+  kg-init:
+    build:
+      context: .
+      dockerfile: services/pack/docker/kg-init.Dockerfile
+    image: lmg/kg-init:local
+    environment:
+      NEO4J_AUTH: ${NEO4J_AUTH}
+      AT: ${AT:-}
+      FIRST_PACK_TAG: ${FIRST_PACK_TAG:-first}
+    volumes:
+      - pack-repo:/srv/pack-repo
+      - packs:/packs
+      - seed-lines:/srv/seed-lines:ro
+      - ./data/agentops:/srv/agentops-config:ro
+    depends_on:
+      neo4j:
+        condition: service_healthy
+      app-init:                        # writes the demo lines into seed-lines (and at.env) first
+        condition: service_completed_successfully
+    restart: "no"
+
+  # ---------------------------------------------------------------- pack-server = Pack deployment server (8796) + deploy watcher, one container
+  # (the watcher restarts the server process itself on deploy · rollback · graph apply). Writes trace-payloads · trace-db (trace_writer through
+  # /secrets) · status · signal · pack-repo (new tags and commits); reads agentops-data (deploy requests · version ledger) · kg-inbox.
+  pack-server:
+    build:
+      context: .
+      dockerfile: services/deploy/docker/pack-server.Dockerfile
+    image: lmg/pack-server:local
+    init: true                         # reaps the server process the watcher starts again
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}        # or by file path: compose.key-file.yml (start script reads /run/secrets/openai_key)
+      NEO4J_AUTH: ${NEO4J_AUTH:?NEO4J_AUTH 필요 — .env를 만드세요(neo4j/<비밀번호>)}
+      DEPLOYMENT_ID: ${DEPLOYMENT_ID:-c1a15@local}
+      FIRST_PACK_TAG: ${FIRST_PACK_TAG:-first}
+      AGENTOPS_URL: http://agentops:18868
+      KGDB_URI: bolt://neo4j:7687
+    tmpfs:
+      - /run/lmg                       # key and graph DB account files (memory only)
+    ports:
+      - "127.0.0.1:${PACK_SERVER_PORT:-8796}:8796"
+    volumes:
+      - deploy-var:/var/lib/deploy               # settings the watcher keeps up to date · watcher state · logs · unpacked Packs
+      - pack-repo:/srv/pack-repo                 # kg-init's Pack git repository (c1a15-pack) · vector index releases · first graph history
+      - status:/shared/status                    # approved-changes (Pack apply tool) · deployments (watcher) → agentops reads
+      - kg-signal:/shared/signal                 # graph apply signals → agentops reads
+      - trace-payloads:/shared/trace-payloads    # run record bodies → agentops reads
+      - agentops-data:/shared/agentops-data:ro   # deploy request files · version ledger (llmops.db) written by agentops
+      - kg-inbox:/shared/kg-inbox:ro             # approval letters written by the app (graph apply input)
+      - db-secrets:/secrets:ro                   # run-record DB account file made by trace-db-init (read only)
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf -m 2 http://127.0.0.1:8796/health >/dev/null"]
+      interval: 10s
+      timeout: 3s
+      start_period: 300s
+      retries: 3
+    restart: unless-stopped
+    depends_on:
+      trace-db-init:
+        condition: service_completed_successfully
+      kg-init:
+        condition: service_completed_successfully
+      neo4j:
+        condition: service_healthy
+  # ---------------------------------------------------------------- maintenance guide app: technician (8081) · lead (8082)
+  # app-db → app-init (tables · data · demo lines → seed-lines) → kg-init → app-examples (example F into the app history) → api → web
+  app-db:
+    image: pgvector/pgvector:0.8.6-pg16-bookworm
+    environment:
+      POSTGRES_USER: c1a15
+      POSTGRES_DB: c1a15
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD 필요 — .env를 만드세요}
+    volumes:
+      - app-pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U c1a15 -d c1a15"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  # one run, then exits: empty DB → tables · data (c1a15.dbinit; an existing DB is only compared) · the first state of the main scenario
+  # (demo history lines with the same AT, also written to seed-lines for kg-init). Run again → the same lines.
+  app-init:
+    &app-api
+    build: ./services/app/server
+    image: lmg/app-api:local
+    command: ["sh", "/opt/app-init.sh", "lines"]
+    environment:
+      DATABASE_URL: postgresql+psycopg://c1a15:${POSTGRES_PASSWORD}@app-db:5432/c1a15
+      DATA_DIR: /data
+      AT: ${AT:-}
+      C1A15_TECH_PASSWORD: ${C1A15_TECH_PASSWORD:?필요 — .env를 만드세요(.env.example 참고)}
+      C1A15_LEAD_PASSWORD: ${C1A15_LEAD_PASSWORD:?필요 — .env를 만드세요(.env.example 참고)}
+    volumes:
+      - ./services/app/data:/data:ro
+      - ./services/app/docker/app-init.sh:/opt/app-init.sh:ro
+      - seed-lines:/srv/seed-lines
+    depends_on:
+      app-db:
+        condition: service_healthy
+    restart: "no"
+
+  # one run, then exits: the example F lines kg-init made (same AT) into the app history DB
+  app-examples:
+    <<: *app-api
+    command: ["sh", "/opt/app-init.sh", "examples"]
+    volumes:
+      - ./services/app/data:/data:ro
+      - ./services/app/docker/app-init.sh:/opt/app-init.sh:ro
+      - seed-lines:/srv/seed-lines:ro
+      - pack-repo:/srv/pack-repo:ro
+    depends_on:
+      kg-init:
+        condition: service_completed_successfully
+
+  api:
+    <<: *app-api
+    command: ["uvicorn", "c1a15.api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+    environment:
+      DATABASE_URL: postgresql+psycopg://c1a15:${POSTGRES_PASSWORD}@app-db:5432/c1a15
+      DATA_DIR: /data
+      APP_MODE: ${APP_MODE:-fixture}                 # fixture = templates and word rules only, no model call
+      C1A15_INTERNAL_TOKEN: ${C1A15_INTERNAL_TOKEN:?필요 — .env를 만드세요(.env.example 참고)}
+      C1A15_DEPLOY_URL: http://pack-server:8796      # the deployment server (one address · a compose name)
+      C1A15_DEPLOY_HOST: pack-server
+      C1A15_ALARM: ml
+      C1A15_KG_INBOX: /inbox/kg                      # approval letters → pack-server applies them to the graph
+      C1A15_CHECKS: deploy                           # the lead's person checks → deployment server → run records
+      C1A15_RECENT_DAYS: "4"                         # same window as the graph rule (WHEN_RECENT.days 4)
+    volumes:
+      - ./services/app/data:/data:ro
+      - kg-inbox:/inbox/kg
+    depends_on:
+      app-examples:
+        condition: service_completed_successfully
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=2)"]
+      interval: 5s
+      timeout: 3s
+      start_period: 30s
+      retries: 6
+
+  web:
+    build:
+      context: ./services/app
+      dockerfile: docker/web.Dockerfile
+    image: lmg/app-web:local
+    ports:
+      - "127.0.0.1:${TECH_PORT:-8081}:8081"
+      - "127.0.0.1:${LEAD_PORT:-8082}:8082"
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  trace-pg:
+  app-pg:                            # the app DB (accounts · equipment · history · alarms · reports)
+  db-secrets:
+  agentops-data:
+  trace-payloads:
+  status:
+  kg-signal:
+  pack-repo:
+  packs:
+  neo4j-data:
+  seed-lines:
+  deploy-var:
+  kg-inbox:                          # the app writes approval letters here · pack-server reads

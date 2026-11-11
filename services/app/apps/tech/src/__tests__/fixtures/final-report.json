@@ -1,0 +1,167 @@
+{
+ "report_id": 1,
+ "session_id": 1,
+ "status": "awaiting_approval",
+ "equipment_id": "M-01",
+ "equipment_type": "회전 가공 설비",
+ "group_name": "온도 차 저하",
+ "occurred_at": "2026-11-03T03:19:58.986995+00:00",
+ "confirmed_at": "2026-11-03T03:19:59.120788+00:00",
+ "author_name": "김 정비",
+ "lock_at": "2026-11-03T03:19:59.036911+00:00",
+ "rejected_before": false,
+ "decision": null,
+ "sensors": [
+  {
+   "name": "온도 차",
+   "value_text": "7.9 K",
+   "range_text": "8.2 K 이상",
+   "status": "경계 아래",
+   "out_of_range": true
+  },
+  {
+   "name": "회전 속도",
+   "value_text": "1,500 rpm",
+   "range_text": "1,308 ~ 1,981",
+   "status": "정상",
+   "out_of_range": false
+  },
+  {
+   "name": "회전력",
+   "value_text": "40.0 Nm",
+   "range_text": "20.3 ~ 60.1",
+   "status": "정상",
+   "out_of_range": false
+  },
+  {
+   "name": "공구 마모",
+   "value_text": "100 분",
+   "range_text": "4 ~ 215",
+   "status": "정상",
+   "out_of_range": false
+  },
+  {
+   "name": "공기 온도",
+   "value_text": "302.5 K",
+   "range_text": "296.7 ~ 303.8",
+   "status": "정상",
+   "out_of_range": false
+  }
+ ],
+ "sensor_evidence": "온도 차 7.9 K (경계 8.2 K 아래) · 1,500 rpm → 냉각 계통 쪽",
+ "causes": [
+  {
+   "name": "냉각 필터 막힘",
+   "probability": 69,
+   "evidence": 8,
+   "result": "확정 · 4.3 점검 이상",
+   "confirmed": true
+  },
+  {
+   "name": "냉각수 부족",
+   "probability": 19,
+   "evidence": 2,
+   "result": "점검 안 함",
+   "confirmed": false
+  },
+  {
+   "name": "냉각 팬 열화",
+   "probability": 6,
+   "evidence": 0,
+   "result": "미확인 · 4.4 C등급",
+   "confirmed": false
+  },
+  {
+   "name": "냉각 설정 오류",
+   "probability": 6,
+   "evidence": 0,
+   "result": "점검 안 함",
+   "confirmed": false
+  }
+ ],
+ "cause": "냉각 필터 막힘",
+ "check_path": "잠금 확인(1.2) → 고온부 확인과 온도 기록(4.2) → 흡기 필터 육안 점검(4.3, 이상: 기름때가 필터 표면 절반 넘게 덮음)",
+ "evidence_records": "H-0204 · H-0241 · H-0226",
+ "timeline": [
+  {
+   "at": "2026-11-03T03:19:58.993339+00:00",
+   "who": "김 정비",
+   "text": "점검 시작",
+   "section": null,
+   "grade": null
+  },
+  {
+   "at": "2026-11-03T03:19:59.027070+00:00",
+   "who": "김 정비",
+   "text": "알람 확인",
+   "section": null,
+   "grade": null
+  },
+  {
+   "at": "2026-11-03T03:19:59.036911+00:00",
+   "who": "김 정비",
+   "text": "잠금 완료 · 1.2",
+   "section": "1.2",
+   "grade": "A"
+  },
+  {
+   "at": "2026-11-03T03:19:59.052607+00:00",
+   "who": "김 정비",
+   "text": "사전 확인 완료",
+   "section": "4.2",
+   "grade": "A"
+  },
+  {
+   "at": "2026-11-03T03:19:59.064829+00:00",
+   "who": "김 정비",
+   "text": "결과 입력 · 4.3 이상",
+   "section": "4.3",
+   "grade": "A"
+  },
+  {
+   "at": "2026-11-03T03:19:59.076764+00:00",
+   "who": "김 정비",
+   "text": "조치 완료 · 4.3.2",
+   "section": "4.3.2",
+   "grade": "A"
+  },
+  {
+   "at": "2026-11-03T03:19:59.087745+00:00",
+   "who": "김 정비",
+   "text": "재가동 · 6.1",
+   "section": "6.1",
+   "grade": "B"
+  },
+  {
+   "at": "2026-11-03T03:19:59.100065+00:00",
+   "who": "김 정비",
+   "text": "재가동 확인 · 경계 이내",
+   "section": "6.1",
+   "grade": null
+  },
+  {
+   "at": "2026-11-03T03:19:59.117532+00:00",
+   "who": "김 정비",
+   "text": "보고서 확정",
+   "section": null,
+   "grade": null
+  }
+ ],
+ "action": "흡기 필터 교체(4.3.2, A) · 재가동(6.1, B, 확인 완료) 후 온도 차 9.0 K 경계 이내",
+ "restart": "온도 차 9.0 K · 경계 8.2 K 이내",
+ "downtime": "0분",
+ "grade_use": {
+  "A": 4,
+  "B": 1,
+  "C": 0
+ },
+ "unresolved": "냉각 팬 분해 점검(4.4, C등급) · 주간 확인 요청",
+ "author_role": "야간 정비",
+ "cause_basis": {
+  "section": "4.3",
+  "title": "흡기 필터 육안 점검",
+  "value": "이상",
+  "memo": "기름때가 필터 표면 절반 넘게 덮음"
+ },
+ "exception_record": null
+}

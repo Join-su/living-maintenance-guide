@@ -1,0 +1,11 @@
+{
+ "documents": 300,
+ "files": {
+  "documents.jsonl": "644488712a32700e0f30c2977b0de70acd29c8ecdce8bb7f0a2da6317fcbec39"
+ },
+ "format": "documents-1",
+ "kind": "corpus",
+ "parent_release": "c1a15-history-train-v1",
+ "release_id": "c1a15-history-train-v2",
+ "sha256": "a1d2eb3aed1c3a8585f764420767d6a711cd5985b975c8decf6f1dea8c7c1082"
+}

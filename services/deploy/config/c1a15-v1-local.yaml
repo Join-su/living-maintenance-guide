@@ -1,0 +1,25 @@
+deployment_id: c1a15@v1-local           # C1-a15 맥 격리 배포(D-265 · D-261 (3) — 격리 사본에서 끝까지 먼저). 공유 DB 1건은 c1a15-v1-pg-local
+retention_class: dev                     # 맥 격리(원문 짧게)
+pack:
+  repo: ../../c1a15-pack                 # 읽기만(git rev-parse · archive). 원격 없음 — 로컬 태그
+  ref: v3                                # 태그 v3(→ c7b1c36, c1a15-pack 보고 012-03) — 약속 v3(report) · 보고서 문장 node(가짜 provider · tools/fake/rule.py) · 사용자 모델. 앞: v2 9406df5(eb11510) · v1 50c537f(70a02c3)
+  pack_subdir: pack
+  releases_subdir: releases
+  expect_revision: "sha256:b0c06b5555e155dcab46d8672665e1604ea62527fba4866a4ca3b70beb81e2ee"
+execution:                               # Pack 쪽 pack/execution/deploy.yaml(태그 v3)을 그대로 옮김 — environment · release_roots는 서버가 씀
+  entrypoint: run
+  stores: {}                             # 벡터 DB는 PS-02(packrt 0.12.0 retrieve@2)부터. P1 첫 Run은 앱 결과를 start.similar로(다리, D-259 (3))
+  models:
+    failure_classifier: {release: mr-ai4i-lgbm-large-v1}   # 사용자 모델(ONNX, D-268 · D-272) — 배포 환경에 onnxruntime 1.31.0 필수(맥 .venv KS-3). 되돌림 = mr-c1a15-standin-v1
+data_dir: ../var/c1a15-v1-local
+packs_dir: ../.packs
+review_policy: auto_approve              # 검토 node 없음(약속 v2 그래프)
+provider: fake                           # v3 report = LLM 문장 node → 가짜 provider가 Pack 트리 tools/fake/rule.py(c1a15-pack/fake-rule@1)를 씀. 실제 provider는 사용자 승인 뒤
+registration:
+  mode: none                             # 격리: 장부 대조 없음(공유 DB 1건 설정은 llmops_pg)
+trace:                                   # 격리: 임시 DB만(공유 DB llmopsagent에 쓰지 않음). 비밀 값은 env 파일에만(git 밖, 600)
+  dsn_env: LLMOPSAGENT_TRACE_DSN
+  env_file: ../var/c1a15-v1-local/trace.env
+outcome_by_node: {}
+grounding_keys: []                       # D-278(Q-g (가)): 약속 v2의 alarm · decision · similar · retrieval은 result.output 칸 — state에 없음, 앱은 201 result.output에서 읽음
+secret_env_names: [OPENAI_API_KEY]

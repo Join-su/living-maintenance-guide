@@ -1,0 +1,46 @@
+{
+ "now": "2026-10-13T12:40:44.202713+00:00",
+ "tiles": {
+  "awaiting": 3,
+  "calls_open": 2,
+  "violations": 0
+ },
+ "rows": [
+  {
+   "report_id": 8,
+   "session_id": 41,
+   "equipment_id": "M-04",
+   "group_name": "온도 차 저하",
+   "cause": "냉각 필터 막힘",
+   "author_name": "김 정비",
+   "confirmed_at": "2026-10-13T12:40:43.257112+00:00",
+   "evidence_count": 3,
+   "low_evidence": true,
+   "violations": 0
+  },
+  {
+   "report_id": 7,
+   "session_id": 40,
+   "equipment_id": "M-03",
+   "group_name": "온도 차 저하",
+   "cause": "냉각 필터 막힘",
+   "author_name": "김 정비",
+   "confirmed_at": "2026-10-13T12:40:42.693263+00:00",
+   "evidence_count": 3,
+   "low_evidence": false,
+   "violations": 0
+  },
+  {
+   "report_id": 6,
+   "session_id": 39,
+   "equipment_id": "M-01",
+   "group_name": "온도 차 저하",
+   "cause": "냉각 필터 막힘",
+   "author_name": "김 정비",
+   "confirmed_at": "2026-10-13T12:40:42.323471+00:00",
+   "evidence_count": 3,
+   "low_evidence": false,
+   "violations": 0
+  }
+ ]
+}

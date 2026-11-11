@@ -1,0 +1,420 @@
+{
+ "session_id": 32,
+ "alarm_id": 32,
+ "status": "in_progress",
+ "locked": true,
+ "lock_at": "2026-10-13T12:40:33.216952+00:00",
+ "probabilities": {
+  "CL-2": 50,
+  "CL-3": 50
+ },
+ "evidence": {
+  "CL-2": 0,
+  "CL-3": 0
+ },
+ "low_evidence": false,
+ "top_records": [
+  "H-0248",
+  "H-0262",
+  "H-0295"
+ ],
+ "similar_basis": "상위 10건",
+ "cause_names": {
+  "CL-1": "냉각 필터 막힘",
+  "CL-2": "냉각 팬 열화",
+  "CL-3": "냉각수 부족",
+  "CL-4": "냉각 설정 오류"
+ },
+ "similar_cards": [
+  {
+   "record_id": "H-0248",
+   "equipment_id": "M-02",
+   "month": 9,
+   "similarity_pct": 81,
+   "outcome_type": "원인 확정",
+   "cause_code": "CL-1",
+   "outcome_label": "냉각 필터 막힘",
+   "action_name": "흡기 필터 교체",
+   "downtime_min": 26
+  },
+  {
+   "record_id": "H-0262",
+   "equipment_id": "M-18",
+   "month": 9,
+   "similarity_pct": 80,
+   "outcome_type": "원인 확정",
+   "cause_code": "CL-1",
+   "outcome_label": "냉각 필터 막힘",
+   "action_name": "흡기 필터 교체",
+   "downtime_min": 21
+  },
+  {
+   "record_id": "H-0295",
+   "equipment_id": "M-13",
+   "month": 9,
+   "similarity_pct": 77,
+   "outcome_type": "원인 확정",
+   "cause_code": "CL-1",
+   "outcome_label": "냉각 필터 막힘",
+   "action_name": "흡기 필터 교체",
+   "downtime_min": 27
+  }
+ ],
+ "alarm": {
+  "alarm_id": 32,
+  "equipment_id": "M-05",
+  "equipment_type": "회전 가공 설비",
+  "occurred_at": "2026-10-13T12:40:33.175660+00:00",
+  "symptom_group": "CL",
+  "group_name": "온도 차 저하",
+  "system": "냉각 계통",
+  "alarm": {
+   "sensor": "온도 차",
+   "value": 7.8,
+   "unit": "K",
+   "boundary": 8.3,
+   "direction": "경계 아래",
+   "trend_title": "온도 차 추이 · 최근 12회 측정"
+  },
+  "boundary_text": "하위 경계 8.3 K",
+  "out_of_range_count": 1,
+  "trend": [
+   {
+    "at": "2026-09-22T09:45:00+09:00",
+    "value": 8.5
+   },
+   {
+    "at": "2026-09-23T03:16:00+09:00",
+    "value": 8.1
+   },
+   {
+    "at": "2026-09-23T20:47:00+09:00",
+    "value": 8.4
+   },
+   {
+    "at": "2026-09-24T14:18:00+09:00",
+    "value": 8.6
+   },
+   {
+    "at": "2026-09-25T07:49:00+09:00",
+    "value": 8.2
+   },
+   {
+    "at": "2026-09-26T01:21:00+09:00",
+    "value": 7.8
+   },
+   {
+    "at": "2026-09-26T18:52:00+09:00",
+    "value": 7.7
+   },
+   {
+    "at": "2026-09-27T12:23:00+09:00",
+    "value": 7.8
+   },
+   {
+    "at": "2026-09-28T05:54:00+09:00",
+    "value": 7.8
+   },
+   {
+    "at": "2026-09-28T23:25:00+09:00",
+    "value": 7.8
+   },
+   {
+    "at": "2026-09-29T16:57:00+09:00",
+    "value": 7.7
+   },
+   {
+    "at": "2026-09-30T10:28:00+09:00",
+    "value": 7.8
+   }
+  ],
+  "trend_title": "온도 차 추이 · 최근 12회 측정",
+  "sensors": [
+   {
+    "key": "temp_diff_k",
+    "name": "온도 차",
+    "value": 7.8,
+    "unit": "K",
+    "value_text": "7.8 K",
+    "range_text": "8.3 K 이상",
+    "status": "경계 아래",
+    "is_alarm_sensor": true,
+    "out_of_range": true
+   },
+   {
+    "key": "rotational_speed_rpm",
+    "name": "회전 속도",
+    "value": 1359.0,
+    "unit": "rpm",
+    "value_text": "1,359 rpm",
+    "range_text": "1,305 ~ 1,979",
+    "status": "정상",
+    "is_alarm_sensor": false,
+    "out_of_range": false
+   },
+   {
+    "key": "torque_nm",
+    "name": "회전력",
+    "value": 57.2,
+    "unit": "Nm",
+    "value_text": "57.2 Nm",
+    "range_text": "20.5 ~ 59.7",
+    "status": "정상",
+    "is_alarm_sensor": false,
+    "out_of_range": false
+   },
+   {
+    "key": "tool_wear_min",
+    "name": "공구 마모",
+    "value": 67.0,
+    "unit": "분",
+    "value_text": "67 분",
+    "range_text": "4 ~ 214",
+    "status": "정상",
+    "is_alarm_sensor": false,
+    "out_of_range": false
+   },
+   {
+    "key": "air_temperature_k",
+    "name": "공기 온도",
+    "value": 302.6,
+    "unit": "K",
+    "value_text": "302.6 K",
+    "range_text": "296.4 ~ 302.4",
+    "status": "정상",
+    "is_alarm_sensor": false,
+    "out_of_range": false
+   }
+  ],
+  "ai_reading": {
+   "text": "온도 차 값(7.8 K)이 경계(8.3 K)보다 작아졌습니다. 냉각 계통 쪽 문제일 가능성이 높습니다.",
+   "fallback": false,
+   "label": null
+  },
+  "similar_count": 10
+ },
+ "results": [
+  {
+   "seq": 9,
+   "section": "4.3",
+   "value": "정상",
+   "memo": null
+  },
+  {
+   "seq": 12,
+   "section": "4.6",
+   "value": "정상",
+   "memo": null
+  }
+ ],
+ "step": {
+  "kind": "report",
+  "section": "4.4",
+  "grade": null,
+  "cause": null,
+  "reason": null,
+  "unable_before": null,
+  "interpretation": null,
+  "quote": null,
+  "outcome": "daytime",
+  "call_status": null
+ },
+ "last_seq": 17,
+ "recommend_handover": false,
+ "path": [
+  {
+   "at": "2026-10-13T12:40:33.216952+00:00",
+   "title": "잠금 확인",
+   "detail": "1.2절",
+   "status": "ok"
+  },
+  {
+   "at": "2026-10-13T12:40:33.234407+00:00",
+   "title": "고온부 확인과 온도 기록",
+   "detail": "4.2절",
+   "status": "ok"
+  },
+  {
+   "at": "2026-10-13T12:40:33.250411+00:00",
+   "title": "흡기 필터 육안 점검",
+   "detail": "정상",
+   "status": "ok"
+  },
+  {
+   "at": "2026-10-13T12:40:33.264871+00:00",
+   "title": "냉각 설정값 확인",
+   "detail": "정상",
+   "status": "ok"
+  }
+ ],
+ "restart": {
+  "section": "6.1",
+  "title": "재가동",
+  "grade": "B",
+  "checklist": [
+   "주변 공구·이물질 치움",
+   "냉각 커버 고정 확인",
+   "작업자 대피 확인"
+  ],
+  "restarted_at": null,
+  "outcome": null
+ },
+ "call": {
+  "kind": "approval",
+  "reason": null,
+  "head": null,
+  "section": "4.4",
+  "title": "냉각 팬 분해 점검",
+  "grade": "C",
+  "minutes": 10,
+  "checks_done": [
+   {
+    "section": "4.3",
+    "title": "흡기 필터 육안 점검",
+    "value": "정상"
+   },
+   {
+    "section": "4.6",
+    "title": "냉각 설정값 확인",
+    "value": "정상"
+   }
+  ],
+  "candidates": [
+   {
+    "code": "CL-2",
+    "name": "냉각 팬 열화",
+    "pct": 50
+   },
+   {
+    "code": "CL-3",
+    "name": "냉각수 부족",
+    "pct": 50
+   }
+  ],
+  "summary": {
+   "text": "M-05 온도 차 저하(21:40). 흡기 필터 육안 점검 · 냉각 설정값 확인 점검 정상. 1순위 후보 냉각 팬 열화(50%), 확인에 냉각 팬 분해 점검(4.4절, C등급) 필요. 설비는 정지 상태로 대기 중.",
+   "fallback": false,
+   "label": null
+  },
+  "status": "answered",
+  "waiting_at": null,
+  "sent_at": "2026-10-13T12:40:33.279296+00:00",
+  "answer": {
+   "answer": "daytime",
+   "by": "lead.park",
+   "by_name": "박 파트장",
+   "at": "2026-10-13T12:40:35.148605+00:00",
+   "note": null
+  }
+ },
+ "report": {
+  "status": "draft",
+  "rejection": null,
+  "fields": [
+   {
+    "key": "equipment_alarm",
+    "label": "설비 · 알람",
+    "source": "자동",
+    "text": "M-05 · 온도 차 저하 · 21:40 ~ 21:40",
+    "edited": false,
+    "ok": true,
+    "unsupported_numbers": []
+   },
+   {
+    "key": "sensor_evidence",
+    "label": "센서 근거",
+    "source": "센서",
+    "text": "온도 차 7.8 K (경계 8.3 K 아래) · 1,359 rpm → 냉각 계통 쪽",
+    "edited": false,
+    "ok": true,
+    "unsupported_numbers": []
+   },
+   {
+    "key": "check_path",
+    "label": "점검 경로",
+    "source": "입력",
+    "text": "잠금 확인(1.2) → 고온부 확인과 온도 기록(4.2) → 흡기 필터 육안 점검(4.3, 정상) → 냉각 설정값 확인(4.6, 정상)",
+    "edited": false,
+    "ok": true,
+    "unsupported_numbers": []
+   },
+   {
+    "key": "cause",
+    "label": "확정 원인",
+    "source": "입력",
+    "text": "원인 미상",
+    "edited": false,
+    "ok": true,
+    "unsupported_numbers": []
+   },
+   {
+    "key": "evidence_records",
+    "label": "근거 사례",
+    "source": "기록",
+    "text": "H-0248 · H-0262 · H-0295",
+    "edited": false,
+    "ok": true,
+    "unsupported_numbers": []
+   },
+   {
+    "key": "action",
+    "label": "조치",
+    "source": "매뉴얼",
+    "text": "조치 없음",
+    "edited": false,
+    "ok": true,
+    "unsupported_numbers": []
+   },
+   {
+    "key": "downtime",
+    "label": "정지 시간",
+    "source": "자동",
+    "text": "0분",
+    "edited": false,
+    "ok": true,
+    "unsupported_numbers": []
+   },
+   {
+    "key": "unresolved",
+    "label": "미확인 · 요청",
+    "source": "입력",
+    "text": "냉각 팬 분해 점검(4.4, C등급) · 주간 확인 요청 / 냉각 팬 분해 점검(4.4) 주간 처리 요청",
+    "edited": false,
+    "ok": true,
+    "unsupported_numbers": []
+   }
+  ],
+  "checks": [
+   {
+    "key": "grounded",
+    "label": "근거 없는 문장 없음",
+    "ok": true
+   },
+   {
+    "key": "authority",
+    "label": "권한 등급 위반 없음",
+    "ok": true
+   },
+   {
+    "key": "required",
+    "label": "필수 8항목 모두 채워짐",
+    "ok": true
+   }
+  ],
+  "messages": [],
+  "can_confirm": true,
+  "confirmed_at": null,
+  "low_evidence": false
+ },
+ "preview": {
+  "kind": "instruct",
+  "section": "4.3",
+  "grade": "A",
+  "cause": "CL-1",
+  "title": "흡기 필터 육안 점검",
+  "minutes": 3,
+  "reason": "냉각 필터 막힘 가능성이 83%로 가장 높고, 4.3절 점검은 약 3분 · A등급입니다. 다른 점검: 4.4(C), 4.5(A), 4.6(A).",
+  "reason_fallback": false,
+  "reason_label": null
+ }
+}

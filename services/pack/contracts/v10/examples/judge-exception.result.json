@@ -1,0 +1,27 @@
+{
+  "decision": {
+    "probabilities": {
+      "CL-1": 37,
+      "CL-2": 37,
+      "CL-3": 5,
+      "CL-4": 21
+    },
+    "evidence": {
+      "CL-1": 4,
+      "CL-2": 4,
+      "CL-3": 0,
+      "CL-4": 2
+    },
+    "low_evidence": false,
+    "kind": "instruct",
+    "section": "EX-R-0001",
+    "grade": "C",
+    "cause": "CL-1",
+    "reason": "exception_guide",
+    "relation": "EX-R-0001",
+    "graph": {
+      "used": "EX-R-0001",
+      "layer": "mm3-v2-48a5b999"
+    }
+  }
+}

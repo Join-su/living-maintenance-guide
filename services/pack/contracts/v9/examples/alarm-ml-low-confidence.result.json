@@ -1,0 +1,34 @@
+{
+  "alarm": {
+    "event_id": "C1A-E8b21d4e07a5c",
+    "alarm": false,
+    "group": null,
+    "group_source": null,
+    "alarm_block": null,
+    "sensor_derived": {
+      "power_w": 6952,
+      "temp_diff_k": 10.5
+    },
+    "ml": {
+      "model_release": "mr-ai4i-lgbm-large-v1",
+      "risk": 0.7,
+      "alarm": true,
+      "top_k": [
+        {
+          "type": "HDF",
+          "probability": 0.45,
+          "group_suggestion": "CL"
+        },
+        {
+          "type": "PWF",
+          "probability": 0.25,
+          "group_suggestion": "PW"
+        }
+      ],
+      "confidence": 0.45,
+      "threshold": 0.5,
+      "confirmed": false
+    },
+    "no_alarm_reason": "low_confidence"
+  }
+}

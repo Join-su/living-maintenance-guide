@@ -1,0 +1,276 @@
+/* 승인 CSS(packages/ui/src/styles) 밖의 최소 조정: 화면 틀 가운데 정렬, 입력 칸을 실제 textarea로 쓰기 위한 초기화,
+   종 목록이 열린 동안 뒤 화면 조작을 막는 투명 막(패널 z-index 5 바로 아래). 색 · 글자 · 간격 토큰은 바꾸지 않는다. */
+#root { min-height: 100vh; display: grid; place-items: center; }
+.ap textarea.memo { display: block; width: 100%; box-sizing: border-box; font: inherit; color: var(--ink); resize: none; outline: none; background: #fff; }
+.ap textarea.memo:focus { border-color: var(--pri); }
+.ap textarea.memo:disabled { background: #f3f5f8; }
+.ap .catch { position: absolute; inset: 0; z-index: 4; }
+.ap [role="button"]:not(.dis) { cursor: pointer; }
+
+/* D-528 최종안(부록 1 · 2 · 4): 태블릿 1280 × 800 · 왼쪽 「오늘 밤 알람」 칸 264px · 본문 1280 − 264px. 정비자 토큰 · 본문 꼴은 그대로. */
+.ap { width: 1280px; height: 800px; }
+.ap-main { margin-left: 264px; }
+.ap-main .ap-body { height: 680px; } .ap-main .ap-body.nostep { height: 736px; } .ap-main .ap-body.past { height: 608px; }
+.ap .modal { left: 380px; top: 200px; } .ap .modal.wide { left: 280px; top: 76px; max-height: 660px; }
+.n-lp { position: absolute; top: 64px; left: 0; bottom: 0; width: 264px; background: #fff; border-right: 1px solid var(--ln); display: flex; flex-direction: column; overflow: auto; }
+.n-lh { display: flex; align-items: center; justify-content: space-between; padding: 16px 18px 10px; }
+.n-lh b { font-size: 16px; font-weight: 800; }
+.n-cnt { background: var(--bad); color: #fff; border-radius: 999px; font-size: 13px; font-weight: 800; padding: 1px 9px; }
+.n-lp .tabs { display: flex; gap: 4px; padding: 3px; border-radius: 9px; background: var(--bg); margin: 0 18px 8px; }
+.n-lp .tabs button { flex: 1; height: 32px; border: 0; border-radius: 7px; font: inherit; font-size: 13.5px; font-weight: 600; color: var(--sub); background: none; cursor: pointer; }
+.n-lp .tabs button.on { background: #fff; color: var(--ink); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08); }
+.n-li { display: flex; flex-direction: column; gap: 3px; text-align: left; width: 100%; padding: 12px 18px; border: 0; border-left: 3px solid transparent; border-bottom: 1px solid #f0f2f5; background: none; font: inherit; color: var(--ink); cursor: pointer; }
+.n-li:hover { background: #f8f9fb; }
+.n-li.on { background: var(--pri-s); border-left-color: var(--pri); }
+.n-li.ro { cursor: default; } .n-li.ro:hover { background: none; }
+.n-li b { font-size: 15.5px; font-weight: 800; }
+.n-lr { display: flex; align-items: center; justify-content: space-between; }
+.n-k { display: inline-flex; align-items: center; height: 22px; padding: 0 8px; border-radius: 6px; background: #eef0f4; color: #4a5263; font-size: 12.5px; font-weight: 700; }
+.n-t { font-size: 13px; color: var(--mut); }
+.n-lv { display: flex; gap: 10px; font-size: 14px; color: var(--sub); font-weight: 600; }
+.n-lv .bad { color: var(--bad); font-weight: 800; }
+.n-ls { display: flex; align-items: center; gap: 6px; font-size: 13.5px; color: var(--sub); font-weight: 600; }
+.n-ls .em { font-style: normal; }
+.n-le { padding: 24px 18px; color: var(--mut); font-size: 14.5px; }
+/* 내 알람 카드 상태값 한 줄(계통 · 값 · 경계 · 방향) */
+.n-vals { display: flex; align-items: center; gap: 14px; margin-top: 6px; font-size: 14px; white-space: nowrap; }
+.n-vals .k { color: var(--sub); font-size: 13.5px; }
+.n-vals b { color: var(--bad); font-weight: 800; }
+.n-bd { display: inline-flex; align-items: center; height: 24px; padding: 0 8px; border-radius: 6px; background: var(--bad-s); color: var(--bad); font-size: 12.5px; font-weight: 700; }
+/* 잠금 확인 큰 팝업(가운데 680px · 뒤 어둡게 · 닫기는 단계 띠만) */
+.lockdim { position: absolute; inset: 0; background: rgba(15, 23, 42, 0.45); z-index: 20; }
+.ap:has(.lockm) .ap-step { position: relative; z-index: 22; }
+.ap:has(.lockm) .ap-step::after { content: ""; position: absolute; inset: 0; background: rgba(15, 23, 42, 0.45); pointer-events: none; }
+.lockm { position: absolute; left: 300px; top: 160px; width: 680px; z-index: 21; background: #fff; border-radius: 18px; padding: 28px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3); display: flex; flex-direction: column; gap: 16px; }
+.lockm .n-lockbox { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; border: 1.5px solid #d97706; background: var(--warn-s); border-radius: 12px; padding: 16px; }
+.lockm .n-lockbox .ic { width: 26px; height: 26px; color: #d97706; }
+.lockm .n-lockbox h3 { margin: 0; font-size: 22px; font-weight: 900; }
+.lockm .n-lockbox span { font-size: 14.5px; color: var(--sub); }
+.lockm .proc { gap: 10px; } .lockm .proc li { font-size: 16px; }
+.lockm .proc li:last-child { background: var(--warn-s); }
+.banner.rej { margin-bottom: 14px; }
+/* 보고서 최종본(정비자 14): 위 「보고서로」 · 「출력」, 아래 문서(스크롤) */
+.fbody { overflow: auto; }
+.fbar { display: flex; align-items: center; gap: 10px; max-width: 960px; margin: 0 auto 12px; }
+.fbar .sp { flex: 1; }
+.rl .rl-r { display: inline-flex; align-items: center; gap: 10px; flex: none; }
+/* D-637 F13: 최근 내 보고서 한 줄 — 넘치면 … */
+.rl { gap: 10px; }
+.rl .rl-t { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rl .rl-w { color: var(--sub); }
+.rl .lk2 { color: var(--pri); font-weight: 700; font-size: 14px; cursor: pointer; }
+/* D-530 답장 001-zzt 1(가이드 10쪽): 매뉴얼 원문 창 = 가운데 · 조금 작게 · 단계 띠도 어둠 아래(답장 001-zzx-2 1) */
+.ap .modal.wide[aria-label^="매뉴얼 원문"] { left: 320px; top: 134px; width: 640px; max-height: 540px; }
+/* 답장 001-zzx 가(가이드 14 ~ 16쪽): 조치 화면 왼쪽 = 카드 셋(원인 확정 · 조치 · 재가동)을 내용 높이로 쌓음 · 재가동 뒤 값은 재가동 카드 안 */
+.ap .g64 > .stk { gap: 16px; }
+.ap .g64 > .stk > .cd:last-child { flex: none; }
+.ap .stk .cd-h { margin-bottom: 10px; }
+.ap .kvr { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; }
+.ap .kvr span { color: var(--sub); }
+.ap .kvr b { color: var(--pri); font-weight: 700; }
+.ap .stk .act-h { margin-bottom: 12px; }
+.ap .stk .act-h .ch.green { margin-left: auto; }
+.ap .rvrow { display: flex; align-items: baseline; gap: 12px; margin: 4px 0 14px; color: var(--sub); font-size: 14px; }
+.ap .rvrow .rv-big { color: var(--ink); }
+.ap .stk .choice2 { margin-top: 0; }
+/* 답장 001-zzx 나(가이드 14쪽): 오른쪽 '지금까지 점검 · 조치' 줄 = 이름 · 절 · 결과 한 줄 */
+.ap .tli > div > b, .ap .tli > div > span:not(.vd) { display: inline; font-size: 15.5px; }
+.ap .tli > div > span:not(.vd):not(:empty)::before { content: " · "; }
+.ap .tli > div > span:not(.vd) { color: var(--ink); font-weight: 700; }
+.ap .tli { padding-bottom: 14px; }
+/* 답장 001-zzx 다(가이드 5 · 17 · 19 · 33쪽): 다음 버튼은 그 카드 · 상자 안 아래 */
+.ap .ai-c .cta { margin-top: 14px; }
+.ap .cd > .ckl + .banner.ok, .ap .cd > .ckl + .cta2 { margin-top: 16px; }
+.ap .cd > .banner.ok + .btn { margin-top: 12px; }
+.ap .rejb > div { flex: 1; }
+.ap .rejb .btn { margin-top: 12px; background: #fff; }
+.ap .stk .act .proc { margin-bottom: 14px; }
+.ap .stk .act .proc li:last-child { background: #f8f9fb; }
+/* 답장 001-zzx 마(가이드 22 · 23쪽): 지난 점검 = 왼쪽 기록 목록 + 오른쪽 고른 기록 칸(정정 · 메모는 칸 안) + 「지금 단계로」 */
+.ap-body.pl .g64 > .cd { display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
+.ap .plist { display: flex; flex-direction: column; gap: 10px; overflow-y: auto; min-height: 0; }
+.ap .pli { display: flex; flex-direction: column; gap: 4px; padding: 11px 14px; border: 1px solid var(--ln); border-radius: 10px; background: #fff; cursor: pointer; }
+.ap .pli b { font-size: 15px; } .ap .pli span { font-size: 13px; color: var(--sub); }
+.ap .pli.on { border: 2px solid var(--pri); background: var(--pri-s); padding: 10px 13px; }
+.ap .pli.bad b { color: var(--bad); }
+.ap .pli.void b, .ap .pli.void span { color: var(--mut); text-decoration: line-through; }
+.ap .pdet .unsent { align-self: flex-start; margin: -4px 0 10px; }
+.ap .prow { display: flex; justify-content: space-between; gap: 16px; padding: 4px 0 12px; border-bottom: 1px solid var(--ln); font-size: 15px; }
+.ap .prow span { color: var(--sub); flex: none; } .ap .prow b { text-align: right; }
+.ap .pdet .pv, .ap .pdet .corr-box, .ap .pdet .corr-list { margin-top: 12px; }
+.ap .pdet > .btn { margin-top: 16px; }
+.ap .pform { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+.ap .pform > .sm { font-size: 13px; color: var(--sub); font-weight: 700; margin-top: 4px; }
+.ap .pform .memo { min-height: 72px; margin: 0; border-color: var(--pri); }
+.ap .pform .rbtns .rbtn { min-height: 92px; }
+.ap .pform .mb { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
+.ap .pfoot { margin-top: auto; padding-top: 14px; }
+/* 답장 001-zzx 바(가이드 28쪽): 인계 요약 왼쪽 = 빨강 머리 + 값 줄 + '지금까지 점검 · 조치' 체크 목록 */
+.ap .warn-h.bad { background: var(--bad-s); }
+.ap .warn-h.bad > .ic { color: var(--bad); }
+.ap .warn-h .vline { display: block; color: var(--bad); font-size: 14px; font-weight: 800; }
+.ap .cklist { display: flex; flex-direction: column; gap: 10px; }
+.ap .cki { display: flex; align-items: center; gap: 10px; font-size: 15px; }
+.ap .cki .cb { flex: none; width: 20px; height: 20px; border-radius: 5px; display: grid; place-items: center; background: var(--ok); color: #fff; font-size: 13px; font-weight: 900; }
+.ap .cki .cb .ic { width: 14px; height: 14px; }
+.ap .cki.bad .cb { background: var(--bad); }
+.ap .cki.now .cb { background: var(--pri); }
+.ap .cki.void { color: var(--mut); text-decoration: line-through; } .ap .cki.void .cb { background: #c4cad4; }
+/* 답장 001-zzx 아(가이드 3쪽): 정비자 로그인 머리 = 큰 로고 위 · 이름 아래 */
+.ap .lg-card .brand { flex-direction: column; align-items: flex-start; gap: 10px; font-size: 18px; }
+.ap .lg-card .brand .logo { width: 46px; height: 46px; border-radius: 12px; } .ap .lg-card .brand .logo .ic { width: 24px; height: 24px; }
+/* 답장 001-zzx-2 3(가이드 9 · 15 · 34쪽): 잠긴 버튼 = 선 자물쇠 아이콘(공용 이모지 대신) */
+.ap .btn.dis::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  vertical-align: -2px;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='18' height='11' x='3' y='11' rx='2' ry='2'/%3E%3Cpath d='M7 11V7a5 5 0 0 1 10 0v4'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='18' height='11' x='3' y='11' rx='2' ry='2'/%3E%3Cpath d='M7 11V7a5 5 0 0 1 10 0v4'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+/* 답장 001-zzx-2 3(가이드 6 · 14쪽): 두 칸 폭 1.25 : 1 그대로 — 안의 카드 줄이 칸을 밀어 넓히지 않게 */
+.ap .g64 { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }
+/* 가이드 6쪽(작은 꼴): 과거 기록 카드 '유사 n%'는 둘째 줄 오른쪽 초록 — 좁아진 칸에서 줄이 넘치지 않게 */
+.ap .hc-t { flex-wrap: wrap; }
+.ap .hc-t em { flex-basis: 100%; text-align: right; color: var(--ok); }
+.ap .sp.pick:not(.done) { cursor: pointer; } /* 지난 단계를 보는 동안 뒤 단계(회색)도 누름 — 지시 d530-p33 */
+/* D-538: 보고서 화면 예외 상황 기록 칸(선택 · 두 글 · 확정 뒤 읽기만) */
+.ap .exp .memo { min-height: 64px; margin: 0; width: 100%; resize: vertical; }
+.ap .exp .khv { font-size: 15px; line-height: 1.6; white-space: pre-wrap; }
+.ap .exp .khf + .khf { margin-top: 10px; }
+.ap .exp .khf .sm { display: block; font-size: 13px; font-weight: 700; color: var(--sub); margin-bottom: 6px; }
+.ap .xref { margin-bottom: 12px; } /* D-543 참고 알림 */
+/* D-543 예외 안내(호출 화면): 노하우 글 + 출처 · 왼쪽 카드 오른쪽 아래 「노하우 등록」 · 같은 자리 두 칸 */
+.ap .g64 > .cd:has(.xkh) { position: relative; }
+.ap .g64 > .cd:has(.xkr) { padding-bottom: 80px; }
+.ap .xkh p { font-size: 16px; line-height: 1.75; margin: 0; }
+.ap .xwk { margin-top: 12px; padding: 10px 14px; border: 1px solid #f5d0a9; border-radius: 10px; background: #fffaf3; font-size: 14px; line-height: 1.7; }
+.ap .xwk > b { display: block; font-size: 13px; color: #b45309; }
+.ap .xwk .xwr.now { font-weight: 700; color: var(--ink); }
+.ap .xwk .xwr.done { color: var(--sub); }
+/* D-642 C: 지시 문장 한 줄 · '지금'은 문장 앞 표시 */
+.ap .xwk .xwr .xnow { margin-right: 6px; }
+.ap .xwk .xwr .xside { color: var(--sub); }
+.ap .xkh .xsrc { display: block; margin-top: 8px; font-size: 13px; color: var(--sub); }
+.ap .xkr { position: absolute; right: 20px; bottom: 18px; }
+.ap .xkr .btn, .ap .xkf .mb .btn { height: 44px; padding: 0 22px; }
+.ap .xkf { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--ln); }
+.ap .xkf .cd-h { margin-bottom: 4px; }
+.ap .xkf .sm { display: block; font-size: 13px; font-weight: 700; color: var(--sub); margin: 8px 0 6px; }
+.ap .xkf .memo { min-height: 44px; margin: 0; width: 100%; border-color: var(--pri); resize: vertical; }
+.ap .xkf .mb { display: flex; justify-content: flex-end; gap: 10px; margin-top: 12px; }
+/* D-546 U6 공구 교체 주의(꼴 02): 내 알람 카드 위 주황 줄 */
+.ap .tool { display: flex; align-items: center; gap: 14px; background: var(--warn-s); border: 1px solid #f3d29b; border-radius: 14px; padding: 14px 18px; margin-bottom: 14px; }
+.ap .tool > .ic { width: 24px; height: 24px; color: #a85a00; flex: none; }
+.ap .tool .tm { flex: 1; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.ap .tool .tm b { font-size: 16px; font-weight: 800; color: #7a4300; }
+.ap .tool .tm span { font-size: 14px; color: var(--sub); font-weight: 600; }
+.ap .tool .tm em { font-style: normal; color: #a85a00; font-weight: 800; }
+.ap .tool .btn { flex: none; background: #fff; }
+/* D-546 U5 ML 알람(꼴 01): 「ML 예측」 표 · 예측 유형 · 위험도 두 줄 */
+.ap .mlk { display: inline-flex; align-items: center; gap: 4px; height: 22px; padding: 0 7px; border-radius: 6px; background: var(--pri-s); color: var(--pri); font-size: 12.5px; font-weight: 700; }
+.ap .mlk .ic, .ap .mlc .ic { width: 13px; height: 13px; }
+.ap .mlc { display: inline-flex; align-items: center; gap: 4px; }
+.ap .n-vals.ml { gap: 10px; flex-wrap: wrap; row-gap: 4px; }
+.ap .n-vals .bad, .ap .n-lv .bad, .ap .mlr .bad { color: var(--bad); }
+.ap .mlr { display: flex; align-items: baseline; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--ln); }
+.ap .mlr:first-of-type { padding-top: 2px; }
+.ap .mlr span { font-size: 14.5px; color: var(--sub); font-weight: 600; }
+.ap .mlr b { font-size: 17px; font-weight: 800; }
+.ap .mlr b.bad { font-size: 22px; }
+.ap .mlr:last-of-type { margin-bottom: 14px; }
+/* 호출 · 인계 보낸 뒤(답장 u4-audit-fix): '보낸 요약' 읽기만 · 아래 '보냄 · 시각 / 답 기다림' 한 줄 */
+.ap .pv.ro .sm::after { content: none; }
+.ap .wait { display: flex; flex-direction: column; gap: 2px; background: var(--warn-s); border-radius: 12px; padding: 14px 16px; margin-top: 12px; color: #7a4a00; }
+.ap .wait span { font-size: 14px; color: var(--sub); }
+.ap .sml { display: block; font-size: 13px; color: var(--mut); font-weight: 600; margin-bottom: 6px; }
+.ap .pv.ro { background: #f6f8fb; border-color: transparent; min-height: 0; }
+/* D-556 예외 글 → 「AI 나눔」 줄(점검 · 조치 · 비슷한 예외 기록 같음 / 아님) */
+.ap .exp .exa { display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-top: 8px; }
+.ap .exp .exa .btn { height: 40px; padding: 0 16px; }
+.ap .exp .exi { border: 1px solid var(--ln); border-radius: 10px; padding: 10px 12px; }
+.ap .exp .exi + .exi { margin-top: 8px; }
+.ap .exp .exl { font-size: 15px; line-height: 1.6; }
+.ap .exp .exl .ch { margin-right: 8px; }
+.ap .exp .exs { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 8px; }
+.ap .exp .exb { display: inline-flex; gap: 6px; margin-left: auto; }
+.ap .exp .exb .btn { height: 36px; padding: 0 14px; }
+.ap .exp .exm { flex-direction: column; align-items: stretch; gap: 6px; }
+.ap .exp .exr { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+.ap .exp .exr .exn { flex: 1; min-width: 0; }
+.ap .exp .exr .btn { height: 32px; padding: 0 12px; }
+.ap .xkf .memo { min-height: 96px; }
+/* D-556 [점검 바꾸기]: 점검 안내 아래 링크 · 창(지금 추천 후보 줄) */
+.ap .refs .lk.sw { margin-left: auto; }
+.ap .swm { width: min(560px, calc(100vw - 32px)); }
+.ap .swm .swl { display: flex; flex-direction: column; gap: 8px; margin: 12px 0 4px; }
+.ap .swm .swc { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 14px; border: 1.5px solid var(--ln); border-radius: 10px; cursor: pointer; background: #fff; }
+.ap .swm .swc:hover { border-color: var(--pri); }
+.ap .swm .swc.dis { opacity: .5; cursor: default; }
+.ap .xwhy { margin-top: 6px; font-size: 13px; color: var(--sub); }
+.ap .nx .refs { margin-top: auto; justify-content: flex-end; }
+.ap .nx .refs ~ .btn.full { margin-top: 0; }
+.ap .swm .swc .tags { display: inline-flex; gap: 6px; flex-shrink: 0; }
+.ap .swm .swc .swt { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.ap .swm .swc .sws { font-size: 13px; font-weight: 400; color: var(--sub); }
+.ap .swm .swc.swx { border-style: dashed; color: #7a4a00; background: var(--warn-s); }
+
+/* 정답지 고침A 18쪽 예외 상황 팝업 · 19쪽 보고서 안 '예외 상황' 구역(넘치면 이 구역만 스크롤) */
+.ap .modal.exp { left: 230px; top: 56px; width: 820px; max-height: 688px; }
+.ap .exp .mh { display: flex; align-items: center; justify-content: space-between; }
+.ap .exp .exp-b { display: flex; flex-direction: column; gap: 10px; overflow-y: auto; min-height: 0; }
+.ap .exp .exn0 { display: block; margin-bottom: 6px; font-size: 14px; font-weight: 700; color: #b45309; }
+.ap .exp .exl + .exl { margin-top: 2px; }
+.ap .exp .exe { display: flex; flex-direction: column; gap: 6px; margin-top: 4px; padding: 10px 12px; border: 1px dashed #f0b67a; border-radius: 10px; background: #fffaf3; }
+.ap .exp .exe > b { font-size: 13px; color: #b45309; }
+.ap .exp .exe input { height: 36px; padding: 0 12px; border: 1px solid #f5d0a9; border-radius: 8px; background: #fff; font: inherit; font-size: 14px; }
+.ap .exp .exel { display: flex; flex-direction: column; gap: 4px; }
+.ap .exp .exel > span { font-size: 13px; color: var(--sub); }
+.ap .exp .exr .btn.xed.ghost { border-color: #f0b67a; color: #b45309; }
+.ap .exp .exr .btn.xed.xon { border-width: 2px; background: #fffaf3; }
+.ap .exp .exh { font-size: 13px; font-weight: 700; color: var(--sub); }
+.ap .rx { border: 1px solid var(--ln); border-radius: 12px; margin-top: 14px; }
+.ap .rx .rx-h { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid var(--ln); }
+.ap .rx .rx-h .btn { height: 36px; padding: 0 14px; }
+.ap .rx .rxs { max-height: 220px; overflow-y: auto; padding: 4px 14px 8px; }
+/* 정답지 19쪽 · D-579: 보고서 카드는 화면 높이 안 — 예외 구역이 남은 자리를 받고 넘치면 그 구역만 스크롤(칸이 길면 카드가 스크롤) */
+.ap .g73:has(> .cd > .rx) { grid-template-rows: minmax(0, 1fr); }
+.ap .g73 > .cd:has(> .rx) { display: flex; flex-direction: column; min-height: 0; overflow-y: auto; }
+.ap .g73 > .cd:has(> .rx) > * { flex-shrink: 0; }
+.ap .g73 > .cd > .rx { flex: 1 0 130px; display: flex; flex-direction: column; min-height: 130px; }
+.ap .g73 > .cd > .rx .rxs { flex: 1 1 0; min-height: 0; max-height: none; }
+.ap .rx .rxr { display: grid; grid-template-columns: 96px 1fr; gap: 12px; padding: 7px 0; font-size: 14px; line-height: 1.55; border-bottom: 1px solid var(--ln); }
+.ap .rx .rxr:last-child { border-bottom: 0; }
+.ap .rx .rxr > span:first-child { color: var(--sub); font-weight: 700; }
+
+/* D-619 사전 점검 후보: 내 알람 아래 · 고장 판단 아님(주의 수준 · 알람 빨강 안 씀) */
+.ap .pck .pck-o { font-size: 13px; color: var(--sub); } /* D-642 E ③ 담당 표시 */
+.ap .pcl { flex: 1; min-height: 0; overflow-y: auto; margin-top: 12px; display: flex; flex-direction: column; gap: 10px; }
+.ap .g2 > div:has(> .pcl) > .cd .empty { padding: 10px 0; }
+.ap .pck { flex: none; display: flex; flex-direction: column; gap: 3px; padding: 12px 16px; border-left: 4px solid var(--pri); }
+.ap .pck-h { display: flex; align-items: baseline; gap: 10px; }
+.ap .pck-h b { font-size: 16px; font-weight: 800; }
+.ap .pck-h span { font-size: 13px; color: var(--sub); font-weight: 600; }
+.ap .pck-d { font-size: 15px; font-weight: 700; }
+.ap .pck-n { font-size: 13px; color: var(--sub); line-height: 1.4; }
+.ap .pck-f { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 2px; }
+.ap .pck-b .btn { height: 34px; padding: 0 14px; font-size: 13px; }
+.ap .pck-b { display: flex; gap: 8px; }
+.ap .pck-m { font-size: 13px; color: var(--sub); font-weight: 600; }
+.ap .modal.pcm { width: 520px; }
+.ap .pcs { font-size: 14px; font-weight: 700; margin: 6px 0 10px; }
+/* D-663 S4: 겉은 핵심만(누르면 펼침) */
+.ap .pck-s { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.ap .pck-t { font-size: 15px; font-weight: 800; }
+.ap .pck-c { font-size: 14px; font-weight: 700; color: var(--pri); }
+.ap .pck-ms { font-size: 12px; color: var(--sub); font-weight: 600; }
+.ap .pck-s svg { margin-left: auto; width: 18px; height: 18px; color: var(--sub); }
+.ap .pck-x { display: flex; flex-direction: column; gap: 3px; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--ln); }
+.ap .pck-l { font-size: 13px; font-weight: 700; margin-top: 4px; }
+.ap .pck-x .pcb { font-size: 13px; padding: 5px 0; }
+.ap .pcb { font-size: 14px; padding: 7px 0; border-top: 1px solid var(--ln); }
+.ap .pcm textarea { width: 100%; min-height: 90px; box-sizing: border-box; font: inherit; padding: 10px; border: 1px solid var(--ln); border-radius: 10px; margin-top: 8px; }
+.ap .pcm .mb { display: flex; justify-content: flex-end; gap: 10px; margin-top: 12px; }

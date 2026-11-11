@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# 0009 전 백업(EV-001 CH-40): 앱 DB의 리트리버 · release 표 넷 자료를 파일 하나로(compose db 안 pg_dump --data-only).
+# 사용: scripts/db-retriever-tables-backup <파일>   (같은 compose project · .env로 — 운영 순서서 첫 줄)
+set -euo pipefail
+OUT=${1:?백업 파일 경로가 필요합니다}
+D=$(cd "$(dirname "$OUT")" && pwd) || { echo "백업 폴더가 없음: $(dirname "$OUT")"; exit 1; }  # 대입 따로 — 실패하면 멈춤(review 2차 N1)
+OUT="$D/$(basename "$OUT")"  # 절대 경로로(아래 cd 뒤에도 같은 파일)
+[ ! -e "$OUT" ] && [ ! -e "$OUT.counts" ] || { echo "이미 있는 파일 — 덮어쓰지 않음: $OUT(.counts)"; exit 1; }
+cd "$(dirname "$0")/.."
+q() { docker compose exec -T db psql -U c1a15 -d c1a15 -tAc "$1"; }
+[ "$(q "select version_num from alembic_version")" = "0008" ] || { echo "DB 판이 0008이 아님 — 0009 전에만 백업"; exit 1; }
+docker compose exec -T db pg_dump -U c1a15 -d c1a15 --data-only --no-owner \
+  -t knowledge.data_releases -t knowledge.release_chunks -t knowledge.active_releases -t knowledge.history_embeddings > "$OUT"
+for t in data_releases release_chunks active_releases history_embeddings; do echo "$t $(q "select count(*) from knowledge.$t")"; done > "$OUT.counts"
+echo "백업: $OUT ($(wc -c < "$OUT" | tr -d ' ') bytes) · 행 수 $OUT.counts"

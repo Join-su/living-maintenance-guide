@@ -1,0 +1,43 @@
+{
+ "backend": "flat-local",
+ "build_sha256": "f8b7fe33de6be109ca7d2e5d08680e719e4942ef570e12ba1e7e713c3ab45aa9",
+ "builder": {
+  "name": "packrt.index",
+  "version": 1
+ },
+ "chunks": 32,
+ "corpus_release": {
+  "id": "c1a15-manuals-v1",
+  "sha256": "2fa3c1529652992eb5468f5dd625ad8b2ba3da5367e51ffc12be06ea37226277"
+ },
+ "documents": 1,
+ "embedding": {
+  "dim": 64,
+  "mode": "fake",
+  "model": "text-embedding-3-small",
+  "provider": "openai"
+ },
+ "files": {
+  "chunks.jsonl": "e8cf39b4a851e32d29a73d8d1e49be037381d561d2da3c769ff3553cdd74b835",
+  "vectors.json": "3daed9e9e3be19d71b92b4b88691bd662e780e8be98b5c6458c621ab18b187b7"
+ },
+ "index_recipe": {
+  "chunk_size": null,
+  "chunker": null,
+  "chunker_sha256": null,
+  "metadata": [
+   "evidence_type",
+   "source"
+  ],
+  "overlap": 0,
+  "rerank_norm": null,
+  "split": "section"
+ },
+ "index_recipe_sha256": "be272ec53b02d4329f820870480757e9a373c30b919f16d22f83197a91b5ad7b",
+ "index_sha256": "a77bf8b9c16b5b83635ad1f995ae0ea5baf204e593ff57e729e59f7abb75fa71",
+ "kind": "index",
+ "parent_release": null,
+ "release_id": "ir-manuals-f8b7fe33",
+ "rerank_norm": null,
+ "store": "manuals"
+}

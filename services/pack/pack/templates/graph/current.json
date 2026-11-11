@@ -1,0 +1,6767 @@
+{
+ "candidate": [
+  {
+   "code": "TW-1",
+   "group": "공구 마모 경고",
+   "n": 21
+  },
+  {
+   "code": "TW-2",
+   "group": "공구 마모 경고",
+   "n": 8
+  },
+  {
+   "code": "TW-3",
+   "group": "공구 마모 경고",
+   "n": 8
+  },
+  {
+   "code": "TW-4",
+   "group": "공구 마모 경고",
+   "n": 3
+  },
+  {
+   "code": "CL-1",
+   "group": "온도 차 저하",
+   "n": 57
+  },
+  {
+   "code": "CL-2",
+   "group": "온도 차 저하",
+   "n": 25
+  },
+  {
+   "code": "CL-3",
+   "group": "온도 차 저하",
+   "n": 10
+  },
+  {
+   "code": "CL-4",
+   "group": "온도 차 저하",
+   "n": 16
+  },
+  {
+   "code": "PW-1",
+   "group": "출력 이탈",
+   "n": 43
+  },
+  {
+   "code": "PW-2",
+   "group": "출력 이탈",
+   "n": 23
+  },
+  {
+   "code": "PW-3",
+   "group": "출력 이탈",
+   "n": 15
+  },
+  {
+   "code": "LD-1",
+   "group": "토크 과부하",
+   "n": 8
+  },
+  {
+   "code": "LD-2",
+   "group": "토크 과부하",
+   "n": 6
+  },
+  {
+   "code": "LD-3",
+   "group": "토크 과부하",
+   "n": 15
+  }
+ ],
+ "causes": [
+  {
+   "code": "CL-1",
+   "name": "냉각 필터 막힘"
+  },
+  {
+   "code": "CL-2",
+   "name": "냉각 팬 열화"
+  },
+  {
+   "code": "CL-3",
+   "name": "냉각수 부족"
+  },
+  {
+   "code": "CL-4",
+   "name": "냉각 설정 오류"
+  },
+  {
+   "code": "LD-1",
+   "name": "절삭유 노즐 막힘"
+  },
+  {
+   "code": "LD-2",
+   "name": "스핀들 베어링 열화"
+  },
+  {
+   "code": "LD-3",
+   "name": "절삭 조건 과다"
+  },
+  {
+   "code": "PW-1",
+   "name": "회전 조건 설정 오류"
+  },
+  {
+   "code": "PW-2",
+   "name": "전원 단자 이완"
+  },
+  {
+   "code": "PW-3",
+   "name": "엔코더 신호 이상"
+  },
+  {
+   "code": "TW-1",
+   "name": "공구 수명 도래"
+  },
+  {
+   "code": "TW-2",
+   "name": "공구 날 손상"
+  },
+  {
+   "code": "TW-3",
+   "name": "마모 카운터 미초기화"
+  },
+  {
+   "code": "TW-4",
+   "name": "공구 편마모"
+  }
+ ],
+ "exception_relations": [],
+ "groups": [
+  {
+   "code": "CL",
+   "name": "온도 차 저하"
+  },
+  {
+   "code": "LD",
+   "name": "토크 과부하"
+  },
+  {
+   "code": "PW",
+   "name": "출력 이탈"
+  },
+  {
+   "code": "TW",
+   "name": "공구 마모 경고"
+  }
+ ],
+ "indicates": [
+  {
+   "app_no": "2.3",
+   "code": "TW-3",
+   "n": 8,
+   "no": "2.1.3",
+   "role": "confirm"
+  },
+  {
+   "app_no": "2.4",
+   "code": "TW-2",
+   "n": 8,
+   "no": "2.1.4",
+   "role": "confirm"
+  },
+  {
+   "app_no": "2.5",
+   "code": "TW-1",
+   "n": 21,
+   "no": "2.1.5",
+   "role": "confirm"
+  },
+  {
+   "app_no": "2.6",
+   "code": "TW-4",
+   "n": 3,
+   "no": "2.1.6",
+   "role": "confirm"
+  },
+  {
+   "app_no": "3.3",
+   "code": "PW-1",
+   "n": 43,
+   "no": "2.2.3",
+   "role": "confirm"
+  },
+  {
+   "app_no": "3.4",
+   "code": "PW-3",
+   "n": 15,
+   "no": "2.2.4",
+   "role": "confirm"
+  },
+  {
+   "app_no": "3.5",
+   "code": "PW-2",
+   "n": 23,
+   "no": "2.2.5",
+   "role": "screen"
+  },
+  {
+   "app_no": "3.6",
+   "code": "PW-2",
+   "n": 23,
+   "no": "2.2.6",
+   "role": "confirm"
+  },
+  {
+   "app_no": "4.3",
+   "code": "CL-1",
+   "n": 57,
+   "no": "2.3.3",
+   "role": "confirm"
+  },
+  {
+   "app_no": "4.4",
+   "code": "CL-2",
+   "n": 25,
+   "no": "2.3.4",
+   "role": "confirm"
+  },
+  {
+   "app_no": "4.5",
+   "code": "CL-3",
+   "n": 10,
+   "no": "2.3.5",
+   "role": "confirm"
+  },
+  {
+   "app_no": "4.6",
+   "code": "CL-4",
+   "n": 16,
+   "no": "2.3.6",
+   "role": "confirm"
+  },
+  {
+   "app_no": "5.3",
+   "code": "LD-1",
+   "n": 8,
+   "no": "2.4.3",
+   "role": "confirm"
+  },
+  {
+   "app_no": "5.4",
+   "code": "LD-3",
+   "n": 15,
+   "no": "2.4.4",
+   "role": "confirm"
+  },
+  {
+   "app_no": "5.5",
+   "code": "LD-2",
+   "n": 6,
+   "no": "2.4.5",
+   "role": "screen"
+  },
+  {
+   "app_no": "5.6",
+   "code": "LD-2",
+   "n": 6,
+   "no": "2.4.6",
+   "role": "confirm"
+  }
+ ],
+ "knowhow": [],
+ "layer": "mm3-v3-48a5b999",
+ "records": [
+  {
+   "cause": "LD-1",
+   "checked": [
+    "5.3"
+   ],
+   "did": [
+    "5.3.2"
+   ],
+   "equipment": "M-02",
+   "group": "LD",
+   "id": "H-0001",
+   "sensors": {
+    "air_temperature_k": 300.4,
+    "power_w": 8346,
+    "process_temperature_k": 310.4,
+    "rotational_speed_rpm": 1298.0,
+    "temp_diff_k": 10.0,
+    "tool_wear_min": 19.0,
+    "torque_nm": 61.4
+   },
+   "ts": "2026-01-01T01:25:00+09:00"
+  },
+  {
+   "cause": "PW-2",
+   "checked": [
+    "3.5",
+    "3.6"
+   ],
+   "did": [
+    "7.1"
+   ],
+   "equipment": "M-14",
+   "group": "PW",
+   "id": "H-0002",
+   "sensors": {
+    "air_temperature_k": 300.6,
+    "power_w": 4165,
+    "process_temperature_k": 310.6,
+    "rotational_speed_rpm": 2127.0,
+    "temp_diff_k": 10.0,
+    "tool_wear_min": 53.0,
+    "torque_nm": 18.7
+   },
+   "ts": "2026-01-01T11:59:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-16",
+   "group": "PW",
+   "id": "H-0003",
+   "sensors": {
+    "air_temperature_k": 300.6,
+    "power_w": 3528,
+    "process_temperature_k": 310.4,
+    "rotational_speed_rpm": 2514.0,
+    "temp_diff_k": 9.8,
+    "tool_wear_min": 215.0,
+    "torque_nm": 13.4
+   },
+   "ts": "2026-01-03T17:53:00+09:00"
+  },
+  {
+   "cause": "TW-1",
+   "checked": [
+    "2.3",
+    "2.4",
+    "2.5"
+   ],
+   "did": [
+    "2.4.2"
+   ],
+   "equipment": "M-17",
+   "group": "TW",
+   "id": "H-0004",
+   "sensors": {
+    "air_temperature_k": 300.6,
+    "power_w": 5264,
+    "process_temperature_k": 310.3,
+    "rotational_speed_rpm": 1648.0,
+    "temp_diff_k": 9.7,
+    "tool_wear_min": 217.0,
+    "torque_nm": 30.5
+   },
+   "ts": "2026-01-03T19:07:00+09:00"
+  },
+  {
+   "cause": "PW-3",
+   "checked": [
+    "3.3",
+    "3.4"
+   ],
+   "did": [
+    "3.4.2"
+   ],
+   "equipment": "M-10",
+   "group": "PW",
+   "id": "H-0005",
+   "sensors": {
+    "air_temperature_k": 300.9,
+    "power_w": 3858,
+    "process_temperature_k": 310.5,
+    "rotational_speed_rpm": 2288.0,
+    "temp_diff_k": 9.6,
+    "tool_wear_min": 85.0,
+    "torque_nm": 16.1
+   },
+   "ts": "2026-01-04T23:41:00+09:00"
+  },
+  {
+   "cause": "PW-2",
+   "checked": [
+    "3.3",
+    "3.4",
+    "3.5",
+    "3.6"
+   ],
+   "did": [
+    "7.1"
+   ],
+   "equipment": "M-17",
+   "group": "PW",
+   "id": "H-0008",
+   "sensors": {
+    "air_temperature_k": 299.5,
+    "power_w": 8695,
+    "process_temperature_k": 310.1,
+    "rotational_speed_rpm": 1359.0,
+    "temp_diff_k": 10.6,
+    "tool_wear_min": 67.0,
+    "torque_nm": 61.1
+   },
+   "ts": "2026-01-14T00:24:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.5",
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-19",
+   "group": "PW",
+   "id": "H-0009",
+   "sensors": {
+    "air_temperature_k": 299.8,
+    "power_w": 3841,
+    "process_temperature_k": 310.9,
+    "rotational_speed_rpm": 2084.0,
+    "temp_diff_k": 11.1,
+    "tool_wear_min": 175.0,
+    "torque_nm": 17.6
+   },
+   "ts": "2026-01-15T12:44:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-19",
+   "group": "PW",
+   "id": "H-0011",
+   "sensors": {
+    "air_temperature_k": 300.6,
+    "power_w": 8635,
+    "process_temperature_k": 311.9,
+    "rotational_speed_rpm": 1372.0,
+    "temp_diff_k": 11.3,
+    "tool_wear_min": 212.0,
+    "torque_nm": 60.1
+   },
+   "ts": "2026-01-19T04:16:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-11",
+   "group": "PW",
+   "id": "H-0012",
+   "sensors": {
+    "air_temperature_k": 300.4,
+    "power_w": 8772,
+    "process_temperature_k": 311.2,
+    "rotational_speed_rpm": 1351.0,
+    "temp_diff_k": 10.8,
+    "tool_wear_min": 18.0,
+    "torque_nm": 62.0
+   },
+   "ts": "2026-01-22T12:57:00+09:00"
+  },
+  {
+   "cause": "PW-2",
+   "checked": [
+    "3.3",
+    "3.4",
+    "3.5",
+    "3.6"
+   ],
+   "did": [
+    "7.1"
+   ],
+   "equipment": "M-02",
+   "group": "PW",
+   "id": "H-0013",
+   "sensors": {
+    "air_temperature_k": 300.5,
+    "power_w": 3856,
+    "process_temperature_k": 311.7,
+    "rotational_speed_rpm": 2141.0,
+    "temp_diff_k": 11.2,
+    "tool_wear_min": 196.0,
+    "torque_nm": 17.2
+   },
+   "ts": "2026-01-25T03:04:00+09:00"
+  },
+  {
+   "cause": "TW-1",
+   "checked": [
+    "2.3",
+    "2.4",
+    "2.5"
+   ],
+   "did": [
+    "2.4.2"
+   ],
+   "equipment": "M-11",
+   "group": "TW",
+   "id": "H-0014",
+   "sensors": {
+    "air_temperature_k": 300.7,
+    "power_w": 6604,
+    "process_temperature_k": 311.8,
+    "rotational_speed_rpm": 1443.0,
+    "temp_diff_k": 11.1,
+    "tool_wear_min": 217.0,
+    "torque_nm": 43.7
+   },
+   "ts": "2026-01-25T11:00:00+09:00"
+  },
+  {
+   "cause": "TW-1",
+   "checked": [
+    "2.3",
+    "2.4",
+    "2.5"
+   ],
+   "did": [
+    "2.4.2"
+   ],
+   "equipment": "M-14",
+   "group": "TW",
+   "id": "H-0015",
+   "sensors": {
+    "air_temperature_k": 300.7,
+    "power_w": 6247,
+    "process_temperature_k": 311.8,
+    "rotational_speed_rpm": 1407.0,
+    "temp_diff_k": 11.1,
+    "tool_wear_min": 224.0,
+    "torque_nm": 42.4
+   },
+   "ts": "2026-01-25T14:10:00+09:00"
+  },
+  {
+   "cause": "TW-1",
+   "checked": [
+    "2.3",
+    "2.4",
+    "2.5"
+   ],
+   "did": [
+    "2.4.2"
+   ],
+   "equipment": "M-16",
+   "group": "TW",
+   "id": "H-0016",
+   "sensors": {
+    "air_temperature_k": 300.7,
+    "power_w": 5812,
+    "process_temperature_k": 311.7,
+    "rotational_speed_rpm": 1504.0,
+    "temp_diff_k": 11.0,
+    "tool_wear_min": 229.0,
+    "torque_nm": 36.9
+   },
+   "ts": "2026-01-25T15:30:00+09:00"
+  },
+  {
+   "cause": "PW-3",
+   "checked": [
+    "3.5",
+    "3.3",
+    "3.4"
+   ],
+   "did": [
+    "3.4.2"
+   ],
+   "equipment": "M-07",
+   "group": "PW",
+   "id": "H-0018",
+   "sensors": {
+    "air_temperature_k": 300.5,
+    "power_w": 4012,
+    "process_temperature_k": 312.0,
+    "rotational_speed_rpm": 1985.0,
+    "temp_diff_k": 11.5,
+    "tool_wear_min": 143.0,
+    "torque_nm": 19.3
+   },
+   "ts": "2026-01-27T12:02:00+09:00"
+  },
+  {
+   "cause": "LD-3",
+   "checked": [
+    "5.3",
+    "5.4"
+   ],
+   "did": [
+    "5.4.2"
+   ],
+   "equipment": "M-08",
+   "group": "LD",
+   "id": "H-0019",
+   "sensors": {
+    "air_temperature_k": 300.5,
+    "power_w": 8041,
+    "process_temperature_k": 312.0,
+    "rotational_speed_rpm": 1263.0,
+    "temp_diff_k": 11.5,
+    "tool_wear_min": 146.0,
+    "torque_nm": 60.8
+   },
+   "ts": "2026-01-27T13:13:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.5",
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-07",
+   "group": "PW",
+   "id": "H-0020",
+   "sensors": {
+    "air_temperature_k": 301.2,
+    "power_w": 8514,
+    "process_temperature_k": 312.4,
+    "rotational_speed_rpm": 1378.0,
+    "temp_diff_k": 11.2,
+    "tool_wear_min": 95.0,
+    "torque_nm": 59.0
+   },
+   "ts": "2026-02-05T06:44:00+09:00"
+  },
+  {
+   "cause": "PW-3",
+   "checked": [
+    "3.3",
+    "3.4"
+   ],
+   "did": [
+    "3.4.2"
+   ],
+   "equipment": "M-06",
+   "group": "PW",
+   "id": "H-0022",
+   "sensors": {
+    "air_temperature_k": 300.3,
+    "power_w": 4113,
+    "process_temperature_k": 311.8,
+    "rotational_speed_rpm": 2004.0,
+    "temp_diff_k": 11.5,
+    "tool_wear_min": 12.0,
+    "torque_nm": 19.6
+   },
+   "ts": "2026-02-10T08:21:00+09:00"
+  },
+  {
+   "cause": "LD-3",
+   "checked": [
+    "5.3",
+    "5.4"
+   ],
+   "did": [
+    "5.4.2"
+   ],
+   "equipment": "M-02",
+   "group": "LD",
+   "id": "H-0023",
+   "sensors": {
+    "air_temperature_k": 299.6,
+    "power_w": 8391,
+    "process_temperature_k": 310.9,
+    "rotational_speed_rpm": 1229.0,
+    "temp_diff_k": 11.3,
+    "tool_wear_min": 209.0,
+    "torque_nm": 65.2
+   },
+   "ts": "2026-02-13T02:48:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-06",
+   "group": "PW",
+   "id": "H-0024",
+   "sensors": {
+    "air_temperature_k": 299.2,
+    "power_w": 8881,
+    "process_temperature_k": 310.6,
+    "rotational_speed_rpm": 1370.0,
+    "temp_diff_k": 11.4,
+    "tool_wear_min": 42.0,
+    "torque_nm": 61.9
+   },
+   "ts": "2026-02-13T23:55:00+09:00"
+  },
+  {
+   "cause": "TW-1",
+   "checked": [
+    "2.3",
+    "2.4",
+    "2.6",
+    "2.5"
+   ],
+   "did": [
+    "2.4.2"
+   ],
+   "equipment": "M-12",
+   "group": "TW",
+   "id": "H-0026",
+   "sensors": {
+    "air_temperature_k": 298.9,
+    "power_w": 5763,
+    "process_temperature_k": 310.7,
+    "rotational_speed_rpm": 1638.0,
+    "temp_diff_k": 11.8,
+    "tool_wear_min": 218.0,
+    "torque_nm": 33.6
+   },
+   "ts": "2026-02-16T09:59:00+09:00"
+  },
+  {
+   "cause": "TW-1",
+   "checked": [
+    "2.3",
+    "2.4",
+    "2.6",
+    "2.5"
+   ],
+   "did": [
+    "2.4.2"
+   ],
+   "equipment": "M-13",
+   "group": "TW",
+   "id": "H-0027",
+   "sensors": {
+    "air_temperature_k": 298.9,
+    "power_w": 5581,
+    "process_temperature_k": 310.6,
+    "rotational_speed_rpm": 1615.0,
+    "temp_diff_k": 11.7,
+    "tool_wear_min": 221.0,
+    "torque_nm": 33.0
+   },
+   "ts": "2026-02-16T10:20:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-05",
+   "group": "PW",
+   "id": "H-0028",
+   "sensors": {
+    "air_temperature_k": 298.6,
+    "power_w": 8449,
+    "process_temperature_k": 309.9,
+    "rotational_speed_rpm": 1356.0,
+    "temp_diff_k": 11.3,
+    "tool_wear_min": 34.0,
+    "torque_nm": 59.5
+   },
+   "ts": "2026-02-22T17:10:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-07",
+   "group": "PW",
+   "id": "H-0029",
+   "sensors": {
+    "air_temperature_k": 298.3,
+    "power_w": 8430,
+    "process_temperature_k": 309.6,
+    "rotational_speed_rpm": 1469.0,
+    "temp_diff_k": 11.3,
+    "tool_wear_min": 191.0,
+    "torque_nm": 54.8
+   },
+   "ts": "2026-02-24T23:39:00+09:00"
+  },
+  {
+   "cause": "TW-2",
+   "checked": [
+    "2.3",
+    "2.4"
+   ],
+   "did": [
+    "2.4.2"
+   ],
+   "equipment": "M-17",
+   "group": "TW",
+   "id": "H-0030",
+   "sensors": {
+    "air_temperature_k": 297.5,
+    "power_w": 7503,
+    "process_temperature_k": 308.4,
+    "rotational_speed_rpm": 1433.0,
+    "temp_diff_k": 10.9,
+    "tool_wear_min": 218.0,
+    "torque_nm": 50.0
+   },
+   "ts": "2026-02-28T06:38:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-19",
+   "group": "PW",
+   "id": "H-0031",
+   "sensors": {
+    "air_temperature_k": 297.4,
+    "power_w": 8594,
+    "process_temperature_k": 308.4,
+    "rotational_speed_rpm": 1328.0,
+    "temp_diff_k": 11.0,
+    "tool_wear_min": 98.0,
+    "torque_nm": 61.8
+   },
+   "ts": "2026-03-01T19:22:00+09:00"
+  },
+  {
+   "cause": "LD-3",
+   "checked": [
+    "5.3",
+    "5.4"
+   ],
+   "did": [
+    "5.4.2"
+   ],
+   "equipment": "M-05",
+   "group": "LD",
+   "id": "H-0032",
+   "sensors": {
+    "air_temperature_k": 297.3,
+    "power_w": 8047,
+    "process_temperature_k": 308.3,
+    "rotational_speed_rpm": 1268.0,
+    "temp_diff_k": 11.0,
+    "tool_wear_min": 119.0,
+    "torque_nm": 60.6
+   },
+   "ts": "2026-03-02T00:37:00+09:00"
+  },
+  {
+   "cause": "LD-1",
+   "checked": [
+    "5.3"
+   ],
+   "did": [
+    "5.3.2"
+   ],
+   "equipment": "M-14",
+   "group": "LD",
+   "id": "H-0034",
+   "sensors": {
+    "air_temperature_k": 297.5,
+    "power_w": 7977,
+    "process_temperature_k": 308.6,
+    "rotational_speed_rpm": 1255.0,
+    "temp_diff_k": 11.1,
+    "tool_wear_min": 77.0,
+    "torque_nm": 60.7
+   },
+   "ts": "2026-03-07T11:19:00+09:00"
+  },
+  {
+   "cause": "LD-3",
+   "checked": [
+    "5.3",
+    "5.4"
+   ],
+   "did": [
+    "5.4.2"
+   ],
+   "equipment": "M-19",
+   "group": "LD",
+   "id": "H-0035",
+   "sensors": {
+    "air_temperature_k": 297.4,
+    "power_w": 8108,
+    "process_temperature_k": 308.3,
+    "rotational_speed_rpm": 1284.0,
+    "temp_diff_k": 10.9,
+    "tool_wear_min": 50.0,
+    "torque_nm": 60.3
+   },
+   "ts": "2026-03-12T17:55:00+09:00"
+  },
+  {
+   "cause": "PW-3",
+   "checked": [
+    "3.5",
+    "3.3",
+    "3.4"
+   ],
+   "did": [
+    "3.4.2"
+   ],
+   "equipment": "M-14",
+   "group": "PW",
+   "id": "H-0038",
+   "sensors": {
+    "air_temperature_k": 297.6,
+    "power_w": 3595,
+    "process_temperature_k": 308.6,
+    "rotational_speed_rpm": 2384.0,
+    "temp_diff_k": 11.0,
+    "tool_wear_min": 171.0,
+    "torque_nm": 14.4
+   },
+   "ts": "2026-03-20T14:12:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.5",
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-15",
+   "group": "PW",
+   "id": "H-0039",
+   "sensors": {
+    "air_temperature_k": 297.6,
+    "power_w": 8665,
+    "process_temperature_k": 308.6,
+    "rotational_speed_rpm": 1326.0,
+    "temp_diff_k": 11.0,
+    "tool_wear_min": 173.0,
+    "torque_nm": 62.4
+   },
+   "ts": "2026-03-20T15:22:00+09:00"
+  },
+  {
+   "cause": "LD-3",
+   "checked": [
+    "5.3",
+    "5.4"
+   ],
+   "did": [
+    "5.4.2"
+   ],
+   "equipment": "M-20",
+   "group": "LD",
+   "id": "H-0041",
+   "sensors": {
+    "air_temperature_k": 298.2,
+    "power_w": 8235,
+    "process_temperature_k": 308.8,
+    "rotational_speed_rpm": 1302.0,
+    "temp_diff_k": 10.6,
+    "tool_wear_min": 34.0,
+    "torque_nm": 60.4
+   },
+   "ts": "2026-03-24T11:23:00+09:00"
+  },
+  {
+   "cause": "PW-3",
+   "checked": [
+    "3.5",
+    "3.3",
+    "3.4"
+   ],
+   "did": [
+    "3.4.2"
+   ],
+   "equipment": "M-18",
+   "group": "PW",
+   "id": "H-0042",
+   "sensors": {
+    "air_temperature_k": 298.5,
+    "power_w": 4081,
+    "process_temperature_k": 309.1,
+    "rotational_speed_rpm": 2051.0,
+    "temp_diff_k": 10.6,
+    "tool_wear_min": 184.0,
+    "torque_nm": 19.0
+   },
+   "ts": "2026-03-26T14:12:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-03",
+   "group": "PW",
+   "id": "H-0044",
+   "sensors": {
+    "air_temperature_k": 299.0,
+    "power_w": 9012,
+    "process_temperature_k": 310.2,
+    "rotational_speed_rpm": 1377.0,
+    "temp_diff_k": 11.2,
+    "tool_wear_min": 92.0,
+    "torque_nm": 62.5
+   },
+   "ts": "2026-04-05T23:52:00+09:00"
+  },
+  {
+   "cause": "LD-2",
+   "checked": [
+    "5.3",
+    "5.4",
+    "5.5",
+    "5.6"
+   ],
+   "did": [
+    "7.2"
+   ],
+   "equipment": "M-09",
+   "group": "LD",
+   "id": "H-0045",
+   "sensors": {
+    "air_temperature_k": 298.9,
+    "power_w": 8343,
+    "process_temperature_k": 309.8,
+    "rotational_speed_rpm": 1287.0,
+    "temp_diff_k": 10.9,
+    "tool_wear_min": 216.0,
+    "torque_nm": 61.9
+   },
+   "ts": "2026-04-07T15:42:00+09:00"
+  },
+  {
+   "cause": "TW-3",
+   "checked": [
+    "2.3"
+   ],
+   "did": [
+    "2.3.2"
+   ],
+   "equipment": "M-11",
+   "group": "TW",
+   "id": "H-0046",
+   "sensors": {
+    "air_temperature_k": 299.0,
+    "power_w": 6855,
+    "process_temperature_k": 310.0,
+    "rotational_speed_rpm": 1458.0,
+    "temp_diff_k": 11.0,
+    "tool_wear_min": 221.0,
+    "torque_nm": 44.9
+   },
+   "ts": "2026-04-07T17:36:00+09:00"
+  },
+  {
+   "cause": "TW-1",
+   "checked": [
+    "2.3",
+    "2.4",
+    "2.6",
+    "2.5"
+   ],
+   "did": [
+    "2.4.2"
+   ],
+   "equipment": "M-13",
+   "group": "TW",
+   "id": "H-0047",
+   "sensors": {
+    "air_temperature_k": 299.1,
+    "power_w": 7333,
+    "process_temperature_k": 310.1,
+    "rotational_speed_rpm": 1435.0,
+    "temp_diff_k": 11.0,
+    "tool_wear_min": 229.0,
+    "torque_nm": 48.8
+   },
+   "ts": "2026-04-07T19:46:00+09:00"
+  },
+  {
+   "cause": "TW-1",
+   "checked": [
+    "2.3",
+    "2.4",
+    "2.5"
+   ],
+   "did": [
+    "2.4.2"
+   ],
+   "equipment": "M-16",
+   "group": "TW",
+   "id": "H-0049",
+   "sensors": {
+    "air_temperature_k": 299.1,
+    "power_w": 4619,
+    "process_temperature_k": 310.3,
+    "rotational_speed_rpm": 1838.0,
+    "temp_diff_k": 11.2,
+    "tool_wear_min": 235.0,
+    "torque_nm": 24.0
+   },
+   "ts": "2026-04-07T22:24:00+09:00"
+  },
+  {
+   "cause": "TW-2",
+   "checked": [
+    "2.3",
+    "2.4"
+   ],
+   "did": [
+    "2.4.2"
+   ],
+   "equipment": "M-17",
+   "group": "TW",
+   "id": "H-0050",
+   "sensors": {
+    "air_temperature_k": 299.2,
+    "power_w": 6923,
+    "process_temperature_k": 310.3,
+    "rotational_speed_rpm": 1352.0,
+    "temp_diff_k": 11.1,
+    "tool_wear_min": 238.0,
+    "torque_nm": 48.9
+   },
+   "ts": "2026-04-07T23:12:00+09:00"
+  },
+  {
+   "cause": "TW-2",
+   "checked": [
+    "2.3",
+    "2.4"
+   ],
+   "did": [
+    "2.4.2"
+   ],
+   "equipment": "M-01",
+   "group": "TW",
+   "id": "H-0051",
+   "sensors": {
+    "air_temperature_k": 299.0,
+    "power_w": 6521,
+    "process_temperature_k": 310.2,
+    "rotational_speed_rpm": 1412.0,
+    "temp_diff_k": 11.2,
+    "tool_wear_min": 246.0,
+    "torque_nm": 44.1
+   },
+   "ts": "2026-04-08T02:10:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.5",
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-09",
+   "group": "PW",
+   "id": "H-0054",
+   "sensors": {
+    "air_temperature_k": 298.1,
+    "power_w": 9502,
+    "process_temperature_k": 308.2,
+    "rotational_speed_rpm": 1420.0,
+    "temp_diff_k": 10.1,
+    "tool_wear_min": 19.0,
+    "torque_nm": 63.9
+   },
+   "ts": "2026-04-29T13:50:00+09:00"
+  },
+  {
+   "cause": "PW-2",
+   "checked": [
+    "3.3",
+    "3.4",
+    "3.5",
+    "3.6"
+   ],
+   "did": [
+    "7.1"
+   ],
+   "equipment": "M-08",
+   "group": "PW",
+   "id": "H-0055",
+   "sensors": {
+    "air_temperature_k": 297.9,
+    "power_w": 4169,
+    "process_temperature_k": 308.5,
+    "rotational_speed_rpm": 2129.0,
+    "temp_diff_k": 10.6,
+    "tool_wear_min": 126.0,
+    "torque_nm": 18.7
+   },
+   "ts": "2026-04-30T23:48:00+09:00"
+  },
+  {
+   "cause": "TW-3",
+   "checked": [
+    "2.3"
+   ],
+   "did": [
+    "2.3.2"
+   ],
+   "equipment": "M-01",
+   "group": "TW",
+   "id": "H-0056",
+   "sensors": {
+    "air_temperature_k": 297.6,
+    "power_w": 7560,
+    "process_temperature_k": 308.4,
+    "rotational_speed_rpm": 1391.0,
+    "temp_diff_k": 10.8,
+    "tool_wear_min": 218.0,
+    "torque_nm": 51.9
+   },
+   "ts": "2026-05-02T04:52:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-07",
+   "group": "PW",
+   "id": "H-0057",
+   "sensors": {
+    "air_temperature_k": 297.5,
+    "power_w": 8478,
+    "process_temperature_k": 309.4,
+    "rotational_speed_rpm": 1391.0,
+    "temp_diff_k": 11.9,
+    "tool_wear_min": 34.0,
+    "torque_nm": 58.2
+   },
+   "ts": "2026-05-08T23:15:00+09:00"
+  },
+  {
+   "cause": "TW-3",
+   "checked": [
+    "2.3"
+   ],
+   "did": [
+    "2.3.2"
+   ],
+   "equipment": "M-15",
+   "group": "TW",
+   "id": "H-0058",
+   "sensors": {
+    "air_temperature_k": 297.6,
+    "power_w": 4296,
+    "process_temperature_k": 309.5,
+    "rotational_speed_rpm": 2001.0,
+    "temp_diff_k": 11.9,
+    "tool_wear_min": 220.0,
+    "torque_nm": 20.5
+   },
+   "ts": "2026-05-11T10:49:00+09:00"
+  },
+  {
+   "cause": "TW-3",
+   "checked": [
+    "2.3"
+   ],
+   "did": [
+    "2.3.2"
+   ],
+   "equipment": "M-16",
+   "group": "TW",
+   "id": "H-0059",
+   "sensors": {
+    "air_temperature_k": 297.6,
+    "power_w": 7828,
+    "process_temperature_k": 309.6,
+    "rotational_speed_rpm": 1501.0,
+    "temp_diff_k": 12.0,
+    "tool_wear_min": 222.0,
+    "torque_nm": 49.8
+   },
+   "ts": "2026-05-11T11:54:00+09:00"
+  },
+  {
+   "cause": "TW-1",
+   "checked": [
+    "2.3",
+    "2.4",
+    "2.6",
+    "2.5"
+   ],
+   "did": [
+    "2.4.2"
+   ],
+   "equipment": "M-18",
+   "group": "TW",
+   "id": "H-0060",
+   "sensors": {
+    "air_temperature_k": 297.6,
+    "power_w": 5694,
+    "process_temperature_k": 309.4,
+    "rotational_speed_rpm": 1628.0,
+    "temp_diff_k": 11.8,
+    "tool_wear_min": 229.0,
+    "torque_nm": 33.4
+   },
+   "ts": "2026-05-11T13:45:00+09:00"
+  },
+  {
+   "cause": "LD-2",
+   "checked": [
+    "5.3",
+    "5.4",
+    "5.5",
+    "5.6"
+   ],
+   "did": [
+    "7.2"
+   ],
+   "equipment": "M-12",
+   "group": "LD",
+   "id": "H-0061",
+   "sensors": {
+    "air_temperature_k": 296.7,
+    "power_w": 8148,
+    "process_temperature_k": 307.8,
+    "rotational_speed_rpm": 1286.0,
+    "temp_diff_k": 11.1,
+    "tool_wear_min": 0.0,
+    "torque_nm": 60.5
+   },
+   "ts": "2026-05-17T21:58:00+09:00"
+  },
+  {
+   "cause": "LD-2",
+   "checked": [
+    "5.3",
+    "5.4",
+    "5.5",
+    "5.6"
+   ],
+   "did": [
+    "7.2"
+   ],
+   "equipment": "M-07",
+   "group": "LD",
+   "id": "H-0062",
+   "sensors": {
+    "air_temperature_k": 295.6,
+    "power_w": 8174,
+    "process_temperature_k": 306.2,
+    "rotational_speed_rpm": 1263.0,
+    "temp_diff_k": 10.6,
+    "tool_wear_min": 27.0,
+    "torque_nm": 61.8
+   },
+   "ts": "2026-05-24T07:13:00+09:00"
+  },
+  {
+   "cause": "LD-3",
+   "checked": [
+    "5.3",
+    "5.4"
+   ],
+   "did": [
+    "5.4.2"
+   ],
+   "equipment": "M-04",
+   "group": "LD",
+   "id": "H-0063",
+   "sensors": {
+    "air_temperature_k": 296.2,
+    "power_w": 7755,
+    "process_temperature_k": 307.2,
+    "rotational_speed_rpm": 1168.0,
+    "temp_diff_k": 11.0,
+    "tool_wear_min": 172.0,
+    "torque_nm": 63.4
+   },
+   "ts": "2026-05-26T09:17:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-14",
+   "group": "PW",
+   "id": "H-0065",
+   "sensors": {
+    "air_temperature_k": 296.7,
+    "power_w": 9090,
+    "process_temperature_k": 307.8,
+    "rotational_speed_rpm": 1258.0,
+    "temp_diff_k": 11.1,
+    "tool_wear_min": 105.0,
+    "torque_nm": 69.0
+   },
+   "ts": "2026-05-31T03:08:00+09:00"
+  },
+  {
+   "cause": "LD-3",
+   "checked": [
+    "5.3",
+    "5.4"
+   ],
+   "did": [
+    "5.4.2"
+   ],
+   "equipment": "M-02",
+   "group": "LD",
+   "id": "H-0066",
+   "sensors": {
+    "air_temperature_k": 296.8,
+    "power_w": 8172,
+    "process_temperature_k": 307.9,
+    "rotational_speed_rpm": 1271.0,
+    "temp_diff_k": 11.1,
+    "tool_wear_min": 125.0,
+    "torque_nm": 61.4
+   },
+   "ts": "2026-05-31T10:36:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.5",
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-11",
+   "group": "PW",
+   "id": "H-0067",
+   "sensors": {
+    "air_temperature_k": 297.0,
+    "power_w": 8434,
+    "process_temperature_k": 307.8,
+    "rotational_speed_rpm": 1316.0,
+    "temp_diff_k": 10.8,
+    "tool_wear_min": 200.0,
+    "torque_nm": 61.2
+   },
+   "ts": "2026-06-01T11:34:00+09:00"
+  },
+  {
+   "cause": "TW-3",
+   "checked": [
+    "2.3"
+   ],
+   "did": [
+    "2.3.2"
+   ],
+   "equipment": "M-19",
+   "group": "TW",
+   "id": "H-0068",
+   "sensors": {
+    "air_temperature_k": 297.0,
+    "power_w": 6201,
+    "process_temperature_k": 308.1,
+    "rotational_speed_rpm": 1355.0,
+    "temp_diff_k": 11.1,
+    "tool_wear_min": 217.0,
+    "torque_nm": 43.7
+   },
+   "ts": "2026-06-01T18:40:00+09:00"
+  },
+  {
+   "cause": "TW-1",
+   "checked": [
+    "2.3",
+    "2.4",
+    "2.6",
+    "2.5"
+   ],
+   "did": [
+    "2.4.2"
+   ],
+   "equipment": "M-01",
+   "group": "TW",
+   "id": "H-0069",
+   "sensors": {
+    "air_temperature_k": 297.0,
+    "power_w": 6577,
+    "process_temperature_k": 308.1,
+    "rotational_speed_rpm": 1517.0,
+    "temp_diff_k": 11.1,
+    "tool_wear_min": 222.0,
+    "torque_nm": 41.4
+   },
+   "ts": "2026-06-01T20:48:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-08",
+   "group": "PW",
+   "id": "H-0070",
+   "sensors": {
+    "air_temperature_k": 297.3,
+    "power_w": 8842,
+    "process_temperature_k": 308.5,
+    "rotational_speed_rpm": 1398.0,
+    "temp_diff_k": 11.2,
+    "tool_wear_min": 12.0,
+    "torque_nm": 60.4
+   },
+   "ts": "2026-06-02T02:53:00+09:00"
+  },
+  {
+   "cause": "PW-2",
+   "checked": [
+    "3.5",
+    "3.6"
+   ],
+   "did": [
+    "7.1"
+   ],
+   "equipment": "M-12",
+   "group": "PW",
+   "id": "H-0071",
+   "sensors": {
+    "air_temperature_k": 297.0,
+    "power_w": 8644,
+    "process_temperature_k": 308.3,
+    "rotational_speed_rpm": 1399.0,
+    "temp_diff_k": 11.3,
+    "tool_wear_min": 135.0,
+    "torque_nm": 59.0
+   },
+   "ts": "2026-06-03T16:51:00+09:00"
+  },
+  {
+   "cause": "TW-3",
+   "checked": [
+    "2.3"
+   ],
+   "did": [
+    "2.3.2"
+   ],
+   "equipment": "M-20",
+   "group": "TW",
+   "id": "H-0072",
+   "sensors": {
+    "air_temperature_k": 297.3,
+    "power_w": 5856,
+    "process_temperature_k": 308.7,
+    "rotational_speed_rpm": 1549.0,
+    "temp_diff_k": 11.4,
+    "tool_wear_min": 218.0,
+    "torque_nm": 36.1
+   },
+   "ts": "2026-06-04T17:54:00+09:00"
+  },
+  {
+   "cause": "TW-2",
+   "checked": [
+    "2.3",
+    "2.4"
+   ],
+   "did": [
+    "2.4.2"
+   ],
+   "equipment": "M-02",
+   "group": "TW",
+   "id": "H-0073",
+   "sensors": {
+    "air_temperature_k": 297.5,
+    "power_w": 6662,
+    "process_temperature_k": 308.8,
+    "rotational_speed_rpm": 1533.0,
+    "temp_diff_k": 11.3,
+    "tool_wear_min": 223.0,
+    "torque_nm": 41.5
+   },
+   "ts": "2026-06-04T19:13:00+09:00"
+  },
+  {
+   "cause": "TW-3",
+   "checked": [
+    "2.3"
+   ],
+   "did": [
+    "2.3.2"
+   ],
+   "equipment": "M-11",
+   "group": "TW",
+   "id": "H-0074",
+   "sensors": {
+    "air_temperature_k": 298.7,
+    "power_w": 5292,
+    "process_temperature_k": 309.8,
+    "rotational_speed_rpm": 1589.0,
+    "temp_diff_k": 11.1,
+    "tool_wear_min": 217.0,
+    "torque_nm": 31.8
+   },
+   "ts": "2026-06-10T23:46:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-10",
+   "group": "PW",
+   "id": "H-0075",
+   "sensors": {
+    "air_temperature_k": 298.2,
+    "power_w": 4026,
+    "process_temperature_k": 309.3,
+    "rotational_speed_rpm": 2056.0,
+    "temp_diff_k": 11.1,
+    "tool_wear_min": 144.0,
+    "torque_nm": 18.7
+   },
+   "ts": "2026-06-13T03:24:00+09:00"
+  },
+  {
+   "cause": "LD-3",
+   "checked": [
+    "5.3",
+    "5.4"
+   ],
+   "did": [
+    "5.4.2"
+   ],
+   "equipment": "M-11",
+   "group": "LD",
+   "id": "H-0076",
+   "sensors": {
+    "air_temperature_k": 298.2,
+    "power_w": 8397,
+    "process_temperature_k": 309.2,
+    "rotational_speed_rpm": 1332.0,
+    "temp_diff_k": 11.0,
+    "tool_wear_min": 147.0,
+    "torque_nm": 60.2
+   },
+   "ts": "2026-06-13T03:43:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-15",
+   "group": "PW",
+   "id": "H-0077",
+   "sensors": {
+    "air_temperature_k": 298.1,
+    "power_w": 3994,
+    "process_temperature_k": 309.0,
+    "rotational_speed_rpm": 1976.0,
+    "temp_diff_k": 10.9,
+    "tool_wear_min": 158.0,
+    "torque_nm": 19.3
+   },
+   "ts": "2026-06-13T07:25:00+09:00"
+  },
+  {
+   "cause": "PW-2",
+   "checked": [
+    "3.3",
+    "3.4",
+    "3.5",
+    "3.6"
+   ],
+   "did": [
+    "7.1"
+   ],
+   "equipment": "M-10",
+   "group": "PW",
+   "id": "H-0078",
+   "sensors": {
+    "air_temperature_k": 298.0,
+    "power_w": 3828,
+    "process_temperature_k": 308.7,
+    "rotational_speed_rpm": 2101.0,
+    "temp_diff_k": 10.7,
+    "tool_wear_min": 198.0,
+    "torque_nm": 17.4
+   },
+   "ts": "2026-06-13T20:58:00+09:00"
+  },
+  {
+   "cause": "TW-1",
+   "checked": [
+    "2.3",
+    "2.4",
+    "2.5"
+   ],
+   "did": [
+    "2.4.2"
+   ],
+   "equipment": "M-18",
+   "group": "TW",
+   "id": "H-0079",
+   "sensors": {
+    "air_temperature_k": 298.0,
+    "power_w": 5886,
+    "process_temperature_k": 308.6,
+    "rotational_speed_rpm": 1507.0,
+    "temp_diff_k": 10.6,
+    "tool_wear_min": 217.0,
+    "torque_nm": 37.3
+   },
+   "ts": "2026-06-14T03:24:00+09:00"
+  },
+  {
+   "cause": "PW-3",
+   "checked": [
+    "3.5",
+    "3.3",
+    "3.4"
+   ],
+   "did": [
+    "3.4.2"
+   ],
+   "equipment": "M-17",
+   "group": "PW",
+   "id": "H-0080",
+   "sensors": {
+    "air_temperature_k": 298.4,
+    "power_w": 3541,
+    "process_temperature_k": 307.9,
+    "rotational_speed_rpm": 2381.0,
+    "temp_diff_k": 9.5,
+    "tool_wear_min": 164.0,
+    "torque_nm": 14.2
+   },
+   "ts": "2026-06-22T21:19:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-06",
+   "group": "PW",
+   "id": "H-0081",
+   "sensors": {
+    "air_temperature_k": 298.1,
+    "power_w": 8578,
+    "process_temperature_k": 307.4,
+    "rotational_speed_rpm": 1363.0,
+    "temp_diff_k": 9.3,
+    "tool_wear_min": 187.0,
+    "torque_nm": 60.1
+   },
+   "ts": "2026-06-23T05:15:00+09:00"
+  },
+  {
+   "cause": "PW-2",
+   "checked": [
+    "3.3",
+    "3.4",
+    "3.5",
+    "3.6"
+   ],
+   "did": [
+    "7.1"
+   ],
+   "equipment": "M-11",
+   "group": "PW",
+   "id": "H-0082",
+   "sensors": {
+    "air_temperature_k": 298.1,
+    "power_w": 4145,
+    "process_temperature_k": 307.6,
+    "rotational_speed_rpm": 1950.0,
+    "temp_diff_k": 9.5,
+    "tool_wear_min": 202.0,
+    "torque_nm": 20.3
+   },
+   "ts": "2026-06-23T09:03:00+09:00"
+  },
+  {
+   "cause": "PW-2",
+   "checked": [
+    "3.5",
+    "3.6"
+   ],
+   "did": [
+    "7.1"
+   ],
+   "equipment": "M-03",
+   "group": "PW",
+   "id": "H-0083",
+   "sensors": {
+    "air_temperature_k": 298.5,
+    "power_w": 8623,
+    "process_temperature_k": 308.0,
+    "rotational_speed_rpm": 1384.0,
+    "temp_diff_k": 9.5,
+    "tool_wear_min": 27.0,
+    "torque_nm": 59.5
+   },
+   "ts": "2026-06-23T19:44:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-14",
+   "group": "PW",
+   "id": "H-0084",
+   "sensors": {
+    "air_temperature_k": 298.3,
+    "power_w": 1148,
+    "process_temperature_k": 308.0,
+    "rotational_speed_rpm": 2886.0,
+    "temp_diff_k": 9.7,
+    "tool_wear_min": 57.0,
+    "torque_nm": 3.8
+   },
+   "ts": "2026-06-24T05:46:00+09:00"
+  },
+  {
+   "cause": "LD-2",
+   "checked": [
+    "5.3",
+    "5.4",
+    "5.5",
+    "5.6"
+   ],
+   "did": [
+    "7.2"
+   ],
+   "equipment": "M-05",
+   "group": "LD",
+   "id": "H-0085",
+   "sensors": {
+    "air_temperature_k": 297.7,
+    "power_w": 8214,
+    "process_temperature_k": 307.3,
+    "rotational_speed_rpm": 1249.0,
+    "temp_diff_k": 9.6,
+    "tool_wear_min": 47.0,
+    "torque_nm": 62.8
+   },
+   "ts": "2026-06-26T19:58:00+09:00"
+  },
+  {
+   "cause": "PW-3",
+   "checked": [
+    "3.3",
+    "3.4"
+   ],
+   "did": [
+    "3.4.2"
+   ],
+   "equipment": "M-01",
+   "group": "PW",
+   "id": "H-0086",
+   "sensors": {
+    "air_temperature_k": 298.3,
+    "power_w": 4143,
+    "process_temperature_k": 308.1,
+    "rotational_speed_rpm": 1840.0,
+    "temp_diff_k": 9.8,
+    "tool_wear_min": 88.0,
+    "torque_nm": 21.5
+   },
+   "ts": "2026-06-27T09:46:00+09:00"
+  },
+  {
+   "cause": "LD-2",
+   "checked": [
+    "5.3",
+    "5.4",
+    "5.5",
+    "5.6"
+   ],
+   "did": [
+    "7.2"
+   ],
+   "equipment": "M-06",
+   "group": "LD",
+   "id": "H-0087",
+   "sensors": {
+    "air_temperature_k": 298.3,
+    "power_w": 8064,
+    "process_temperature_k": 308.0,
+    "rotational_speed_rpm": 1242.0,
+    "temp_diff_k": 9.7,
+    "tool_wear_min": 98.0,
+    "torque_nm": 62.0
+   },
+   "ts": "2026-06-27T14:00:00+09:00"
+  },
+  {
+   "cause": "LD-3",
+   "checked": [
+    "5.3",
+    "5.4"
+   ],
+   "did": [
+    "5.4.2"
+   ],
+   "equipment": "M-20",
+   "group": "LD",
+   "id": "H-0088",
+   "sensors": {
+    "air_temperature_k": 298.6,
+    "power_w": 8097,
+    "process_temperature_k": 308.3,
+    "rotational_speed_rpm": 1278.0,
+    "temp_diff_k": 9.7,
+    "tool_wear_min": 32.0,
+    "torque_nm": 60.5
+   },
+   "ts": "2026-07-02T11:36:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.5",
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-05",
+   "group": "PW",
+   "id": "H-0089",
+   "sensors": {
+    "air_temperature_k": 298.5,
+    "power_w": 9033,
+    "process_temperature_k": 308.2,
+    "rotational_speed_rpm": 1301.0,
+    "temp_diff_k": 9.7,
+    "tool_wear_min": 42.0,
+    "torque_nm": 66.3
+   },
+   "ts": "2026-07-02T15:43:00+09:00"
+  },
+  {
+   "cause": "PW-2",
+   "checked": [
+    "3.3",
+    "3.4",
+    "3.5",
+    "3.6"
+   ],
+   "did": [
+    "7.1"
+   ],
+   "equipment": "M-10",
+   "group": "PW",
+   "id": "H-0090",
+   "sensors": {
+    "air_temperature_k": 299.3,
+    "power_w": 3677,
+    "process_temperature_k": 309.2,
+    "rotational_speed_rpm": 2280.0,
+    "temp_diff_k": 9.9,
+    "tool_wear_min": 207.0,
+    "torque_nm": 15.4
+   },
+   "ts": "2026-07-05T00:53:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-08",
+   "group": "PW",
+   "id": "H-0091",
+   "sensors": {
+    "air_temperature_k": 299.4,
+    "power_w": 8656,
+    "process_temperature_k": 309.3,
+    "rotational_speed_rpm": 1401.0,
+    "temp_diff_k": 9.9,
+    "tool_wear_min": 38.0,
+    "torque_nm": 59.0
+   },
+   "ts": "2026-07-05T16:51:00+09:00"
+  },
+  {
+   "cause": "PW-2",
+   "checked": [
+    "3.5",
+    "3.6"
+   ],
+   "did": [
+    "7.1"
+   ],
+   "equipment": "M-07",
+   "group": "PW",
+   "id": "H-0092",
+   "sensors": {
+    "air_temperature_k": 299.4,
+    "power_w": 4020,
+    "process_temperature_k": 309.0,
+    "rotational_speed_rpm": 1939.0,
+    "temp_diff_k": 9.6,
+    "tool_wear_min": 204.0,
+    "torque_nm": 19.8
+   },
+   "ts": "2026-07-07T20:31:00+09:00"
+  },
+  {
+   "cause": "TW-1",
+   "checked": [
+    "2.3",
+    "2.4",
+    "2.5"
+   ],
+   "did": [
+    "2.4.2"
+   ],
+   "equipment": "M-12",
+   "group": "TW",
+   "id": "H-0093",
+   "sensors": {
+    "air_temperature_k": 299.5,
+    "power_w": 5890,
+    "process_temperature_k": 309.1,
+    "rotational_speed_rpm": 1336.0,
+    "temp_diff_k": 9.6,
+    "tool_wear_min": 217.0,
+    "torque_nm": 42.1
+   },
+   "ts": "2026-07-08T00:42:00+09:00"
+  },
+  {
+   "cause": "TW-1",
+   "checked": [
+    "2.3",
+    "2.4",
+    "2.5"
+   ],
+   "did": [
+    "2.4.2"
+   ],
+   "equipment": "M-13",
+   "group": "TW",
+   "id": "H-0094",
+   "sensors": {
+    "air_temperature_k": 299.6,
+    "power_w": 5927,
+    "process_temperature_k": 309.2,
+    "rotational_speed_rpm": 1422.0,
+    "temp_diff_k": 9.6,
+    "tool_wear_min": 219.0,
+    "torque_nm": 39.8
+   },
+   "ts": "2026-07-08T01:17:00+09:00"
+  },
+  {
+   "cause": "TW-1",
+   "checked": [
+    "2.3",
+    "2.4",
+    "2.5"
+   ],
+   "did": [
+    "2.4.2"
+   ],
+   "equipment": "M-14",
+   "group": "TW",
+   "id": "H-0095",
+   "sensors": {
+    "air_temperature_k": 299.6,
+    "power_w": 5919,
+    "process_temperature_k": 309.2,
+    "rotational_speed_rpm": 1540.0,
+    "temp_diff_k": 9.6,
+    "tool_wear_min": 221.0,
+    "torque_nm": 36.7
+   },
+   "ts": "2026-07-08T02:13:00+09:00"
+  },
+  {
+   "cause": "LD-1",
+   "checked": [
+    "5.3"
+   ],
+   "did": [
+    "5.3.2"
+   ],
+   "equipment": "M-18",
+   "group": "LD",
+   "id": "H-0096",
+   "sensors": {
+    "air_temperature_k": 299.3,
+    "power_w": 8275,
+    "process_temperature_k": 308.5,
+    "rotational_speed_rpm": 1304.0,
+    "temp_diff_k": 9.2,
+    "tool_wear_min": 8.0,
+    "torque_nm": 60.6
+   },
+   "ts": "2026-07-11T04:13:00+09:00"
+  },
+  {
+   "cause": "LD-3",
+   "checked": [
+    "5.3",
+    "5.4"
+   ],
+   "did": [
+    "5.4.2"
+   ],
+   "equipment": "M-08",
+   "group": "LD",
+   "id": "H-0097",
+   "sensors": {
+    "air_temperature_k": 299.1,
+    "power_w": 8329,
+    "process_temperature_k": 308.2,
+    "rotational_speed_rpm": 1319.0,
+    "temp_diff_k": 9.1,
+    "tool_wear_min": 36.0,
+    "torque_nm": 60.3
+   },
+   "ts": "2026-07-11T12:51:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-16",
+   "group": "PW",
+   "id": "H-0098",
+   "sensors": {
+    "air_temperature_k": 299.2,
+    "power_w": 8764,
+    "process_temperature_k": 308.5,
+    "rotational_speed_rpm": 1381.0,
+    "temp_diff_k": 9.3,
+    "tool_wear_min": 59.0,
+    "torque_nm": 60.6
+   },
+   "ts": "2026-07-11T19:51:00+09:00"
+  },
+  {
+   "cause": "LD-1",
+   "checked": [
+    "5.3"
+   ],
+   "did": [
+    "5.3.2"
+   ],
+   "equipment": "M-16",
+   "group": "LD",
+   "id": "H-0099",
+   "sensors": {
+    "air_temperature_k": 299.4,
+    "power_w": 8167,
+    "process_temperature_k": 308.7,
+    "rotational_speed_rpm": 1289.0,
+    "temp_diff_k": 9.3,
+    "tool_wear_min": 104.0,
+    "torque_nm": 60.5
+   },
+   "ts": "2026-07-12T12:57:00+09:00"
+  },
+  {
+   "cause": "TW-4",
+   "checked": [
+    "2.3",
+    "2.4",
+    "2.5",
+    "2.6"
+   ],
+   "did": [
+    "2.6.2"
+   ],
+   "equipment": "M-01",
+   "group": "TW",
+   "id": "H-0101",
+   "sensors": {
+    "air_temperature_k": 299.3,
+    "power_w": 7768,
+    "process_temperature_k": 308.6,
+    "rotational_speed_rpm": 1384.0,
+    "temp_diff_k": 9.3,
+    "tool_wear_min": 218.0,
+    "torque_nm": 53.6
+   },
+   "ts": "2026-07-14T04:25:00+09:00"
+  },
+  {
+   "cause": "TW-3",
+   "checked": [
+    "2.3"
+   ],
+   "did": [
+    "2.3.2"
+   ],
+   "equipment": "M-02",
+   "group": "TW",
+   "id": "H-0102",
+   "sensors": {
+    "air_temperature_k": 299.2,
+    "power_w": 7273,
+    "process_temperature_k": 308.5,
+    "rotational_speed_rpm": 1378.0,
+    "temp_diff_k": 9.3,
+    "tool_wear_min": 220.0,
+    "torque_nm": 50.4
+   },
+   "ts": "2026-07-14T05:50:00+09:00"
+  },
+  {
+   "cause": "TW-1",
+   "checked": [
+    "2.3",
+    "2.4",
+    "2.6",
+    "2.5"
+   ],
+   "did": [
+    "2.4.2"
+   ],
+   "equipment": "M-04",
+   "group": "TW",
+   "id": "H-0103",
+   "sensors": {
+    "air_temperature_k": 299.2,
+    "power_w": 6582,
+    "process_temperature_k": 308.4,
+    "rotational_speed_rpm": 1445.0,
+    "temp_diff_k": 9.2,
+    "tool_wear_min": 224.0,
+    "torque_nm": 43.5
+   },
+   "ts": "2026-07-14T07:37:00+09:00"
+  },
+  {
+   "cause": "LD-3",
+   "checked": [
+    "5.3",
+    "5.4"
+   ],
+   "did": [
+    "5.4.2"
+   ],
+   "equipment": "M-13",
+   "group": "LD",
+   "id": "H-0104",
+   "sensors": {
+    "air_temperature_k": 299.1,
+    "power_w": 8391,
+    "process_temperature_k": 308.3,
+    "rotational_speed_rpm": 1305.0,
+    "temp_diff_k": 9.2,
+    "tool_wear_min": 17.0,
+    "torque_nm": 61.4
+   },
+   "ts": "2026-07-14T15:22:00+09:00"
+  },
+  {
+   "cause": "LD-3",
+   "checked": [
+    "5.3",
+    "5.4"
+   ],
+   "did": [
+    "5.4.2"
+   ],
+   "equipment": "M-05",
+   "group": "LD",
+   "id": "H-0105",
+   "sensors": {
+    "air_temperature_k": 299.3,
+    "power_w": 8282,
+    "process_temperature_k": 308.5,
+    "rotational_speed_rpm": 1305.0,
+    "temp_diff_k": 9.2,
+    "tool_wear_min": 44.0,
+    "torque_nm": 60.6
+   },
+   "ts": "2026-07-15T01:31:00+09:00"
+  },
+  {
+   "cause": "LD-1",
+   "checked": [
+    "5.3"
+   ],
+   "did": [
+    "5.3.2"
+   ],
+   "equipment": "M-10",
+   "group": "LD",
+   "id": "H-0106",
+   "sensors": {
+    "air_temperature_k": 299.0,
+    "power_w": 7921,
+    "process_temperature_k": 308.1,
+    "rotational_speed_rpm": 1242.0,
+    "temp_diff_k": 9.1,
+    "tool_wear_min": 117.0,
+    "torque_nm": 60.9
+   },
+   "ts": "2026-07-15T23:37:00+09:00"
+  },
+  {
+   "cause": "PW-3",
+   "checked": [
+    "3.3",
+    "3.4"
+   ],
+   "did": [
+    "3.4.2"
+   ],
+   "equipment": "M-14",
+   "group": "PW",
+   "id": "H-0108",
+   "sensors": {
+    "air_temperature_k": 299.2,
+    "power_w": 9049,
+    "process_temperature_k": 308.6,
+    "rotational_speed_rpm": 1267.0,
+    "temp_diff_k": 9.4,
+    "tool_wear_min": 76.0,
+    "torque_nm": 68.2
+   },
+   "ts": "2026-07-18T07:58:00+09:00"
+  },
+  {
+   "cause": "PW-2",
+   "checked": [
+    "3.3",
+    "3.4",
+    "3.5",
+    "3.6"
+   ],
+   "did": [
+    "7.1"
+   ],
+   "equipment": "M-02",
+   "group": "PW",
+   "id": "H-0109",
+   "sensors": {
+    "air_temperature_k": 299.0,
+    "power_w": 8466,
+    "process_temperature_k": 308.8,
+    "rotational_speed_rpm": 1382.0,
+    "temp_diff_k": 9.8,
+    "tool_wear_min": 199.0,
+    "torque_nm": 58.5
+   },
+   "ts": "2026-07-20T01:54:00+09:00"
+  },
+  {
+   "cause": "TW-1",
+   "checked": [
+    "2.3",
+    "2.4",
+    "2.6",
+    "2.5"
+   ],
+   "did": [
+    "2.4.2"
+   ],
+   "equipment": "M-12",
+   "group": "TW",
+   "id": "H-0110",
+   "sensors": {
+    "air_temperature_k": 299.2,
+    "power_w": 7758,
+    "process_temperature_k": 309.0,
+    "rotational_speed_rpm": 1515.0,
+    "temp_diff_k": 9.8,
+    "tool_wear_min": 228.0,
+    "torque_nm": 48.9
+   },
+   "ts": "2026-07-20T10:22:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-04",
+   "group": "PW",
+   "id": "H-0111",
+   "sensors": {
+    "air_temperature_k": 299.5,
+    "power_w": 3986,
+    "process_temperature_k": 309.3,
+    "rotational_speed_rpm": 1972.0,
+    "temp_diff_k": 9.8,
+    "tool_wear_min": 177.0,
+    "torque_nm": 19.3
+   },
+   "ts": "2026-07-23T01:31:00+09:00"
+  },
+  {
+   "cause": "PW-2",
+   "checked": [
+    "3.3",
+    "3.4",
+    "3.5",
+    "3.6"
+   ],
+   "did": [
+    "7.1"
+   ],
+   "equipment": "M-08",
+   "group": "PW",
+   "id": "H-0112",
+   "sensors": {
+    "air_temperature_k": 299.1,
+    "power_w": 9331,
+    "process_temperature_k": 308.8,
+    "rotational_speed_rpm": 1320.0,
+    "temp_diff_k": 9.7,
+    "tool_wear_min": 20.0,
+    "torque_nm": 67.5
+   },
+   "ts": "2026-07-23T22:31:00+09:00"
+  },
+  {
+   "cause": "LD-3",
+   "checked": [
+    "5.3",
+    "5.4"
+   ],
+   "did": [
+    "5.4.2"
+   ],
+   "equipment": "M-13",
+   "group": "LD",
+   "id": "H-0113",
+   "sensors": {
+    "air_temperature_k": 299.6,
+    "power_w": 8343,
+    "process_temperature_k": 309.4,
+    "rotational_speed_rpm": 1283.0,
+    "temp_diff_k": 9.8,
+    "tool_wear_min": 83.0,
+    "torque_nm": 62.1
+   },
+   "ts": "2026-07-24T20:37:00+09:00"
+  },
+  {
+   "cause": "LD-1",
+   "checked": [
+    "5.3"
+   ],
+   "did": [
+    "5.3.2"
+   ],
+   "equipment": "M-06",
+   "group": "LD",
+   "id": "H-0114",
+   "sensors": {
+    "air_temperature_k": 299.9,
+    "power_w": 8050,
+    "process_temperature_k": 309.6,
+    "rotational_speed_rpm": 1254.0,
+    "temp_diff_k": 9.7,
+    "tool_wear_min": 124.0,
+    "torque_nm": 61.3
+   },
+   "ts": "2026-07-25T07:56:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.5",
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-09",
+   "group": "PW",
+   "id": "H-0115",
+   "sensors": {
+    "air_temperature_k": 299.9,
+    "power_w": 8692,
+    "process_temperature_k": 309.4,
+    "rotational_speed_rpm": 1363.0,
+    "temp_diff_k": 9.5,
+    "tool_wear_min": 57.0,
+    "torque_nm": 60.9
+   },
+   "ts": "2026-07-27T14:46:00+09:00"
+  },
+  {
+   "cause": "TW-1",
+   "checked": [
+    "2.3",
+    "2.4",
+    "2.5"
+   ],
+   "did": [
+    "2.4.2"
+   ],
+   "equipment": "M-13",
+   "group": "TW",
+   "id": "H-0117",
+   "sensors": {
+    "air_temperature_k": 299.8,
+    "power_w": 7417,
+    "process_temperature_k": 309.2,
+    "rotational_speed_rpm": 1491.0,
+    "temp_diff_k": 9.4,
+    "tool_wear_min": 216.0,
+    "torque_nm": 47.5
+   },
+   "ts": "2026-07-29T23:17:00+09:00"
+  },
+  {
+   "cause": "PW-2",
+   "checked": [
+    "3.5",
+    "3.6"
+   ],
+   "did": [
+    "7.1"
+   ],
+   "equipment": "M-11",
+   "group": "PW",
+   "id": "H-0118",
+   "sensors": {
+    "air_temperature_k": 300.2,
+    "power_w": 4069,
+    "process_temperature_k": 309.5,
+    "rotational_speed_rpm": 2183.0,
+    "temp_diff_k": 9.3,
+    "tool_wear_min": 39.0,
+    "torque_nm": 17.8
+   },
+   "ts": "2026-07-30T14:54:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-13",
+   "group": "PW",
+   "id": "H-0119",
+   "sensors": {
+    "air_temperature_k": 300.3,
+    "power_w": 8598,
+    "process_temperature_k": 309.5,
+    "rotational_speed_rpm": 1320.0,
+    "temp_diff_k": 9.2,
+    "tool_wear_min": 142.0,
+    "torque_nm": 62.2
+   },
+   "ts": "2026-08-01T03:55:00+09:00"
+  },
+  {
+   "cause": "TW-2",
+   "checked": [
+    "2.3",
+    "2.4"
+   ],
+   "did": [
+    "2.4.2"
+   ],
+   "equipment": "M-08",
+   "group": "TW",
+   "id": "H-0120",
+   "sensors": {
+    "air_temperature_k": 300.5,
+    "power_w": 7642,
+    "process_temperature_k": 309.3,
+    "rotational_speed_rpm": 1417.0,
+    "temp_diff_k": 8.8,
+    "tool_wear_min": 231.0,
+    "torque_nm": 51.5
+   },
+   "ts": "2026-08-02T10:08:00+09:00"
+  },
+  {
+   "cause": "TW-2",
+   "checked": [
+    "2.3",
+    "2.4"
+   ],
+   "did": [
+    "2.4.2"
+   ],
+   "equipment": "M-09",
+   "group": "TW",
+   "id": "H-0121",
+   "sensors": {
+    "air_temperature_k": 300.6,
+    "power_w": 7040,
+    "process_temperature_k": 309.4,
+    "rotational_speed_rpm": 1549.0,
+    "temp_diff_k": 8.8,
+    "tool_wear_min": 233.0,
+    "torque_nm": 43.4
+   },
+   "ts": "2026-08-02T11:07:00+09:00"
+  },
+  {
+   "cause": "TW-1",
+   "checked": [
+    "2.3",
+    "2.4",
+    "2.5"
+   ],
+   "did": [
+    "2.4.2"
+   ],
+   "equipment": "M-11",
+   "group": "TW",
+   "id": "H-0122",
+   "sensors": {
+    "air_temperature_k": 300.7,
+    "power_w": 6753,
+    "process_temperature_k": 309.5,
+    "rotational_speed_rpm": 1479.0,
+    "temp_diff_k": 8.8,
+    "tool_wear_min": 240.0,
+    "torque_nm": 43.6
+   },
+   "ts": "2026-08-02T12:49:00+09:00"
+  },
+  {
+   "cause": "TW-1",
+   "checked": [
+    "2.3",
+    "2.4",
+    "2.5"
+   ],
+   "did": [
+    "2.4.2"
+   ],
+   "equipment": "M-13",
+   "group": "TW",
+   "id": "H-0123",
+   "sensors": {
+    "air_temperature_k": 300.6,
+    "power_w": 6793,
+    "process_temperature_k": 309.4,
+    "rotational_speed_rpm": 1471.0,
+    "temp_diff_k": 8.8,
+    "tool_wear_min": 244.0,
+    "torque_nm": 44.1
+   },
+   "ts": "2026-08-02T14:30:00+09:00"
+  },
+  {
+   "cause": "LD-1",
+   "checked": [
+    "5.3"
+   ],
+   "did": [
+    "5.3.2"
+   ],
+   "equipment": "M-05",
+   "group": "LD",
+   "id": "H-0124",
+   "sensors": {
+    "air_temperature_k": 300.5,
+    "power_w": 8161,
+    "process_temperature_k": 309.5,
+    "rotational_speed_rpm": 1255.0,
+    "temp_diff_k": 9.0,
+    "tool_wear_min": 138.0,
+    "torque_nm": 62.1
+   },
+   "ts": "2026-08-04T12:27:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.5",
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-07",
+   "group": "PW",
+   "id": "H-0125",
+   "sensors": {
+    "air_temperature_k": 300.5,
+    "power_w": 8831,
+    "process_temperature_k": 309.8,
+    "rotational_speed_rpm": 1345.0,
+    "temp_diff_k": 9.3,
+    "tool_wear_min": 153.0,
+    "torque_nm": 62.7
+   },
+   "ts": "2026-08-07T11:46:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.5",
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-09",
+   "group": "PW",
+   "id": "H-0126",
+   "sensors": {
+    "air_temperature_k": 300.5,
+    "power_w": 8911,
+    "process_temperature_k": 309.7,
+    "rotational_speed_rpm": 1395.0,
+    "temp_diff_k": 9.2,
+    "tool_wear_min": 157.0,
+    "torque_nm": 61.0
+   },
+   "ts": "2026-08-07T13:47:00+09:00"
+  },
+  {
+   "cause": "TW-2",
+   "checked": [
+    "2.3",
+    "2.4"
+   ],
+   "did": [
+    "2.4.2"
+   ],
+   "equipment": "M-15",
+   "group": "TW",
+   "id": "H-0127",
+   "sensors": {
+    "air_temperature_k": 300.5,
+    "power_w": 7181,
+    "process_temperature_k": 309.6,
+    "rotational_speed_rpm": 1366.0,
+    "temp_diff_k": 9.1,
+    "tool_wear_min": 219.0,
+    "torque_nm": 50.2
+   },
+   "ts": "2026-08-08T12:37:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-01",
+   "group": "PW",
+   "id": "H-0128",
+   "sensors": {
+    "air_temperature_k": 300.0,
+    "power_w": 3847,
+    "process_temperature_k": 309.0,
+    "rotational_speed_rpm": 2174.0,
+    "temp_diff_k": 9.0,
+    "tool_wear_min": 112.0,
+    "torque_nm": 16.9
+   },
+   "ts": "2026-08-10T04:46:00+09:00"
+  },
+  {
+   "cause": "PW-3",
+   "checked": [
+    "3.3",
+    "3.4"
+   ],
+   "did": [
+    "3.4.2"
+   ],
+   "equipment": "M-11",
+   "group": "PW",
+   "id": "H-0129",
+   "sensors": {
+    "air_temperature_k": 300.4,
+    "power_w": 8683,
+    "process_temperature_k": 309.8,
+    "rotational_speed_rpm": 1314.0,
+    "temp_diff_k": 9.4,
+    "tool_wear_min": 146.0,
+    "torque_nm": 63.1
+   },
+   "ts": "2026-08-13T11:32:00+09:00"
+  },
+  {
+   "cause": "TW-2",
+   "checked": [
+    "2.3",
+    "2.4"
+   ],
+   "did": [
+    "2.4.2"
+   ],
+   "equipment": "M-14",
+   "group": "TW",
+   "id": "H-0130",
+   "sensors": {
+    "air_temperature_k": 302.5,
+    "power_w": 5408,
+    "process_temperature_k": 311.4,
+    "rotational_speed_rpm": 1629.0,
+    "temp_diff_k": 8.9,
+    "tool_wear_min": 225.0,
+    "torque_nm": 31.7
+   },
+   "ts": "2026-09-08T03:19:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.5",
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-01",
+   "group": "PW",
+   "id": "H-0132",
+   "sensors": {
+    "air_temperature_k": 301.9,
+    "power_w": 9562,
+    "process_temperature_k": 310.6,
+    "rotational_speed_rpm": 1331.0,
+    "temp_diff_k": 8.7,
+    "tool_wear_min": 85.0,
+    "torque_nm": 68.6
+   },
+   "ts": "2026-09-15T16:42:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-02",
+   "group": "PW",
+   "id": "H-0134",
+   "sensors": {
+    "air_temperature_k": 302.0,
+    "power_w": 8819,
+    "process_temperature_k": 310.6,
+    "rotational_speed_rpm": 1392.0,
+    "temp_diff_k": 8.6,
+    "tool_wear_min": 10.0,
+    "torque_nm": 60.5
+   },
+   "ts": "2026-09-20T20:20:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-05",
+   "group": "CL",
+   "id": "H-0136",
+   "sensors": {
+    "air_temperature_k": 302.4,
+    "power_w": 5765,
+    "process_temperature_k": 310.5,
+    "rotational_speed_rpm": 1500.0,
+    "temp_diff_k": 8.1,
+    "tool_wear_min": 164.0,
+    "torque_nm": 36.7
+   },
+   "ts": "2026-09-23T03:28:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-08",
+   "group": "CL",
+   "id": "H-0137",
+   "sensors": {
+    "air_temperature_k": 302.0,
+    "power_w": 7437,
+    "process_temperature_k": 310.1,
+    "rotational_speed_rpm": 1409.0,
+    "temp_diff_k": 8.1,
+    "tool_wear_min": 172.0,
+    "torque_nm": 50.4
+   },
+   "ts": "2026-09-23T06:09:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-09",
+   "group": "CL",
+   "id": "H-0138",
+   "sensors": {
+    "air_temperature_k": 302.0,
+    "power_w": 6471,
+    "process_temperature_k": 310.1,
+    "rotational_speed_rpm": 1361.0,
+    "temp_diff_k": 8.1,
+    "tool_wear_min": 174.0,
+    "torque_nm": 45.4
+   },
+   "ts": "2026-09-23T07:12:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-10",
+   "group": "CL",
+   "id": "H-0139",
+   "sensors": {
+    "air_temperature_k": 302.1,
+    "power_w": 5305,
+    "process_temperature_k": 310.1,
+    "rotational_speed_rpm": 1753.0,
+    "temp_diff_k": 8.0,
+    "tool_wear_min": 176.0,
+    "torque_nm": 28.9
+   },
+   "ts": "2026-09-23T08:10:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-11",
+   "group": "CL",
+   "id": "H-0140",
+   "sensors": {
+    "air_temperature_k": 302.0,
+    "power_w": 4393,
+    "process_temperature_k": 310.0,
+    "rotational_speed_rpm": 1832.0,
+    "temp_diff_k": 8.0,
+    "tool_wear_min": 178.0,
+    "torque_nm": 22.9
+   },
+   "ts": "2026-09-23T08:44:00+09:00"
+  },
+  {
+   "cause": "CL-2",
+   "checked": [
+    "4.3",
+    "4.6",
+    "4.5",
+    "4.4"
+   ],
+   "did": [
+    "4.4.2"
+   ],
+   "equipment": "M-12",
+   "group": "CL",
+   "id": "H-0141",
+   "sensors": {
+    "air_temperature_k": 301.9,
+    "power_w": 6978,
+    "process_temperature_k": 309.9,
+    "rotational_speed_rpm": 1374.0,
+    "temp_diff_k": 8.0,
+    "tool_wear_min": 180.0,
+    "torque_nm": 48.5
+   },
+   "ts": "2026-09-23T09:25:00+09:00"
+  },
+  {
+   "cause": "PW-2",
+   "checked": [
+    "3.5",
+    "3.6"
+   ],
+   "did": [
+    "7.1"
+   ],
+   "equipment": "M-06",
+   "group": "PW",
+   "id": "H-0142",
+   "sensors": {
+    "air_temperature_k": 301.8,
+    "power_w": 1716,
+    "process_temperature_k": 310.2,
+    "rotational_speed_rpm": 2825.0,
+    "temp_diff_k": 8.4,
+    "tool_wear_min": 215.0,
+    "torque_nm": 5.8
+   },
+   "ts": "2026-09-23T21:49:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.5",
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-17",
+   "group": "PW",
+   "id": "H-0143",
+   "sensors": {
+    "air_temperature_k": 301.4,
+    "power_w": 8425,
+    "process_temperature_k": 309.9,
+    "rotational_speed_rpm": 1259.0,
+    "temp_diff_k": 8.5,
+    "tool_wear_min": 20.0,
+    "torque_nm": 63.9
+   },
+   "ts": "2026-09-24T07:18:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-11",
+   "group": "CL",
+   "id": "H-0144",
+   "sensors": {
+    "air_temperature_k": 301.7,
+    "power_w": 6734,
+    "process_temperature_k": 309.8,
+    "rotational_speed_rpm": 1398.0,
+    "temp_diff_k": 8.1,
+    "tool_wear_min": 109.0,
+    "torque_nm": 46.0
+   },
+   "ts": "2026-09-25T13:28:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.5",
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-12",
+   "group": "PW",
+   "id": "H-0145",
+   "sensors": {
+    "air_temperature_k": 301.7,
+    "power_w": 9170,
+    "process_temperature_k": 309.8,
+    "rotational_speed_rpm": 1284.0,
+    "temp_diff_k": 8.1,
+    "tool_wear_min": 111.0,
+    "torque_nm": 68.2
+   },
+   "ts": "2026-09-25T14:04:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-14",
+   "group": "CL",
+   "id": "H-0147",
+   "sensors": {
+    "air_temperature_k": 301.8,
+    "power_w": 7618,
+    "process_temperature_k": 309.9,
+    "rotational_speed_rpm": 1418.0,
+    "temp_diff_k": 8.1,
+    "tool_wear_min": 116.0,
+    "torque_nm": 51.3
+   },
+   "ts": "2026-09-25T16:10:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-16",
+   "group": "CL",
+   "id": "H-0149",
+   "sensors": {
+    "air_temperature_k": 301.8,
+    "power_w": 5087,
+    "process_temperature_k": 309.7,
+    "rotational_speed_rpm": 1598.0,
+    "temp_diff_k": 7.9,
+    "tool_wear_min": 124.0,
+    "torque_nm": 30.4
+   },
+   "ts": "2026-09-25T17:37:00+09:00"
+  },
+  {
+   "cause": "CL-2",
+   "checked": [
+    "4.3",
+    "4.5",
+    "4.6",
+    "4.4"
+   ],
+   "did": [
+    "4.4.2"
+   ],
+   "equipment": "M-17",
+   "group": "CL",
+   "id": "H-0150",
+   "sensors": {
+    "air_temperature_k": 301.9,
+    "power_w": 4965,
+    "process_temperature_k": 309.8,
+    "rotational_speed_rpm": 1724.0,
+    "temp_diff_k": 7.9,
+    "tool_wear_min": 126.0,
+    "torque_nm": 27.5
+   },
+   "ts": "2026-09-25T18:43:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-18",
+   "group": "CL",
+   "id": "H-0151",
+   "sensors": {
+    "air_temperature_k": 301.9,
+    "power_w": 7054,
+    "process_temperature_k": 309.8,
+    "rotational_speed_rpm": 1507.0,
+    "temp_diff_k": 7.9,
+    "tool_wear_min": 131.0,
+    "torque_nm": 44.7
+   },
+   "ts": "2026-09-25T19:19:00+09:00"
+  },
+  {
+   "cause": "CL-2",
+   "checked": [
+    "4.3",
+    "4.6",
+    "4.5",
+    "4.4"
+   ],
+   "did": [
+    "4.4.2"
+   ],
+   "equipment": "M-19",
+   "group": "CL",
+   "id": "H-0152",
+   "sensors": {
+    "air_temperature_k": 301.9,
+    "power_w": 5245,
+    "process_temperature_k": 309.7,
+    "rotational_speed_rpm": 1595.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 133.0,
+    "torque_nm": 31.4
+   },
+   "ts": "2026-09-25T20:26:00+09:00"
+  },
+  {
+   "cause": "CL-4",
+   "checked": [
+    "4.3",
+    "4.6"
+   ],
+   "did": [
+    "4.6.2"
+   ],
+   "equipment": "M-20",
+   "group": "CL",
+   "id": "H-0153",
+   "sensors": {
+    "air_temperature_k": 301.9,
+    "power_w": 6158,
+    "process_temperature_k": 309.7,
+    "rotational_speed_rpm": 1568.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 135.0,
+    "torque_nm": 37.5
+   },
+   "ts": "2026-09-25T21:07:00+09:00"
+  },
+  {
+   "cause": "CL-4",
+   "checked": [
+    "4.3",
+    "4.5",
+    "4.6"
+   ],
+   "did": [
+    "4.6.2"
+   ],
+   "equipment": "M-01",
+   "group": "CL",
+   "id": "H-0154",
+   "sensors": {
+    "air_temperature_k": 301.8,
+    "power_w": 6553,
+    "process_temperature_k": 309.6,
+    "rotational_speed_rpm": 1432.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 138.0,
+    "torque_nm": 43.7
+   },
+   "ts": "2026-09-25T22:17:00+09:00"
+  },
+  {
+   "cause": "CL-3",
+   "checked": [
+    "4.3",
+    "4.5"
+   ],
+   "did": [
+    "4.5.2"
+   ],
+   "equipment": "M-02",
+   "group": "CL",
+   "id": "H-0155",
+   "sensors": {
+    "air_temperature_k": 301.9,
+    "power_w": 6382,
+    "process_temperature_k": 309.7,
+    "rotational_speed_rpm": 1424.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 140.0,
+    "torque_nm": 42.8
+   },
+   "ts": "2026-09-25T23:17:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-05",
+   "group": "CL",
+   "id": "H-0156",
+   "sensors": {
+    "air_temperature_k": 302.0,
+    "power_w": 7681,
+    "process_temperature_k": 309.8,
+    "rotational_speed_rpm": 1280.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 147.0,
+    "torque_nm": 57.3
+   },
+   "ts": "2026-09-26T01:38:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-06",
+   "group": "CL",
+   "id": "H-0157",
+   "sensors": {
+    "air_temperature_k": 302.0,
+    "power_w": 5353,
+    "process_temperature_k": 309.8,
+    "rotational_speed_rpm": 1649.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 152.0,
+    "torque_nm": 31.0
+   },
+   "ts": "2026-09-26T02:46:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-07",
+   "group": "CL",
+   "id": "H-0158",
+   "sensors": {
+    "air_temperature_k": 302.0,
+    "power_w": 7780,
+    "process_temperature_k": 309.9,
+    "rotational_speed_rpm": 1407.0,
+    "temp_diff_k": 7.9,
+    "tool_wear_min": 154.0,
+    "torque_nm": 52.8
+   },
+   "ts": "2026-09-26T03:06:00+09:00"
+  },
+  {
+   "cause": "CL-4",
+   "checked": [
+    "4.3",
+    "4.5",
+    "4.6"
+   ],
+   "did": [
+    "4.6.2"
+   ],
+   "equipment": "M-09",
+   "group": "CL",
+   "id": "H-0160",
+   "sensors": {
+    "air_temperature_k": 302.1,
+    "power_w": 6092,
+    "process_temperature_k": 310.0,
+    "rotational_speed_rpm": 1531.0,
+    "temp_diff_k": 7.9,
+    "tool_wear_min": 161.0,
+    "torque_nm": 38.0
+   },
+   "ts": "2026-09-26T05:10:00+09:00"
+  },
+  {
+   "cause": "CL-3",
+   "checked": [
+    "4.3",
+    "4.5"
+   ],
+   "did": [
+    "4.5.2"
+   ],
+   "equipment": "M-10",
+   "group": "CL",
+   "id": "H-0161",
+   "sensors": {
+    "air_temperature_k": 302.1,
+    "power_w": 5785,
+    "process_temperature_k": 310.1,
+    "rotational_speed_rpm": 1543.0,
+    "temp_diff_k": 8.0,
+    "tool_wear_min": 164.0,
+    "torque_nm": 35.8
+   },
+   "ts": "2026-09-26T06:21:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-11",
+   "group": "CL",
+   "id": "H-0162",
+   "sensors": {
+    "air_temperature_k": 302.1,
+    "power_w": 6960,
+    "process_temperature_k": 310.1,
+    "rotational_speed_rpm": 1379.0,
+    "temp_diff_k": 8.0,
+    "tool_wear_min": 166.0,
+    "torque_nm": 48.2
+   },
+   "ts": "2026-09-26T07:14:00+09:00"
+  },
+  {
+   "cause": "CL-2",
+   "checked": [
+    "4.3",
+    "4.5",
+    "4.6",
+    "4.4"
+   ],
+   "did": [
+    "4.4.2"
+   ],
+   "equipment": "M-12",
+   "group": "CL",
+   "id": "H-0163",
+   "sensors": {
+    "air_temperature_k": 302.1,
+    "power_w": 7061,
+    "process_temperature_k": 310.1,
+    "rotational_speed_rpm": 1447.0,
+    "temp_diff_k": 8.0,
+    "tool_wear_min": 169.0,
+    "torque_nm": 46.6
+   },
+   "ts": "2026-09-26T07:58:00+09:00"
+  },
+  {
+   "cause": "CL-4",
+   "checked": [
+    "4.3",
+    "4.5",
+    "4.6"
+   ],
+   "did": [
+    "4.6.2"
+   ],
+   "equipment": "M-13",
+   "group": "CL",
+   "id": "H-0164",
+   "sensors": {
+    "air_temperature_k": 302.1,
+    "power_w": 4750,
+    "process_temperature_k": 310.1,
+    "rotational_speed_rpm": 1844.0,
+    "temp_diff_k": 8.0,
+    "tool_wear_min": 171.0,
+    "torque_nm": 24.6
+   },
+   "ts": "2026-09-26T08:29:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-14",
+   "group": "CL",
+   "id": "H-0165",
+   "sensors": {
+    "air_temperature_k": 302.1,
+    "power_w": 5057,
+    "process_temperature_k": 310.1,
+    "rotational_speed_rpm": 1615.0,
+    "temp_diff_k": 8.0,
+    "tool_wear_min": 176.0,
+    "torque_nm": 29.9
+   },
+   "ts": "2026-09-26T09:18:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-15",
+   "group": "CL",
+   "id": "H-0166",
+   "sensors": {
+    "air_temperature_k": 302.0,
+    "power_w": 7405,
+    "process_temperature_k": 310.0,
+    "rotational_speed_rpm": 1449.0,
+    "temp_diff_k": 8.0,
+    "tool_wear_min": 181.0,
+    "torque_nm": 48.8
+   },
+   "ts": "2026-09-26T10:31:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-16",
+   "group": "CL",
+   "id": "H-0167",
+   "sensors": {
+    "air_temperature_k": 302.0,
+    "power_w": 7471,
+    "process_temperature_k": 309.9,
+    "rotational_speed_rpm": 1388.0,
+    "temp_diff_k": 7.9,
+    "tool_wear_min": 183.0,
+    "torque_nm": 51.4
+   },
+   "ts": "2026-09-26T11:03:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-17",
+   "group": "CL",
+   "id": "H-0168",
+   "sensors": {
+    "air_temperature_k": 302.0,
+    "power_w": 6485,
+    "process_temperature_k": 309.9,
+    "rotational_speed_rpm": 1447.0,
+    "temp_diff_k": 7.9,
+    "tool_wear_min": 185.0,
+    "torque_nm": 42.8
+   },
+   "ts": "2026-09-26T12:07:00+09:00"
+  },
+  {
+   "cause": "CL-4",
+   "checked": [
+    "4.3",
+    "4.5",
+    "4.6"
+   ],
+   "did": [
+    "4.6.2"
+   ],
+   "equipment": "M-18",
+   "group": "CL",
+   "id": "H-0169",
+   "sensors": {
+    "air_temperature_k": 302.0,
+    "power_w": 4984,
+    "process_temperature_k": 310.0,
+    "rotational_speed_rpm": 1664.0,
+    "temp_diff_k": 8.0,
+    "tool_wear_min": 190.0,
+    "torque_nm": 28.6
+   },
+   "ts": "2026-09-26T12:45:00+09:00"
+  },
+  {
+   "cause": "CL-2",
+   "checked": [
+    "4.3",
+    "4.5",
+    "4.6",
+    "4.4"
+   ],
+   "did": [
+    "4.4.2"
+   ],
+   "equipment": "M-19",
+   "group": "CL",
+   "id": "H-0170",
+   "sensors": {
+    "air_temperature_k": 302.0,
+    "power_w": 4942,
+    "process_temperature_k": 309.9,
+    "rotational_speed_rpm": 1735.0,
+    "temp_diff_k": 7.9,
+    "tool_wear_min": 192.0,
+    "torque_nm": 27.2
+   },
+   "ts": "2026-09-26T14:04:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-20",
+   "group": "CL",
+   "id": "H-0171",
+   "sensors": {
+    "air_temperature_k": 302.0,
+    "power_w": 7890,
+    "process_temperature_k": 309.9,
+    "rotational_speed_rpm": 1308.0,
+    "temp_diff_k": 7.9,
+    "tool_wear_min": 197.0,
+    "torque_nm": 57.6
+   },
+   "ts": "2026-09-26T15:04:00+09:00"
+  },
+  {
+   "cause": "CL-3",
+   "checked": [
+    "4.3",
+    "4.5"
+   ],
+   "did": [
+    "4.5.2"
+   ],
+   "equipment": "M-01",
+   "group": "CL",
+   "id": "H-0172",
+   "sensors": {
+    "air_temperature_k": 302.0,
+    "power_w": 6199,
+    "process_temperature_k": 309.8,
+    "rotational_speed_rpm": 1480.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 199.0,
+    "torque_nm": 40.0
+   },
+   "ts": "2026-09-26T15:48:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-02",
+   "group": "CL",
+   "id": "H-0173",
+   "sensors": {
+    "air_temperature_k": 301.9,
+    "power_w": 6284,
+    "process_temperature_k": 309.6,
+    "rotational_speed_rpm": 1439.0,
+    "temp_diff_k": 7.7,
+    "tool_wear_min": 201.0,
+    "torque_nm": 41.7
+   },
+   "ts": "2026-09-26T16:30:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-03",
+   "group": "CL",
+   "id": "H-0174",
+   "sensors": {
+    "air_temperature_k": 301.9,
+    "power_w": 5763,
+    "process_temperature_k": 309.7,
+    "rotational_speed_rpm": 1533.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 204.0,
+    "torque_nm": 35.9
+   },
+   "ts": "2026-09-26T17:39:00+09:00"
+  },
+  {
+   "cause": "CL-2",
+   "checked": [
+    "4.3",
+    "4.5",
+    "4.6",
+    "4.4"
+   ],
+   "did": [
+    "4.4.2"
+   ],
+   "equipment": "M-05",
+   "group": "CL",
+   "id": "H-0176",
+   "sensors": {
+    "air_temperature_k": 302.0,
+    "power_w": 5375,
+    "process_temperature_k": 309.7,
+    "rotational_speed_rpm": 1414.0,
+    "temp_diff_k": 7.7,
+    "tool_wear_min": 209.0,
+    "torque_nm": 36.3
+   },
+   "ts": "2026-09-26T19:28:00+09:00"
+  },
+  {
+   "cause": "CL-3",
+   "checked": [
+    "4.3",
+    "4.5"
+   ],
+   "did": [
+    "4.5.2"
+   ],
+   "equipment": "M-06",
+   "group": "CL",
+   "id": "H-0177",
+   "sensors": {
+    "air_temperature_k": 301.9,
+    "power_w": 5620,
+    "process_temperature_k": 309.6,
+    "rotational_speed_rpm": 1551.0,
+    "temp_diff_k": 7.7,
+    "tool_wear_min": 211.0,
+    "torque_nm": 34.6
+   },
+   "ts": "2026-09-26T19:51:00+09:00"
+  },
+  {
+   "cause": "CL-2",
+   "checked": [
+    "4.3",
+    "4.5",
+    "4.6",
+    "4.4"
+   ],
+   "did": [
+    "4.4.2"
+   ],
+   "equipment": "M-07",
+   "group": "CL",
+   "id": "H-0178",
+   "sensors": {
+    "air_temperature_k": 301.8,
+    "power_w": 7369,
+    "process_temperature_k": 309.6,
+    "rotational_speed_rpm": 1436.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 214.0,
+    "torque_nm": 49.0
+   },
+   "ts": "2026-09-26T20:39:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-08",
+   "group": "CL",
+   "id": "H-0179",
+   "sensors": {
+    "air_temperature_k": 301.9,
+    "power_w": 6643,
+    "process_temperature_k": 309.6,
+    "rotational_speed_rpm": 1385.0,
+    "temp_diff_k": 7.7,
+    "tool_wear_min": 217.0,
+    "torque_nm": 45.8
+   },
+   "ts": "2026-09-26T21:39:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-09",
+   "group": "CL",
+   "id": "H-0180",
+   "sensors": {
+    "air_temperature_k": 301.8,
+    "power_w": 5459,
+    "process_temperature_k": 309.5,
+    "rotational_speed_rpm": 1732.0,
+    "temp_diff_k": 7.7,
+    "tool_wear_min": 220.0,
+    "torque_nm": 30.1
+   },
+   "ts": "2026-09-26T22:56:00+09:00"
+  },
+  {
+   "cause": "CL-2",
+   "checked": [
+    "4.3",
+    "4.5",
+    "4.6",
+    "4.4"
+   ],
+   "did": [
+    "4.4.2"
+   ],
+   "equipment": "M-10",
+   "group": "CL",
+   "id": "H-0181",
+   "sensors": {
+    "air_temperature_k": 301.9,
+    "power_w": 7235,
+    "process_temperature_k": 309.6,
+    "rotational_speed_rpm": 1410.0,
+    "temp_diff_k": 7.7,
+    "tool_wear_min": 223.0,
+    "torque_nm": 49.0
+   },
+   "ts": "2026-09-26T23:53:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-11",
+   "group": "CL",
+   "id": "H-0182",
+   "sensors": {
+    "air_temperature_k": 301.9,
+    "power_w": 6542,
+    "process_temperature_k": 309.6,
+    "rotational_speed_rpm": 1446.0,
+    "temp_diff_k": 7.7,
+    "tool_wear_min": 225.0,
+    "torque_nm": 43.2
+   },
+   "ts": "2026-09-27T00:21:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-12",
+   "group": "CL",
+   "id": "H-0183",
+   "sensors": {
+    "air_temperature_k": 301.8,
+    "power_w": 6324,
+    "process_temperature_k": 309.5,
+    "rotational_speed_rpm": 1525.0,
+    "temp_diff_k": 7.7,
+    "tool_wear_min": 227.0,
+    "torque_nm": 39.6
+   },
+   "ts": "2026-09-27T01:15:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-14",
+   "group": "CL",
+   "id": "H-0184",
+   "sensors": {
+    "air_temperature_k": 301.8,
+    "power_w": 6452,
+    "process_temperature_k": 309.6,
+    "rotational_speed_rpm": 1443.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 231.0,
+    "torque_nm": 42.7
+   },
+   "ts": "2026-09-27T03:07:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-15",
+   "group": "CL",
+   "id": "H-0185",
+   "sensors": {
+    "air_temperature_k": 301.8,
+    "power_w": 6841,
+    "process_temperature_k": 309.7,
+    "rotational_speed_rpm": 1442.0,
+    "temp_diff_k": 7.9,
+    "tool_wear_min": 233.0,
+    "torque_nm": 45.3
+   },
+   "ts": "2026-09-27T04:05:00+09:00"
+  },
+  {
+   "cause": "CL-2",
+   "checked": [
+    "4.3",
+    "4.5",
+    "4.6",
+    "4.4"
+   ],
+   "did": [
+    "4.4.2"
+   ],
+   "equipment": "M-16",
+   "group": "CL",
+   "id": "H-0186",
+   "sensors": {
+    "air_temperature_k": 301.9,
+    "power_w": 5742,
+    "process_temperature_k": 309.7,
+    "rotational_speed_rpm": 1719.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 0.0,
+    "torque_nm": 31.9
+   },
+   "ts": "2026-09-27T04:45:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-17",
+   "group": "CL",
+   "id": "H-0187",
+   "sensors": {
+    "air_temperature_k": 302.0,
+    "power_w": 6321,
+    "process_temperature_k": 309.8,
+    "rotational_speed_rpm": 1532.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 2.0,
+    "torque_nm": 39.4
+   },
+   "ts": "2026-09-27T05:25:00+09:00"
+  },
+  {
+   "cause": "CL-4",
+   "checked": [
+    "4.3",
+    "4.5",
+    "4.6"
+   ],
+   "did": [
+    "4.6.2"
+   ],
+   "equipment": "M-19",
+   "group": "CL",
+   "id": "H-0189",
+   "sensors": {
+    "air_temperature_k": 302.1,
+    "power_w": 6399,
+    "process_temperature_k": 310.0,
+    "rotational_speed_rpm": 1355.0,
+    "temp_diff_k": 7.9,
+    "tool_wear_min": 6.0,
+    "torque_nm": 45.1
+   },
+   "ts": "2026-09-27T07:40:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-20",
+   "group": "CL",
+   "id": "H-0190",
+   "sensors": {
+    "air_temperature_k": 302.2,
+    "power_w": 6756,
+    "process_temperature_k": 310.1,
+    "rotational_speed_rpm": 1421.0,
+    "temp_diff_k": 7.9,
+    "tool_wear_min": 9.0,
+    "torque_nm": 45.4
+   },
+   "ts": "2026-09-27T08:15:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-01",
+   "group": "CL",
+   "id": "H-0191",
+   "sensors": {
+    "air_temperature_k": 302.2,
+    "power_w": 7392,
+    "process_temperature_k": 310.1,
+    "rotational_speed_rpm": 1368.0,
+    "temp_diff_k": 7.9,
+    "tool_wear_min": 12.0,
+    "torque_nm": 51.6
+   },
+   "ts": "2026-09-27T09:22:00+09:00"
+  },
+  {
+   "cause": "CL-2",
+   "checked": [
+    "4.3",
+    "4.5",
+    "4.6",
+    "4.4"
+   ],
+   "did": [
+    "4.4.2"
+   ],
+   "equipment": "M-02",
+   "group": "CL",
+   "id": "H-0192",
+   "sensors": {
+    "air_temperature_k": 302.2,
+    "power_w": 6886,
+    "process_temperature_k": 310.1,
+    "rotational_speed_rpm": 1458.0,
+    "temp_diff_k": 7.9,
+    "tool_wear_min": 15.0,
+    "torque_nm": 45.1
+   },
+   "ts": "2026-09-27T10:23:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-03",
+   "group": "CL",
+   "id": "H-0193",
+   "sensors": {
+    "air_temperature_k": 302.2,
+    "power_w": 5696,
+    "process_temperature_k": 310.1,
+    "rotational_speed_rpm": 1572.0,
+    "temp_diff_k": 7.9,
+    "tool_wear_min": 17.0,
+    "torque_nm": 34.6
+   },
+   "ts": "2026-09-27T10:57:00+09:00"
+  },
+  {
+   "cause": "CL-2",
+   "checked": [
+    "4.3",
+    "4.5",
+    "4.6",
+    "4.4"
+   ],
+   "did": [
+    "4.4.2"
+   ],
+   "equipment": "M-04",
+   "group": "CL",
+   "id": "H-0194",
+   "sensors": {
+    "air_temperature_k": 302.2,
+    "power_w": 7563,
+    "process_temperature_k": 310.0,
+    "rotational_speed_rpm": 1483.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 20.0,
+    "torque_nm": 48.7
+   },
+   "ts": "2026-09-27T11:59:00+09:00"
+  },
+  {
+   "cause": "CL-4",
+   "checked": [
+    "4.3",
+    "4.5",
+    "4.6"
+   ],
+   "did": [
+    "4.6.2"
+   ],
+   "equipment": "M-05",
+   "group": "CL",
+   "id": "H-0195",
+   "sensors": {
+    "air_temperature_k": 302.3,
+    "power_w": 6401,
+    "process_temperature_k": 310.1,
+    "rotational_speed_rpm": 1513.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 22.0,
+    "torque_nm": 40.4
+   },
+   "ts": "2026-09-27T12:25:00+09:00"
+  },
+  {
+   "cause": "CL-3",
+   "checked": [
+    "4.3",
+    "4.5"
+   ],
+   "did": [
+    "4.5.2"
+   ],
+   "equipment": "M-07",
+   "group": "CL",
+   "id": "H-0197",
+   "sensors": {
+    "air_temperature_k": 302.4,
+    "power_w": 6076,
+    "process_temperature_k": 310.2,
+    "rotational_speed_rpm": 1539.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 29.0,
+    "torque_nm": 37.7
+   },
+   "ts": "2026-09-27T14:11:00+09:00"
+  },
+  {
+   "cause": "CL-4",
+   "checked": [
+    "4.3",
+    "4.5",
+    "4.6"
+   ],
+   "did": [
+    "4.6.2"
+   ],
+   "equipment": "M-08",
+   "group": "CL",
+   "id": "H-0198",
+   "sensors": {
+    "air_temperature_k": 302.3,
+    "power_w": 6187,
+    "process_temperature_k": 310.1,
+    "rotational_speed_rpm": 1563.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 31.0,
+    "torque_nm": 37.8
+   },
+   "ts": "2026-09-27T15:21:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-09",
+   "group": "CL",
+   "id": "H-0199",
+   "sensors": {
+    "air_temperature_k": 302.3,
+    "power_w": 5141,
+    "process_temperature_k": 310.1,
+    "rotational_speed_rpm": 1653.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 34.0,
+    "torque_nm": 29.7
+   },
+   "ts": "2026-09-27T15:55:00+09:00"
+  },
+  {
+   "cause": "CL-2",
+   "checked": [
+    "4.3",
+    "4.5",
+    "4.6",
+    "4.4"
+   ],
+   "did": [
+    "4.4.2"
+   ],
+   "equipment": "M-10",
+   "group": "CL",
+   "id": "H-0200",
+   "sensors": {
+    "air_temperature_k": 302.3,
+    "power_w": 7212,
+    "process_temperature_k": 310.1,
+    "rotational_speed_rpm": 1353.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 36.0,
+    "torque_nm": 50.9
+   },
+   "ts": "2026-09-27T17:03:00+09:00"
+  },
+  {
+   "cause": "CL-2",
+   "checked": [
+    "4.3",
+    "4.5",
+    "4.6",
+    "4.4"
+   ],
+   "did": [
+    "4.4.2"
+   ],
+   "equipment": "M-11",
+   "group": "CL",
+   "id": "H-0201",
+   "sensors": {
+    "air_temperature_k": 302.2,
+    "power_w": 6703,
+    "process_temperature_k": 310.0,
+    "rotational_speed_rpm": 1468.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 38.0,
+    "torque_nm": 43.6
+   },
+   "ts": "2026-09-27T17:41:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-12",
+   "group": "CL",
+   "id": "H-0202",
+   "sensors": {
+    "air_temperature_k": 302.3,
+    "power_w": 5331,
+    "process_temperature_k": 310.2,
+    "rotational_speed_rpm": 1506.0,
+    "temp_diff_k": 7.9,
+    "tool_wear_min": 43.0,
+    "torque_nm": 33.8
+   },
+   "ts": "2026-09-27T18:31:00+09:00"
+  },
+  {
+   "cause": "CL-4",
+   "checked": [
+    "4.3",
+    "4.5",
+    "4.6"
+   ],
+   "did": [
+    "4.6.2"
+   ],
+   "equipment": "M-13",
+   "group": "CL",
+   "id": "H-0203",
+   "sensors": {
+    "air_temperature_k": 302.3,
+    "power_w": 7253,
+    "process_temperature_k": 310.1,
+    "rotational_speed_rpm": 1388.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 48.0,
+    "torque_nm": 49.9
+   },
+   "ts": "2026-09-27T19:41:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-14",
+   "group": "CL",
+   "id": "H-0204",
+   "sensors": {
+    "air_temperature_k": 302.4,
+    "power_w": 7138,
+    "process_temperature_k": 310.2,
+    "rotational_speed_rpm": 1485.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 50.0,
+    "torque_nm": 45.9
+   },
+   "ts": "2026-09-27T20:36:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-15",
+   "group": "CL",
+   "id": "H-0205",
+   "sensors": {
+    "air_temperature_k": 302.4,
+    "power_w": 6342,
+    "process_temperature_k": 310.2,
+    "rotational_speed_rpm": 1331.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 53.0,
+    "torque_nm": 45.5
+   },
+   "ts": "2026-09-27T21:23:00+09:00"
+  },
+  {
+   "cause": "CL-4",
+   "checked": [
+    "4.3",
+    "4.5",
+    "4.6"
+   ],
+   "did": [
+    "4.6.2"
+   ],
+   "equipment": "M-16",
+   "group": "CL",
+   "id": "H-0206",
+   "sensors": {
+    "air_temperature_k": 302.5,
+    "power_w": 8123,
+    "process_temperature_k": 310.3,
+    "rotational_speed_rpm": 1326.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 55.0,
+    "torque_nm": 58.5
+   },
+   "ts": "2026-09-27T22:13:00+09:00"
+  },
+  {
+   "cause": "CL-2",
+   "checked": [
+    "4.3",
+    "4.5",
+    "4.6",
+    "4.4"
+   ],
+   "did": [
+    "4.4.2"
+   ],
+   "equipment": "M-17",
+   "group": "CL",
+   "id": "H-0207",
+   "sensors": {
+    "air_temperature_k": 302.3,
+    "power_w": 8087,
+    "process_temperature_k": 310.2,
+    "rotational_speed_rpm": 1394.0,
+    "temp_diff_k": 7.9,
+    "tool_wear_min": 57.0,
+    "torque_nm": 55.4
+   },
+   "ts": "2026-09-27T23:10:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-19",
+   "group": "CL",
+   "id": "H-0208",
+   "sensors": {
+    "air_temperature_k": 302.4,
+    "power_w": 7765,
+    "process_temperature_k": 310.1,
+    "rotational_speed_rpm": 1358.0,
+    "temp_diff_k": 7.7,
+    "tool_wear_min": 61.0,
+    "torque_nm": 54.6
+   },
+   "ts": "2026-09-28T01:07:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-20",
+   "group": "CL",
+   "id": "H-0209",
+   "sensors": {
+    "air_temperature_k": 302.5,
+    "power_w": 5348,
+    "process_temperature_k": 310.2,
+    "rotational_speed_rpm": 1586.0,
+    "temp_diff_k": 7.7,
+    "tool_wear_min": 64.0,
+    "torque_nm": 32.2
+   },
+   "ts": "2026-09-28T01:45:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-01",
+   "group": "CL",
+   "id": "H-0210",
+   "sensors": {
+    "air_temperature_k": 302.5,
+    "power_w": 5586,
+    "process_temperature_k": 310.3,
+    "rotational_speed_rpm": 1688.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 66.0,
+    "torque_nm": 31.6
+   },
+   "ts": "2026-09-28T02:35:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-02",
+   "group": "CL",
+   "id": "H-0211",
+   "sensors": {
+    "air_temperature_k": 302.6,
+    "power_w": 6560,
+    "process_temperature_k": 310.5,
+    "rotational_speed_rpm": 1450.0,
+    "temp_diff_k": 7.9,
+    "tool_wear_min": 68.0,
+    "torque_nm": 43.2
+   },
+   "ts": "2026-09-28T03:54:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-03",
+   "group": "CL",
+   "id": "H-0212",
+   "sensors": {
+    "air_temperature_k": 302.7,
+    "power_w": 6925,
+    "process_temperature_k": 310.5,
+    "rotational_speed_rpm": 1398.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 70.0,
+    "torque_nm": 47.3
+   },
+   "ts": "2026-09-28T04:26:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-05",
+   "group": "CL",
+   "id": "H-0214",
+   "sensors": {
+    "air_temperature_k": 302.6,
+    "power_w": 6770,
+    "process_temperature_k": 310.4,
+    "rotational_speed_rpm": 1514.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 75.0,
+    "torque_nm": 42.7
+   },
+   "ts": "2026-09-28T06:30:00+09:00"
+  },
+  {
+   "cause": "CL-2",
+   "checked": [
+    "4.3",
+    "4.6",
+    "4.5",
+    "4.4"
+   ],
+   "did": [
+    "4.4.2"
+   ],
+   "equipment": "M-06",
+   "group": "CL",
+   "id": "H-0215",
+   "sensors": {
+    "air_temperature_k": 302.6,
+    "power_w": 5792,
+    "process_temperature_k": 310.4,
+    "rotational_speed_rpm": 1532.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 77.0,
+    "torque_nm": 36.1
+   },
+   "ts": "2026-09-28T07:02:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-08",
+   "group": "CL",
+   "id": "H-0216",
+   "sensors": {
+    "air_temperature_k": 302.6,
+    "power_w": 5709,
+    "process_temperature_k": 310.3,
+    "rotational_speed_rpm": 1642.0,
+    "temp_diff_k": 7.7,
+    "tool_wear_min": 82.0,
+    "torque_nm": 33.2
+   },
+   "ts": "2026-09-28T09:04:00+09:00"
+  },
+  {
+   "cause": "CL-4",
+   "checked": [
+    "4.3",
+    "4.6"
+   ],
+   "did": [
+    "4.6.2"
+   ],
+   "equipment": "M-13",
+   "group": "CL",
+   "id": "H-0217",
+   "sensors": {
+    "air_temperature_k": 302.6,
+    "power_w": 6383,
+    "process_temperature_k": 310.2,
+    "rotational_speed_rpm": 1563.0,
+    "temp_diff_k": 7.6,
+    "tool_wear_min": 97.0,
+    "torque_nm": 39.0
+   },
+   "ts": "2026-09-28T13:08:00+09:00"
+  },
+  {
+   "cause": "CL-2",
+   "checked": [
+    "4.3",
+    "4.5",
+    "4.6",
+    "4.4"
+   ],
+   "did": [
+    "4.4.2"
+   ],
+   "equipment": "M-14",
+   "group": "CL",
+   "id": "H-0218",
+   "sensors": {
+    "air_temperature_k": 302.6,
+    "power_w": 5295,
+    "process_temperature_k": 310.2,
+    "rotational_speed_rpm": 1631.0,
+    "temp_diff_k": 7.6,
+    "tool_wear_min": 100.0,
+    "torque_nm": 31.0
+   },
+   "ts": "2026-09-28T13:54:00+09:00"
+  },
+  {
+   "cause": "CL-2",
+   "checked": [
+    "4.3",
+    "4.6",
+    "4.5",
+    "4.4"
+   ],
+   "did": [
+    "4.4.2"
+   ],
+   "equipment": "M-15",
+   "group": "CL",
+   "id": "H-0219",
+   "sensors": {
+    "air_temperature_k": 302.5,
+    "power_w": 5978,
+    "process_temperature_k": 310.2,
+    "rotational_speed_rpm": 1547.0,
+    "temp_diff_k": 7.7,
+    "tool_wear_min": 103.0,
+    "torque_nm": 36.9
+   },
+   "ts": "2026-09-28T15:15:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-16",
+   "group": "CL",
+   "id": "H-0220",
+   "sensors": {
+    "air_temperature_k": 302.6,
+    "power_w": 6257,
+    "process_temperature_k": 310.3,
+    "rotational_speed_rpm": 1479.0,
+    "temp_diff_k": 7.7,
+    "tool_wear_min": 105.0,
+    "torque_nm": 40.4
+   },
+   "ts": "2026-09-28T16:00:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-18",
+   "group": "CL",
+   "id": "H-0222",
+   "sensors": {
+    "air_temperature_k": 302.4,
+    "power_w": 4231,
+    "process_temperature_k": 310.1,
+    "rotational_speed_rpm": 1906.0,
+    "temp_diff_k": 7.7,
+    "tool_wear_min": 110.0,
+    "torque_nm": 21.2
+   },
+   "ts": "2026-09-28T17:34:00+09:00"
+  },
+  {
+   "cause": "CL-2",
+   "checked": [
+    "4.3",
+    "4.6",
+    "4.5",
+    "4.4"
+   ],
+   "did": [
+    "4.4.2"
+   ],
+   "equipment": "M-20",
+   "group": "CL",
+   "id": "H-0224",
+   "sensors": {
+    "air_temperature_k": 302.3,
+    "power_w": 5374,
+    "process_temperature_k": 310.1,
+    "rotational_speed_rpm": 1688.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 115.0,
+    "torque_nm": 30.4
+   },
+   "ts": "2026-09-28T19:36:00+09:00"
+  },
+  {
+   "cause": "CL-2",
+   "checked": [
+    "4.3",
+    "4.6",
+    "4.5",
+    "4.4"
+   ],
+   "did": [
+    "4.4.2"
+   ],
+   "equipment": "M-01",
+   "group": "CL",
+   "id": "H-0225",
+   "sensors": {
+    "air_temperature_k": 302.3,
+    "power_w": 8251,
+    "process_temperature_k": 310.2,
+    "rotational_speed_rpm": 1443.0,
+    "temp_diff_k": 7.9,
+    "tool_wear_min": 120.0,
+    "torque_nm": 54.6
+   },
+   "ts": "2026-09-28T20:28:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-02",
+   "group": "CL",
+   "id": "H-0226",
+   "sensors": {
+    "air_temperature_k": 302.4,
+    "power_w": 7021,
+    "process_temperature_k": 310.2,
+    "rotational_speed_rpm": 1445.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 125.0,
+    "torque_nm": 46.4
+   },
+   "ts": "2026-09-28T21:00:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-03",
+   "group": "CL",
+   "id": "H-0227",
+   "sensors": {
+    "air_temperature_k": 302.4,
+    "power_w": 6747,
+    "process_temperature_k": 310.2,
+    "rotational_speed_rpm": 1435.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 127.0,
+    "torque_nm": 44.9
+   },
+   "ts": "2026-09-28T21:40:00+09:00"
+  },
+  {
+   "cause": "CL-2",
+   "checked": [
+    "4.3",
+    "4.5",
+    "4.6",
+    "4.4"
+   ],
+   "did": [
+    "4.4.2"
+   ],
+   "equipment": "M-04",
+   "group": "CL",
+   "id": "H-0228",
+   "sensors": {
+    "air_temperature_k": 302.4,
+    "power_w": 5361,
+    "process_temperature_k": 310.1,
+    "rotational_speed_rpm": 1556.0,
+    "temp_diff_k": 7.7,
+    "tool_wear_min": 132.0,
+    "torque_nm": 32.9
+   },
+   "ts": "2026-09-28T22:37:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-05",
+   "group": "CL",
+   "id": "H-0229",
+   "sensors": {
+    "air_temperature_k": 302.3,
+    "power_w": 7290,
+    "process_temperature_k": 310.1,
+    "rotational_speed_rpm": 1321.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 134.0,
+    "torque_nm": 52.7
+   },
+   "ts": "2026-09-28T23:54:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-06",
+   "group": "CL",
+   "id": "H-0230",
+   "sensors": {
+    "air_temperature_k": 302.4,
+    "power_w": 5912,
+    "process_temperature_k": 310.1,
+    "rotational_speed_rpm": 1577.0,
+    "temp_diff_k": 7.7,
+    "tool_wear_min": 136.0,
+    "torque_nm": 35.8
+   },
+   "ts": "2026-09-29T00:38:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-07",
+   "group": "CL",
+   "id": "H-0231",
+   "sensors": {
+    "air_temperature_k": 302.4,
+    "power_w": 5156,
+    "process_temperature_k": 310.2,
+    "rotational_speed_rpm": 1578.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 139.0,
+    "torque_nm": 31.2
+   },
+   "ts": "2026-09-29T01:29:00+09:00"
+  },
+  {
+   "cause": "CL-3",
+   "checked": [
+    "4.3",
+    "4.5"
+   ],
+   "did": [
+    "4.5.2"
+   ],
+   "equipment": "M-08",
+   "group": "CL",
+   "id": "H-0232",
+   "sensors": {
+    "air_temperature_k": 302.4,
+    "power_w": 7766,
+    "process_temperature_k": 310.1,
+    "rotational_speed_rpm": 1418.0,
+    "temp_diff_k": 7.7,
+    "tool_wear_min": 141.0,
+    "torque_nm": 52.3
+   },
+   "ts": "2026-09-29T02:33:00+09:00"
+  },
+  {
+   "cause": "CL-4",
+   "checked": [
+    "4.3",
+    "4.5",
+    "4.6"
+   ],
+   "did": [
+    "4.6.2"
+   ],
+   "equipment": "M-09",
+   "group": "CL",
+   "id": "H-0233",
+   "sensors": {
+    "air_temperature_k": 302.4,
+    "power_w": 8134,
+    "process_temperature_k": 310.2,
+    "rotational_speed_rpm": 1392.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 143.0,
+    "torque_nm": 55.8
+   },
+   "ts": "2026-09-29T03:33:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-10",
+   "group": "CL",
+   "id": "H-0234",
+   "sensors": {
+    "air_temperature_k": 302.5,
+    "power_w": 6663,
+    "process_temperature_k": 310.3,
+    "rotational_speed_rpm": 1446.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 146.0,
+    "torque_nm": 44.0
+   },
+   "ts": "2026-09-29T04:21:00+09:00"
+  },
+  {
+   "cause": "CL-4",
+   "checked": [
+    "4.3",
+    "4.5",
+    "4.6"
+   ],
+   "did": [
+    "4.6.2"
+   ],
+   "equipment": "M-11",
+   "group": "CL",
+   "id": "H-0235",
+   "sensors": {
+    "air_temperature_k": 302.5,
+    "power_w": 7042,
+    "process_temperature_k": 310.2,
+    "rotational_speed_rpm": 1329.0,
+    "temp_diff_k": 7.7,
+    "tool_wear_min": 148.0,
+    "torque_nm": 50.6
+   },
+   "ts": "2026-09-29T05:18:00+09:00"
+  },
+  {
+   "cause": "PW-3",
+   "checked": [
+    "3.3",
+    "3.4"
+   ],
+   "did": [
+    "3.4.2"
+   ],
+   "equipment": "M-14",
+   "group": "PW",
+   "id": "H-0237",
+   "sensors": {
+    "air_temperature_k": 302.4,
+    "power_w": 3726,
+    "process_temperature_k": 310.2,
+    "rotational_speed_rpm": 2224.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 154.0,
+    "torque_nm": 16.0
+   },
+   "ts": "2026-09-29T07:55:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-15",
+   "group": "CL",
+   "id": "H-0238",
+   "sensors": {
+    "air_temperature_k": 302.5,
+    "power_w": 5373,
+    "process_temperature_k": 310.2,
+    "rotational_speed_rpm": 1716.0,
+    "temp_diff_k": 7.7,
+    "tool_wear_min": 156.0,
+    "torque_nm": 29.9
+   },
+   "ts": "2026-09-29T08:23:00+09:00"
+  },
+  {
+   "cause": "CL-4",
+   "checked": [
+    "4.3",
+    "4.6"
+   ],
+   "did": [
+    "4.6.2"
+   ],
+   "equipment": "M-16",
+   "group": "CL",
+   "id": "H-0239",
+   "sensors": {
+    "air_temperature_k": 302.5,
+    "power_w": 5889,
+    "process_temperature_k": 310.3,
+    "rotational_speed_rpm": 1584.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 158.0,
+    "torque_nm": 35.5
+   },
+   "ts": "2026-09-29T09:07:00+09:00"
+  },
+  {
+   "cause": "CL-4",
+   "checked": [
+    "4.3",
+    "4.6"
+   ],
+   "did": [
+    "4.6.2"
+   ],
+   "equipment": "M-17",
+   "group": "CL",
+   "id": "H-0240",
+   "sensors": {
+    "air_temperature_k": 302.5,
+    "power_w": 6513,
+    "process_temperature_k": 310.3,
+    "rotational_speed_rpm": 1488.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 160.0,
+    "torque_nm": 41.8
+   },
+   "ts": "2026-09-29T10:22:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-18",
+   "group": "CL",
+   "id": "H-0241",
+   "sensors": {
+    "air_temperature_k": 302.4,
+    "power_w": 7367,
+    "process_temperature_k": 310.3,
+    "rotational_speed_rpm": 1374.0,
+    "temp_diff_k": 7.9,
+    "tool_wear_min": 163.0,
+    "torque_nm": 51.2
+   },
+   "ts": "2026-09-29T11:07:00+09:00"
+  },
+  {
+   "cause": "CL-2",
+   "checked": [
+    "4.3",
+    "4.6",
+    "4.5",
+    "4.4"
+   ],
+   "did": [
+    "4.4.2"
+   ],
+   "equipment": "M-19",
+   "group": "CL",
+   "id": "H-0242",
+   "sensors": {
+    "air_temperature_k": 302.4,
+    "power_w": 7836,
+    "process_temperature_k": 310.3,
+    "rotational_speed_rpm": 1378.0,
+    "temp_diff_k": 7.9,
+    "tool_wear_min": 165.0,
+    "torque_nm": 54.3
+   },
+   "ts": "2026-09-29T11:54:00+09:00"
+  },
+  {
+   "cause": "CL-2",
+   "checked": [
+    "4.3",
+    "4.6",
+    "4.5",
+    "4.4"
+   ],
+   "did": [
+    "4.4.2"
+   ],
+   "equipment": "M-20",
+   "group": "CL",
+   "id": "H-0243",
+   "sensors": {
+    "air_temperature_k": 302.5,
+    "power_w": 6058,
+    "process_temperature_k": 310.3,
+    "rotational_speed_rpm": 1551.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 168.0,
+    "torque_nm": 37.3
+   },
+   "ts": "2026-09-29T13:02:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-02",
+   "group": "CL",
+   "id": "H-0245",
+   "sensors": {
+    "air_temperature_k": 302.5,
+    "power_w": 5940,
+    "process_temperature_k": 310.3,
+    "rotational_speed_rpm": 1447.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 172.0,
+    "torque_nm": 39.2
+   },
+   "ts": "2026-09-29T14:27:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-03",
+   "group": "CL",
+   "id": "H-0246",
+   "sensors": {
+    "air_temperature_k": 302.4,
+    "power_w": 7873,
+    "process_temperature_k": 310.2,
+    "rotational_speed_rpm": 1400.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 175.0,
+    "torque_nm": 53.7
+   },
+   "ts": "2026-09-29T15:26:00+09:00"
+  },
+  {
+   "cause": "CL-3",
+   "checked": [
+    "4.3",
+    "4.5"
+   ],
+   "did": [
+    "4.5.2"
+   ],
+   "equipment": "M-04",
+   "group": "CL",
+   "id": "H-0247",
+   "sensors": {
+    "air_temperature_k": 302.4,
+    "power_w": 7160,
+    "process_temperature_k": 310.1,
+    "rotational_speed_rpm": 1401.0,
+    "temp_diff_k": 7.7,
+    "tool_wear_min": 177.0,
+    "torque_nm": 48.8
+   },
+   "ts": "2026-09-29T16:42:00+09:00"
+  },
+  {
+   "cause": "CL-3",
+   "checked": [
+    "4.3",
+    "4.6",
+    "4.5"
+   ],
+   "did": [
+    "4.5.2"
+   ],
+   "equipment": "M-05",
+   "group": "CL",
+   "id": "H-0248",
+   "sensors": {
+    "air_temperature_k": 302.4,
+    "power_w": 4833,
+    "process_temperature_k": 310.1,
+    "rotational_speed_rpm": 1597.0,
+    "temp_diff_k": 7.7,
+    "tool_wear_min": 179.0,
+    "torque_nm": 28.9
+   },
+   "ts": "2026-09-29T17:22:00+09:00"
+  },
+  {
+   "cause": "CL-4",
+   "checked": [
+    "4.3",
+    "4.6"
+   ],
+   "did": [
+    "4.6.2"
+   ],
+   "equipment": "M-06",
+   "group": "CL",
+   "id": "H-0249",
+   "sensors": {
+    "air_temperature_k": 302.3,
+    "power_w": 7163,
+    "process_temperature_k": 310.1,
+    "rotational_speed_rpm": 1487.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 184.0,
+    "torque_nm": 46.0
+   },
+   "ts": "2026-09-29T18:02:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-07",
+   "group": "CL",
+   "id": "H-0250",
+   "sensors": {
+    "air_temperature_k": 302.5,
+    "power_w": 4889,
+    "process_temperature_k": 310.3,
+    "rotational_speed_rpm": 1710.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 186.0,
+    "torque_nm": 27.3
+   },
+   "ts": "2026-09-29T19:08:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-09",
+   "group": "CL",
+   "id": "H-0252",
+   "sensors": {
+    "air_temperature_k": 302.6,
+    "power_w": 4800,
+    "process_temperature_k": 310.4,
+    "rotational_speed_rpm": 1743.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 191.0,
+    "torque_nm": 26.3
+   },
+   "ts": "2026-09-29T20:50:00+09:00"
+  },
+  {
+   "cause": "CL-2",
+   "checked": [
+    "4.3",
+    "4.6",
+    "4.5",
+    "4.4"
+   ],
+   "did": [
+    "4.4.2"
+   ],
+   "equipment": "M-10",
+   "group": "CL",
+   "id": "H-0253",
+   "sensors": {
+    "air_temperature_k": 302.6,
+    "power_w": 5482,
+    "process_temperature_k": 310.5,
+    "rotational_speed_rpm": 1596.0,
+    "temp_diff_k": 7.9,
+    "tool_wear_min": 193.0,
+    "torque_nm": 32.8
+   },
+   "ts": "2026-09-29T21:19:00+09:00"
+  },
+  {
+   "cause": "CL-3",
+   "checked": [
+    "4.3",
+    "4.5"
+   ],
+   "did": [
+    "4.5.2"
+   ],
+   "equipment": "M-11",
+   "group": "CL",
+   "id": "H-0254",
+   "sensors": {
+    "air_temperature_k": 302.7,
+    "power_w": 5296,
+    "process_temperature_k": 310.5,
+    "rotational_speed_rpm": 1642.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 195.0,
+    "torque_nm": 30.8
+   },
+   "ts": "2026-09-29T22:26:00+09:00"
+  },
+  {
+   "cause": "CL-2",
+   "checked": [
+    "4.3",
+    "4.5",
+    "4.6",
+    "4.4"
+   ],
+   "did": [
+    "4.4.2"
+   ],
+   "equipment": "M-13",
+   "group": "CL",
+   "id": "H-0255",
+   "sensors": {
+    "air_temperature_k": 302.8,
+    "power_w": 4201,
+    "process_temperature_k": 310.6,
+    "rotational_speed_rpm": 2016.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 199.0,
+    "torque_nm": 19.9
+   },
+   "ts": "2026-09-30T00:04:00+09:00"
+  },
+  {
+   "cause": "CL-2",
+   "checked": [
+    "4.3",
+    "4.5",
+    "4.6",
+    "4.4"
+   ],
+   "did": [
+    "4.4.2"
+   ],
+   "equipment": "M-14",
+   "group": "CL",
+   "id": "H-0256",
+   "sensors": {
+    "air_temperature_k": 302.8,
+    "power_w": 5337,
+    "process_temperature_k": 310.6,
+    "rotational_speed_rpm": 1671.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 201.0,
+    "torque_nm": 30.5
+   },
+   "ts": "2026-09-30T01:16:00+09:00"
+  },
+  {
+   "cause": "CL-3",
+   "checked": [
+    "4.3",
+    "4.5"
+   ],
+   "did": [
+    "4.5.2"
+   ],
+   "equipment": "M-15",
+   "group": "CL",
+   "id": "H-0257",
+   "sensors": {
+    "air_temperature_k": 302.8,
+    "power_w": 6352,
+    "process_temperature_k": 310.6,
+    "rotational_speed_rpm": 1404.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 203.0,
+    "torque_nm": 43.2
+   },
+   "ts": "2026-09-30T01:43:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-16",
+   "group": "CL",
+   "id": "H-0258",
+   "sensors": {
+    "air_temperature_k": 302.8,
+    "power_w": 6327,
+    "process_temperature_k": 310.6,
+    "rotational_speed_rpm": 1470.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 205.0,
+    "torque_nm": 41.1
+   },
+   "ts": "2026-09-30T03:09:00+09:00"
+  },
+  {
+   "cause": "CL-1",
+   "checked": [
+    "4.3"
+   ],
+   "did": [
+    "4.3.2"
+   ],
+   "equipment": "M-18",
+   "group": "CL",
+   "id": "H-0260",
+   "sensors": {
+    "air_temperature_k": 302.7,
+    "power_w": 5239,
+    "process_temperature_k": 310.5,
+    "rotational_speed_rpm": 1725.0,
+    "temp_diff_k": 7.8,
+    "tool_wear_min": 209.0,
+    "torque_nm": 29.0
+   },
+   "ts": "2026-09-30T04:49:00+09:00"
+  },
+  {
+   "cause": "LD-3",
+   "checked": [
+    "5.3",
+    "5.4"
+   ],
+   "did": [
+    "5.4.2"
+   ],
+   "equipment": "M-09",
+   "group": "LD",
+   "id": "H-0262",
+   "sensors": {
+    "air_temperature_k": 303.6,
+    "power_w": 8403,
+    "process_temperature_k": 312.5,
+    "rotational_speed_rpm": 1286.0,
+    "temp_diff_k": 8.9,
+    "tool_wear_min": 101.0,
+    "torque_nm": 62.4
+   },
+   "ts": "2026-10-17T09:10:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-06",
+   "group": "PW",
+   "id": "H-0263",
+   "sensors": {
+    "air_temperature_k": 303.8,
+    "power_w": 3731,
+    "process_temperature_k": 312.5,
+    "rotational_speed_rpm": 2344.0,
+    "temp_diff_k": 8.7,
+    "tool_wear_min": 146.0,
+    "torque_nm": 15.2
+   },
+   "ts": "2026-10-17T23:55:00+09:00"
+  },
+  {
+   "cause": "PW-2",
+   "checked": [
+    "3.3",
+    "3.4",
+    "3.5",
+    "3.6"
+   ],
+   "did": [
+    "7.1"
+   ],
+   "equipment": "M-10",
+   "group": "PW",
+   "id": "H-0264",
+   "sensors": {
+    "air_temperature_k": 303.9,
+    "power_w": 8736,
+    "process_temperature_k": 312.7,
+    "rotational_speed_rpm": 1339.0,
+    "temp_diff_k": 8.8,
+    "tool_wear_min": 156.0,
+    "torque_nm": 62.3
+   },
+   "ts": "2026-10-18T03:53:00+09:00"
+  },
+  {
+   "cause": "PW-3",
+   "checked": [
+    "3.5",
+    "3.3",
+    "3.4"
+   ],
+   "did": [
+    "3.4.2"
+   ],
+   "equipment": "M-11",
+   "group": "PW",
+   "id": "H-0265",
+   "sensors": {
+    "air_temperature_k": 303.6,
+    "power_w": 4007,
+    "process_temperature_k": 312.7,
+    "rotational_speed_rpm": 2174.0,
+    "temp_diff_k": 9.1,
+    "tool_wear_min": 37.0,
+    "torque_nm": 17.6
+   },
+   "ts": "2026-10-19T15:32:00+09:00"
+  },
+  {
+   "cause": "PW-2",
+   "checked": [
+    "3.5",
+    "3.6"
+   ],
+   "did": [
+    "7.1"
+   ],
+   "equipment": "M-05",
+   "group": "PW",
+   "id": "H-0266",
+   "sensors": {
+    "air_temperature_k": 304.2,
+    "power_w": 4071,
+    "process_temperature_k": 313.7,
+    "rotational_speed_rpm": 2113.0,
+    "temp_diff_k": 9.5,
+    "tool_wear_min": 139.0,
+    "torque_nm": 18.4
+   },
+   "ts": "2026-10-23T19:10:00+09:00"
+  },
+  {
+   "cause": "PW-3",
+   "checked": [
+    "3.5",
+    "3.3",
+    "3.4"
+   ],
+   "did": [
+    "3.4.2"
+   ],
+   "equipment": "M-17",
+   "group": "PW",
+   "id": "H-0267",
+   "sensors": {
+    "air_temperature_k": 302.3,
+    "power_w": 4136,
+    "process_temperature_k": 311.7,
+    "rotational_speed_rpm": 2170.0,
+    "temp_diff_k": 9.4,
+    "tool_wear_min": 91.0,
+    "torque_nm": 18.2
+   },
+   "ts": "2026-11-13T16:37:00+09:00"
+  },
+  {
+   "cause": "PW-3",
+   "checked": [
+    "3.3",
+    "3.4"
+   ],
+   "did": [
+    "3.4.2"
+   ],
+   "equipment": "M-18",
+   "group": "PW",
+   "id": "H-0268",
+   "sensors": {
+    "air_temperature_k": 301.4,
+    "power_w": 3868,
+    "process_temperature_k": 311.3,
+    "rotational_speed_rpm": 2323.0,
+    "temp_diff_k": 9.9,
+    "tool_wear_min": 50.0,
+    "torque_nm": 15.9
+   },
+   "ts": "2026-11-19T13:41:00+09:00"
+  },
+  {
+   "cause": "PW-2",
+   "checked": [
+    "3.3",
+    "3.4",
+    "3.5",
+    "3.6"
+   ],
+   "did": [
+    "7.1"
+   ],
+   "equipment": "M-19",
+   "group": "PW",
+   "id": "H-0269",
+   "sensors": {
+    "air_temperature_k": 301.5,
+    "power_w": 4065,
+    "process_temperature_k": 311.1,
+    "rotational_speed_rpm": 2076.0,
+    "temp_diff_k": 9.6,
+    "tool_wear_min": 103.0,
+    "torque_nm": 18.7
+   },
+   "ts": "2026-11-20T08:13:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-01",
+   "group": "PW",
+   "id": "H-0270",
+   "sensors": {
+    "air_temperature_k": 300.8,
+    "power_w": 8632,
+    "process_temperature_k": 310.4,
+    "rotational_speed_rpm": 1288.0,
+    "temp_diff_k": 9.6,
+    "tool_wear_min": 3.0,
+    "torque_nm": 64.0
+   },
+   "ts": "2026-11-21T20:24:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-09",
+   "group": "PW",
+   "id": "H-0271",
+   "sensors": {
+    "air_temperature_k": 300.5,
+    "power_w": 8986,
+    "process_temperature_k": 310.5,
+    "rotational_speed_rpm": 1409.0,
+    "temp_diff_k": 10.0,
+    "tool_wear_min": 73.0,
+    "torque_nm": 60.9
+   },
+   "ts": "2026-11-22T21:25:00+09:00"
+  },
+  {
+   "cause": "TW-4",
+   "checked": [
+    "2.3",
+    "2.4",
+    "2.5",
+    "2.6"
+   ],
+   "did": [
+    "2.6.2"
+   ],
+   "equipment": "M-06",
+   "group": "TW",
+   "id": "H-0272",
+   "sensors": {
+    "air_temperature_k": 300.5,
+    "power_w": 6996,
+    "process_temperature_k": 310.2,
+    "rotational_speed_rpm": 1386.0,
+    "temp_diff_k": 9.7,
+    "tool_wear_min": 225.0,
+    "torque_nm": 48.2
+   },
+   "ts": "2026-11-24T23:13:00+09:00"
+  },
+  {
+   "cause": "TW-1",
+   "checked": [
+    "2.3",
+    "2.4",
+    "2.5"
+   ],
+   "did": [
+    "2.4.2"
+   ],
+   "equipment": "M-09",
+   "group": "TW",
+   "id": "H-0273",
+   "sensors": {
+    "air_temperature_k": 300.4,
+    "power_w": 5337,
+    "process_temperature_k": 310.2,
+    "rotational_speed_rpm": 1671.0,
+    "temp_diff_k": 9.8,
+    "tool_wear_min": 234.0,
+    "torque_nm": 30.5
+   },
+   "ts": "2026-11-25T02:05:00+09:00"
+  },
+  {
+   "cause": "PW-2",
+   "checked": [
+    "3.5",
+    "3.6"
+   ],
+   "did": [
+    "7.1"
+   ],
+   "equipment": "M-16",
+   "group": "PW",
+   "id": "H-0274",
+   "sensors": {
+    "air_temperature_k": 300.6,
+    "power_w": 4064,
+    "process_temperature_k": 310.5,
+    "rotational_speed_rpm": 2156.0,
+    "temp_diff_k": 9.9,
+    "tool_wear_min": 16.0,
+    "torque_nm": 18.0
+   },
+   "ts": "2026-11-25T07:55:00+09:00"
+  },
+  {
+   "cause": "PW-2",
+   "checked": [
+    "3.3",
+    "3.4",
+    "3.5",
+    "3.6"
+   ],
+   "did": [
+    "7.1"
+   ],
+   "equipment": "M-11",
+   "group": "PW",
+   "id": "H-0275",
+   "sensors": {
+    "air_temperature_k": 300.7,
+    "power_w": 4065,
+    "process_temperature_k": 310.8,
+    "rotational_speed_rpm": 1814.0,
+    "temp_diff_k": 10.1,
+    "tool_wear_min": 59.0,
+    "torque_nm": 21.4
+   },
+   "ts": "2026-11-25T21:14:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-07",
+   "group": "PW",
+   "id": "H-0278",
+   "sensors": {
+    "air_temperature_k": 300.9,
+    "power_w": 4101,
+    "process_temperature_k": 310.8,
+    "rotational_speed_rpm": 1988.0,
+    "temp_diff_k": 9.9,
+    "tool_wear_min": 136.0,
+    "torque_nm": 19.7
+   },
+   "ts": "2026-11-30T02:46:00+09:00"
+  },
+  {
+   "cause": "LD-3",
+   "checked": [
+    "5.3",
+    "5.4"
+   ],
+   "did": [
+    "5.4.2"
+   ],
+   "equipment": "M-03",
+   "group": "LD",
+   "id": "H-0279",
+   "sensors": {
+    "air_temperature_k": 301.0,
+    "power_w": 8336,
+    "process_temperature_k": 311.1,
+    "rotational_speed_rpm": 1236.0,
+    "temp_diff_k": 10.1,
+    "tool_wear_min": 177.0,
+    "torque_nm": 64.4
+   },
+   "ts": "2026-11-30T16:43:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-09",
+   "group": "PW",
+   "id": "H-0280",
+   "sensors": {
+    "air_temperature_k": 301.0,
+    "power_w": 8497,
+    "process_temperature_k": 311.0,
+    "rotational_speed_rpm": 1399.0,
+    "temp_diff_k": 10.0,
+    "tool_wear_min": 190.0,
+    "torque_nm": 58.0
+   },
+   "ts": "2026-11-30T22:04:00+09:00"
+  },
+  {
+   "cause": "TW-1",
+   "checked": [
+    "2.3",
+    "2.4",
+    "2.6",
+    "2.5"
+   ],
+   "did": [
+    "2.4.2"
+   ],
+   "equipment": "M-01",
+   "group": "TW",
+   "id": "H-0281",
+   "sensors": {
+    "air_temperature_k": 300.8,
+    "power_w": 6258,
+    "process_temperature_k": 310.6,
+    "rotational_speed_rpm": 1416.0,
+    "temp_diff_k": 9.8,
+    "tool_wear_min": 225.0,
+    "torque_nm": 42.2
+   },
+   "ts": "2026-12-01T08:34:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.5",
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-08",
+   "group": "PW",
+   "id": "H-0282",
+   "sensors": {
+    "air_temperature_k": 301.1,
+    "power_w": 9116,
+    "process_temperature_k": 310.9,
+    "rotational_speed_rpm": 1282.0,
+    "temp_diff_k": 9.8,
+    "tool_wear_min": 10.0,
+    "torque_nm": 67.9
+   },
+   "ts": "2026-12-01T14:35:00+09:00"
+  },
+  {
+   "cause": "LD-1",
+   "checked": [
+    "5.3"
+   ],
+   "did": [
+    "5.3.2"
+   ],
+   "equipment": "M-16",
+   "group": "LD",
+   "id": "H-0284",
+   "sensors": {
+    "air_temperature_k": 300.2,
+    "power_w": 8105,
+    "process_temperature_k": 309.7,
+    "rotational_speed_rpm": 1275.0,
+    "temp_diff_k": 9.5,
+    "tool_wear_min": 15.0,
+    "torque_nm": 60.7
+   },
+   "ts": "2026-12-07T17:29:00+09:00"
+  },
+  {
+   "cause": "LD-2",
+   "checked": [
+    "5.3",
+    "5.4",
+    "5.5",
+    "5.6"
+   ],
+   "did": [
+    "7.2"
+   ],
+   "equipment": "M-14",
+   "group": "LD",
+   "id": "H-0286",
+   "sensors": {
+    "air_temperature_k": 300.2,
+    "power_w": 7606,
+    "process_temperature_k": 309.7,
+    "rotational_speed_rpm": 1183.0,
+    "temp_diff_k": 9.5,
+    "tool_wear_min": 170.0,
+    "torque_nm": 61.4
+   },
+   "ts": "2026-12-09T20:21:00+09:00"
+  },
+  {
+   "cause": "PW-2",
+   "checked": [
+    "3.5",
+    "3.6"
+   ],
+   "did": [
+    "7.1"
+   ],
+   "equipment": "M-15",
+   "group": "PW",
+   "id": "H-0287",
+   "sensors": {
+    "air_temperature_k": 300.1,
+    "power_w": 3942,
+    "process_temperature_k": 309.7,
+    "rotational_speed_rpm": 2151.0,
+    "temp_diff_k": 9.6,
+    "tool_wear_min": 173.0,
+    "torque_nm": 17.5
+   },
+   "ts": "2026-12-09T21:14:00+09:00"
+  },
+  {
+   "cause": "PW-2",
+   "checked": [
+    "3.3",
+    "3.4",
+    "3.5",
+    "3.6"
+   ],
+   "did": [
+    "7.1"
+   ],
+   "equipment": "M-01",
+   "group": "PW",
+   "id": "H-0289",
+   "sensors": {
+    "air_temperature_k": 301.2,
+    "power_w": 3749,
+    "process_temperature_k": 310.1,
+    "rotational_speed_rpm": 2280.0,
+    "temp_diff_k": 8.9,
+    "tool_wear_min": 11.0,
+    "torque_nm": 15.7
+   },
+   "ts": "2026-12-13T18:38:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.5",
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-15",
+   "group": "PW",
+   "id": "H-0290",
+   "sensors": {
+    "air_temperature_k": 301.1,
+    "power_w": 10112,
+    "process_temperature_k": 310.4,
+    "rotational_speed_rpm": 1312.0,
+    "temp_diff_k": 9.3,
+    "tool_wear_min": 49.0,
+    "torque_nm": 73.6
+   },
+   "ts": "2026-12-14T06:16:00+09:00"
+  },
+  {
+   "cause": "PW-3",
+   "checked": [
+    "3.5",
+    "3.3",
+    "3.4"
+   ],
+   "did": [
+    "3.4.2"
+   ],
+   "equipment": "M-13",
+   "group": "PW",
+   "id": "H-0292",
+   "sensors": {
+    "air_temperature_k": 301.5,
+    "power_w": 4169,
+    "process_temperature_k": 310.7,
+    "rotational_speed_rpm": 1942.0,
+    "temp_diff_k": 9.2,
+    "tool_wear_min": 155.0,
+    "torque_nm": 20.5
+   },
+   "ts": "2026-12-15T16:03:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.5",
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-07",
+   "group": "PW",
+   "id": "H-0293",
+   "sensors": {
+    "air_temperature_k": 301.6,
+    "power_w": 8411,
+    "process_temperature_k": 310.6,
+    "rotational_speed_rpm": 1321.0,
+    "temp_diff_k": 9.0,
+    "tool_wear_min": 73.0,
+    "torque_nm": 60.8
+   },
+   "ts": "2026-12-17T15:11:00+09:00"
+  },
+  {
+   "cause": "PW-2",
+   "checked": [
+    "3.3",
+    "3.4",
+    "3.5",
+    "3.6"
+   ],
+   "did": [
+    "7.1"
+   ],
+   "equipment": "M-12",
+   "group": "PW",
+   "id": "H-0295",
+   "sensors": {
+    "air_temperature_k": 301.3,
+    "power_w": 4099,
+    "process_temperature_k": 310.4,
+    "rotational_speed_rpm": 2093.0,
+    "temp_diff_k": 9.1,
+    "tool_wear_min": 190.0,
+    "torque_nm": 18.7
+   },
+   "ts": "2026-12-19T06:47:00+09:00"
+  },
+  {
+   "cause": "TW-4",
+   "checked": [
+    "2.3",
+    "2.4",
+    "2.5",
+    "2.6"
+   ],
+   "did": [
+    "2.6.2"
+   ],
+   "equipment": "M-05",
+   "group": "TW",
+   "id": "H-0296",
+   "sensors": {
+    "air_temperature_k": 301.5,
+    "power_w": 4630,
+    "process_temperature_k": 310.6,
+    "rotational_speed_rpm": 1579.0,
+    "temp_diff_k": 9.1,
+    "tool_wear_min": 220.0,
+    "torque_nm": 28.0
+   },
+   "ts": "2026-12-19T17:51:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-12",
+   "group": "PW",
+   "id": "H-0297",
+   "sensors": {
+    "air_temperature_k": 301.3,
+    "power_w": 8561,
+    "process_temperature_k": 310.8,
+    "rotational_speed_rpm": 1531.0,
+    "temp_diff_k": 9.5,
+    "tool_wear_min": 57.0,
+    "torque_nm": 53.4
+   },
+   "ts": "2026-12-23T15:50:00+09:00"
+  },
+  {
+   "cause": "PW-1",
+   "checked": [
+    "3.3"
+   ],
+   "did": [
+    "3.3.2"
+   ],
+   "equipment": "M-17",
+   "group": "PW",
+   "id": "H-0298",
+   "sensors": {
+    "air_temperature_k": 301.1,
+    "power_w": 8503,
+    "process_temperature_k": 310.6,
+    "rotational_speed_rpm": 1388.0,
+    "temp_diff_k": 9.5,
+    "tool_wear_min": 68.0,
+    "torque_nm": 58.5
+   },
+   "ts": "2026-12-23T19:52:00+09:00"
+  },
+  {
+   "cause": "PW-3",
+   "checked": [
+    "3.5",
+    "3.3",
+    "3.4"
+   ],
+   "did": [
+    "3.4.2"
+   ],
+   "equipment": "M-07",
+   "group": "PW",
+   "id": "H-0299",
+   "sensors": {
+    "air_temperature_k": 300.7,
+    "power_w": 3560,
+    "process_temperature_k": 311.1,
+    "rotational_speed_rpm": 2377.0,
+    "temp_diff_k": 10.4,
+    "tool_wear_min": 135.0,
+    "torque_nm": 14.3
+   },
+   "ts": "2026-12-30T18:24:00+09:00"
+  },
+  {
+   "cause": "PW-2",
+   "checked": [
+    "3.5",
+    "3.6"
+   ],
+   "did": [
+    "7.1"
+   ],
+   "equipment": "M-14",
+   "group": "PW",
+   "id": "H-0300",
+   "sensors": {
+    "air_temperature_k": 300.5,
+    "power_w": 4145,
+    "process_temperature_k": 310.6,
+    "rotational_speed_rpm": 1950.0,
+    "temp_diff_k": 10.1,
+    "tool_wear_min": 208.0,
+    "torque_nm": 20.3
+   },
+   "ts": "2026-12-31T18:19:00+09:00"
+  }
+ ],
+ "release_id": "graph-mm3-v3-48a5b999-bfa0976f",
+ "remedied_by": [
+  {
+   "app_no": "4.3.2",
+   "code": "CL-1",
+   "n": 57,
+   "no": "3.3.4"
+  },
+  {
+   "app_no": "4.4.2",
+   "code": "CL-2",
+   "n": 25,
+   "no": "3.3.2"
+  },
+  {
+   "app_no": "4.5.2",
+   "code": "CL-3",
+   "n": 10,
+   "no": "3.3.3"
+  },
+  {
+   "app_no": "4.6.2",
+   "code": "CL-4",
+   "n": 16,
+   "no": "3.3.1"
+  },
+  {
+   "app_no": "5.3.2",
+   "code": "LD-1",
+   "n": 8,
+   "no": "3.4.2"
+  },
+  {
+   "app_no": "7.2",
+   "code": "LD-2",
+   "n": 6,
+   "no": "3.5.2"
+  },
+  {
+   "app_no": "5.4.2",
+   "code": "LD-3",
+   "n": 15,
+   "no": "3.4.1"
+  },
+  {
+   "app_no": "3.3.2",
+   "code": "PW-1",
+   "n": 43,
+   "no": "3.2.1"
+  },
+  {
+   "app_no": "7.1",
+   "code": "PW-2",
+   "n": 23,
+   "no": "3.5.1"
+  },
+  {
+   "app_no": "3.4.2",
+   "code": "PW-3",
+   "n": 15,
+   "no": "3.2.2"
+  },
+  {
+   "app_no": "2.4.2",
+   "code": "TW-1",
+   "n": 21,
+   "no": "3.1.1"
+  },
+  {
+   "app_no": "2.4.2",
+   "code": "TW-2",
+   "n": 8,
+   "no": "3.1.1"
+  },
+  {
+   "app_no": "2.3.2",
+   "code": "TW-3",
+   "n": 8,
+   "no": "3.1.2"
+  },
+  {
+   "app_no": "2.6.2",
+   "code": "TW-4",
+   "n": 3,
+   "no": "3.1.3"
+  }
+ ],
+ "sections": [
+  {
+   "app_no": "1.1",
+   "checklist": [],
+   "grade": null,
+   "group": null,
+   "kind": "공통",
+   "minutes": null,
+   "name": "매뉴얼 구성과 권한 등급",
+   "no": "1.1"
+  },
+  {
+   "app_no": "1.2",
+   "checklist": [],
+   "grade": "A",
+   "group": null,
+   "kind": "공통",
+   "minutes": 2,
+   "name": "잠금 확인",
+   "no": "1.2"
+  },
+  {
+   "app_no": "1.3",
+   "checklist": [],
+   "grade": null,
+   "group": null,
+   "kind": "공통",
+   "minutes": null,
+   "name": "보호구와 고온부",
+   "no": "1.3"
+  },
+  {
+   "app_no": "1.4",
+   "checklist": [],
+   "grade": null,
+   "group": null,
+   "kind": "공통",
+   "minutes": null,
+   "name": "호출 기준",
+   "no": "1.4"
+  },
+  {
+   "app_no": "2.2",
+   "checklist": [],
+   "grade": "A",
+   "group": "공구 마모 경고",
+   "kind": "사전 확인",
+   "minutes": 1,
+   "name": "공구 번호·마모 카운터 기록",
+   "no": "2.1.2"
+  },
+  {
+   "app_no": "2.3",
+   "checklist": [],
+   "desc": "카운터 값이 누적 가공 시간보다 30분 이상 많거나, 교체 기록 뒤 카운터 초기화 기록이 없으면 \"이상\"이다.",
+   "grade": "A",
+   "group": "공구 마모 경고",
+   "kind": "점검",
+   "minutes": 2,
+   "name": "교체 기록 대조",
+   "no": "2.1.3"
+  },
+  {
+   "app_no": "2.4",
+   "checklist": [],
+   "desc": "날 끝 한 곳이라도 깨짐이나 치핑이 보이면 \"이상\"이다.",
+   "grade": "A",
+   "group": "공구 마모 경고",
+   "kind": "점검",
+   "minutes": 3,
+   "name": "날 끝 확대경 점검",
+   "no": "2.1.4"
+  },
+  {
+   "app_no": "2.5",
+   "checklist": [
+    "주변 공구·이물질을 치웠다",
+    "커버가 모두 닫혔다",
+    "시험 가공 프로그램을 선택했다"
+   ],
+   "desc": "치수가 공차를 벗어나거나 가공면이 비교 시편보다 거칠면 \"이상\"이다.",
+   "grade": "B",
+   "group": "공구 마모 경고",
+   "kind": "점검",
+   "minutes": 8,
+   "name": "시험 가공 치수 확인",
+   "no": "2.1.5"
+  },
+  {
+   "app_no": "2.6",
+   "checklist": [],
+   "desc": "가장 넓은 마모 띠가 가장 좁은 띠의 2배 이상이거나, 공구가 손으로 흔들리면 \"이상\"이다.",
+   "grade": "A",
+   "group": "공구 마모 경고",
+   "kind": "점검",
+   "minutes": 4,
+   "name": "날 마모 띠·콜릿 흔들림 점검",
+   "no": "2.1.6"
+  },
+  {
+   "app_no": "3.2",
+   "checklist": [],
+   "grade": "A",
+   "group": "출력 이탈",
+   "kind": "사전 확인",
+   "minutes": 2,
+   "name": "인버터 경고 코드 기록",
+   "no": "2.2.2"
+  },
+  {
+   "app_no": "3.3",
+   "checklist": [],
+   "desc": "설정값이 공정 표준과 10% 이상 다르면 \"이상\"이다.",
+   "grade": "A",
+   "group": "출력 이탈",
+   "kind": "점검",
+   "minutes": 4,
+   "name": "회전 조건 설정 확인",
+   "no": "2.2.3"
+  },
+  {
+   "app_no": "3.4",
+   "checklist": [],
+   "desc": "커넥터가 헐겁거나 피복이 손상되어 있으면 \"이상\"이다.",
+   "grade": "A",
+   "group": "출력 이탈",
+   "kind": "점검",
+   "minutes": 4,
+   "name": "엔코더 커넥터·케이블 육안 점검",
+   "no": "2.2.4"
+  },
+  {
+   "app_no": "3.5",
+   "checklist": [],
+   "desc": "저전압·과전류 경고가 2회 이상이면 \"이상\"이다.",
+   "grade": "A",
+   "group": "출력 이탈",
+   "kind": "점검",
+   "minutes": 3,
+   "name": "인버터 경고 이력 확인",
+   "no": "2.2.5"
+  },
+  {
+   "app_no": "3.6",
+   "checklist": [],
+   "desc": "단자가 변색되었거나 이완되어 있으면 \"이상\"이다.",
+   "grade": "C",
+   "group": "출력 이탈",
+   "kind": "점검",
+   "minutes": 6,
+   "name": "전원 단자대 점검",
+   "no": "2.2.6"
+  },
+  {
+   "app_no": "4.2",
+   "checklist": [],
+   "grade": "A",
+   "group": "온도 차 저하",
+   "kind": "사전 확인",
+   "minutes": 3,
+   "name": "고온부 확인과 온도 기록",
+   "no": "2.3.2"
+  },
+  {
+   "app_no": "4.3",
+   "checklist": [],
+   "desc": "기름때·먼지가 필터 표면의 절반 이상을 덮으면 \"이상\"이다.",
+   "grade": "A",
+   "group": "온도 차 저하",
+   "kind": "점검",
+   "minutes": 3,
+   "name": "흡기 필터 육안 점검",
+   "no": "2.3.3"
+  },
+  {
+   "app_no": "4.4",
+   "checklist": [],
+   "desc": "축을 손으로 흔들 때 유격이 느껴지거나 날개가 깨져 있으면 \"이상\"이다.",
+   "grade": "C",
+   "group": "온도 차 저하",
+   "kind": "점검",
+   "minutes": 10,
+   "name": "냉각 팬 분해 점검",
+   "no": "2.3.4"
+  },
+  {
+   "app_no": "4.5",
+   "checklist": [],
+   "desc": "수위가 MIN 선 아래면 \"이상\"이다.",
+   "grade": "A",
+   "group": "온도 차 저하",
+   "kind": "점검",
+   "minutes": 5,
+   "name": "냉각수 수위 확인",
+   "no": "2.3.5"
+  },
+  {
+   "app_no": "4.6",
+   "checklist": [],
+   "desc": "어느 하나라도 표준값보다 낮게 설정되어 있으면 \"이상\"이다.",
+   "grade": "A",
+   "group": "온도 차 저하",
+   "kind": "점검",
+   "minutes": 4,
+   "name": "냉각 설정값 확인",
+   "no": "2.3.6"
+  },
+  {
+   "app_no": "5.2",
+   "checklist": [],
+   "grade": "A",
+   "group": "토크 과부하",
+   "kind": "사전 확인",
+   "minutes": 2,
+   "name": "소재·가공 프로그램 기록",
+   "no": "2.4.2"
+  },
+  {
+   "app_no": "5.3",
+   "checklist": [],
+   "desc": "분사 줄기가 끊기거나 공구 날 쪽을 벗어나면 \"이상\"이다.",
+   "grade": "A",
+   "group": "토크 과부하",
+   "kind": "점검",
+   "minutes": 3,
+   "name": "절삭유 노즐 분사 확인",
+   "no": "2.4.3"
+  },
+  {
+   "app_no": "5.4",
+   "checklist": [],
+   "desc": "이송 속도나 절삭 깊이가 공정 표준을 10% 넘게 웃돌면 \"이상\"이다.",
+   "grade": "A",
+   "group": "토크 과부하",
+   "kind": "점검",
+   "minutes": 4,
+   "name": "절삭 조건 대조",
+   "no": "2.4.4"
+  },
+  {
+   "app_no": "5.5",
+   "checklist": [
+    "공구를 분리했다",
+    "커버가 모두 닫혔다",
+    "주변 작업자가 없다"
+   ],
+   "desc": "진동 속도가 2.8 mm/s 를 넘으면 \"이상\"이다.",
+   "grade": "B",
+   "group": "토크 과부하",
+   "kind": "점검",
+   "minutes": 8,
+   "name": "스핀들 진동 측정",
+   "no": "2.4.5"
+  },
+  {
+   "app_no": "5.6",
+   "checklist": [],
+   "desc": "외부 업체가 베어링 마모·손상을 확인하면 \"이상\"이다.",
+   "grade": "D",
+   "group": "토크 과부하",
+   "kind": "점검",
+   "minutes": 120,
+   "name": "스핀들 베어링 분해 점검",
+   "no": "2.4.6"
+  },
+  {
+   "app_no": "2.4.2",
+   "checklist": [],
+   "grade": "A",
+   "group": "공구 마모 경고",
+   "kind": "조치",
+   "minutes": 15,
+   "name": "공구 교체",
+   "no": "3.1.1"
+  },
+  {
+   "app_no": "2.3.2",
+   "checklist": [
+    "교체 기록 번호를 확인했다",
+    "장착된 공구 번호가 교체 기록과 같다",
+    "정정 전 값과 정정 값을 기록했다"
+   ],
+   "grade": "B",
+   "group": "공구 마모 경고",
+   "kind": "조치",
+   "minutes": 3,
+   "name": "마모 카운터 정정",
+   "no": "3.1.2"
+  },
+  {
+   "app_no": "2.6.2",
+   "checklist": [],
+   "grade": "A",
+   "group": "공구 마모 경고",
+   "kind": "조치",
+   "minutes": 18,
+   "name": "콜릿 청소 후 공구 교체",
+   "no": "3.1.3"
+  },
+  {
+   "app_no": "3.3.2",
+   "checklist": [],
+   "grade": "C",
+   "group": "출력 이탈",
+   "kind": "조치",
+   "minutes": 5,
+   "name": "가공 설정값 원복",
+   "no": "3.2.1"
+  },
+  {
+   "app_no": "3.4.2",
+   "checklist": [],
+   "grade": "A",
+   "group": "출력 이탈",
+   "kind": "조치",
+   "minutes": 5,
+   "name": "엔코더 커넥터 재체결",
+   "no": "3.2.2"
+  },
+  {
+   "app_no": "4.6.2",
+   "checklist": [],
+   "grade": "C",
+   "group": "온도 차 저하",
+   "kind": "조치",
+   "minutes": 5,
+   "name": "냉각 설정값 변경",
+   "no": "3.3.1"
+  },
+  {
+   "app_no": "4.4.2",
+   "checklist": [],
+   "grade": "C",
+   "group": "온도 차 저하",
+   "kind": "조치",
+   "minutes": 40,
+   "name": "냉각 팬 모듈 교체",
+   "no": "3.3.2"
+  },
+  {
+   "app_no": "4.5.2",
+   "checklist": [
+    "지정 냉각수(희석 비율 표기)를 확인했다",
+    "누설 흔적이 없다",
+    "보충 후 수위가 MIN–MAX 사이다"
+   ],
+   "grade": "B",
+   "group": "온도 차 저하",
+   "kind": "조치",
+   "minutes": 10,
+   "name": "냉각수 보충",
+   "no": "3.3.3"
+  },
+  {
+   "app_no": "4.3.2",
+   "checklist": [],
+   "grade": "A",
+   "group": "온도 차 저하",
+   "kind": "조치",
+   "minutes": 10,
+   "name": "흡기 필터 교체",
+   "no": "3.3.4"
+  },
+  {
+   "app_no": "5.4.2",
+   "checklist": [],
+   "grade": "C",
+   "group": "토크 과부하",
+   "kind": "조치",
+   "minutes": 5,
+   "name": "절삭 조건 조정",
+   "no": "3.4.1"
+  },
+  {
+   "app_no": "5.3.2",
+   "checklist": [],
+   "grade": "A",
+   "group": "토크 과부하",
+   "kind": "조치",
+   "minutes": 8,
+   "name": "절삭유 노즐 청소·교체",
+   "no": "3.4.2"
+  },
+  {
+   "app_no": "7.1",
+   "checklist": [],
+   "grade": "D",
+   "group": null,
+   "kind": "조치",
+   "minutes": 30,
+   "name": "전기 계통 작업",
+   "no": "3.5.1"
+  },
+  {
+   "app_no": "7.2",
+   "checklist": [],
+   "grade": "D",
+   "group": null,
+   "kind": "조치",
+   "minutes": 180,
+   "name": "스핀들·베어링 분해",
+   "no": "3.5.2"
+  },
+  {
+   "app_no": "6.1",
+   "checklist": [
+    "주변 공구·이물질 치움",
+    "냉각 커버 고정 확인",
+    "작업자 대피 확인"
+   ],
+   "grade": "B",
+   "group": null,
+   "kind": "재가동",
+   "minutes": 3,
+   "name": "재가동",
+   "no": "4.1"
+  },
+  {
+   "app_no": "6.2",
+   "checklist": [],
+   "grade": "A",
+   "group": null,
+   "kind": "마감",
+   "minutes": 2,
+   "name": "이상 없음·감시 마감",
+   "no": "4.2"
+  }
+ ],
+ "source": {
+  "history_sha256": "48a5b999498e46b9f8d8abfea6884b5e4fb0d4682940510776125b530048c506",
+  "manual_sha256": "20ff33b50dfd37115c8a86b763ecf7d0b48bd60a8da7bb482e8cdab6717f3cfb",
+  "map_sha256": "774358d9131f50c7c28e32f182e25dc90f440f7934918cc3acd481aeb7053b6b",
+  "records": 300,
+  "version": "mm3-v3"
+ }
+}

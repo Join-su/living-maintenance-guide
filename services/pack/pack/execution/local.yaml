@@ -1,0 +1,10 @@
+# 이 맥의 실행 설정(명세 v0.5 3.4) — 비밀 값 없음, Pack revision 밖. LLMOps '＋ release' 때 이 파일을 실행 설정으로 고름.
+config_version: 1
+entrypoint: run
+environment: {kind: local-python, python: ../../.venv/bin/python}
+release_roots: [../../releases, ../../../agent-pack-runtime-ingest/releases-c1a15]   # 모델 release(자리 모델) · 벡터 DB(packrt-1 자리, 읽기만)
+models:
+  failure_classifier: {release: mr-ai4i-lgbm-large-v2}   # 사용자 모델(task10-pack 2c74ac0 사본, D-268 · D-272) — 되돌림은 이 줄을 mr-c1a15-standin-v1로
+stores:
+  history: {backend: flat-local, release: ir-history-412ea43e, embedding: {mode: fake}}   # 가짜 DB(packrt-1 ②-b, 질의 임베딩도 가짜 — 망 0). 실제 DB는 execution/deploy-real.yaml
+  manuals: {backend: flat-local, release: ir-manuals-a5c07752, embedding: {mode: fake}}   # 매뉴얼 v2 가짜 DB(013-11 build · packrt-1 자리, 앞 f8b7fe33) — 결과는 trace에만

@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ReportCheck",
+  "description": "보고서 문장 근거 검사 결과(validate@2 결과 모양) — details의 custom 칸에 칸마다 {ok, reason, found(기준 밖 절 · 기록 ID · 수치)}",
+  "type": "object",
+  "required": ["passed", "failed_rules", "details"],
+  "properties": {"passed": {"type": "boolean"}, "failed_rules": {"type": "array", "items": {"type": "string"}}, "reason": {"type": ["string", "null"]}, "details": {"type": "object"}}
+}

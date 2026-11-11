@@ -1,0 +1,22 @@
+{
+  "alarm": {
+    "event_id": "C1A-E3f9a01c2d4b7",
+    "alarm": true,
+    "group": "CL",
+    "group_source": "sensor_boundary",
+    "alarm_block": {
+      "sensor": "온도 차",
+      "value": 7.8,
+      "unit": "K",
+      "boundary": 8.2,
+      "direction": "경계 아래",
+      "trend_title": "온도 차 추이 · 최근 12회 측정"
+    },
+    "sensor_derived": {
+      "power_w": 7864,
+      "temp_diff_k": 7.8
+    },
+    "ml": null,
+    "candidate": null
+  }
+}

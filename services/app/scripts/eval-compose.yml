@@ -1,0 +1,7 @@
+# 평가 실행(scripts/eval-run) 전용 덧붙임: api 컨테이너에 정답 자료 파일 열기 감시를 켠다. 평가 폴더(eval/)는 넣지 않는다.
+services:
+  api:
+    environment:
+      PYTHONPATH: /app/src:/eval_watch
+    volumes:
+      - ./scripts/eval_watch:/eval_watch:ro

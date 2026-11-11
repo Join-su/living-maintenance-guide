@@ -1,0 +1,7 @@
+# 평가 suite r5(c1a15-eval · D-462 C · 리드 꼴 확정 ev079-order-agent) — val 카드 22 + 시연 각본 5 · start → judge 이어 부르기 · 등록은 리드(사본 V4)
+suite: c1a15_order
+split: holdout
+graph: run
+dataset: dataset.jsonl
+expectations: expectations.jsonl
+review_policy: {default: fixture, missing_fixture: stop_before}

@@ -1,0 +1,2 @@
+{"$schema": "https://json-schema.org/draft/2020-12/schema", "title": "MaintenanceRecord", "type": "object", "required": ["record_id", "failure_type", "action"],
+ "properties": {"record_id": {"type": "string"}, "failure_type": {"type": "string"}, "action": {"type": "string"}}}

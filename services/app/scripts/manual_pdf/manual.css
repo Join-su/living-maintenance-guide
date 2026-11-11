@@ -1,0 +1,80 @@
+/* MG-MM 2.0 PDF 조판(EV-005) — A4 세로 · Apple SD Gothic Neo 하나. CSS로 글자를 만들지 않는다(content는 빈 글만). */
+@page { size: A4; margin: 18mm 16mm 18mm 18mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #fff; }
+body { color: #1b1f24; font-family: 'Apple SD Gothic Neo', sans-serif; font-size: 9.6pt; line-height: 1.55; hyphens: none; -webkit-hyphens: none; word-break: keep-all; overflow-wrap: anywhere; }
+b { font-weight: 700; }
+h1, h2, h3, h4, h5 { margin: 0; font-weight: 700; break-after: avoid; }
+section.chapter { break-before: page; }
+section.front { break-after: page; }
+h2.chap { font-size: 17pt; padding-bottom: 6pt; margin-bottom: 10pt; border-bottom: 2pt solid #1b1f24; }
+h2.chap .cn { margin-right: 4pt; }
+h3 { font-size: 13pt; margin: 16pt 0 6pt; padding-bottom: 3pt; border-bottom: 1.2pt solid #1b1f24; }
+h3 .no { margin-right: 6pt; }
+h4 { font-size: 10.4pt; margin: 10pt 0 4pt; padding-left: 6pt; border-left: 3pt solid #1b1f24; }
+h5 { font-size: 10.2pt; margin: 10pt 0 4pt; }
+p { margin: 0 0 5pt; }
+p.meta { background: #f1f3f5; padding: 3pt 7pt; font-size: 9pt; }
+p.lbl { margin-top: 8pt; }
+ol, ul { list-style: none; margin: 0 0 7pt; padding: 0; }
+ol.steps li { display: flex; align-items: flex-start; gap: 7pt; padding: 2pt 0; break-inside: avoid; }
+ol.steps .stepno { flex: none; margin-top: 0.5pt; width: 15pt; height: 15pt; border: 1.1pt solid #1b1f24; border-radius: 50%; font-weight: 700; font-size: 8.4pt; text-align: center; line-height: 13pt; }
+ol.steps li.warn { background: #fff7d1; }
+ol.steps li.warn .ic { flex: none; line-height: 0; margin-top: 0.5pt; }
+ol.steps .tx { flex: 1; }
+ul.dot li { padding: 1pt 0 1pt 12pt; text-indent: -9pt; break-inside: avoid; }
+ul.dot li::before { content: ""; display: inline-block; width: 4pt; height: 4pt; margin-right: 5pt; vertical-align: 1.5pt; background: #1b1f24; border-radius: 50%; }
+ul.dot li.ref { border-left: 3pt solid #f2c200; }
+ul.dot li.ref { padding-left: 17pt; }
+ul.ck li { display: flex; align-items: flex-start; gap: 7pt; padding: 1.5pt 0; break-inside: avoid; }
+ul.ck .cb { flex: none; margin-top: 3pt; width: 10pt; height: 10pt; border: 1.1pt solid #1b1f24; border-radius: 1.5pt; }
+.box { display: flex; gap: 8pt; padding: 6pt 9pt; margin: 6pt 0 9pt; break-inside: avoid; }
+.box .ic { flex: none; line-height: 0; }
+.box.rule { border: 1.4pt solid #1b1f24; border-left: 6pt solid #f2c200; background: #fffbe8; }
+.box.note { border-left: 3pt solid #8a939e; background: #f6f7f8; font-size: 9pt; }
+.box.crit { border: 1.8pt solid #1b1f24; display: block; }
+.box.crit b { margin-right: 6pt; padding: 0.5pt 5pt; background: #1b1f24; color: #fff; font-size: 8.4pt; }
+.box.caution { border: 1.2pt solid #1f5aa6; border-left: 6pt solid #1f5aa6; font-size: 9pt; }
+.box.caution .lbl { font-weight: 700; margin-right: 6pt; color: #1f5aa6; }
+.srcref { color: #5b6470; font-size: 8pt; margin-left: 6pt; }
+table.tbl { border-collapse: collapse; width: 100%; margin: 4pt 0 9pt; font-size: 8.8pt; }
+table.tbl th, table.tbl td { border: 0.7pt solid #9aa3ad; padding: 2.3pt 5pt; text-align: left; vertical-align: top; }
+table.tbl thead th { background: #e9ecef; border-color: #1b1f24; }
+table.tbl tr { break-inside: avoid; }
+table.kv th { width: 28%; background: #f1f3f5; font-weight: 700; }
+td.mono { font-size: 8pt; letter-spacing: 0.3pt; word-break: break-all; }
+table.guide td { border: none; border-bottom: 0.7pt solid #d5dade; padding: 7pt 6pt; }
+table.guide td.gi { width: 34pt; line-height: 0; }
+figure.fig { margin: 8pt 0 10pt; padding: 8pt 8pt 6pt; border: 0.8pt solid #c9cfd6; break-inside: avoid; }
+figure.fig .svg svg { display: block; width: 100%; height: auto; max-height: 70mm; }
+figcaption { font-size: 8.4pt; margin-top: 4pt; color: #3a424c; }
+figcaption .fno { font-weight: 700; color: #1b1f24; margin-right: 2pt; }
+table.form { border-collapse: collapse; width: 100%; margin: 2pt 0 4pt; font-size: 8.8pt; break-inside: avoid; }
+table.form th { width: 42%; text-align: left; font-weight: 400; background: #f6f7f8; border: 0.7pt solid #1b1f24; padding: 4pt 6pt; }
+table.form td.blank { border: 0.7pt solid #1b1f24; height: 20pt; }
+table.form.sign th { width: auto; text-align: center; font-weight: 700; }
+table.form.sign td.blank { width: 22%; }
+.toc .toc-chap, .toc .toc-sec { display: flex; align-items: baseline; gap: 4pt; line-height: 1.32; }
+.toc .toc-chap { font-weight: 700; margin-top: 2.5pt; font-size: 9.2pt; }
+.toc .toc-sec { padding-left: 14pt; font-size: 8.4pt; }
+.toc .dots { flex: 1; border-bottom: 0.7pt dotted #8a939e; }
+.toc .pg { min-width: 14pt; text-align: right; }
+.cover { height: 260mm; display: flex; flex-direction: column; justify-content: space-between; }
+.cv-top { display: flex; justify-content: space-between; font-weight: 700; border-bottom: 2.4pt solid #1b1f24; padding-bottom: 5pt; }
+.kicker { font-size: 12pt; letter-spacing: 2pt; color: #5b6470; }
+.cv-title h1 { font-size: 25pt; margin: 6pt 0 4pt; line-height: 1.25; }
+.model { font-size: 14pt; font-weight: 700; }
+.cv-fig svg { display: block; width: 100%; height: auto; max-height: 100mm; }
+table.cv-meta { border-collapse: collapse; width: 100%; font-size: 9pt; }
+table.cv-meta th, table.cv-meta td { border: 0.8pt solid #1b1f24; padding: 4pt 6pt; text-align: left; }
+table.cv-meta th { background: #f1f3f5; width: 14%; }
+.cv-intro { font-size: 8.4pt; color: #3a424c; margin: 8pt 0 0; }
+.cv-note { font-size: 7.6pt; color: #5b6470; margin: 4pt 0 0; text-align: right; }
+table.rev th:nth-child(1), table.rev td:nth-child(1) { width: 9%; white-space: nowrap; }
+table.rev th:nth-child(2), table.rev td:nth-child(2) { width: 17%; white-space: nowrap; }
+table.tbl thead { display: table-row-group; } /* 쪽을 넘는 표 머리 행을 되풀이하지 않음(그린 글 = 원본 글) */
+p.meta, .box.caution, p.lbl, h5 { break-after: avoid; } /* 머리 · 권한 줄 · 주의 상자를 다음 내용과 같은 쪽에 */
+.formwrap { break-inside: avoid; margin-bottom: 8pt; }
+table.crit th:nth-child(1), table.crit td:nth-child(1) { width: 7%; white-space: nowrap; }
+table.crit th:nth-child(2), table.crit td:nth-child(2) { width: 25%; }
+table.long { font-size: 8.4pt; } table.long th, table.long td { padding-top: 1.7pt; padding-bottom: 1.7pt; } /* 부록 B처럼 긴 표는 한 쪽에 */

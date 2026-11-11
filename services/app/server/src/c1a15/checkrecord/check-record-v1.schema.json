@@ -1,0 +1,858 @@
+{
+ "$defs": {
+  "Cause": {
+   "additionalProperties": false,
+   "properties": {
+    "cause": {
+     "title": "Cause",
+     "type": "string"
+    },
+    "p": {
+     "title": "P",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "cause",
+    "p"
+   ],
+   "title": "Cause",
+   "type": "object"
+  },
+  "Edit": {
+   "additionalProperties": false,
+   "properties": {
+    "after": {
+     "title": "After",
+     "type": "string"
+    },
+    "before": {
+     "title": "Before",
+     "type": "string"
+    },
+    "field": {
+     "title": "Field",
+     "type": "string"
+    }
+   },
+   "required": [
+    "field",
+    "before",
+    "after"
+   ],
+   "title": "Edit",
+   "type": "object"
+  },
+  "ExceptionOffer": {
+   "additionalProperties": false,
+   "description": "D-633 예외 추천이 보인 세션 — 사람이 그 예외를 골랐나(선택 칸 · 예외가 안 보인 세션은 null).",
+   "properties": {
+    "adopted": {
+     "title": "Adopted",
+     "type": "boolean"
+    },
+    "how": {
+     "anyOf": [
+      {
+       "enum": [
+        "switched",
+        "followed"
+       ],
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "How"
+    },
+    "picked_section": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Picked Section"
+    },
+    "relation_id": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Relation Id"
+    },
+    "run_id": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Run Id"
+    }
+   },
+   "required": [
+    "relation_id",
+    "run_id",
+    "adopted",
+    "how",
+    "picked_section"
+   ],
+   "title": "ExceptionOffer",
+   "type": "object"
+  },
+  "FieldTruth": {
+   "additionalProperties": false,
+   "properties": {
+    "confirmed_cause": {
+     "title": "Confirmed Cause",
+     "type": "string"
+    },
+    "confirmed_sections": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Confirmed Sections",
+     "type": "array"
+    },
+    "query": {
+     "$ref": "#/$defs/Query"
+    }
+   },
+   "required": [
+    "query",
+    "confirmed_sections",
+    "confirmed_cause"
+   ],
+   "title": "FieldTruth",
+   "type": "object"
+  },
+  "FirstDecision": {
+   "additionalProperties": false,
+   "properties": {
+    "pack_top": {
+     "items": {
+      "$ref": "#/$defs/Cause"
+     },
+     "title": "Pack Top",
+     "type": "array"
+    },
+    "run_id": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Run Id"
+    },
+    "top": {
+     "items": {
+      "$ref": "#/$defs/Cause"
+     },
+     "title": "Top",
+     "type": "array"
+    }
+   },
+   "required": [
+    "run_id",
+    "top",
+    "pack_top"
+   ],
+   "title": "FirstDecision",
+   "type": "object"
+  },
+  "FirstInstruction": {
+   "additionalProperties": false,
+   "properties": {
+    "kind": {
+     "title": "Kind",
+     "type": "string"
+    },
+    "run_id": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Run Id"
+    },
+    "section": {
+     "title": "Section",
+     "type": "string"
+    }
+   },
+   "required": [
+    "section",
+    "kind",
+    "run_id"
+   ],
+   "title": "FirstInstruction",
+   "type": "object"
+  },
+  "Lead": {
+   "additionalProperties": false,
+   "properties": {
+    "at": {
+     "title": "At",
+     "type": "string"
+    },
+    "cause_text_changed": {
+     "title": "Cause Text Changed",
+     "type": "boolean"
+    },
+    "decision": {
+     "enum": [
+      "approve",
+      "edit"
+     ],
+     "title": "Decision",
+     "type": "string"
+    },
+    "edits": {
+     "items": {
+      "$ref": "#/$defs/Edit"
+     },
+     "title": "Edits",
+     "type": "array"
+    },
+    "rejects": {
+     "items": {
+      "$ref": "#/$defs/Reject"
+     },
+     "title": "Rejects",
+     "type": "array"
+    }
+   },
+   "required": [
+    "decision",
+    "edits",
+    "cause_text_changed",
+    "rejects",
+    "at"
+   ],
+   "title": "Lead",
+   "type": "object"
+  },
+  "Outcome": {
+   "additionalProperties": false,
+   "properties": {
+    "action_section": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Action Section"
+    },
+    "cause_code": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Cause Code"
+    },
+    "cause_text": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Cause Text"
+    },
+    "restart": {
+     "anyOf": [
+      {
+       "enum": [
+        "within",
+        "outside"
+       ],
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Restart"
+    },
+    "type": {
+     "enum": [
+      "원인 확정",
+      "이상 없음·감시",
+      "원인 미상·숙련자 인계"
+     ],
+     "title": "Type",
+     "type": "string"
+    }
+   },
+   "required": [
+    "type",
+    "cause_code",
+    "cause_text",
+    "action_section",
+    "restart"
+   ],
+   "title": "Outcome",
+   "type": "object"
+  },
+  "Query": {
+   "additionalProperties": false,
+   "properties": {
+    "sensor_snapshot": {
+     "additionalProperties": {
+      "type": "number"
+     },
+     "title": "Sensor Snapshot",
+     "type": "object"
+    },
+    "symptom_group": {
+     "title": "Symptom Group",
+     "type": "string"
+    }
+   },
+   "required": [
+    "symptom_group",
+    "sensor_snapshot"
+   ],
+   "title": "Query",
+   "type": "object"
+  },
+  "Reject": {
+   "additionalProperties": false,
+   "properties": {
+    "at": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "At"
+    },
+    "reason": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Reason"
+    }
+   },
+   "required": [
+    "at",
+    "reason"
+   ],
+   "title": "Reject",
+   "type": "object"
+  },
+  "Runs": {
+   "additionalProperties": false,
+   "properties": {
+    "alarm": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Alarm"
+    },
+    "deployment_id": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Deployment Id"
+    },
+    "judge": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Judge",
+     "type": "array"
+    },
+    "report": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Report"
+    },
+    "start": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Start"
+    }
+   },
+   "required": [
+    "deployment_id",
+    "start",
+    "judge",
+    "alarm",
+    "report"
+   ],
+   "title": "Runs",
+   "type": "object"
+  },
+  "Session": {
+   "additionalProperties": false,
+   "properties": {
+    "alarm_id": {
+     "title": "Alarm Id",
+     "type": "integer"
+    },
+    "alarm_source": {
+     "enum": [
+      "boundary",
+      "ml_predicted"
+     ],
+     "title": "Alarm Source",
+     "type": "string"
+    },
+    "closed_at": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Closed At"
+    },
+    "equipment_id": {
+     "title": "Equipment Id",
+     "type": "string"
+    },
+    "occurred_at": {
+     "title": "Occurred At",
+     "type": "string"
+    },
+    "pack_session_id": {
+     "title": "Pack Session Id",
+     "type": "string"
+    },
+    "scenario_id": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Scenario Id"
+    },
+    "symptom_group": {
+     "title": "Symptom Group",
+     "type": "string"
+    }
+   },
+   "required": [
+    "pack_session_id",
+    "alarm_id",
+    "equipment_id",
+    "symptom_group",
+    "alarm_source",
+    "scenario_id",
+    "occurred_at",
+    "closed_at"
+   ],
+   "title": "Session",
+   "type": "object"
+  },
+  "Signal": {
+   "additionalProperties": false,
+   "properties": {
+    "after": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "After"
+    },
+    "basis": {
+     "anyOf": [
+      {
+       "items": {
+        "type": "string"
+       },
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Basis"
+    },
+    "before": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Before"
+    },
+    "final": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Final"
+    },
+    "first": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "First"
+    },
+    "id": {
+     "enum": [
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S5"
+     ],
+     "title": "Id",
+     "type": "string"
+    },
+    "reasons": {
+     "anyOf": [
+      {
+       "items": {
+        "type": "string"
+       },
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Reasons"
+    },
+    "rule": {
+     "const": "check-signals-v1",
+     "title": "Rule",
+     "type": "string"
+    },
+    "runs": {
+     "items": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "title": "Runs",
+     "type": "array"
+    },
+    "sections": {
+     "anyOf": [
+      {
+       "items": {
+        "type": "string"
+       },
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Sections"
+    }
+   },
+   "required": [
+    "id",
+    "rule",
+    "runs"
+   ],
+   "title": "Signal",
+   "type": "object"
+  },
+  "Step": {
+   "additionalProperties": false,
+   "properties": {
+    "at": {
+     "title": "At",
+     "type": "string"
+    },
+    "corrected": {
+     "title": "Corrected",
+     "type": "integer"
+    },
+    "grade": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Grade"
+    },
+    "has_memo": {
+     "title": "Has Memo",
+     "type": "boolean"
+    },
+    "judged": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Judged"
+    },
+    "kind": {
+     "enum": [
+      "lock",
+      "precheck",
+      "check",
+      "confirm",
+      "out_of_scope",
+      "call",
+      "action",
+      "restart",
+      "monitor",
+      "handover"
+     ],
+     "title": "Kind",
+     "type": "string"
+    },
+    "memo": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Memo"
+    },
+    "opened_by_run": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Opened By Run"
+    },
+    "recommended": {
+     "title": "Recommended",
+     "type": "boolean"
+    },
+    "result": {
+     "title": "Result",
+     "type": "string"
+    },
+    "section": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Section"
+    },
+    "seq": {
+     "title": "Seq",
+     "type": "integer"
+    },
+    "void": {
+     "title": "Void",
+     "type": "boolean"
+    }
+   },
+   "required": [
+    "seq",
+    "at",
+    "kind",
+    "section",
+    "grade",
+    "opened_by_run",
+    "recommended",
+    "result",
+    "judged",
+    "memo",
+    "has_memo",
+    "corrected",
+    "void"
+   ],
+   "title": "Step",
+   "type": "object"
+  }
+ },
+ "additionalProperties": false,
+ "properties": {
+  "exception_offer": {
+   "anyOf": [
+    {
+     "$ref": "#/$defs/ExceptionOffer"
+    },
+    {
+     "type": "null"
+    }
+   ],
+   "default": null
+  },
+  "field_truth": {
+   "anyOf": [
+    {
+     "$ref": "#/$defs/FieldTruth"
+    },
+    {
+     "type": "null"
+    }
+   ]
+  },
+  "first_decision": {
+   "$ref": "#/$defs/FirstDecision"
+  },
+  "first_instruction": {
+   "anyOf": [
+    {
+     "$ref": "#/$defs/FirstInstruction"
+    },
+    {
+     "type": "null"
+    }
+   ]
+  },
+  "lead": {
+   "$ref": "#/$defs/Lead"
+  },
+  "made_at": {
+   "title": "Made At",
+   "type": "string"
+  },
+  "outcome": {
+   "$ref": "#/$defs/Outcome"
+  },
+  "record_key": {
+   "title": "Record Key",
+   "type": "string"
+  },
+  "runs": {
+   "$ref": "#/$defs/Runs"
+  },
+  "schema": {
+   "const": "c1a15.check-record.v1",
+   "title": "Schema",
+   "type": "string"
+  },
+  "session": {
+   "$ref": "#/$defs/Session"
+  },
+  "signals": {
+   "items": {
+    "$ref": "#/$defs/Signal"
+   },
+   "title": "Signals",
+   "type": "array"
+  },
+  "steps": {
+   "items": {
+    "$ref": "#/$defs/Step"
+   },
+   "title": "Steps",
+   "type": "array"
+  }
+ },
+ "required": [
+  "schema",
+  "record_key",
+  "made_at",
+  "session",
+  "runs",
+  "first_decision",
+  "first_instruction",
+  "steps",
+  "outcome",
+  "lead",
+  "signals",
+  "field_truth"
+ ],
+ "title": "CheckRecordV1",
+ "type": "object"
+}

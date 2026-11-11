@@ -1,0 +1,63 @@
+{
+  "decision": {
+    "probabilities": {
+      "CL-1": 37,
+      "CL-2": 37,
+      "CL-3": 5,
+      "CL-4": 21
+    },
+    "evidence": {
+      "CL-1": 4,
+      "CL-2": 4,
+      "CL-3": 0,
+      "CL-4": 2
+    },
+    "low_evidence": false,
+    "kind": "instruct",
+    "section": "EX-R-9001",
+    "grade": "C",
+    "cause": "CL-1",
+    "reason": "exception_guide",
+    "relation": "EX-R-9001",
+    "steps_total": 4,
+    "step": "c2",
+    "step_index": 2,
+    "check": {
+      "what": "냉각수 수위",
+      "how": "눈금을 봄",
+      "criteria": "",
+      "minutes": 3
+    },
+    "reason_facts": {
+      "probability": 37,
+      "minutes": 5,
+      "grade": "C",
+      "alternatives": [
+        {
+          "section": "4.3",
+          "grade": "A",
+          "desc": "기름때·먼지가 필터 표면의 절반 이상을 덮으면 \"이상\"이다."
+        },
+        {
+          "section": "4.4",
+          "grade": "C",
+          "desc": "축을 손으로 흔들 때 유격이 느껴지거나 날개가 깨져 있으면 \"이상\"이다."
+        },
+        {
+          "section": "4.5",
+          "grade": "A",
+          "desc": "수위가 MIN 선 아래면 \"이상\"이다."
+        },
+        {
+          "section": "4.6",
+          "grade": "A",
+          "desc": "어느 하나라도 표준값보다 낮게 설정되어 있으면 \"이상\"이다."
+        }
+      ]
+    },
+    "graph": {
+      "used": "EX-R-9001",
+      "layer": "mm3-v3-48a5b999"
+    }
+  }
+}

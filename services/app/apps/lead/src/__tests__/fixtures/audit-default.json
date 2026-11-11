@@ -1,0 +1,761 @@
+{
+ "now": "2026-10-13T12:40:44.329625+00:00",
+ "date": "2026-10-13",
+ "filters": {
+  "equipment": null,
+  "user_id": null
+ },
+ "options": {
+  "equipment": [
+   "M-01",
+   "M-03",
+   "M-04",
+   "M-05",
+   "M-06"
+  ],
+  "users": [
+   {
+    "user_id": "lead.park",
+    "name": "박 파트장"
+   },
+   {
+    "user_id": "tech.choi",
+    "name": "최 정비"
+   },
+   {
+    "user_id": "tech.jung",
+    "name": "정 정비"
+   },
+   {
+    "user_id": "tech.kim",
+    "name": "김 정비"
+   },
+   {
+    "user_id": "tech.lee",
+    "name": "이 정비"
+   }
+  ]
+ },
+ "rows": [
+  {
+   "audit_id": 525,
+   "at": "2026-10-13T12:40:44.319480+00:00",
+   "user_id": "lead.park",
+   "user_name": "박 파트장",
+   "app": "파트장",
+   "action": "등급 변경 · 4.3 흡기 필터 육안 점검 C → A",
+   "target": "권한 등급",
+   "equipment_id": null
+  },
+  {
+   "audit_id": 524,
+   "at": "2026-10-13T12:40:44.316249+00:00",
+   "user_id": "lead.park",
+   "user_name": "박 파트장",
+   "app": "파트장",
+   "action": "등급 변경 · 4.3 흡기 필터 육안 점검 A → C",
+   "target": "권한 등급",
+   "equipment_id": null
+  },
+  {
+   "audit_id": 523,
+   "at": "2026-10-13T12:40:44.294091+00:00",
+   "user_id": "lead.park",
+   "user_name": "박 파트장",
+   "app": "파트장",
+   "action": "보고서 승인",
+   "target": "M-03 보고서",
+   "equipment_id": "M-03"
+  },
+  {
+   "audit_id": 522,
+   "at": "2026-10-13T12:40:44.279545+00:00",
+   "user_id": "lead.park",
+   "user_name": "박 파트장",
+   "app": "파트장",
+   "action": "보고서 반려",
+   "target": "M-01 보고서",
+   "equipment_id": "M-01"
+  },
+  {
+   "audit_id": 521,
+   "at": "2026-10-13T12:40:44.259784+00:00",
+   "user_id": "lead.park",
+   "user_name": "박 파트장",
+   "app": "파트장",
+   "action": "호출 답 · 주간 숙련자 배정",
+   "target": "M-06 호출",
+   "equipment_id": "M-06"
+  },
+  {
+   "audit_id": 520,
+   "at": "2026-10-13T12:40:44.240158+00:00",
+   "user_id": "lead.park",
+   "user_name": "박 파트장",
+   "app": "파트장",
+   "action": "호출 답 · 직접 확인",
+   "target": "M-05 호출",
+   "equipment_id": "M-05"
+  },
+  {
+   "audit_id": 519,
+   "at": "2026-10-13T12:40:44.078667+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "숙련자 인계",
+   "target": "M-06 세션",
+   "equipment_id": "M-06"
+  },
+  {
+   "audit_id": 518,
+   "at": "2026-10-13T12:40:44.064669+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "결과 입력 · 4.4 확인 불가",
+   "target": "M-06 세션",
+   "equipment_id": "M-06"
+  },
+  {
+   "audit_id": 517,
+   "at": "2026-10-13T12:40:44.050100+00:00",
+   "user_id": null,
+   "user_name": "시스템",
+   "app": "system",
+   "action": "지시 · 4.4 냉각 팬 분해 점검",
+   "target": "M-06 세션",
+   "equipment_id": "M-06"
+  },
+  {
+   "audit_id": 516,
+   "at": "2026-10-13T12:40:44.050100+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "결과 입력 · 4.3 확인 불가",
+   "target": "M-06 세션",
+   "equipment_id": "M-06"
+  },
+  {
+   "audit_id": 515,
+   "at": "2026-10-13T12:40:44.035664+00:00",
+   "user_id": null,
+   "user_name": "시스템",
+   "app": "system",
+   "action": "지시 · 4.3 흡기 필터 육안 점검",
+   "target": "M-06 세션",
+   "equipment_id": "M-06"
+  },
+  {
+   "audit_id": 514,
+   "at": "2026-10-13T12:40:44.035664+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "결과 입력 · 4.4 확인 불가",
+   "target": "M-06 세션",
+   "equipment_id": "M-06"
+  },
+  {
+   "audit_id": 513,
+   "at": "2026-10-13T12:40:44.019620+00:00",
+   "user_id": null,
+   "user_name": "시스템",
+   "app": "system",
+   "action": "지시 · 4.4 냉각 팬 분해 점검",
+   "target": "M-06 세션",
+   "equipment_id": "M-06"
+  },
+  {
+   "audit_id": 512,
+   "at": "2026-10-13T12:40:44.019620+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "결과 입력 · 4.5 정상",
+   "target": "M-06 세션",
+   "equipment_id": "M-06"
+  },
+  {
+   "audit_id": 511,
+   "at": "2026-10-13T12:40:44.005008+00:00",
+   "user_id": null,
+   "user_name": "시스템",
+   "app": "system",
+   "action": "지시 · 4.5 냉각수 수위 확인",
+   "target": "M-06 세션",
+   "equipment_id": "M-06"
+  },
+  {
+   "audit_id": 510,
+   "at": "2026-10-13T12:40:44.005008+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "결과 입력 · 4.6 정상",
+   "target": "M-06 세션",
+   "equipment_id": "M-06"
+  },
+  {
+   "audit_id": 509,
+   "at": "2026-10-13T12:40:43.990265+00:00",
+   "user_id": null,
+   "user_name": "시스템",
+   "app": "system",
+   "action": "지시 · 4.6 냉각 설정값 확인",
+   "target": "M-06 세션",
+   "equipment_id": "M-06"
+  },
+  {
+   "audit_id": 508,
+   "at": "2026-10-13T12:40:43.990265+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "결과 입력 · 4.3 확인 불가",
+   "target": "M-06 세션",
+   "equipment_id": "M-06"
+  },
+  {
+   "audit_id": 507,
+   "at": "2026-10-13T12:40:43.962635+00:00",
+   "user_id": null,
+   "user_name": "시스템",
+   "app": "system",
+   "action": "지시 · 4.3 흡기 필터 육안 점검",
+   "target": "M-06 세션",
+   "equipment_id": "M-06"
+  },
+  {
+   "audit_id": 506,
+   "at": "2026-10-13T12:40:43.962635+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "사전 확인 완료",
+   "target": "M-06 세션",
+   "equipment_id": "M-06"
+  },
+  {
+   "audit_id": 505,
+   "at": "2026-10-13T12:40:43.947089+00:00",
+   "user_id": null,
+   "user_name": "시스템",
+   "app": "system",
+   "action": "지시 · 4.2 고온부 확인과 온도 기록",
+   "target": "M-06 세션",
+   "equipment_id": "M-06"
+  },
+  {
+   "audit_id": 504,
+   "at": "2026-10-13T12:40:43.947089+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "잠금 완료 · 1.2",
+   "target": "M-06 세션",
+   "equipment_id": "M-06"
+  },
+  {
+   "audit_id": 503,
+   "at": "2026-10-13T12:40:43.925466+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "점검 시작",
+   "target": "M-06 세션",
+   "equipment_id": "M-06"
+  },
+  {
+   "audit_id": 502,
+   "at": "2026-10-13T12:40:43.906275+00:00",
+   "user_id": null,
+   "user_name": "시스템",
+   "app": "system",
+   "action": "알람 등록 · 배정 김 정비",
+   "target": "M-06 알람",
+   "equipment_id": "M-06"
+  },
+  {
+   "audit_id": 501,
+   "at": "2026-10-13T12:40:43.589832+00:00",
+   "user_id": null,
+   "user_name": "시스템",
+   "app": "system",
+   "action": "호출 필요 · 4.4 냉각 팬 분해 점검",
+   "target": "M-05 세션",
+   "equipment_id": "M-05"
+  },
+  {
+   "audit_id": 500,
+   "at": "2026-10-13T12:40:43.589832+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "파트장 호출 · 4.4",
+   "target": "M-05 세션",
+   "equipment_id": "M-05"
+  },
+  {
+   "audit_id": 499,
+   "at": "2026-10-13T12:40:43.575938+00:00",
+   "user_id": null,
+   "user_name": "시스템",
+   "app": "system",
+   "action": "호출 필요 · 4.4 냉각 팬 분해 점검",
+   "target": "M-05 세션",
+   "equipment_id": "M-05"
+  },
+  {
+   "audit_id": 498,
+   "at": "2026-10-13T12:40:43.575938+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "결과 입력 · 4.6 정상",
+   "target": "M-05 세션",
+   "equipment_id": "M-05"
+  },
+  {
+   "audit_id": 497,
+   "at": "2026-10-13T12:40:43.561051+00:00",
+   "user_id": null,
+   "user_name": "시스템",
+   "app": "system",
+   "action": "지시 · 4.6 냉각 설정값 확인",
+   "target": "M-05 세션",
+   "equipment_id": "M-05"
+  },
+  {
+   "audit_id": 496,
+   "at": "2026-10-13T12:40:43.561051+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "결과 입력 · 4.3 정상",
+   "target": "M-05 세션",
+   "equipment_id": "M-05"
+  },
+  {
+   "audit_id": 495,
+   "at": "2026-10-13T12:40:43.545785+00:00",
+   "user_id": null,
+   "user_name": "시스템",
+   "app": "system",
+   "action": "지시 · 4.3 흡기 필터 육안 점검",
+   "target": "M-05 세션",
+   "equipment_id": "M-05"
+  },
+  {
+   "audit_id": 494,
+   "at": "2026-10-13T12:40:43.545785+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "사전 확인 완료",
+   "target": "M-05 세션",
+   "equipment_id": "M-05"
+  },
+  {
+   "audit_id": 493,
+   "at": "2026-10-13T12:40:43.531860+00:00",
+   "user_id": null,
+   "user_name": "시스템",
+   "app": "system",
+   "action": "지시 · 4.2 고온부 확인과 온도 기록",
+   "target": "M-05 세션",
+   "equipment_id": "M-05"
+  },
+  {
+   "audit_id": 492,
+   "at": "2026-10-13T12:40:43.531860+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "잠금 완료 · 1.2",
+   "target": "M-05 세션",
+   "equipment_id": "M-05"
+  },
+  {
+   "audit_id": 491,
+   "at": "2026-10-13T12:40:43.513786+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "점검 시작",
+   "target": "M-05 세션",
+   "equipment_id": "M-05"
+  },
+  {
+   "audit_id": 490,
+   "at": "2026-10-13T12:40:43.497456+00:00",
+   "user_id": null,
+   "user_name": "시스템",
+   "app": "system",
+   "action": "알람 등록 · 배정 김 정비",
+   "target": "M-05 알람",
+   "equipment_id": "M-05"
+  },
+  {
+   "audit_id": 489,
+   "at": "2026-10-13T12:40:43.255051+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "보고서 확정",
+   "target": "M-04 세션",
+   "equipment_id": "M-04"
+  },
+  {
+   "audit_id": 488,
+   "at": "2026-10-13T12:40:43.052540+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "재가동 확인 · 경계 이내",
+   "target": "M-04 세션",
+   "equipment_id": "M-04"
+  },
+  {
+   "audit_id": 487,
+   "at": "2026-10-13T12:40:43.037331+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "재가동 · 6.1",
+   "target": "M-04 세션",
+   "equipment_id": "M-04"
+  },
+  {
+   "audit_id": 486,
+   "at": "2026-10-13T12:40:43.022884+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "조치 완료 · 4.3.2",
+   "target": "M-04 세션",
+   "equipment_id": "M-04"
+  },
+  {
+   "audit_id": 485,
+   "at": "2026-10-13T12:40:43.008191+00:00",
+   "user_id": null,
+   "user_name": "시스템",
+   "app": "system",
+   "action": "지시 · 4.3.2 흡기 필터 교체",
+   "target": "M-04 세션",
+   "equipment_id": "M-04"
+  },
+  {
+   "audit_id": 484,
+   "at": "2026-10-13T12:40:43.008191+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "결과 입력 · 4.3 이상",
+   "target": "M-04 세션",
+   "equipment_id": "M-04"
+  },
+  {
+   "audit_id": 483,
+   "at": "2026-10-13T12:40:42.994230+00:00",
+   "user_id": null,
+   "user_name": "시스템",
+   "app": "system",
+   "action": "지시 · 4.3 흡기 필터 육안 점검",
+   "target": "M-04 세션",
+   "equipment_id": "M-04"
+  },
+  {
+   "audit_id": 482,
+   "at": "2026-10-13T12:40:42.994230+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "사전 확인 완료",
+   "target": "M-04 세션",
+   "equipment_id": "M-04"
+  },
+  {
+   "audit_id": 481,
+   "at": "2026-10-13T12:40:42.980112+00:00",
+   "user_id": null,
+   "user_name": "시스템",
+   "app": "system",
+   "action": "지시 · 4.2 고온부 확인과 온도 기록",
+   "target": "M-04 세션",
+   "equipment_id": "M-04"
+  },
+  {
+   "audit_id": 480,
+   "at": "2026-10-13T12:40:42.980112+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "잠금 완료 · 1.2",
+   "target": "M-04 세션",
+   "equipment_id": "M-04"
+  },
+  {
+   "audit_id": 479,
+   "at": "2026-10-13T12:40:42.961700+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "점검 시작",
+   "target": "M-04 세션",
+   "equipment_id": "M-04"
+  },
+  {
+   "audit_id": 478,
+   "at": "2026-10-13T12:40:42.943086+00:00",
+   "user_id": null,
+   "user_name": "시스템",
+   "app": "system",
+   "action": "알람 등록 · 배정 김 정비",
+   "target": "M-04 알람",
+   "equipment_id": "M-04"
+  },
+  {
+   "audit_id": 477,
+   "at": "2026-10-13T12:40:42.691771+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "보고서 확정",
+   "target": "M-03 세션",
+   "equipment_id": "M-03"
+  },
+  {
+   "audit_id": 476,
+   "at": "2026-10-13T12:40:42.676770+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "재가동 확인 · 경계 이내",
+   "target": "M-03 세션",
+   "equipment_id": "M-03"
+  },
+  {
+   "audit_id": 475,
+   "at": "2026-10-13T12:40:42.662441+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "재가동 · 6.1",
+   "target": "M-03 세션",
+   "equipment_id": "M-03"
+  },
+  {
+   "audit_id": 474,
+   "at": "2026-10-13T12:40:42.648761+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "조치 완료 · 4.3.2",
+   "target": "M-03 세션",
+   "equipment_id": "M-03"
+  },
+  {
+   "audit_id": 473,
+   "at": "2026-10-13T12:40:42.634267+00:00",
+   "user_id": null,
+   "user_name": "시스템",
+   "app": "system",
+   "action": "지시 · 4.3.2 흡기 필터 교체",
+   "target": "M-03 세션",
+   "equipment_id": "M-03"
+  },
+  {
+   "audit_id": 472,
+   "at": "2026-10-13T12:40:42.634267+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "결과 입력 · 4.3 이상",
+   "target": "M-03 세션",
+   "equipment_id": "M-03"
+  },
+  {
+   "audit_id": 471,
+   "at": "2026-10-13T12:40:42.620141+00:00",
+   "user_id": null,
+   "user_name": "시스템",
+   "app": "system",
+   "action": "지시 · 4.3 흡기 필터 육안 점검",
+   "target": "M-03 세션",
+   "equipment_id": "M-03"
+  },
+  {
+   "audit_id": 470,
+   "at": "2026-10-13T12:40:42.620141+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "사전 확인 완료",
+   "target": "M-03 세션",
+   "equipment_id": "M-03"
+  },
+  {
+   "audit_id": 469,
+   "at": "2026-10-13T12:40:42.606119+00:00",
+   "user_id": null,
+   "user_name": "시스템",
+   "app": "system",
+   "action": "지시 · 4.2 고온부 확인과 온도 기록",
+   "target": "M-03 세션",
+   "equipment_id": "M-03"
+  },
+  {
+   "audit_id": 468,
+   "at": "2026-10-13T12:40:42.606119+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "잠금 완료 · 1.2",
+   "target": "M-03 세션",
+   "equipment_id": "M-03"
+  },
+  {
+   "audit_id": 467,
+   "at": "2026-10-13T12:40:42.587955+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "점검 시작",
+   "target": "M-03 세션",
+   "equipment_id": "M-03"
+  },
+  {
+   "audit_id": 466,
+   "at": "2026-10-13T12:40:42.571475+00:00",
+   "user_id": null,
+   "user_name": "시스템",
+   "app": "system",
+   "action": "알람 등록 · 배정 김 정비",
+   "target": "M-03 알람",
+   "equipment_id": "M-03"
+  },
+  {
+   "audit_id": 465,
+   "at": "2026-10-13T12:40:42.321895+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "보고서 확정",
+   "target": "M-01 세션",
+   "equipment_id": "M-01"
+  },
+  {
+   "audit_id": 464,
+   "at": "2026-10-13T12:40:42.305840+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "재가동 확인 · 경계 이내",
+   "target": "M-01 세션",
+   "equipment_id": "M-01"
+  },
+  {
+   "audit_id": 463,
+   "at": "2026-10-13T12:40:42.290467+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "재가동 · 6.1",
+   "target": "M-01 세션",
+   "equipment_id": "M-01"
+  },
+  {
+   "audit_id": 462,
+   "at": "2026-10-13T12:40:42.275790+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "조치 완료 · 4.3.2",
+   "target": "M-01 세션",
+   "equipment_id": "M-01"
+  },
+  {
+   "audit_id": 461,
+   "at": "2026-10-13T12:40:42.260487+00:00",
+   "user_id": null,
+   "user_name": "시스템",
+   "app": "system",
+   "action": "지시 · 4.3.2 흡기 필터 교체",
+   "target": "M-01 세션",
+   "equipment_id": "M-01"
+  },
+  {
+   "audit_id": 460,
+   "at": "2026-10-13T12:40:42.260487+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "결과 입력 · 4.3 이상",
+   "target": "M-01 세션",
+   "equipment_id": "M-01"
+  },
+  {
+   "audit_id": 459,
+   "at": "2026-10-13T12:40:42.245468+00:00",
+   "user_id": null,
+   "user_name": "시스템",
+   "app": "system",
+   "action": "지시 · 4.3 흡기 필터 육안 점검",
+   "target": "M-01 세션",
+   "equipment_id": "M-01"
+  },
+  {
+   "audit_id": 458,
+   "at": "2026-10-13T12:40:42.245468+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "사전 확인 완료",
+   "target": "M-01 세션",
+   "equipment_id": "M-01"
+  },
+  {
+   "audit_id": 457,
+   "at": "2026-10-13T12:40:42.231067+00:00",
+   "user_id": null,
+   "user_name": "시스템",
+   "app": "system",
+   "action": "지시 · 4.2 고온부 확인과 온도 기록",
+   "target": "M-01 세션",
+   "equipment_id": "M-01"
+  },
+  {
+   "audit_id": 456,
+   "at": "2026-10-13T12:40:42.231067+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "잠금 완료 · 1.2",
+   "target": "M-01 세션",
+   "equipment_id": "M-01"
+  },
+  {
+   "audit_id": 455,
+   "at": "2026-10-13T12:40:42.210688+00:00",
+   "user_id": "tech.kim",
+   "user_name": "김 정비",
+   "app": "정비자",
+   "action": "점검 시작",
+   "target": "M-01 세션",
+   "equipment_id": "M-01"
+  },
+  {
+   "audit_id": 454,
+   "at": "2026-10-13T12:40:42.193676+00:00",
+   "user_id": null,
+   "user_name": "시스템",
+   "app": "system",
+   "action": "알람 등록 · 배정 김 정비",
+   "target": "M-01 알람",
+   "equipment_id": "M-01"
+  }
+ ]
+}

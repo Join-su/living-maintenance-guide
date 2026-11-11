@@ -1,0 +1,3722 @@
+[
+ {
+  "card_id": "EC-V01",
+  "equipment_id": "M-15",
+  "occurred_at": "2026-01-11T00:01:00+09:00",
+  "symptom_group": {
+   "code": "LD",
+   "name": "토크 과부하"
+  },
+  "alarm": {
+   "sensor": "토크",
+   "value": 61.7,
+   "unit": "Nm",
+   "boundary": 60.1,
+   "direction": "경계 위"
+  },
+  "sensor_snapshot": {
+   "quality_grade": "M",
+   "air_temperature_k": 300.2,
+   "process_temperature_k": 310.4,
+   "rotational_speed_rpm": 1202.0,
+   "torque_nm": 61.7,
+   "tool_wear_min": 74.0,
+   "temp_diff_k": 10.2,
+   "power_w": 7766
+  },
+  "recent_12": [
+   {
+    "at": "2026-01-02T05:47:00+09:00",
+    "temp_diff_k": 9.9,
+    "power_w": 4650,
+    "torque_nm": 27.6,
+    "tool_wear_min": 108,
+    "rotational_speed_rpm": 1609
+   },
+   {
+    "at": "2026-01-02T23:18:00+09:00",
+    "temp_diff_k": 9.8,
+    "power_w": 7667,
+    "torque_nm": 52.9,
+    "tool_wear_min": 165,
+    "rotational_speed_rpm": 1384
+   },
+   {
+    "at": "2026-01-03T16:49:00+09:00",
+    "temp_diff_k": 9.7,
+    "power_w": 6372,
+    "torque_nm": 41,
+    "tool_wear_min": 213,
+    "rotational_speed_rpm": 1484
+   },
+   {
+    "at": "2026-01-04T10:21:00+09:00",
+    "temp_diff_k": 9.5,
+    "power_w": 5501,
+    "torque_nm": 34.2,
+    "tool_wear_min": 45,
+    "rotational_speed_rpm": 1536
+   },
+   {
+    "at": "2026-01-05T03:52:00+09:00",
+    "temp_diff_k": 9.4,
+    "power_w": 7474,
+    "torque_nm": 56.6,
+    "tool_wear_min": 98,
+    "rotational_speed_rpm": 1261
+   },
+   {
+    "at": "2026-01-05T21:23:00+09:00",
+    "temp_diff_k": 9.5,
+    "power_w": 6585,
+    "torque_nm": 44.5,
+    "tool_wear_min": 152,
+    "rotational_speed_rpm": 1413
+   },
+   {
+    "at": "2026-01-06T14:54:00+09:00",
+    "temp_diff_k": 9.9,
+    "power_w": 6982,
+    "torque_nm": 47.9,
+    "tool_wear_min": 201,
+    "rotational_speed_rpm": 1392
+   },
+   {
+    "at": "2026-01-07T08:25:00+09:00",
+    "temp_diff_k": 10.1,
+    "power_w": 5113,
+    "torque_nm": 29.2,
+    "tool_wear_min": 39,
+    "rotational_speed_rpm": 1672
+   },
+   {
+    "at": "2026-01-08T01:57:00+09:00",
+    "temp_diff_k": 9.9,
+    "power_w": 6150,
+    "torque_nm": 39.6,
+    "tool_wear_min": 87,
+    "rotational_speed_rpm": 1483
+   },
+   {
+    "at": "2026-01-08T19:28:00+09:00",
+    "temp_diff_k": 9.9,
+    "power_w": 4360,
+    "torque_nm": 21.8,
+    "tool_wear_min": 141,
+    "rotational_speed_rpm": 1910
+   },
+   {
+    "at": "2026-01-09T12:59:00+09:00",
+    "temp_diff_k": 10.1,
+    "power_w": 5352,
+    "torque_nm": 34.6,
+    "tool_wear_min": 195,
+    "rotational_speed_rpm": 1477
+   },
+   {
+    "at": "2026-01-10T06:30:00+09:00",
+    "temp_diff_k": 10.2,
+    "power_w": 7058,
+    "torque_nm": 48.7,
+    "tool_wear_min": 24,
+    "rotational_speed_rpm": 1384
+   }
+  ]
+ },
+ {
+  "card_id": "EC-V02",
+  "equipment_id": "M-07",
+  "occurred_at": "2026-01-20T04:47:00+09:00",
+  "symptom_group": {
+   "code": "PW",
+   "name": "출력 이탈"
+  },
+  "alarm": {
+   "sensor": "기계 출력",
+   "value": 8842,
+   "unit": "W",
+   "boundary": 8403,
+   "direction": "경계 위"
+  },
+  "sensor_snapshot": {
+   "quality_grade": "L",
+   "air_temperature_k": 300.1,
+   "process_temperature_k": 311.3,
+   "rotational_speed_rpm": 1305.0,
+   "torque_nm": 64.7,
+   "tool_wear_min": 66.0,
+   "temp_diff_k": 11.2,
+   "power_w": 8842
+  },
+  "recent_12": [
+   {
+    "at": "2026-01-11T10:32:00+09:00",
+    "temp_diff_k": 10.4,
+    "power_w": 6252,
+    "torque_nm": 39.8,
+    "tool_wear_min": 107,
+    "rotational_speed_rpm": 1500
+   },
+   {
+    "at": "2026-01-12T04:03:00+09:00",
+    "temp_diff_k": 10.4,
+    "power_w": 4992,
+    "torque_nm": 29.1,
+    "tool_wear_min": 152,
+    "rotational_speed_rpm": 1638
+   },
+   {
+    "at": "2026-01-12T21:35:00+09:00",
+    "temp_diff_k": 10.6,
+    "power_w": 5286,
+    "torque_nm": 32.8,
+    "tool_wear_min": 213,
+    "rotational_speed_rpm": 1539
+   },
+   {
+    "at": "2026-01-13T15:06:00+09:00",
+    "temp_diff_k": 10.5,
+    "power_w": 6680,
+    "torque_nm": 42.9,
+    "tool_wear_min": 42,
+    "rotational_speed_rpm": 1487
+   },
+   {
+    "at": "2026-01-14T08:37:00+09:00",
+    "temp_diff_k": 10.5,
+    "power_w": 7445,
+    "torque_nm": 52.7,
+    "tool_wear_min": 92,
+    "rotational_speed_rpm": 1349
+   },
+   {
+    "at": "2026-01-15T02:08:00+09:00",
+    "temp_diff_k": 10.9,
+    "power_w": 4748,
+    "torque_nm": 26.1,
+    "tool_wear_min": 144,
+    "rotational_speed_rpm": 1737
+   },
+   {
+    "at": "2026-01-15T19:39:00+09:00",
+    "temp_diff_k": 11.2,
+    "power_w": 6419,
+    "torque_nm": 41,
+    "tool_wear_min": 193,
+    "rotational_speed_rpm": 1495
+   },
+   {
+    "at": "2026-01-16T13:11:00+09:00",
+    "temp_diff_k": 11.5,
+    "power_w": 5426,
+    "torque_nm": 30,
+    "tool_wear_min": 24,
+    "rotational_speed_rpm": 1727
+   },
+   {
+    "at": "2026-01-17T06:42:00+09:00",
+    "temp_diff_k": 11.5,
+    "power_w": 5864,
+    "torque_nm": 36.6,
+    "tool_wear_min": 74,
+    "rotational_speed_rpm": 1530
+   },
+   {
+    "at": "2026-01-18T00:13:00+09:00",
+    "temp_diff_k": 11.2,
+    "power_w": 6390,
+    "torque_nm": 40.2,
+    "tool_wear_min": 130,
+    "rotational_speed_rpm": 1518
+   },
+   {
+    "at": "2026-01-18T17:44:00+09:00",
+    "temp_diff_k": 11.5,
+    "power_w": 7004,
+    "torque_nm": 45.1,
+    "tool_wear_min": 181,
+    "rotational_speed_rpm": 1483
+   },
+   {
+    "at": "2026-01-19T11:15:00+09:00",
+    "temp_diff_k": 11.4,
+    "power_w": 7157,
+    "torque_nm": 47.3,
+    "tool_wear_min": 15,
+    "rotational_speed_rpm": 1445
+   }
+  ]
+ },
+ {
+  "card_id": "EC-V03",
+  "equipment_id": "M-14",
+  "occurred_at": "2026-01-29T05:09:00+09:00",
+  "symptom_group": {
+   "code": "PW",
+   "name": "출력 이탈"
+  },
+  "alarm": {
+   "sensor": "기계 출력",
+   "value": 8830,
+   "unit": "W",
+   "boundary": 8403,
+   "direction": "경계 위"
+  },
+  "sensor_snapshot": {
+   "quality_grade": "L",
+   "air_temperature_k": 300.3,
+   "process_temperature_k": 311.5,
+   "rotational_speed_rpm": 1403.0,
+   "torque_nm": 60.1,
+   "tool_wear_min": 58.0,
+   "temp_diff_k": 11.2,
+   "power_w": 8830
+  },
+  "recent_12": [
+   {
+    "at": "2026-01-20T10:54:00+09:00",
+    "temp_diff_k": 11.2,
+    "power_w": 6596,
+    "torque_nm": 44.2,
+    "tool_wear_min": 84,
+    "rotational_speed_rpm": 1425
+   },
+   {
+    "at": "2026-01-21T04:26:00+09:00",
+    "temp_diff_k": 10.9,
+    "power_w": 9429,
+    "torque_nm": 65.2,
+    "tool_wear_min": 136,
+    "rotational_speed_rpm": 1381
+   },
+   {
+    "at": "2026-01-21T21:57:00+09:00",
+    "temp_diff_k": 10.8,
+    "power_w": 5750,
+    "torque_nm": 37.3,
+    "tool_wear_min": 187,
+    "rotational_speed_rpm": 1472
+   },
+   {
+    "at": "2026-01-22T15:28:00+09:00",
+    "temp_diff_k": 10.9,
+    "power_w": 5939,
+    "torque_nm": 34.6,
+    "tool_wear_min": 24,
+    "rotational_speed_rpm": 1639
+   },
+   {
+    "at": "2026-01-23T08:59:00+09:00",
+    "temp_diff_k": 11.1,
+    "power_w": 7180,
+    "torque_nm": 45.5,
+    "tool_wear_min": 74,
+    "rotational_speed_rpm": 1507
+   },
+   {
+    "at": "2026-01-24T02:30:00+09:00",
+    "temp_diff_k": 11,
+    "power_w": 6651,
+    "torque_nm": 44.6,
+    "tool_wear_min": 127,
+    "rotational_speed_rpm": 1424
+   },
+   {
+    "at": "2026-01-24T20:02:00+09:00",
+    "temp_diff_k": 11.2,
+    "power_w": 7659,
+    "torque_nm": 50.3,
+    "tool_wear_min": 175,
+    "rotational_speed_rpm": 1454
+   },
+   {
+    "at": "2026-01-25T13:33:00+09:00",
+    "temp_diff_k": 11.1,
+    "power_w": 6247,
+    "torque_nm": 42.4,
+    "tool_wear_min": 224,
+    "rotational_speed_rpm": 1407
+   },
+   {
+    "at": "2026-01-26T07:04:00+09:00",
+    "temp_diff_k": 11,
+    "power_w": 5428,
+    "torque_nm": 31.8,
+    "tool_wear_min": 52,
+    "rotational_speed_rpm": 1630
+   },
+   {
+    "at": "2026-01-27T00:35:00+09:00",
+    "temp_diff_k": 11.1,
+    "power_w": 6304,
+    "torque_nm": 41.4,
+    "tool_wear_min": 108,
+    "rotational_speed_rpm": 1454
+   },
+   {
+    "at": "2026-01-27T18:06:00+09:00",
+    "temp_diff_k": 11.3,
+    "power_w": 8187,
+    "torque_nm": 59.5,
+    "tool_wear_min": 160,
+    "rotational_speed_rpm": 1314
+   },
+   {
+    "at": "2026-01-28T11:38:00+09:00",
+    "temp_diff_k": 11.3,
+    "power_w": 6302,
+    "torque_nm": 38.7,
+    "tool_wear_min": 5,
+    "rotational_speed_rpm": 1555
+   }
+  ]
+ },
+ {
+  "card_id": "EC-V04",
+  "equipment_id": "M-20",
+  "occurred_at": "2026-01-30T03:55:00+09:00",
+  "symptom_group": {
+   "code": "PW",
+   "name": "출력 이탈"
+  },
+  "alarm": {
+   "sensor": "기계 출력",
+   "value": 3949,
+   "unit": "W",
+   "boundary": 4189,
+   "direction": "경계 아래"
+  },
+  "sensor_snapshot": {
+   "quality_grade": "L",
+   "air_temperature_k": 300.1,
+   "process_temperature_k": 311.5,
+   "rotational_speed_rpm": 2218.0,
+   "torque_nm": 17.0,
+   "tool_wear_min": 123.0,
+   "temp_diff_k": 11.4,
+   "power_w": 3949
+  },
+  "recent_12": [
+   {
+    "at": "2026-01-21T09:41:00+09:00",
+    "temp_diff_k": 10.8,
+    "power_w": 5117,
+    "torque_nm": 27.5,
+    "tool_wear_min": 151,
+    "rotational_speed_rpm": 1777
+   },
+   {
+    "at": "2026-01-22T03:12:00+09:00",
+    "temp_diff_k": 10.6,
+    "power_w": 6918,
+    "torque_nm": 46.1,
+    "tool_wear_min": 199,
+    "rotational_speed_rpm": 1433
+   },
+   {
+    "at": "2026-01-22T20:43:00+09:00",
+    "temp_diff_k": 10.8,
+    "power_w": 6849,
+    "torque_nm": 43.4,
+    "tool_wear_min": 41,
+    "rotational_speed_rpm": 1507
+   },
+   {
+    "at": "2026-01-23T14:15:00+09:00",
+    "temp_diff_k": 11.1,
+    "power_w": 6056,
+    "torque_nm": 37.7,
+    "tool_wear_min": 90,
+    "rotational_speed_rpm": 1534
+   },
+   {
+    "at": "2026-01-24T07:46:00+09:00",
+    "temp_diff_k": 11.1,
+    "power_w": 8115,
+    "torque_nm": 57.7,
+    "tool_wear_min": 142,
+    "rotational_speed_rpm": 1343
+   },
+   {
+    "at": "2026-01-25T01:17:00+09:00",
+    "temp_diff_k": 11.1,
+    "power_w": 6005,
+    "torque_nm": 37.6,
+    "tool_wear_min": 191,
+    "rotational_speed_rpm": 1525
+   },
+   {
+    "at": "2026-01-25T18:48:00+09:00",
+    "temp_diff_k": 11.1,
+    "power_w": 6028,
+    "torque_nm": 36.5,
+    "tool_wear_min": 4,
+    "rotational_speed_rpm": 1577
+   },
+   {
+    "at": "2026-01-26T12:19:00+09:00",
+    "temp_diff_k": 10.9,
+    "power_w": 7555,
+    "torque_nm": 51.9,
+    "tool_wear_min": 68,
+    "rotational_speed_rpm": 1390
+   },
+   {
+    "at": "2026-01-27T05:51:00+09:00",
+    "temp_diff_k": 11.3,
+    "power_w": 6813,
+    "torque_nm": 44.2,
+    "tool_wear_min": 126,
+    "rotational_speed_rpm": 1472
+   },
+   {
+    "at": "2026-01-27T23:22:00+09:00",
+    "temp_diff_k": 11.3,
+    "power_w": 7742,
+    "torque_nm": 51.2,
+    "tool_wear_min": 174,
+    "rotational_speed_rpm": 1444
+   },
+   {
+    "at": "2026-01-28T16:53:00+09:00",
+    "temp_diff_k": 11.2,
+    "power_w": 5220,
+    "torque_nm": 32.2,
+    "tool_wear_min": 25,
+    "rotational_speed_rpm": 1548
+   },
+   {
+    "at": "2026-01-29T10:24:00+09:00",
+    "temp_diff_k": 11.3,
+    "power_w": 5305,
+    "torque_nm": 29.3,
+    "tool_wear_min": 71,
+    "rotational_speed_rpm": 1729
+   }
+  ]
+ },
+ {
+  "card_id": "EC-V05",
+  "equipment_id": "M-19",
+  "occurred_at": "2026-01-31T14:05:00+09:00",
+  "symptom_group": {
+   "code": "TW",
+   "name": "공구 마모 경고"
+  },
+  "alarm": {
+   "sensor": "공구 마모 시간",
+   "value": 222,
+   "unit": "분",
+   "boundary": 215,
+   "direction": "경계 위"
+  },
+  "sensor_snapshot": {
+   "quality_grade": "M",
+   "air_temperature_k": 300.3,
+   "process_temperature_k": 311.7,
+   "rotational_speed_rpm": 1374.0,
+   "torque_nm": 47.9,
+   "tool_wear_min": 222.0,
+   "temp_diff_k": 11.4,
+   "power_w": 6892
+  },
+  "recent_12": [
+   {
+    "at": "2026-01-22T19:51:00+09:00",
+    "temp_diff_k": 10.8,
+    "power_w": 6522,
+    "torque_nm": 41.8,
+    "tool_wear_min": 39,
+    "rotational_speed_rpm": 1490
+   },
+   {
+    "at": "2026-01-23T13:22:00+09:00",
+    "temp_diff_k": 11.2,
+    "power_w": 8505,
+    "torque_nm": 64,
+    "tool_wear_min": 87,
+    "rotational_speed_rpm": 1269
+   },
+   {
+    "at": "2026-01-24T06:53:00+09:00",
+    "temp_diff_k": 11.1,
+    "power_w": 5047,
+    "torque_nm": 29,
+    "tool_wear_min": 137,
+    "rotational_speed_rpm": 1662
+   },
+   {
+    "at": "2026-01-25T00:24:00+09:00",
+    "temp_diff_k": 11.1,
+    "power_w": 8170,
+    "torque_nm": 58.4,
+    "tool_wear_min": 189,
+    "rotational_speed_rpm": 1336
+   },
+   {
+    "at": "2026-01-25T17:56:00+09:00",
+    "temp_diff_k": 11.1,
+    "power_w": 5878,
+    "torque_nm": 39.2,
+    "tool_wear_min": 2,
+    "rotational_speed_rpm": 1432
+   },
+   {
+    "at": "2026-01-26T11:27:00+09:00",
+    "temp_diff_k": 10.9,
+    "power_w": 6280,
+    "torque_nm": 41.5,
+    "tool_wear_min": 66,
+    "rotational_speed_rpm": 1445
+   },
+   {
+    "at": "2026-01-27T04:58:00+09:00",
+    "temp_diff_k": 11.2,
+    "power_w": 8239,
+    "torque_nm": 59.2,
+    "tool_wear_min": 121,
+    "rotational_speed_rpm": 1329
+   },
+   {
+    "at": "2026-01-27T22:29:00+09:00",
+    "temp_diff_k": 11.2,
+    "power_w": 5785,
+    "torque_nm": 33,
+    "tool_wear_min": 172,
+    "rotational_speed_rpm": 1674
+   },
+   {
+    "at": "2026-01-28T16:00:00+09:00",
+    "temp_diff_k": 11.2,
+    "power_w": 6322,
+    "torque_nm": 38.9,
+    "tool_wear_min": 23,
+    "rotational_speed_rpm": 1552
+   },
+   {
+    "at": "2026-01-29T09:32:00+09:00",
+    "temp_diff_k": 11.3,
+    "power_w": 6027,
+    "torque_nm": 38.5,
+    "tool_wear_min": 69,
+    "rotational_speed_rpm": 1495
+   },
+   {
+    "at": "2026-01-30T03:03:00+09:00",
+    "temp_diff_k": 11.4,
+    "power_w": 5698,
+    "torque_nm": 35.4,
+    "tool_wear_min": 120,
+    "rotational_speed_rpm": 1537
+   },
+   {
+    "at": "2026-01-30T20:34:00+09:00",
+    "temp_diff_k": 11.4,
+    "power_w": 4931,
+    "torque_nm": 28.3,
+    "tool_wear_min": 173,
+    "rotational_speed_rpm": 1664
+   }
+  ]
+ },
+ {
+  "card_id": "EC-V06",
+  "equipment_id": "M-20",
+  "occurred_at": "2026-04-21T22:10:00+09:00",
+  "symptom_group": {
+   "code": "PW",
+   "name": "출력 이탈"
+  },
+  "alarm": {
+   "sensor": "기계 출력",
+   "value": 1378,
+   "unit": "W",
+   "boundary": 4189,
+   "direction": "경계 아래"
+  },
+  "sensor_snapshot": {
+   "quality_grade": "L",
+   "air_temperature_k": 298.9,
+   "process_temperature_k": 309.1,
+   "rotational_speed_rpm": 2861.0,
+   "torque_nm": 4.6,
+   "tool_wear_min": 143.0,
+   "temp_diff_k": 10.2,
+   "power_w": 1378
+  },
+  "recent_12": [
+   {
+    "at": "2026-04-13T03:55:00+09:00",
+    "temp_diff_k": 10.9,
+    "power_w": 6433,
+    "torque_nm": 40.9,
+    "tool_wear_min": 153,
+    "rotational_speed_rpm": 1502
+   },
+   {
+    "at": "2026-04-13T21:27:00+09:00",
+    "temp_diff_k": 11,
+    "power_w": 7855,
+    "torque_nm": 56.1,
+    "tool_wear_min": 206,
+    "rotational_speed_rpm": 1337
+   },
+   {
+    "at": "2026-04-14T14:58:00+09:00",
+    "temp_diff_k": 10.8,
+    "power_w": 5428,
+    "torque_nm": 34.6,
+    "tool_wear_min": 46,
+    "rotational_speed_rpm": 1498
+   },
+   {
+    "at": "2026-04-15T08:29:00+09:00",
+    "temp_diff_k": 10.9,
+    "power_w": 5051,
+    "torque_nm": 25.6,
+    "tool_wear_min": 100,
+    "rotational_speed_rpm": 1884
+   },
+   {
+    "at": "2026-04-16T02:00:00+09:00",
+    "temp_diff_k": 10.7,
+    "power_w": 5650,
+    "torque_nm": 32.8,
+    "tool_wear_min": 157,
+    "rotational_speed_rpm": 1645
+   },
+   {
+    "at": "2026-04-16T19:31:00+09:00",
+    "temp_diff_k": 10.4,
+    "power_w": 7076,
+    "torque_nm": 46,
+    "tool_wear_min": 4,
+    "rotational_speed_rpm": 1469
+   },
+   {
+    "at": "2026-04-17T13:03:00+09:00",
+    "temp_diff_k": 10,
+    "power_w": 6918,
+    "torque_nm": 45.5,
+    "tool_wear_min": 63,
+    "rotational_speed_rpm": 1452
+   },
+   {
+    "at": "2026-04-18T06:34:00+09:00",
+    "temp_diff_k": 9.7,
+    "power_w": 8005,
+    "torque_nm": 54.1,
+    "tool_wear_min": 113,
+    "rotational_speed_rpm": 1413
+   },
+   {
+    "at": "2026-04-19T00:05:00+09:00",
+    "temp_diff_k": 9.7,
+    "power_w": 4891,
+    "torque_nm": 24.7,
+    "tool_wear_min": 158,
+    "rotational_speed_rpm": 1891
+   },
+   {
+    "at": "2026-04-19T17:36:00+09:00",
+    "temp_diff_k": 9.7,
+    "power_w": 5789,
+    "torque_nm": 36.2,
+    "tool_wear_min": 3,
+    "rotational_speed_rpm": 1527
+   },
+   {
+    "at": "2026-04-20T11:07:00+09:00",
+    "temp_diff_k": 10.5,
+    "power_w": 4460,
+    "torque_nm": 23.9,
+    "tool_wear_min": 24,
+    "rotational_speed_rpm": 1782
+   },
+   {
+    "at": "2026-04-21T04:39:00+09:00",
+    "temp_diff_k": 10.4,
+    "power_w": 6759,
+    "torque_nm": 48.2,
+    "tool_wear_min": 86,
+    "rotational_speed_rpm": 1339
+   }
+  ]
+ },
+ {
+  "card_id": "EC-V07",
+  "equipment_id": "M-18",
+  "occurred_at": "2026-04-29T03:37:00+09:00",
+  "symptom_group": {
+   "code": "TW",
+   "name": "공구 마모 경고"
+  },
+  "alarm": {
+   "sensor": "공구 마모 시간",
+   "value": 216,
+   "unit": "분",
+   "boundary": 215,
+   "direction": "경계 위"
+  },
+  "sensor_snapshot": {
+   "quality_grade": "L",
+   "air_temperature_k": 298.0,
+   "process_temperature_k": 308.3,
+   "rotational_speed_rpm": 1362.0,
+   "torque_nm": 56.8,
+   "tool_wear_min": 216.0,
+   "temp_diff_k": 10.3,
+   "power_w": 8101
+  },
+  "recent_12": [
+   {
+    "at": "2026-04-20T09:22:00+09:00",
+    "temp_diff_k": 10.4,
+    "power_w": 4993,
+    "torque_nm": 28.6,
+    "tool_wear_min": 18,
+    "rotational_speed_rpm": 1667
+   },
+   {
+    "at": "2026-04-21T02:54:00+09:00",
+    "temp_diff_k": 10.3,
+    "power_w": 6661,
+    "torque_nm": 44.2,
+    "tool_wear_min": 82,
+    "rotational_speed_rpm": 1439
+   },
+   {
+    "at": "2026-04-21T20:25:00+09:00",
+    "temp_diff_k": 10.4,
+    "power_w": 8043,
+    "torque_nm": 53.9,
+    "tool_wear_min": 135,
+    "rotational_speed_rpm": 1425
+   },
+   {
+    "at": "2026-04-22T13:56:00+09:00",
+    "temp_diff_k": 10.1,
+    "power_w": 5181,
+    "torque_nm": 32.4,
+    "tool_wear_min": 189,
+    "rotational_speed_rpm": 1527
+   },
+   {
+    "at": "2026-04-23T07:27:00+09:00",
+    "temp_diff_k": 10,
+    "power_w": 6717,
+    "torque_nm": 45.2,
+    "tool_wear_min": 27,
+    "rotational_speed_rpm": 1419
+   },
+   {
+    "at": "2026-04-24T00:58:00+09:00",
+    "temp_diff_k": 9.9,
+    "power_w": 5551,
+    "torque_nm": 32.7,
+    "tool_wear_min": 75,
+    "rotational_speed_rpm": 1621
+   },
+   {
+    "at": "2026-04-24T18:30:00+09:00",
+    "temp_diff_k": 9.6,
+    "power_w": 6415,
+    "torque_nm": 38.6,
+    "tool_wear_min": 124,
+    "rotational_speed_rpm": 1587
+   },
+   {
+    "at": "2026-04-25T12:01:00+09:00",
+    "temp_diff_k": 10,
+    "power_w": 6932,
+    "torque_nm": 48,
+    "tool_wear_min": 181,
+    "rotational_speed_rpm": 1379
+   },
+   {
+    "at": "2026-04-26T05:32:00+09:00",
+    "temp_diff_k": 9.9,
+    "power_w": 9349,
+    "torque_nm": 62.3,
+    "tool_wear_min": 20,
+    "rotational_speed_rpm": 1433
+   },
+   {
+    "at": "2026-04-26T23:03:00+09:00",
+    "temp_diff_k": 10.2,
+    "power_w": 5651,
+    "torque_nm": 33.6,
+    "tool_wear_min": 67,
+    "rotational_speed_rpm": 1606
+   },
+   {
+    "at": "2026-04-27T16:34:00+09:00",
+    "temp_diff_k": 10.2,
+    "power_w": 6115,
+    "torque_nm": 36.7,
+    "tool_wear_min": 122,
+    "rotational_speed_rpm": 1591
+   },
+   {
+    "at": "2026-04-28T10:06:00+09:00",
+    "temp_diff_k": 10.2,
+    "power_w": 6329,
+    "torque_nm": 37.1,
+    "tool_wear_min": 170,
+    "rotational_speed_rpm": 1629
+   }
+  ]
+ },
+ {
+  "card_id": "EC-V08",
+  "equipment_id": "M-14",
+  "occurred_at": "2026-05-02T15:42:00+09:00",
+  "symptom_group": {
+   "code": "PW",
+   "name": "출력 이탈"
+  },
+  "alarm": {
+   "sensor": "기계 출력",
+   "value": 3538,
+   "unit": "W",
+   "boundary": 4189,
+   "direction": "경계 아래"
+  },
+  "sensor_snapshot": {
+   "quality_grade": "M",
+   "air_temperature_k": 297.5,
+   "process_temperature_k": 308.2,
+   "rotational_speed_rpm": 2448.0,
+   "torque_nm": 13.8,
+   "tool_wear_min": 29.0,
+   "temp_diff_k": 10.7,
+   "power_w": 3538
+  },
+  "recent_12": [
+   {
+    "at": "2026-04-23T21:28:00+09:00",
+    "temp_diff_k": 9.9,
+    "power_w": 6590,
+    "torque_nm": 43.4,
+    "tool_wear_min": 66,
+    "rotational_speed_rpm": 1450
+   },
+   {
+    "at": "2026-04-24T14:59:00+09:00",
+    "temp_diff_k": 9.8,
+    "power_w": 5317,
+    "torque_nm": 29.4,
+    "tool_wear_min": 116,
+    "rotational_speed_rpm": 1727
+   },
+   {
+    "at": "2026-04-25T08:30:00+09:00",
+    "temp_diff_k": 9.8,
+    "power_w": 6176,
+    "torque_nm": 42.4,
+    "tool_wear_min": 169,
+    "rotational_speed_rpm": 1391
+   },
+   {
+    "at": "2026-04-26T02:02:00+09:00",
+    "temp_diff_k": 9.8,
+    "power_w": 6575,
+    "torque_nm": 43.6,
+    "tool_wear_min": 5,
+    "rotational_speed_rpm": 1440
+   },
+   {
+    "at": "2026-04-26T19:33:00+09:00",
+    "temp_diff_k": 10,
+    "power_w": 5342,
+    "torque_nm": 30.6,
+    "tool_wear_min": 59,
+    "rotational_speed_rpm": 1667
+   },
+   {
+    "at": "2026-04-27T13:04:00+09:00",
+    "temp_diff_k": 10.1,
+    "power_w": 5980,
+    "torque_nm": 32.8,
+    "tool_wear_min": 112,
+    "rotational_speed_rpm": 1741
+   },
+   {
+    "at": "2026-04-28T06:35:00+09:00",
+    "temp_diff_k": 10.3,
+    "power_w": 4860,
+    "torque_nm": 29.3,
+    "tool_wear_min": 162,
+    "rotational_speed_rpm": 1584
+   },
+   {
+    "at": "2026-04-29T00:06:00+09:00",
+    "temp_diff_k": 10.2,
+    "power_w": 7173,
+    "torque_nm": 49.1,
+    "tool_wear_min": 206,
+    "rotational_speed_rpm": 1395
+   },
+   {
+    "at": "2026-04-29T17:38:00+09:00",
+    "temp_diff_k": 10.1,
+    "power_w": 6914,
+    "torque_nm": 47.5,
+    "tool_wear_min": 33,
+    "rotational_speed_rpm": 1390
+   },
+   {
+    "at": "2026-04-30T11:09:00+09:00",
+    "temp_diff_k": 10.1,
+    "power_w": 4124,
+    "torque_nm": 19.2,
+    "tool_wear_min": 90,
+    "rotational_speed_rpm": 2051
+   },
+   {
+    "at": "2026-05-01T04:40:00+09:00",
+    "temp_diff_k": 10.6,
+    "power_w": 5002,
+    "torque_nm": 27.5,
+    "tool_wear_min": 146,
+    "rotational_speed_rpm": 1737
+   },
+   {
+    "at": "2026-05-01T22:11:00+09:00",
+    "temp_diff_k": 10.7,
+    "power_w": 6529,
+    "torque_nm": 41.9,
+    "tool_wear_min": 196,
+    "rotational_speed_rpm": 1488
+   }
+  ]
+ },
+ {
+  "card_id": "EC-V09",
+  "equipment_id": "M-17",
+  "occurred_at": "2026-05-04T05:23:00+09:00",
+  "symptom_group": {
+   "code": "LD",
+   "name": "토크 과부하"
+  },
+  "alarm": {
+   "sensor": "토크",
+   "value": 60.4,
+   "unit": "Nm",
+   "boundary": 60.1,
+   "direction": "경계 위"
+  },
+  "sensor_snapshot": {
+   "quality_grade": "L",
+   "air_temperature_k": 297.7,
+   "process_temperature_k": 308.7,
+   "rotational_speed_rpm": 1249.0,
+   "torque_nm": 60.4,
+   "tool_wear_min": 143.0,
+   "temp_diff_k": 11.0,
+   "power_w": 7900
+  },
+  "recent_12": [
+   {
+    "at": "2026-04-25T11:08:00+09:00",
+    "temp_diff_k": 10,
+    "power_w": 6362,
+    "torque_nm": 40.1,
+    "tool_wear_min": 179,
+    "rotational_speed_rpm": 1515
+   },
+   {
+    "at": "2026-04-26T04:39:00+09:00",
+    "temp_diff_k": 9.9,
+    "power_w": 6550,
+    "torque_nm": 42.9,
+    "tool_wear_min": 15,
+    "rotational_speed_rpm": 1458
+   },
+   {
+    "at": "2026-04-26T22:11:00+09:00",
+    "temp_diff_k": 10.2,
+    "power_w": 6224,
+    "torque_nm": 43.1,
+    "tool_wear_min": 65,
+    "rotational_speed_rpm": 1379
+   },
+   {
+    "at": "2026-04-27T15:42:00+09:00",
+    "temp_diff_k": 10.3,
+    "power_w": 9033,
+    "torque_nm": 60.7,
+    "tool_wear_min": 119,
+    "rotational_speed_rpm": 1421
+   },
+   {
+    "at": "2026-04-28T09:13:00+09:00",
+    "temp_diff_k": 10.2,
+    "power_w": 5818,
+    "torque_nm": 36.1,
+    "tool_wear_min": 168,
+    "rotational_speed_rpm": 1539
+   },
+   {
+    "at": "2026-04-29T02:44:00+09:00",
+    "temp_diff_k": 10.2,
+    "power_w": 6999,
+    "torque_nm": 45.5,
+    "tool_wear_min": 214,
+    "rotational_speed_rpm": 1469
+   },
+   {
+    "at": "2026-04-29T20:15:00+09:00",
+    "temp_diff_k": 10.1,
+    "power_w": 4318,
+    "torque_nm": 21.1,
+    "tool_wear_min": 42,
+    "rotational_speed_rpm": 1954
+   },
+   {
+    "at": "2026-04-30T13:47:00+09:00",
+    "temp_diff_k": 10.1,
+    "power_w": 5973,
+    "torque_nm": 31.6,
+    "tool_wear_min": 96,
+    "rotational_speed_rpm": 1805
+   },
+   {
+    "at": "2026-05-01T07:18:00+09:00",
+    "temp_diff_k": 10.6,
+    "power_w": 6052,
+    "torque_nm": 36.6,
+    "tool_wear_min": 152,
+    "rotational_speed_rpm": 1579
+   },
+   {
+    "at": "2026-05-02T00:49:00+09:00",
+    "temp_diff_k": 10.8,
+    "power_w": 8152,
+    "torque_nm": 56.7,
+    "tool_wear_min": 203,
+    "rotational_speed_rpm": 1373
+   },
+   {
+    "at": "2026-05-02T18:20:00+09:00",
+    "temp_diff_k": 10.8,
+    "power_w": 6597,
+    "torque_nm": 40.8,
+    "tool_wear_min": 37,
+    "rotational_speed_rpm": 1544
+   },
+   {
+    "at": "2026-05-03T11:51:00+09:00",
+    "temp_diff_k": 10.8,
+    "power_w": 6293,
+    "torque_nm": 38.3,
+    "tool_wear_min": 93,
+    "rotational_speed_rpm": 1569
+   }
+  ]
+ },
+ {
+  "card_id": "EC-V10",
+  "equipment_id": "M-08",
+  "occurred_at": "2026-05-14T20:18:00+09:00",
+  "symptom_group": {
+   "code": "LD",
+   "name": "토크 과부하"
+  },
+  "alarm": {
+   "sensor": "토크",
+   "value": 61.2,
+   "unit": "Nm",
+   "boundary": 60.1,
+   "direction": "경계 위"
+  },
+  "sensor_snapshot": {
+   "quality_grade": "M",
+   "air_temperature_k": 297.8,
+   "process_temperature_k": 309.2,
+   "rotational_speed_rpm": 1295.0,
+   "torque_nm": 61.2,
+   "tool_wear_min": 12.0,
+   "temp_diff_k": 11.4,
+   "power_w": 8299
+  },
+  "recent_12": [
+   {
+    "at": "2026-05-06T02:03:00+09:00",
+    "temp_diff_k": 11,
+    "power_w": 7330,
+    "torque_nm": 52.2,
+    "tool_wear_min": 49,
+    "rotational_speed_rpm": 1341
+   },
+   {
+    "at": "2026-05-06T19:34:00+09:00",
+    "temp_diff_k": 11.3,
+    "power_w": 6629,
+    "torque_nm": 42.6,
+    "tool_wear_min": 105,
+    "rotational_speed_rpm": 1486
+   },
+   {
+    "at": "2026-05-07T13:06:00+09:00",
+    "temp_diff_k": 11.6,
+    "power_w": 4338,
+    "torque_nm": 22.6,
+    "tool_wear_min": 161,
+    "rotational_speed_rpm": 1833
+   },
+   {
+    "at": "2026-05-08T06:37:00+09:00",
+    "temp_diff_k": 11.6,
+    "power_w": 5095,
+    "torque_nm": 30.2,
+    "tool_wear_min": 211,
+    "rotational_speed_rpm": 1611
+   },
+   {
+    "at": "2026-05-09T00:08:00+09:00",
+    "temp_diff_k": 11.9,
+    "power_w": 4151,
+    "torque_nm": 20.6,
+    "tool_wear_min": 37,
+    "rotational_speed_rpm": 1924
+   },
+   {
+    "at": "2026-05-09T17:39:00+09:00",
+    "temp_diff_k": 11.9,
+    "power_w": 5777,
+    "torque_nm": 36.8,
+    "tool_wear_min": 88,
+    "rotational_speed_rpm": 1499
+   },
+   {
+    "at": "2026-05-10T11:10:00+09:00",
+    "temp_diff_k": 11.9,
+    "power_w": 5978,
+    "torque_nm": 34.6,
+    "tool_wear_min": 142,
+    "rotational_speed_rpm": 1650
+   },
+   {
+    "at": "2026-05-11T04:42:00+09:00",
+    "temp_diff_k": 12,
+    "power_w": 5908,
+    "torque_nm": 36.8,
+    "tool_wear_min": 198,
+    "rotational_speed_rpm": 1533
+   },
+   {
+    "at": "2026-05-11T22:13:00+09:00",
+    "temp_diff_k": 11.9,
+    "power_w": 7424,
+    "torque_nm": 47.9,
+    "tool_wear_min": 18,
+    "rotational_speed_rpm": 1480
+   },
+   {
+    "at": "2026-05-12T15:44:00+09:00",
+    "temp_diff_k": 11.8,
+    "power_w": 6633,
+    "torque_nm": 44.2,
+    "tool_wear_min": 68,
+    "rotational_speed_rpm": 1433
+   },
+   {
+    "at": "2026-05-13T09:15:00+09:00",
+    "temp_diff_k": 11.6,
+    "power_w": 6000,
+    "torque_nm": 37.3,
+    "tool_wear_min": 120,
+    "rotational_speed_rpm": 1536
+   },
+   {
+    "at": "2026-05-14T02:46:00+09:00",
+    "temp_diff_k": 11.4,
+    "power_w": 6019,
+    "torque_nm": 36.8,
+    "tool_wear_min": 172,
+    "rotational_speed_rpm": 1562
+   }
+  ]
+ },
+ {
+  "card_id": "EC-V11",
+  "equipment_id": "M-08",
+  "occurred_at": "2026-05-17T18:22:00+09:00",
+  "symptom_group": {
+   "code": "TW",
+   "name": "공구 마모 경고"
+  },
+  "alarm": {
+   "sensor": "공구 마모 시간",
+   "value": 231,
+   "unit": "분",
+   "boundary": 215,
+   "direction": "경계 위"
+  },
+  "sensor_snapshot": {
+   "quality_grade": "L",
+   "air_temperature_k": 296.8,
+   "process_temperature_k": 308.0,
+   "rotational_speed_rpm": 1497.0,
+   "torque_nm": 41.7,
+   "tool_wear_min": 231.0,
+   "temp_diff_k": 11.2,
+   "power_w": 6537
+  },
+  "recent_12": [
+   {
+    "at": "2026-05-09T00:08:00+09:00",
+    "temp_diff_k": 11.9,
+    "power_w": 4151,
+    "torque_nm": 20.6,
+    "tool_wear_min": 37,
+    "rotational_speed_rpm": 1924
+   },
+   {
+    "at": "2026-05-09T17:39:00+09:00",
+    "temp_diff_k": 11.9,
+    "power_w": 5777,
+    "torque_nm": 36.8,
+    "tool_wear_min": 88,
+    "rotational_speed_rpm": 1499
+   },
+   {
+    "at": "2026-05-10T11:10:00+09:00",
+    "temp_diff_k": 11.9,
+    "power_w": 5978,
+    "torque_nm": 34.6,
+    "tool_wear_min": 142,
+    "rotational_speed_rpm": 1650
+   },
+   {
+    "at": "2026-05-11T04:42:00+09:00",
+    "temp_diff_k": 12,
+    "power_w": 5908,
+    "torque_nm": 36.8,
+    "tool_wear_min": 198,
+    "rotational_speed_rpm": 1533
+   },
+   {
+    "at": "2026-05-11T22:13:00+09:00",
+    "temp_diff_k": 11.9,
+    "power_w": 7424,
+    "torque_nm": 47.9,
+    "tool_wear_min": 18,
+    "rotational_speed_rpm": 1480
+   },
+   {
+    "at": "2026-05-12T15:44:00+09:00",
+    "temp_diff_k": 11.8,
+    "power_w": 6633,
+    "torque_nm": 44.2,
+    "tool_wear_min": 68,
+    "rotational_speed_rpm": 1433
+   },
+   {
+    "at": "2026-05-13T09:15:00+09:00",
+    "temp_diff_k": 11.6,
+    "power_w": 6000,
+    "torque_nm": 37.3,
+    "tool_wear_min": 120,
+    "rotational_speed_rpm": 1536
+   },
+   {
+    "at": "2026-05-14T02:46:00+09:00",
+    "temp_diff_k": 11.4,
+    "power_w": 6019,
+    "torque_nm": 36.8,
+    "tool_wear_min": 172,
+    "rotational_speed_rpm": 1562
+   },
+   {
+    "at": "2026-05-14T20:18:00+09:00",
+    "temp_diff_k": 11.4,
+    "power_w": 8299,
+    "torque_nm": 61.2,
+    "tool_wear_min": 12,
+    "rotational_speed_rpm": 1295
+   },
+   {
+    "at": "2026-05-15T13:49:00+09:00",
+    "temp_diff_k": 11.2,
+    "power_w": 6479,
+    "torque_nm": 40.2,
+    "tool_wear_min": 72,
+    "rotational_speed_rpm": 1539
+   },
+   {
+    "at": "2026-05-16T07:20:00+09:00",
+    "temp_diff_k": 11.3,
+    "power_w": 6032,
+    "torque_nm": 39,
+    "tool_wear_min": 127,
+    "rotational_speed_rpm": 1477
+   },
+   {
+    "at": "2026-05-17T00:51:00+09:00",
+    "temp_diff_k": 11.5,
+    "power_w": 7239,
+    "torque_nm": 45.9,
+    "tool_wear_min": 182,
+    "rotational_speed_rpm": 1506
+   }
+  ]
+ },
+ {
+  "card_id": "EC-V12",
+  "equipment_id": "M-09",
+  "occurred_at": "2026-05-17T19:15:00+09:00",
+  "symptom_group": {
+   "code": "TW",
+   "name": "공구 마모 경고"
+  },
+  "alarm": {
+   "sensor": "공구 마모 시간",
+   "value": 233,
+   "unit": "분",
+   "boundary": 215,
+   "direction": "경계 위"
+  },
+  "sensor_snapshot": {
+   "quality_grade": "M",
+   "air_temperature_k": 296.7,
+   "process_temperature_k": 307.8,
+   "rotational_speed_rpm": 1537.0,
+   "torque_nm": 36.3,
+   "tool_wear_min": 233.0,
+   "temp_diff_k": 11.1,
+   "power_w": 5843
+  },
+  "recent_12": [
+   {
+    "at": "2026-05-09T01:00:00+09:00",
+    "temp_diff_k": 11.8,
+    "power_w": 4203,
+    "torque_nm": 19.8,
+    "tool_wear_min": 39,
+    "rotational_speed_rpm": 2027
+   },
+   {
+    "at": "2026-05-09T18:32:00+09:00",
+    "temp_diff_k": 11.9,
+    "power_w": 4796,
+    "torque_nm": 25.8,
+    "tool_wear_min": 91,
+    "rotational_speed_rpm": 1775
+   },
+   {
+    "at": "2026-05-10T12:03:00+09:00",
+    "temp_diff_k": 11.9,
+    "power_w": 6390,
+    "torque_nm": 40.6,
+    "tool_wear_min": 144,
+    "rotational_speed_rpm": 1503
+   },
+   {
+    "at": "2026-05-11T05:34:00+09:00",
+    "temp_diff_k": 11.9,
+    "power_w": 5572,
+    "torque_nm": 31.3,
+    "tool_wear_min": 200,
+    "rotational_speed_rpm": 1700
+   },
+   {
+    "at": "2026-05-11T23:05:00+09:00",
+    "temp_diff_k": 12,
+    "power_w": 5263,
+    "torque_nm": 31.1,
+    "tool_wear_min": 20,
+    "rotational_speed_rpm": 1616
+   },
+   {
+    "at": "2026-05-12T16:36:00+09:00",
+    "temp_diff_k": 11.7,
+    "power_w": 7054,
+    "torque_nm": 44.7,
+    "tool_wear_min": 73,
+    "rotational_speed_rpm": 1507
+   },
+   {
+    "at": "2026-05-13T10:08:00+09:00",
+    "temp_diff_k": 11.6,
+    "power_w": 7537,
+    "torque_nm": 51.3,
+    "tool_wear_min": 122,
+    "rotational_speed_rpm": 1403
+   },
+   {
+    "at": "2026-05-14T03:39:00+09:00",
+    "temp_diff_k": 11.5,
+    "power_w": 7450,
+    "torque_nm": 49.1,
+    "tool_wear_min": 174,
+    "rotational_speed_rpm": 1449
+   },
+   {
+    "at": "2026-05-14T21:10:00+09:00",
+    "temp_diff_k": 11.4,
+    "power_w": 6796,
+    "torque_nm": 47.3,
+    "tool_wear_min": 15,
+    "rotational_speed_rpm": 1372
+   },
+   {
+    "at": "2026-05-15T14:41:00+09:00",
+    "temp_diff_k": 11.2,
+    "power_w": 5813,
+    "torque_nm": 39.2,
+    "tool_wear_min": 74,
+    "rotational_speed_rpm": 1416
+   },
+   {
+    "at": "2026-05-16T08:12:00+09:00",
+    "temp_diff_k": 11.4,
+    "power_w": 8804,
+    "torque_nm": 58.1,
+    "tool_wear_min": 129,
+    "rotational_speed_rpm": 1447
+   },
+   {
+    "at": "2026-05-17T01:44:00+09:00",
+    "temp_diff_k": 11.5,
+    "power_w": 6084,
+    "torque_nm": 41.8,
+    "tool_wear_min": 184,
+    "rotational_speed_rpm": 1390
+   }
+  ]
+ },
+ {
+  "card_id": "EC-V13",
+  "equipment_id": "M-11",
+  "occurred_at": "2026-05-17T21:00:00+09:00",
+  "symptom_group": {
+   "code": "TW",
+   "name": "공구 마모 경고"
+  },
+  "alarm": {
+   "sensor": "공구 마모 시간",
+   "value": 238,
+   "unit": "분",
+   "boundary": 215,
+   "direction": "경계 위"
+  },
+  "sensor_snapshot": {
+   "quality_grade": "L",
+   "air_temperature_k": 296.7,
+   "process_temperature_k": 307.8,
+   "rotational_speed_rpm": 1646.0,
+   "torque_nm": 34.6,
+   "tool_wear_min": 238.0,
+   "temp_diff_k": 11.1,
+   "power_w": 5964
+  },
+  "recent_12": [
+   {
+    "at": "2026-05-09T02:46:00+09:00",
+    "temp_diff_k": 11.9,
+    "power_w": 5612,
+    "torque_nm": 35.8,
+    "tool_wear_min": 44,
+    "rotational_speed_rpm": 1497
+   },
+   {
+    "at": "2026-05-09T20:17:00+09:00",
+    "temp_diff_k": 12,
+    "power_w": 7098,
+    "torque_nm": 52.3,
+    "tool_wear_min": 96,
+    "rotational_speed_rpm": 1296
+   },
+   {
+    "at": "2026-05-10T13:48:00+09:00",
+    "temp_diff_k": 11.9,
+    "power_w": 6045,
+    "torque_nm": 34.4,
+    "tool_wear_min": 148,
+    "rotational_speed_rpm": 1678
+   },
+   {
+    "at": "2026-05-11T07:19:00+09:00",
+    "temp_diff_k": 11.9,
+    "power_w": 6263,
+    "torque_nm": 42.9,
+    "tool_wear_min": 206,
+    "rotational_speed_rpm": 1394
+   },
+   {
+    "at": "2026-05-12T00:50:00+09:00",
+    "temp_diff_k": 11.8,
+    "power_w": 3860,
+    "torque_nm": 16.8,
+    "tool_wear_min": 27,
+    "rotational_speed_rpm": 2194
+   },
+   {
+    "at": "2026-05-12T18:22:00+09:00",
+    "temp_diff_k": 11.8,
+    "power_w": 6679,
+    "torque_nm": 45.3,
+    "tool_wear_min": 78,
+    "rotational_speed_rpm": 1408
+   },
+   {
+    "at": "2026-05-13T11:53:00+09:00",
+    "temp_diff_k": 11.6,
+    "power_w": 6972,
+    "torque_nm": 47.9,
+    "tool_wear_min": 127,
+    "rotational_speed_rpm": 1390
+   },
+   {
+    "at": "2026-05-14T05:24:00+09:00",
+    "temp_diff_k": 11.4,
+    "power_w": 6814,
+    "torque_nm": 45.6,
+    "tool_wear_min": 179,
+    "rotational_speed_rpm": 1427
+   },
+   {
+    "at": "2026-05-14T22:55:00+09:00",
+    "temp_diff_k": 11.3,
+    "power_w": 5757,
+    "torque_nm": 33.2,
+    "tool_wear_min": 20,
+    "rotational_speed_rpm": 1656
+   },
+   {
+    "at": "2026-05-15T16:26:00+09:00",
+    "temp_diff_k": 11.1,
+    "power_w": 6362,
+    "torque_nm": 40.1,
+    "tool_wear_min": 82,
+    "rotational_speed_rpm": 1515
+   },
+   {
+    "at": "2026-05-16T09:58:00+09:00",
+    "temp_diff_k": 11.4,
+    "power_w": 5488,
+    "torque_nm": 30.9,
+    "tool_wear_min": 133,
+    "rotational_speed_rpm": 1696
+   },
+   {
+    "at": "2026-05-17T03:29:00+09:00",
+    "temp_diff_k": 11.4,
+    "power_w": 6148,
+    "torque_nm": 38.8,
+    "tool_wear_min": 189,
+    "rotational_speed_rpm": 1513
+   }
+  ]
+ },
+ {
+  "card_id": "EC-V14",
+  "equipment_id": "M-10",
+  "occurred_at": "2026-05-22T05:15:00+09:00",
+  "symptom_group": {
+   "code": "PW",
+   "name": "출력 이탈"
+  },
+  "alarm": {
+   "sensor": "기계 출력",
+   "value": 9855,
+   "unit": "W",
+   "boundary": 8403,
+   "direction": "경계 위"
+  },
+  "sensor_snapshot": {
+   "quality_grade": "M",
+   "air_temperature_k": 295.8,
+   "process_temperature_k": 306.3,
+   "rotational_speed_rpm": 1235.0,
+   "torque_nm": 76.2,
+   "tool_wear_min": 89.0,
+   "temp_diff_k": 10.5,
+   "power_w": 9855
+  },
+  "recent_12": [
+   {
+    "at": "2026-05-13T11:00:00+09:00",
+    "temp_diff_k": 11.7,
+    "power_w": 6156,
+    "torque_nm": 38.8,
+    "tool_wear_min": 124,
+    "rotational_speed_rpm": 1515
+   },
+   {
+    "at": "2026-05-14T04:31:00+09:00",
+    "temp_diff_k": 11.5,
+    "power_w": 4878,
+    "torque_nm": 27.4,
+    "tool_wear_min": 176,
+    "rotational_speed_rpm": 1700
+   },
+   {
+    "at": "2026-05-14T22:03:00+09:00",
+    "temp_diff_k": 11.3,
+    "power_w": 6388,
+    "torque_nm": 42.6,
+    "tool_wear_min": 17,
+    "rotational_speed_rpm": 1432
+   },
+   {
+    "at": "2026-05-15T15:34:00+09:00",
+    "temp_diff_k": 11.2,
+    "power_w": 5569,
+    "torque_nm": 31.6,
+    "tool_wear_min": 79,
+    "rotational_speed_rpm": 1683
+   },
+   {
+    "at": "2026-05-16T09:05:00+09:00",
+    "temp_diff_k": 11.5,
+    "power_w": 4509,
+    "torque_nm": 23.8,
+    "tool_wear_min": 131,
+    "rotational_speed_rpm": 1809
+   },
+   {
+    "at": "2026-05-17T02:36:00+09:00",
+    "temp_diff_k": 11.5,
+    "power_w": 7121,
+    "torque_nm": 46.9,
+    "tool_wear_min": 186,
+    "rotational_speed_rpm": 1450
+   },
+   {
+    "at": "2026-05-17T20:07:00+09:00",
+    "temp_diff_k": 11.1,
+    "power_w": 6210,
+    "torque_nm": 39.4,
+    "tool_wear_min": 236,
+    "rotational_speed_rpm": 1505
+   },
+   {
+    "at": "2026-05-18T13:39:00+09:00",
+    "temp_diff_k": 11.1,
+    "power_w": 7481,
+    "torque_nm": 50.7,
+    "tool_wear_min": 43,
+    "rotational_speed_rpm": 1409
+   },
+   {
+    "at": "2026-05-19T07:10:00+09:00",
+    "temp_diff_k": 10.9,
+    "power_w": 4769,
+    "torque_nm": 24.2,
+    "tool_wear_min": 97,
+    "rotational_speed_rpm": 1882
+   },
+   {
+    "at": "2026-05-20T00:41:00+09:00",
+    "temp_diff_k": 10.9,
+    "power_w": 5937,
+    "torque_nm": 37.4,
+    "tool_wear_min": 146,
+    "rotational_speed_rpm": 1516
+   },
+   {
+    "at": "2026-05-20T18:12:00+09:00",
+    "temp_diff_k": 10.9,
+    "power_w": 6279,
+    "torque_nm": 37.9,
+    "tool_wear_min": 197,
+    "rotational_speed_rpm": 1582
+   },
+   {
+    "at": "2026-05-21T11:43:00+09:00",
+    "temp_diff_k": 10.8,
+    "power_w": 5261,
+    "torque_nm": 32.6,
+    "tool_wear_min": 33,
+    "rotational_speed_rpm": 1541
+   }
+  ]
+ },
+ {
+  "card_id": "EC-V15",
+  "equipment_id": "M-11",
+  "occurred_at": "2026-05-22T23:38:00+09:00",
+  "symptom_group": {
+   "code": "LD",
+   "name": "토크 과부하"
+  },
+  "alarm": {
+   "sensor": "토크",
+   "value": 62.3,
+   "unit": "Nm",
+   "boundary": 60.1,
+   "direction": "경계 위"
+  },
+  "sensor_snapshot": {
+   "quality_grade": "H",
+   "air_temperature_k": 295.6,
+   "process_temperature_k": 306.1,
+   "rotational_speed_rpm": 1256.0,
+   "torque_nm": 62.3,
+   "tool_wear_min": 142.0,
+   "temp_diff_k": 10.5,
+   "power_w": 8194
+  },
+  "recent_12": [
+   {
+    "at": "2026-05-14T05:24:00+09:00",
+    "temp_diff_k": 11.4,
+    "power_w": 6814,
+    "torque_nm": 45.6,
+    "tool_wear_min": 179,
+    "rotational_speed_rpm": 1427
+   },
+   {
+    "at": "2026-05-14T22:55:00+09:00",
+    "temp_diff_k": 11.3,
+    "power_w": 5757,
+    "torque_nm": 33.2,
+    "tool_wear_min": 20,
+    "rotational_speed_rpm": 1656
+   },
+   {
+    "at": "2026-05-15T16:26:00+09:00",
+    "temp_diff_k": 11.1,
+    "power_w": 6362,
+    "torque_nm": 40.1,
+    "tool_wear_min": 82,
+    "rotational_speed_rpm": 1515
+   },
+   {
+    "at": "2026-05-16T09:58:00+09:00",
+    "temp_diff_k": 11.4,
+    "power_w": 5488,
+    "torque_nm": 30.9,
+    "tool_wear_min": 133,
+    "rotational_speed_rpm": 1696
+   },
+   {
+    "at": "2026-05-17T03:29:00+09:00",
+    "temp_diff_k": 11.4,
+    "power_w": 6148,
+    "torque_nm": 38.8,
+    "tool_wear_min": 189,
+    "rotational_speed_rpm": 1513
+   },
+   {
+    "at": "2026-05-17T21:00:00+09:00",
+    "temp_diff_k": 11.1,
+    "power_w": 5964,
+    "torque_nm": 34.6,
+    "tool_wear_min": 238,
+    "rotational_speed_rpm": 1646
+   },
+   {
+    "at": "2026-05-18T14:31:00+09:00",
+    "temp_diff_k": 11.2,
+    "power_w": 5210,
+    "torque_nm": 29.7,
+    "tool_wear_min": 46,
+    "rotational_speed_rpm": 1675
+   },
+   {
+    "at": "2026-05-19T08:02:00+09:00",
+    "temp_diff_k": 10.9,
+    "power_w": 7011,
+    "torque_nm": 52.1,
+    "tool_wear_min": 100,
+    "rotational_speed_rpm": 1285
+   },
+   {
+    "at": "2026-05-20T01:34:00+09:00",
+    "temp_diff_k": 10.9,
+    "power_w": 6437,
+    "torque_nm": 41.7,
+    "tool_wear_min": 148,
+    "rotational_speed_rpm": 1474
+   },
+   {
+    "at": "2026-05-20T19:05:00+09:00",
+    "temp_diff_k": 10.9,
+    "power_w": 6856,
+    "torque_nm": 45.5,
+    "tool_wear_min": 199,
+    "rotational_speed_rpm": 1439
+   },
+   {
+    "at": "2026-05-21T12:36:00+09:00",
+    "temp_diff_k": 10.8,
+    "power_w": 4760,
+    "torque_nm": 23.3,
+    "tool_wear_min": 38,
+    "rotational_speed_rpm": 1951
+   },
+   {
+    "at": "2026-05-22T06:07:00+09:00",
+    "temp_diff_k": 10.5,
+    "power_w": 7083,
+    "torque_nm": 46.2,
+    "tool_wear_min": 92,
+    "rotational_speed_rpm": 1464
+   }
+  ]
+ },
+ {
+  "card_id": "EC-V16",
+  "equipment_id": "M-14",
+  "occurred_at": "2026-06-16T04:26:00+09:00",
+  "symptom_group": {
+   "code": "PW",
+   "name": "출력 이탈"
+  },
+  "alarm": {
+   "sensor": "기계 출력",
+   "value": 4158,
+   "unit": "W",
+   "boundary": 4189,
+   "direction": "경계 아래"
+  },
+  "sensor_snapshot": {
+   "quality_grade": "M",
+   "air_temperature_k": 298.0,
+   "process_temperature_k": 308.2,
+   "rotational_speed_rpm": 2090.0,
+   "torque_nm": 19.0,
+   "tool_wear_min": 143.0,
+   "temp_diff_k": 10.2,
+   "power_w": 4158
+  },
+  "recent_12": [
+   {
+    "at": "2026-06-07T10:11:00+09:00",
+    "temp_diff_k": 11.3,
+    "power_w": 9697,
+    "torque_nm": 74.5,
+    "tool_wear_min": 194,
+    "rotational_speed_rpm": 1243
+   },
+   {
+    "at": "2026-06-08T03:42:00+09:00",
+    "temp_diff_k": 11.6,
+    "power_w": 5475,
+    "torque_nm": 28.9,
+    "tool_wear_min": 20,
+    "rotational_speed_rpm": 1809
+   },
+   {
+    "at": "2026-06-08T21:14:00+09:00",
+    "temp_diff_k": 11.5,
+    "power_w": 5428,
+    "torque_nm": 33.1,
+    "tool_wear_min": 68,
+    "rotational_speed_rpm": 1566
+   },
+   {
+    "at": "2026-06-09T14:45:00+09:00",
+    "temp_diff_k": 11.4,
+    "power_w": 6807,
+    "torque_nm": 43.8,
+    "tool_wear_min": 124,
+    "rotational_speed_rpm": 1484
+   },
+   {
+    "at": "2026-06-10T08:16:00+09:00",
+    "temp_diff_k": 11.2,
+    "power_w": 6611,
+    "torque_nm": 40.6,
+    "tool_wear_min": 176,
+    "rotational_speed_rpm": 1555
+   },
+   {
+    "at": "2026-06-11T01:47:00+09:00",
+    "temp_diff_k": 11,
+    "power_w": 7165,
+    "torque_nm": 46.8,
+    "tool_wear_min": 4,
+    "rotational_speed_rpm": 1462
+   },
+   {
+    "at": "2026-06-11T19:18:00+09:00",
+    "temp_diff_k": 11.2,
+    "power_w": 5862,
+    "torque_nm": 37.9,
+    "tool_wear_min": 60,
+    "rotational_speed_rpm": 1477
+   },
+   {
+    "at": "2026-06-12T12:50:00+09:00",
+    "temp_diff_k": 11.2,
+    "power_w": 6846,
+    "torque_nm": 46.3,
+    "tool_wear_min": 107,
+    "rotational_speed_rpm": 1412
+   },
+   {
+    "at": "2026-06-13T06:21:00+09:00",
+    "temp_diff_k": 11,
+    "power_w": 6412,
+    "torque_nm": 39.2,
+    "tool_wear_min": 155,
+    "rotational_speed_rpm": 1562
+   },
+   {
+    "at": "2026-06-13T23:52:00+09:00",
+    "temp_diff_k": 10.7,
+    "power_w": 7412,
+    "torque_nm": 47,
+    "tool_wear_min": 208,
+    "rotational_speed_rpm": 1506
+   },
+   {
+    "at": "2026-06-14T17:23:00+09:00",
+    "temp_diff_k": 10.8,
+    "power_w": 6002,
+    "torque_nm": 35.8,
+    "tool_wear_min": 43,
+    "rotational_speed_rpm": 1601
+   },
+   {
+    "at": "2026-06-15T10:54:00+09:00",
+    "temp_diff_k": 10.6,
+    "power_w": 8135,
+    "torque_nm": 52.7,
+    "tool_wear_min": 95,
+    "rotational_speed_rpm": 1474
+   }
+  ]
+ },
+ {
+  "card_id": "EC-V17",
+  "equipment_id": "M-13",
+  "occurred_at": "2026-06-16T21:04:00+09:00",
+  "symptom_group": {
+   "code": "LD",
+   "name": "토크 과부하"
+  },
+  "alarm": {
+   "sensor": "토크",
+   "value": 61,
+   "unit": "Nm",
+   "boundary": 60.1,
+   "direction": "경계 위"
+  },
+  "sensor_snapshot": {
+   "quality_grade": "L",
+   "air_temperature_k": 298.2,
+   "process_temperature_k": 308.4,
+   "rotational_speed_rpm": 1310.0,
+   "torque_nm": 61.0,
+   "tool_wear_min": 189.0,
+   "temp_diff_k": 10.2,
+   "power_w": 8368
+  },
+  "recent_12": [
+   {
+    "at": "2026-06-08T02:50:00+09:00",
+    "temp_diff_k": 11.7,
+    "power_w": 5739,
+    "torque_nm": 32.7,
+    "tool_wear_min": 18,
+    "rotational_speed_rpm": 1676
+   },
+   {
+    "at": "2026-06-08T20:21:00+09:00",
+    "temp_diff_k": 11.4,
+    "power_w": 8193,
+    "torque_nm": 54.6,
+    "tool_wear_min": 66,
+    "rotational_speed_rpm": 1433
+   },
+   {
+    "at": "2026-06-09T13:52:00+09:00",
+    "temp_diff_k": 11.3,
+    "power_w": 6830,
+    "torque_nm": 49,
+    "tool_wear_min": 121,
+    "rotational_speed_rpm": 1331
+   },
+   {
+    "at": "2026-06-10T07:24:00+09:00",
+    "temp_diff_k": 11.2,
+    "power_w": 6896,
+    "torque_nm": 48,
+    "tool_wear_min": 174,
+    "rotational_speed_rpm": 1372
+   },
+   {
+    "at": "2026-06-11T00:55:00+09:00",
+    "temp_diff_k": 11.1,
+    "power_w": 5383,
+    "torque_nm": 33.4,
+    "tool_wear_min": 2,
+    "rotational_speed_rpm": 1539
+   },
+   {
+    "at": "2026-06-11T18:26:00+09:00",
+    "temp_diff_k": 11.2,
+    "power_w": 6408,
+    "torque_nm": 38.2,
+    "tool_wear_min": 58,
+    "rotational_speed_rpm": 1602
+   },
+   {
+    "at": "2026-06-12T11:57:00+09:00",
+    "temp_diff_k": 11.3,
+    "power_w": 6647,
+    "torque_nm": 39.5,
+    "tool_wear_min": 105,
+    "rotational_speed_rpm": 1607
+   },
+   {
+    "at": "2026-06-13T05:28:00+09:00",
+    "temp_diff_k": 10.9,
+    "power_w": 5883,
+    "torque_nm": 35.6,
+    "tool_wear_min": 153,
+    "rotational_speed_rpm": 1578
+   },
+   {
+    "at": "2026-06-13T23:00:00+09:00",
+    "temp_diff_k": 10.7,
+    "power_w": 4859,
+    "torque_nm": 26.2,
+    "tool_wear_min": 206,
+    "rotational_speed_rpm": 1771
+   },
+   {
+    "at": "2026-06-14T16:31:00+09:00",
+    "temp_diff_k": 10.7,
+    "power_w": 5870,
+    "torque_nm": 36.9,
+    "tool_wear_min": 41,
+    "rotational_speed_rpm": 1519
+   },
+   {
+    "at": "2026-06-15T10:02:00+09:00",
+    "temp_diff_k": 10.5,
+    "power_w": 5950,
+    "torque_nm": 34.9,
+    "tool_wear_min": 93,
+    "rotational_speed_rpm": 1628
+   },
+   {
+    "at": "2026-06-16T03:33:00+09:00",
+    "temp_diff_k": 10.1,
+    "power_w": 7488,
+    "torque_nm": 51,
+    "tool_wear_min": 141,
+    "rotational_speed_rpm": 1402
+   }
+  ]
+ },
+ {
+  "card_id": "EC-V18",
+  "equipment_id": "M-10",
+  "occurred_at": "2026-06-20T10:03:00+09:00",
+  "symptom_group": {
+   "code": "TW",
+   "name": "공구 마모 경고"
+  },
+  "alarm": {
+   "sensor": "공구 마모 시간",
+   "value": 219,
+   "unit": "분",
+   "boundary": 215,
+   "direction": "경계 위"
+  },
+  "sensor_snapshot": {
+   "quality_grade": "M",
+   "air_temperature_k": 297.9,
+   "process_temperature_k": 307.4,
+   "rotational_speed_rpm": 1610.0,
+   "torque_nm": 34.6,
+   "tool_wear_min": 219.0,
+   "temp_diff_k": 9.5,
+   "power_w": 5834
+  },
+  "recent_12": [
+   {
+    "at": "2026-06-11T15:48:00+09:00",
+    "temp_diff_k": 11.1,
+    "power_w": 5050,
+    "torque_nm": 27.7,
+    "tool_wear_min": 50,
+    "rotational_speed_rpm": 1741
+   },
+   {
+    "at": "2026-06-12T09:19:00+09:00",
+    "temp_diff_k": 11.3,
+    "power_w": 7193,
+    "torque_nm": 47.8,
+    "tool_wear_min": 99,
+    "rotational_speed_rpm": 1437
+   },
+   {
+    "at": "2026-06-13T02:51:00+09:00",
+    "temp_diff_k": 11.1,
+    "power_w": 4026,
+    "torque_nm": 18.7,
+    "tool_wear_min": 144,
+    "rotational_speed_rpm": 2056
+   },
+   {
+    "at": "2026-06-13T20:22:00+09:00",
+    "temp_diff_k": 10.7,
+    "power_w": 3828,
+    "torque_nm": 17.4,
+    "tool_wear_min": 198,
+    "rotational_speed_rpm": 2101
+   },
+   {
+    "at": "2026-06-14T13:53:00+09:00",
+    "temp_diff_k": 10.8,
+    "power_w": 6181,
+    "torque_nm": 40.1,
+    "tool_wear_min": 31,
+    "rotational_speed_rpm": 1472
+   },
+   {
+    "at": "2026-06-15T07:24:00+09:00",
+    "temp_diff_k": 10.7,
+    "power_w": 6276,
+    "torque_nm": 39.3,
+    "tool_wear_min": 86,
+    "rotational_speed_rpm": 1525
+   },
+   {
+    "at": "2026-06-16T00:55:00+09:00",
+    "temp_diff_k": 10.2,
+    "power_w": 6309,
+    "torque_nm": 39.9,
+    "tool_wear_min": 134,
+    "rotational_speed_rpm": 1510
+   },
+   {
+    "at": "2026-06-16T18:27:00+09:00",
+    "temp_diff_k": 10.1,
+    "power_w": 7183,
+    "torque_nm": 47.5,
+    "tool_wear_min": 178,
+    "rotational_speed_rpm": 1444
+   },
+   {
+    "at": "2026-06-17T11:58:00+09:00",
+    "temp_diff_k": 10,
+    "power_w": 7061,
+    "torque_nm": 43.7,
+    "tool_wear_min": 8,
+    "rotational_speed_rpm": 1543
+   },
+   {
+    "at": "2026-06-18T05:29:00+09:00",
+    "temp_diff_k": 9.8,
+    "power_w": 6828,
+    "torque_nm": 43.7,
+    "tool_wear_min": 59,
+    "rotational_speed_rpm": 1492
+   },
+   {
+    "at": "2026-06-18T23:00:00+09:00",
+    "temp_diff_k": 9.8,
+    "power_w": 5973,
+    "torque_nm": 36.4,
+    "tool_wear_min": 109,
+    "rotational_speed_rpm": 1567
+   },
+   {
+    "at": "2026-06-19T16:31:00+09:00",
+    "temp_diff_k": 9.8,
+    "power_w": 6923,
+    "torque_nm": 44.1,
+    "tool_wear_min": 166,
+    "rotational_speed_rpm": 1499
+   }
+  ]
+ },
+ {
+  "card_id": "EC-V19",
+  "equipment_id": "M-12",
+  "occurred_at": "2026-06-20T11:48:00+09:00",
+  "symptom_group": {
+   "code": "TW",
+   "name": "공구 마모 경고"
+  },
+  "alarm": {
+   "sensor": "공구 마모 시간",
+   "value": 225,
+   "unit": "분",
+   "boundary": 215,
+   "direction": "경계 위"
+  },
+  "sensor_snapshot": {
+   "quality_grade": "H",
+   "air_temperature_k": 297.9,
+   "process_temperature_k": 307.4,
+   "rotational_speed_rpm": 1604.0,
+   "torque_nm": 36.1,
+   "tool_wear_min": 225.0,
+   "temp_diff_k": 9.5,
+   "power_w": 6064
+  },
+  "recent_12": [
+   {
+    "at": "2026-06-11T17:33:00+09:00",
+    "temp_diff_k": 11.2,
+    "power_w": 5991,
+    "torque_nm": 38.5,
+    "tool_wear_min": 55,
+    "rotational_speed_rpm": 1486
+   },
+   {
+    "at": "2026-06-12T11:05:00+09:00",
+    "temp_diff_k": 11.3,
+    "power_w": 4931,
+    "torque_nm": 27.6,
+    "tool_wear_min": 103,
+    "rotational_speed_rpm": 1706
+   },
+   {
+    "at": "2026-06-13T04:36:00+09:00",
+    "temp_diff_k": 11,
+    "power_w": 7961,
+    "torque_nm": 52.5,
+    "tool_wear_min": 150,
+    "rotational_speed_rpm": 1448
+   },
+   {
+    "at": "2026-06-13T22:07:00+09:00",
+    "temp_diff_k": 10.7,
+    "power_w": 7379,
+    "torque_nm": 48.2,
+    "tool_wear_min": 204,
+    "rotational_speed_rpm": 1462
+   },
+   {
+    "at": "2026-06-14T15:38:00+09:00",
+    "temp_diff_k": 10.8,
+    "power_w": 6167,
+    "torque_nm": 37.7,
+    "tool_wear_min": 36,
+    "rotational_speed_rpm": 1562
+   },
+   {
+    "at": "2026-06-15T09:09:00+09:00",
+    "temp_diff_k": 10.6,
+    "power_w": 7899,
+    "torque_nm": 54.7,
+    "tool_wear_min": 91,
+    "rotational_speed_rpm": 1379
+   },
+   {
+    "at": "2026-06-16T02:41:00+09:00",
+    "temp_diff_k": 10.1,
+    "power_w": 3899,
+    "torque_nm": 16.8,
+    "tool_wear_min": 139,
+    "rotational_speed_rpm": 2216
+   },
+   {
+    "at": "2026-06-16T20:12:00+09:00",
+    "temp_diff_k": 10.2,
+    "power_w": 6729,
+    "torque_nm": 42,
+    "tool_wear_min": 184,
+    "rotational_speed_rpm": 1530
+   },
+   {
+    "at": "2026-06-17T13:43:00+09:00",
+    "temp_diff_k": 10.1,
+    "power_w": 5613,
+    "torque_nm": 33.5,
+    "tool_wear_min": 13,
+    "rotational_speed_rpm": 1600
+   },
+   {
+    "at": "2026-06-18T07:14:00+09:00",
+    "temp_diff_k": 9.9,
+    "power_w": 6169,
+    "torque_nm": 38.3,
+    "tool_wear_min": 63,
+    "rotational_speed_rpm": 1538
+   },
+   {
+    "at": "2026-06-19T00:45:00+09:00",
+    "temp_diff_k": 9.8,
+    "power_w": 5887,
+    "torque_nm": 35.4,
+    "tool_wear_min": 114,
+    "rotational_speed_rpm": 1588
+   },
+   {
+    "at": "2026-06-19T18:17:00+09:00",
+    "temp_diff_k": 9.7,
+    "power_w": 6966,
+    "torque_nm": 45.5,
+    "tool_wear_min": 171,
+    "rotational_speed_rpm": 1462
+   }
+  ]
+ },
+ {
+  "card_id": "EC-V20",
+  "equipment_id": "M-10",
+  "occurred_at": "2026-08-17T02:07:00+09:00",
+  "symptom_group": {
+   "code": "PW",
+   "name": "출력 이탈"
+  },
+  "alarm": {
+   "sensor": "기계 출력",
+   "value": 3855,
+   "unit": "W",
+   "boundary": 4189,
+   "direction": "경계 아래"
+  },
+  "sensor_snapshot": {
+   "quality_grade": "M",
+   "air_temperature_k": 301.3,
+   "process_temperature_k": 310.0,
+   "rotational_speed_rpm": 2068.0,
+   "torque_nm": 17.8,
+   "tool_wear_min": 176.0,
+   "temp_diff_k": 8.7,
+   "power_w": 3855
+  },
+  "recent_12": [
+   {
+    "at": "2026-08-08T07:53:00+09:00",
+    "temp_diff_k": 9.2,
+    "power_w": 6156,
+    "torque_nm": 38.1,
+    "tool_wear_min": 209,
+    "rotational_speed_rpm": 1543
+   },
+   {
+    "at": "2026-08-09T01:24:00+09:00",
+    "temp_diff_k": 9.2,
+    "power_w": 5974,
+    "torque_nm": 38.7,
+    "tool_wear_min": 35,
+    "rotational_speed_rpm": 1474
+   },
+   {
+    "at": "2026-08-09T18:55:00+09:00",
+    "temp_diff_k": 9.1,
+    "power_w": 4691,
+    "torque_nm": 23.8,
+    "tool_wear_min": 84,
+    "rotational_speed_rpm": 1882
+   },
+   {
+    "at": "2026-08-10T12:27:00+09:00",
+    "temp_diff_k": 9.3,
+    "power_w": 6962,
+    "torque_nm": 43.2,
+    "tool_wear_min": 132,
+    "rotational_speed_rpm": 1539
+   },
+   {
+    "at": "2026-08-11T05:58:00+09:00",
+    "temp_diff_k": 9.3,
+    "power_w": 6957,
+    "torque_nm": 42.1,
+    "tool_wear_min": 191,
+    "rotational_speed_rpm": 1578
+   },
+   {
+    "at": "2026-08-11T23:29:00+09:00",
+    "temp_diff_k": 9.3,
+    "power_w": 6678,
+    "torque_nm": 40.8,
+    "tool_wear_min": 28,
+    "rotational_speed_rpm": 1563
+   },
+   {
+    "at": "2026-08-12T17:00:00+09:00",
+    "temp_diff_k": 9.5,
+    "power_w": 3435,
+    "torque_nm": 12.8,
+    "tool_wear_min": 81,
+    "rotational_speed_rpm": 2563
+   },
+   {
+    "at": "2026-08-13T10:31:00+09:00",
+    "temp_diff_k": 9.3,
+    "power_w": 7329,
+    "torque_nm": 51.2,
+    "tool_wear_min": 143,
+    "rotational_speed_rpm": 1367
+   },
+   {
+    "at": "2026-08-14T04:03:00+09:00",
+    "temp_diff_k": 9.2,
+    "power_w": 7323,
+    "torque_nm": 48.8,
+    "tool_wear_min": 191,
+    "rotational_speed_rpm": 1433
+   },
+   {
+    "at": "2026-08-14T21:34:00+09:00",
+    "temp_diff_k": 9.1,
+    "power_w": 6760,
+    "torque_nm": 44.4,
+    "tool_wear_min": 19,
+    "rotational_speed_rpm": 1454
+   },
+   {
+    "at": "2026-08-15T15:05:00+09:00",
+    "temp_diff_k": 8.9,
+    "power_w": 5829,
+    "torque_nm": 36.5,
+    "tool_wear_min": 71,
+    "rotational_speed_rpm": 1525
+   },
+   {
+    "at": "2026-08-16T08:36:00+09:00",
+    "temp_diff_k": 8.6,
+    "power_w": 5942,
+    "torque_nm": 35.2,
+    "tool_wear_min": 124,
+    "rotational_speed_rpm": 1612
+   }
+  ]
+ },
+ {
+  "card_id": "EC-V21",
+  "equipment_id": "M-16",
+  "occurred_at": "2026-08-19T11:56:00+09:00",
+  "symptom_group": {
+   "code": "PW",
+   "name": "출력 이탈"
+  },
+  "alarm": {
+   "sensor": "기계 출력",
+   "value": 4150,
+   "unit": "W",
+   "boundary": 4189,
+   "direction": "경계 아래"
+  },
+  "sensor_snapshot": {
+   "quality_grade": "L",
+   "air_temperature_k": 301.5,
+   "process_temperature_k": 310.6,
+   "rotational_speed_rpm": 1962.0,
+   "torque_nm": 20.2,
+   "tool_wear_min": 124.0,
+   "temp_diff_k": 9.1,
+   "power_w": 4150
+  },
+  "recent_12": [
+   {
+    "at": "2026-08-10T17:42:00+09:00",
+    "temp_diff_k": 9.2,
+    "power_w": 5412,
+    "torque_nm": 32.1,
+    "tool_wear_min": 150,
+    "rotational_speed_rpm": 1610
+   },
+   {
+    "at": "2026-08-11T11:13:00+09:00",
+    "temp_diff_k": 9.3,
+    "power_w": 6205,
+    "torque_nm": 39.9,
+    "tool_wear_min": 207,
+    "rotational_speed_rpm": 1485
+   },
+   {
+    "at": "2026-08-12T04:44:00+09:00",
+    "temp_diff_k": 9.4,
+    "power_w": 5604,
+    "torque_nm": 35.7,
+    "tool_wear_min": 46,
+    "rotational_speed_rpm": 1499
+   },
+   {
+    "at": "2026-08-12T22:16:00+09:00",
+    "temp_diff_k": 9.4,
+    "power_w": 4940,
+    "torque_nm": 26.5,
+    "tool_wear_min": 101,
+    "rotational_speed_rpm": 1780
+   },
+   {
+    "at": "2026-08-13T15:47:00+09:00",
+    "temp_diff_k": 9.3,
+    "power_w": 6076,
+    "torque_nm": 37.7,
+    "tool_wear_min": 156,
+    "rotational_speed_rpm": 1539
+   },
+   {
+    "at": "2026-08-14T09:18:00+09:00",
+    "temp_diff_k": 9.2,
+    "power_w": 7441,
+    "torque_nm": 48.8,
+    "tool_wear_min": 205,
+    "rotational_speed_rpm": 1456
+   },
+   {
+    "at": "2026-08-15T02:49:00+09:00",
+    "temp_diff_k": 8.9,
+    "power_w": 5571,
+    "torque_nm": 33,
+    "tool_wear_min": 34,
+    "rotational_speed_rpm": 1612
+   },
+   {
+    "at": "2026-08-15T20:20:00+09:00",
+    "temp_diff_k": 8.8,
+    "power_w": 7057,
+    "torque_nm": 46,
+    "tool_wear_min": 89,
+    "rotational_speed_rpm": 1465
+   },
+   {
+    "at": "2026-08-16T13:52:00+09:00",
+    "temp_diff_k": 8.7,
+    "power_w": 6457,
+    "torque_nm": 42,
+    "tool_wear_min": 141,
+    "rotational_speed_rpm": 1468
+   },
+   {
+    "at": "2026-08-17T07:23:00+09:00",
+    "temp_diff_k": 8.8,
+    "power_w": 7548,
+    "torque_nm": 56.8,
+    "tool_wear_min": 195,
+    "rotational_speed_rpm": 1269
+   },
+   {
+    "at": "2026-08-18T00:54:00+09:00",
+    "temp_diff_k": 8.8,
+    "power_w": 6371,
+    "torque_nm": 37.6,
+    "tool_wear_min": 32,
+    "rotational_speed_rpm": 1618
+   },
+   {
+    "at": "2026-08-18T18:25:00+09:00",
+    "temp_diff_k": 9.1,
+    "power_w": 8143,
+    "torque_nm": 54.3,
+    "tool_wear_min": 81,
+    "rotational_speed_rpm": 1432
+   }
+  ]
+ },
+ {
+  "card_id": "EC-V22",
+  "equipment_id": "M-12",
+  "occurred_at": "2026-10-10T04:21:00+09:00",
+  "symptom_group": {
+   "code": "CL",
+   "name": "온도 차 저하"
+  },
+  "alarm": {
+   "sensor": "온도 차",
+   "value": 8,
+   "unit": "K",
+   "boundary": 8.2,
+   "direction": "경계 아래"
+  },
+  "sensor_snapshot": {
+   "quality_grade": "L",
+   "air_temperature_k": 303.3,
+   "process_temperature_k": 311.3,
+   "rotational_speed_rpm": 1592.0,
+   "torque_nm": 33.7,
+   "tool_wear_min": 14.0,
+   "temp_diff_k": 8.0,
+   "power_w": 5618
+  },
+  "recent_12": [
+   {
+    "at": "2026-10-01T10:07:00+09:00",
+    "temp_diff_k": 7.8,
+    "power_w": 4866,
+    "torque_nm": 28.3,
+    "tool_wear_min": 88,
+    "rotational_speed_rpm": 1642
+   },
+   {
+    "at": "2026-10-02T03:38:00+09:00",
+    "temp_diff_k": 8,
+    "power_w": 4338,
+    "torque_nm": 21.6,
+    "tool_wear_min": 131,
+    "rotational_speed_rpm": 1918
+   },
+   {
+    "at": "2026-10-02T21:09:00+09:00",
+    "temp_diff_k": 7.9,
+    "power_w": 5414,
+    "torque_nm": 32.7,
+    "tool_wear_min": 181,
+    "rotational_speed_rpm": 1581
+   },
+   {
+    "at": "2026-10-03T14:41:00+09:00",
+    "temp_diff_k": 8,
+    "power_w": 8447,
+    "torque_nm": 57.7,
+    "tool_wear_min": 19,
+    "rotational_speed_rpm": 1398
+   },
+   {
+    "at": "2026-10-04T08:12:00+09:00",
+    "temp_diff_k": 8.3,
+    "power_w": 6314,
+    "torque_nm": 36.9,
+    "tool_wear_min": 71,
+    "rotational_speed_rpm": 1634
+   },
+   {
+    "at": "2026-10-05T01:43:00+09:00",
+    "temp_diff_k": 8,
+    "power_w": 6153,
+    "torque_nm": 41.7,
+    "tool_wear_min": 120,
+    "rotational_speed_rpm": 1409
+   },
+   {
+    "at": "2026-10-05T19:14:00+09:00",
+    "temp_diff_k": 8.1,
+    "power_w": 5961,
+    "torque_nm": 37.3,
+    "tool_wear_min": 176,
+    "rotational_speed_rpm": 1526
+   },
+   {
+    "at": "2026-10-06T12:45:00+09:00",
+    "temp_diff_k": 8.2,
+    "power_w": 7079,
+    "torque_nm": 54.6,
+    "tool_wear_min": 226,
+    "rotational_speed_rpm": 1238
+   },
+   {
+    "at": "2026-10-07T06:17:00+09:00",
+    "temp_diff_k": 7.9,
+    "power_w": 5335,
+    "torque_nm": 31.7,
+    "tool_wear_min": 34,
+    "rotational_speed_rpm": 1607
+   },
+   {
+    "at": "2026-10-07T23:48:00+09:00",
+    "temp_diff_k": 8.2,
+    "power_w": 5202,
+    "torque_nm": 31.7,
+    "tool_wear_min": 97,
+    "rotational_speed_rpm": 1567
+   },
+   {
+    "at": "2026-10-08T17:19:00+09:00",
+    "temp_diff_k": 8.2,
+    "power_w": 8548,
+    "torque_nm": 66.8,
+    "tool_wear_min": 148,
+    "rotational_speed_rpm": 1222
+   },
+   {
+    "at": "2026-10-09T10:50:00+09:00",
+    "temp_diff_k": 8.4,
+    "power_w": 6220,
+    "torque_nm": 42.7,
+    "tool_wear_min": 197,
+    "rotational_speed_rpm": 1391
+   }
+  ]
+ },
+ {
+  "card_id": "EC-V23",
+  "equipment_id": "M-14",
+  "occurred_at": "2026-10-10T06:06:00+09:00",
+  "symptom_group": {
+   "code": "CL",
+   "name": "온도 차 저하"
+  },
+  "alarm": {
+   "sensor": "온도 차",
+   "value": 8,
+   "unit": "K",
+   "boundary": 8.2,
+   "direction": "경계 아래"
+  },
+  "sensor_snapshot": {
+   "quality_grade": "L",
+   "air_temperature_k": 303.3,
+   "process_temperature_k": 311.3,
+   "rotational_speed_rpm": 1393.0,
+   "torque_nm": 47.4,
+   "tool_wear_min": 18.0,
+   "temp_diff_k": 8.0,
+   "power_w": 6914
+  },
+  "recent_12": [
+   {
+    "at": "2026-10-01T11:52:00+09:00",
+    "temp_diff_k": 7.7,
+    "power_w": 5444,
+    "torque_nm": 31.6,
+    "tool_wear_min": 93,
+    "rotational_speed_rpm": 1645
+   },
+   {
+    "at": "2026-10-02T05:23:00+09:00",
+    "temp_diff_k": 8,
+    "power_w": 6204,
+    "torque_nm": 38.8,
+    "tool_wear_min": 136,
+    "rotational_speed_rpm": 1527
+   },
+   {
+    "at": "2026-10-02T22:54:00+09:00",
+    "temp_diff_k": 7.9,
+    "power_w": 7784,
+    "torque_nm": 55.1,
+    "tool_wear_min": 187,
+    "rotational_speed_rpm": 1349
+   },
+   {
+    "at": "2026-10-03T16:26:00+09:00",
+    "temp_diff_k": 8,
+    "power_w": 6271,
+    "torque_nm": 39.5,
+    "tool_wear_min": 23,
+    "rotational_speed_rpm": 1516
+   },
+   {
+    "at": "2026-10-04T09:57:00+09:00",
+    "temp_diff_k": 8.3,
+    "power_w": 5243,
+    "torque_nm": 32.3,
+    "tool_wear_min": 76,
+    "rotational_speed_rpm": 1550
+   },
+   {
+    "at": "2026-10-05T03:28:00+09:00",
+    "temp_diff_k": 8.1,
+    "power_w": 4689,
+    "torque_nm": 24.6,
+    "tool_wear_min": 128,
+    "rotational_speed_rpm": 1820
+   },
+   {
+    "at": "2026-10-05T20:59:00+09:00",
+    "temp_diff_k": 8.1,
+    "power_w": 5952,
+    "torque_nm": 39.8,
+    "tool_wear_min": 181,
+    "rotational_speed_rpm": 1428
+   },
+   {
+    "at": "2026-10-06T14:30:00+09:00",
+    "temp_diff_k": 8.2,
+    "power_w": 6532,
+    "torque_nm": 41.2,
+    "tool_wear_min": 230,
+    "rotational_speed_rpm": 1514
+   },
+   {
+    "at": "2026-10-07T08:02:00+09:00",
+    "temp_diff_k": 8,
+    "power_w": 7560,
+    "torque_nm": 46.1,
+    "tool_wear_min": 41,
+    "rotational_speed_rpm": 1566
+   },
+   {
+    "at": "2026-10-08T01:33:00+09:00",
+    "temp_diff_k": 8.2,
+    "power_w": 6667,
+    "torque_nm": 44.8,
+    "tool_wear_min": 101,
+    "rotational_speed_rpm": 1421
+   },
+   {
+    "at": "2026-10-08T19:04:00+09:00",
+    "temp_diff_k": 8.2,
+    "power_w": 5443,
+    "torque_nm": 33.3,
+    "tool_wear_min": 153,
+    "rotational_speed_rpm": 1561
+   },
+   {
+    "at": "2026-10-09T12:35:00+09:00",
+    "temp_diff_k": 8.5,
+    "power_w": 5860,
+    "torque_nm": 31.6,
+    "tool_wear_min": 202,
+    "rotational_speed_rpm": 1771
+   }
+  ]
+ },
+ {
+  "card_id": "EC-V24",
+  "equipment_id": "M-16",
+  "occurred_at": "2026-10-10T07:52:00+09:00",
+  "symptom_group": {
+   "code": "CL",
+   "name": "온도 차 저하"
+  },
+  "alarm": {
+   "sensor": "온도 차",
+   "value": 8,
+   "unit": "K",
+   "boundary": 8.2,
+   "direction": "경계 아래"
+  },
+  "sensor_snapshot": {
+   "quality_grade": "L",
+   "air_temperature_k": 303.2,
+   "process_temperature_k": 311.2,
+   "rotational_speed_rpm": 1427.0,
+   "torque_nm": 45.6,
+   "tool_wear_min": 25.0,
+   "temp_diff_k": 8.0,
+   "power_w": 6814
+  },
+  "recent_12": [
+   {
+    "at": "2026-10-01T13:37:00+09:00",
+    "temp_diff_k": 7.7,
+    "power_w": 5826,
+    "torque_nm": 36.6,
+    "tool_wear_min": 97,
+    "rotational_speed_rpm": 1520
+   },
+   {
+    "at": "2026-10-02T07:08:00+09:00",
+    "temp_diff_k": 8,
+    "power_w": 6132,
+    "torque_nm": 38.5,
+    "tool_wear_min": 142,
+    "rotational_speed_rpm": 1521
+   },
+   {
+    "at": "2026-10-03T00:40:00+09:00",
+    "temp_diff_k": 7.9,
+    "power_w": 6465,
+    "torque_nm": 43.2,
+    "tool_wear_min": 191,
+    "rotational_speed_rpm": 1429
+   },
+   {
+    "at": "2026-10-03T18:11:00+09:00",
+    "temp_diff_k": 8,
+    "power_w": 7414,
+    "torque_nm": 50.5,
+    "tool_wear_min": 30,
+    "rotational_speed_rpm": 1402
+   },
+   {
+    "at": "2026-10-04T11:42:00+09:00",
+    "temp_diff_k": 8.2,
+    "power_w": 7056,
+    "torque_nm": 48.3,
+    "tool_wear_min": 80,
+    "rotational_speed_rpm": 1395
+   },
+   {
+    "at": "2026-10-05T05:13:00+09:00",
+    "temp_diff_k": 8.2,
+    "power_w": 7381,
+    "torque_nm": 45.3,
+    "tool_wear_min": 135,
+    "rotational_speed_rpm": 1556
+   },
+   {
+    "at": "2026-10-05T22:44:00+09:00",
+    "temp_diff_k": 8.2,
+    "power_w": 5193,
+    "torque_nm": 29.8,
+    "tool_wear_min": 186,
+    "rotational_speed_rpm": 1664
+   },
+   {
+    "at": "2026-10-06T16:16:00+09:00",
+    "temp_diff_k": 8.1,
+    "power_w": 7211,
+    "torque_nm": 46,
+    "tool_wear_min": 234,
+    "rotational_speed_rpm": 1497
+   },
+   {
+    "at": "2026-10-07T09:47:00+09:00",
+    "temp_diff_k": 8.2,
+    "power_w": 6014,
+    "torque_nm": 36.6,
+    "tool_wear_min": 47,
+    "rotational_speed_rpm": 1569
+   },
+   {
+    "at": "2026-10-08T03:18:00+09:00",
+    "temp_diff_k": 8.1,
+    "power_w": 5594,
+    "torque_nm": 34.2,
+    "tool_wear_min": 107,
+    "rotational_speed_rpm": 1562
+   },
+   {
+    "at": "2026-10-08T20:49:00+09:00",
+    "temp_diff_k": 8.2,
+    "power_w": 4575,
+    "torque_nm": 22.3,
+    "tool_wear_min": 157,
+    "rotational_speed_rpm": 1959
+   },
+   {
+    "at": "2026-10-09T14:20:00+09:00",
+    "temp_diff_k": 8.4,
+    "power_w": 4088,
+    "torque_nm": 18.3,
+    "tool_wear_min": 207,
+    "rotational_speed_rpm": 2133
+   }
+  ]
+ },
+ {
+  "card_id": "EC-V25",
+  "equipment_id": "M-18",
+  "occurred_at": "2026-10-10T09:37:00+09:00",
+  "symptom_group": {
+   "code": "CL",
+   "name": "온도 차 저하"
+  },
+  "alarm": {
+   "sensor": "온도 차",
+   "value": 8,
+   "unit": "K",
+   "boundary": 8.2,
+   "direction": "경계 아래"
+  },
+  "sensor_snapshot": {
+   "quality_grade": "L",
+   "air_temperature_k": 303.2,
+   "process_temperature_k": 311.2,
+   "rotational_speed_rpm": 1363.0,
+   "torque_nm": 46.7,
+   "tool_wear_min": 29.0,
+   "temp_diff_k": 8.0,
+   "power_w": 6666
+  },
+  "recent_12": [
+   {
+    "at": "2026-10-01T15:22:00+09:00",
+    "temp_diff_k": 7.6,
+    "power_w": 6959,
+    "torque_nm": 46.6,
+    "tool_wear_min": 102,
+    "rotational_speed_rpm": 1426
+   },
+   {
+    "at": "2026-10-02T08:54:00+09:00",
+    "temp_diff_k": 8,
+    "power_w": 6234,
+    "torque_nm": 39.5,
+    "tool_wear_min": 147,
+    "rotational_speed_rpm": 1507
+   },
+   {
+    "at": "2026-10-03T02:25:00+09:00",
+    "temp_diff_k": 7.9,
+    "power_w": 5886,
+    "torque_nm": 37.2,
+    "tool_wear_min": 197,
+    "rotational_speed_rpm": 1511
+   },
+   {
+    "at": "2026-10-03T19:56:00+09:00",
+    "temp_diff_k": 8.1,
+    "power_w": 5878,
+    "torque_nm": 36.1,
+    "tool_wear_min": 35,
+    "rotational_speed_rpm": 1555
+   },
+   {
+    "at": "2026-10-04T13:27:00+09:00",
+    "temp_diff_k": 8.2,
+    "power_w": 6306,
+    "torque_nm": 38.5,
+    "tool_wear_min": 85,
+    "rotational_speed_rpm": 1564
+   },
+   {
+    "at": "2026-10-05T06:58:00+09:00",
+    "temp_diff_k": 8.2,
+    "power_w": 6045,
+    "torque_nm": 38,
+    "tool_wear_min": 139,
+    "rotational_speed_rpm": 1519
+   },
+   {
+    "at": "2026-10-06T00:30:00+09:00",
+    "temp_diff_k": 8.1,
+    "power_w": 6138,
+    "torque_nm": 36.7,
+    "tool_wear_min": 191,
+    "rotational_speed_rpm": 1597
+   },
+   {
+    "at": "2026-10-06T18:01:00+09:00",
+    "temp_diff_k": 8.1,
+    "power_w": 5548,
+    "torque_nm": 32.5,
+    "tool_wear_min": 2,
+    "rotational_speed_rpm": 1630
+   },
+   {
+    "at": "2026-10-07T11:32:00+09:00",
+    "temp_diff_k": 8.1,
+    "power_w": 4943,
+    "torque_nm": 27.9,
+    "tool_wear_min": 55,
+    "rotational_speed_rpm": 1692
+   },
+   {
+    "at": "2026-10-08T05:03:00+09:00",
+    "temp_diff_k": 8.1,
+    "power_w": 6292,
+    "torque_nm": 38.1,
+    "tool_wear_min": 112,
+    "rotational_speed_rpm": 1577
+   },
+   {
+    "at": "2026-10-08T22:34:00+09:00",
+    "temp_diff_k": 8.3,
+    "power_w": 4844,
+    "torque_nm": 25.8,
+    "tool_wear_min": 161,
+    "rotational_speed_rpm": 1793
+   },
+   {
+    "at": "2026-10-09T16:06:00+09:00",
+    "temp_diff_k": 8.3,
+    "power_w": 6935,
+    "torque_nm": 47.1,
+    "tool_wear_min": 213,
+    "rotational_speed_rpm": 1406
+   }
+  ]
+ },
+ {
+  "card_id": "EC-V26",
+  "equipment_id": "M-20",
+  "occurred_at": "2026-10-10T11:22:00+09:00",
+  "symptom_group": {
+   "code": "CL",
+   "name": "온도 차 저하"
+  },
+  "alarm": {
+   "sensor": "온도 차",
+   "value": 8,
+   "unit": "K",
+   "boundary": 8.2,
+   "direction": "경계 아래"
+  },
+  "sensor_snapshot": {
+   "quality_grade": "M",
+   "air_temperature_k": 303.2,
+   "process_temperature_k": 311.2,
+   "rotational_speed_rpm": 1688.0,
+   "torque_nm": 31.9,
+   "tool_wear_min": 33.0,
+   "temp_diff_k": 8.0,
+   "power_w": 5639
+  },
+  "recent_12": [
+   {
+    "at": "2026-10-01T17:07:00+09:00",
+    "temp_diff_k": 7.8,
+    "power_w": 8795,
+    "torque_nm": 62.4,
+    "tool_wear_min": 106,
+    "rotational_speed_rpm": 1346
+   },
+   {
+    "at": "2026-10-02T10:39:00+09:00",
+    "temp_diff_k": 7.9,
+    "power_w": 6540,
+    "torque_nm": 42,
+    "tool_wear_min": 152,
+    "rotational_speed_rpm": 1487
+   },
+   {
+    "at": "2026-10-03T04:10:00+09:00",
+    "temp_diff_k": 8,
+    "power_w": 6344,
+    "torque_nm": 40.2,
+    "tool_wear_min": 201,
+    "rotational_speed_rpm": 1507
+   },
+   {
+    "at": "2026-10-03T21:41:00+09:00",
+    "temp_diff_k": 8.1,
+    "power_w": 7172,
+    "torque_nm": 52.2,
+    "tool_wear_min": 40,
+    "rotational_speed_rpm": 1312
+   },
+   {
+    "at": "2026-10-04T15:12:00+09:00",
+    "temp_diff_k": 8.3,
+    "power_w": 5504,
+    "torque_nm": 36.1,
+    "tool_wear_min": 89,
+    "rotational_speed_rpm": 1456
+   },
+   {
+    "at": "2026-10-05T08:43:00+09:00",
+    "temp_diff_k": 8.1,
+    "power_w": 6613,
+    "torque_nm": 45.3,
+    "tool_wear_min": 144,
+    "rotational_speed_rpm": 1394
+   },
+   {
+    "at": "2026-10-06T02:15:00+09:00",
+    "temp_diff_k": 8.3,
+    "power_w": 4364,
+    "torque_nm": 23.8,
+    "tool_wear_min": 196,
+    "rotational_speed_rpm": 1751
+   },
+   {
+    "at": "2026-10-06T19:46:00+09:00",
+    "temp_diff_k": 8.1,
+    "power_w": 5296,
+    "torque_nm": 30.5,
+    "tool_wear_min": 7,
+    "rotational_speed_rpm": 1658
+   },
+   {
+    "at": "2026-10-07T13:17:00+09:00",
+    "temp_diff_k": 8.2,
+    "power_w": 5985,
+    "torque_nm": 35.5,
+    "tool_wear_min": 63,
+    "rotational_speed_rpm": 1610
+   },
+   {
+    "at": "2026-10-08T06:48:00+09:00",
+    "temp_diff_k": 8.1,
+    "power_w": 6678,
+    "torque_nm": 43,
+    "tool_wear_min": 117,
+    "rotational_speed_rpm": 1483
+   },
+   {
+    "at": "2026-10-09T00:19:00+09:00",
+    "temp_diff_k": 8.3,
+    "power_w": 5641,
+    "torque_nm": 32.2,
+    "tool_wear_min": 166,
+    "rotational_speed_rpm": 1673
+   },
+   {
+    "at": "2026-10-09T17:51:00+09:00",
+    "temp_diff_k": 8.4,
+    "power_w": 5606,
+    "torque_nm": 35.5,
+    "tool_wear_min": 217,
+    "rotational_speed_rpm": 1508
+   }
+  ]
+ },
+ {
+  "card_id": "EC-V27",
+  "equipment_id": "M-02",
+  "occurred_at": "2026-10-10T13:07:00+09:00",
+  "symptom_group": {
+   "code": "CL",
+   "name": "온도 차 저하"
+  },
+  "alarm": {
+   "sensor": "온도 차",
+   "value": 8,
+   "unit": "K",
+   "boundary": 8.2,
+   "direction": "경계 아래"
+  },
+  "sensor_snapshot": {
+   "quality_grade": "H",
+   "air_temperature_k": 303.3,
+   "process_temperature_k": 311.3,
+   "rotational_speed_rpm": 1502.0,
+   "torque_nm": 39.5,
+   "tool_wear_min": 38.0,
+   "temp_diff_k": 8.0,
+   "power_w": 6213
+  },
+  "recent_12": [
+   {
+    "at": "2026-10-01T18:53:00+09:00",
+    "temp_diff_k": 7.8,
+    "power_w": 7314,
+    "torque_nm": 49.5,
+    "tool_wear_min": 110,
+    "rotational_speed_rpm": 1411
+   },
+   {
+    "at": "2026-10-02T12:24:00+09:00",
+    "temp_diff_k": 7.9,
+    "power_w": 6239,
+    "torque_nm": 41.9,
+    "tool_wear_min": 156,
+    "rotational_speed_rpm": 1422
+   },
+   {
+    "at": "2026-10-03T05:55:00+09:00",
+    "temp_diff_k": 7.8,
+    "power_w": 4469,
+    "torque_nm": 22.7,
+    "tool_wear_min": 207,
+    "rotational_speed_rpm": 1880
+   },
+   {
+    "at": "2026-10-03T23:26:00+09:00",
+    "temp_diff_k": 8.1,
+    "power_w": 5947,
+    "torque_nm": 36.5,
+    "tool_wear_min": 44,
+    "rotational_speed_rpm": 1556
+   },
+   {
+    "at": "2026-10-04T16:57:00+09:00",
+    "temp_diff_k": 8.2,
+    "power_w": 5520,
+    "torque_nm": 33.9,
+    "tool_wear_min": 96,
+    "rotational_speed_rpm": 1555
+   },
+   {
+    "at": "2026-10-05T10:29:00+09:00",
+    "temp_diff_k": 8.3,
+    "power_w": 3791,
+    "torque_nm": 16.5,
+    "tool_wear_min": 148,
+    "rotational_speed_rpm": 2194
+   },
+   {
+    "at": "2026-10-06T04:00:00+09:00",
+    "temp_diff_k": 8.3,
+    "power_w": 7479,
+    "torque_nm": 53.7,
+    "tool_wear_min": 200,
+    "rotational_speed_rpm": 1330
+   },
+   {
+    "at": "2026-10-06T21:31:00+09:00",
+    "temp_diff_k": 8.1,
+    "power_w": 8044,
+    "torque_nm": 52.9,
+    "tool_wear_min": 11,
+    "rotational_speed_rpm": 1452
+   },
+   {
+    "at": "2026-10-07T15:02:00+09:00",
+    "temp_diff_k": 8.2,
+    "power_w": 8221,
+    "torque_nm": 55.6,
+    "tool_wear_min": 67,
+    "rotational_speed_rpm": 1412
+   },
+   {
+    "at": "2026-10-08T08:33:00+09:00",
+    "temp_diff_k": 8,
+    "power_w": 4978,
+    "torque_nm": 29.6,
+    "tool_wear_min": 122,
+    "rotational_speed_rpm": 1606
+   },
+   {
+    "at": "2026-10-09T02:05:00+09:00",
+    "temp_diff_k": 8.4,
+    "power_w": 5880,
+    "torque_nm": 35.9,
+    "tool_wear_min": 171,
+    "rotational_speed_rpm": 1564
+   },
+   {
+    "at": "2026-10-09T19:36:00+09:00",
+    "temp_diff_k": 8.4,
+    "power_w": 6205,
+    "torque_nm": 38.5,
+    "tool_wear_min": 221,
+    "rotational_speed_rpm": 1539
+   }
+  ]
+ },
+ {
+  "card_id": "EC-V28",
+  "equipment_id": "M-09",
+  "occurred_at": "2026-10-10T19:15:00+09:00",
+  "symptom_group": {
+   "code": "CL",
+   "name": "온도 차 저하"
+  },
+  "alarm": {
+   "sensor": "온도 차",
+   "value": 8.1,
+   "unit": "K",
+   "boundary": 8.2,
+   "direction": "경계 아래"
+  },
+  "sensor_snapshot": {
+   "quality_grade": "L",
+   "air_temperature_k": 303.5,
+   "process_temperature_k": 311.6,
+   "rotational_speed_rpm": 1361.0,
+   "torque_nm": 46.5,
+   "tool_wear_min": 62.0,
+   "temp_diff_k": 8.1,
+   "power_w": 6627
+  },
+  "recent_12": [
+   {
+    "at": "2026-10-02T01:00:00+09:00",
+    "temp_diff_k": 8,
+    "power_w": 5182,
+    "torque_nm": 29.7,
+    "tool_wear_min": 125,
+    "rotational_speed_rpm": 1666
+   },
+   {
+    "at": "2026-10-02T18:32:00+09:00",
+    "temp_diff_k": 7.8,
+    "power_w": 5435,
+    "torque_nm": 32.6,
+    "tool_wear_min": 174,
+    "rotational_speed_rpm": 1592
+   },
+   {
+    "at": "2026-10-03T12:03:00+09:00",
+    "temp_diff_k": 8,
+    "power_w": 6558,
+    "torque_nm": 43.7,
+    "tool_wear_min": 13,
+    "rotational_speed_rpm": 1433
+   },
+   {
+    "at": "2026-10-04T05:34:00+09:00",
+    "temp_diff_k": 8.2,
+    "power_w": 6935,
+    "torque_nm": 48.2,
+    "tool_wear_min": 65,
+    "rotational_speed_rpm": 1374
+   },
+   {
+    "at": "2026-10-04T23:05:00+09:00",
+    "temp_diff_k": 8,
+    "power_w": 8298,
+    "torque_nm": 55.8,
+    "tool_wear_min": 113,
+    "rotational_speed_rpm": 1420
+   },
+   {
+    "at": "2026-10-05T16:36:00+09:00",
+    "temp_diff_k": 8.2,
+    "power_w": 4241,
+    "torque_nm": 19.7,
+    "tool_wear_min": 167,
+    "rotational_speed_rpm": 2056
+   },
+   {
+    "at": "2026-10-06T10:08:00+09:00",
+    "temp_diff_k": 8.2,
+    "power_w": 5518,
+    "torque_nm": 31.8,
+    "tool_wear_min": 217,
+    "rotational_speed_rpm": 1657
+   },
+   {
+    "at": "2026-10-07T03:39:00+09:00",
+    "temp_diff_k": 8.1,
+    "power_w": 6939,
+    "torque_nm": 44.5,
+    "tool_wear_min": 27,
+    "rotational_speed_rpm": 1489
+   },
+   {
+    "at": "2026-10-07T21:10:00+09:00",
+    "temp_diff_k": 8.2,
+    "power_w": 5449,
+    "torque_nm": 30.7,
+    "tool_wear_min": 90,
+    "rotational_speed_rpm": 1695
+   },
+   {
+    "at": "2026-10-08T14:41:00+09:00",
+    "temp_diff_k": 8.1,
+    "power_w": 6909,
+    "torque_nm": 46.2,
+    "tool_wear_min": 139,
+    "rotational_speed_rpm": 1428
+   },
+   {
+    "at": "2026-10-09T08:12:00+09:00",
+    "temp_diff_k": 8.3,
+    "power_w": 6176,
+    "torque_nm": 34.9,
+    "tool_wear_min": 189,
+    "rotational_speed_rpm": 1690
+   },
+   {
+    "at": "2026-10-10T01:44:00+09:00",
+    "temp_diff_k": 8.2,
+    "power_w": 7611,
+    "torque_nm": 53.8,
+    "tool_wear_min": 8,
+    "rotational_speed_rpm": 1351
+   }
+  ]
+ },
+ {
+  "card_id": "EC-V29",
+  "equipment_id": "M-20",
+  "occurred_at": "2026-10-29T10:53:00+09:00",
+  "symptom_group": {
+   "code": "PW",
+   "name": "출력 이탈"
+  },
+  "alarm": {
+   "sensor": "기계 출력",
+   "value": 8599,
+   "unit": "W",
+   "boundary": 8403,
+   "direction": "경계 위"
+  },
+  "sensor_snapshot": {
+   "quality_grade": "L",
+   "air_temperature_k": 303.5,
+   "process_temperature_k": 312.9,
+   "rotational_speed_rpm": 1275.0,
+   "torque_nm": 64.4,
+   "tool_wear_min": 113.0,
+   "temp_diff_k": 9.4,
+   "power_w": 8599
+  },
+  "recent_12": [
+   {
+    "at": "2026-10-20T16:39:00+09:00",
+    "temp_diff_k": 9.2,
+    "power_w": 7268,
+    "torque_nm": 48.3,
+    "tool_wear_min": 110,
+    "rotational_speed_rpm": 1437
+   },
+   {
+    "at": "2026-10-21T10:10:00+09:00",
+    "temp_diff_k": 9,
+    "power_w": 5415,
+    "torque_nm": 30.4,
+    "tool_wear_min": 171,
+    "rotational_speed_rpm": 1701
+   },
+   {
+    "at": "2026-10-22T03:41:00+09:00",
+    "temp_diff_k": 8.9,
+    "power_w": 5237,
+    "torque_nm": 31.1,
+    "tool_wear_min": 20,
+    "rotational_speed_rpm": 1608
+   },
+   {
+    "at": "2026-10-22T21:12:00+09:00",
+    "temp_diff_k": 9.3,
+    "power_w": 6691,
+    "torque_nm": 40.7,
+    "tool_wear_min": 74,
+    "rotational_speed_rpm": 1570
+   },
+   {
+    "at": "2026-10-23T14:43:00+09:00",
+    "temp_diff_k": 9.5,
+    "power_w": 4752,
+    "torque_nm": 26.2,
+    "tool_wear_min": 126,
+    "rotational_speed_rpm": 1732
+   },
+   {
+    "at": "2026-10-24T08:15:00+09:00",
+    "temp_diff_k": 9.1,
+    "power_w": 6236,
+    "torque_nm": 35.7,
+    "tool_wear_min": 180,
+    "rotational_speed_rpm": 1668
+   },
+   {
+    "at": "2026-10-25T01:46:00+09:00",
+    "temp_diff_k": 9.2,
+    "power_w": 4962,
+    "torque_nm": 29.8,
+    "tool_wear_min": 17,
+    "rotational_speed_rpm": 1590
+   },
+   {
+    "at": "2026-10-25T19:17:00+09:00",
+    "temp_diff_k": 9.2,
+    "power_w": 5951,
+    "torque_nm": 38.4,
+    "tool_wear_min": 72,
+    "rotational_speed_rpm": 1480
+   },
+   {
+    "at": "2026-10-26T12:48:00+09:00",
+    "temp_diff_k": 9.1,
+    "power_w": 7299,
+    "torque_nm": 48,
+    "tool_wear_min": 126,
+    "rotational_speed_rpm": 1452
+   },
+   {
+    "at": "2026-10-27T06:19:00+09:00",
+    "temp_diff_k": 8.9,
+    "power_w": 6525,
+    "torque_nm": 42.5,
+    "tool_wear_min": 183,
+    "rotational_speed_rpm": 1466
+   },
+   {
+    "at": "2026-10-27T23:51:00+09:00",
+    "temp_diff_k": 9.3,
+    "power_w": 4123,
+    "torque_nm": 18.6,
+    "tool_wear_min": 22,
+    "rotational_speed_rpm": 2117
+   },
+   {
+    "at": "2026-10-28T17:22:00+09:00",
+    "temp_diff_k": 9.4,
+    "power_w": 7379,
+    "torque_nm": 52.9,
+    "tool_wear_min": 66,
+    "rotational_speed_rpm": 1332
+   }
+  ]
+ },
+ {
+  "card_id": "EC-V30",
+  "equipment_id": "M-19",
+  "occurred_at": "2026-11-04T23:41:00+09:00",
+  "symptom_group": {
+   "code": "PW",
+   "name": "출력 이탈"
+  },
+  "alarm": {
+   "sensor": "기계 출력",
+   "value": 3683,
+   "unit": "W",
+   "boundary": 4189,
+   "direction": "경계 아래"
+  },
+  "sensor_snapshot": {
+   "quality_grade": "L",
+   "air_temperature_k": 303.1,
+   "process_temperature_k": 312.8,
+   "rotational_speed_rpm": 2329.0,
+   "torque_nm": 15.1,
+   "tool_wear_min": 113.0,
+   "temp_diff_k": 9.7,
+   "power_w": 3683
+  },
+  "recent_12": [
+   {
+    "at": "2026-10-27T05:27:00+09:00",
+    "temp_diff_k": 8.9,
+    "power_w": 6076,
+    "torque_nm": 38.5,
+    "tool_wear_min": 180,
+    "rotational_speed_rpm": 1507
+   },
+   {
+    "at": "2026-10-27T22:58:00+09:00",
+    "temp_diff_k": 9.2,
+    "power_w": 5005,
+    "torque_nm": 26.7,
+    "tool_wear_min": 17,
+    "rotational_speed_rpm": 1790
+   },
+   {
+    "at": "2026-10-28T16:29:00+09:00",
+    "temp_diff_k": 9.5,
+    "power_w": 5942,
+    "torque_nm": 39.9,
+    "tool_wear_min": 63,
+    "rotational_speed_rpm": 1422
+   },
+   {
+    "at": "2026-10-29T10:00:00+09:00",
+    "temp_diff_k": 9.4,
+    "power_w": 7056,
+    "torque_nm": 44.8,
+    "tool_wear_min": 111,
+    "rotational_speed_rpm": 1504
+   },
+   {
+    "at": "2026-10-30T03:32:00+09:00",
+    "temp_diff_k": 9.4,
+    "power_w": 5413,
+    "torque_nm": 34.3,
+    "tool_wear_min": 161,
+    "rotational_speed_rpm": 1507
+   },
+   {
+    "at": "2026-10-30T21:03:00+09:00",
+    "temp_diff_k": 9.3,
+    "power_w": 7148,
+    "torque_nm": 48,
+    "tool_wear_min": 215,
+    "rotational_speed_rpm": 1422
+   },
+   {
+    "at": "2026-10-31T14:34:00+09:00",
+    "temp_diff_k": 9.3,
+    "power_w": 6937,
+    "torque_nm": 45.5,
+    "tool_wear_min": 51,
+    "rotational_speed_rpm": 1456
+   },
+   {
+    "at": "2026-11-01T08:05:00+09:00",
+    "temp_diff_k": 9.4,
+    "power_w": 5778,
+    "torque_nm": 33.6,
+    "tool_wear_min": 104,
+    "rotational_speed_rpm": 1642
+   },
+   {
+    "at": "2026-11-02T01:36:00+09:00",
+    "temp_diff_k": 9.5,
+    "power_w": 5981,
+    "torque_nm": 37.9,
+    "tool_wear_min": 163,
+    "rotational_speed_rpm": 1507
+   },
+   {
+    "at": "2026-11-02T19:08:00+09:00",
+    "temp_diff_k": 9.5,
+    "power_w": 7024,
+    "torque_nm": 49.1,
+    "tool_wear_min": 221,
+    "rotational_speed_rpm": 1366
+   },
+   {
+    "at": "2026-11-03T12:39:00+09:00",
+    "temp_diff_k": 9.7,
+    "power_w": 6633,
+    "torque_nm": 44.2,
+    "tool_wear_min": 17,
+    "rotational_speed_rpm": 1433
+   },
+   {
+    "at": "2026-11-04T06:10:00+09:00",
+    "temp_diff_k": 9.6,
+    "power_w": 5728,
+    "torque_nm": 34.4,
+    "tool_wear_min": 64,
+    "rotational_speed_rpm": 1590
+   }
+  ]
+ }
+]

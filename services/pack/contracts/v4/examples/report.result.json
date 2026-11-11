@@ -1,0 +1,16 @@
+{
+  "report": {
+    "cause": {
+      "text": "냉각 팬 고장(CL-1)으로 온도 차가 7.8 K까지 떨어졌습니다. 근거 사례 H-0226과 같습니다.",
+      "fallback": false,
+      "attempts": 1,
+      "reason": null
+    },
+    "action": {
+      "text": "냉각 팬 교체(4.3.2, A등급) · 재가동 확인",
+      "fallback": true,
+      "attempts": 2,
+      "reason": "ungrounded_number"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+ "alarms": [],
+ "new_since": [],
+ "in_progress": [],
+ "change_seq": 0,
+ "shift": {
+  "label": "야간",
+  "start": "2026-10-13T22:00:00+09:00",
+  "end": "2026-10-14T06:00:00+09:00",
+  "start_text": "22:00",
+  "end_text": "06:00",
+  "done": 0,
+  "in_progress": 0,
+  "calls": 0
+ },
+ "recent_reports": []
+}

@@ -1,0 +1,19 @@
+# 시험용 Pack(EV-003 LS-0): predict@1 하나(json-linear 가짜 모델, llmops tests/packfix.py와 같은 모양). 모델 release는 releases/ 아래 — 실행 설정은 시험이 임시 사본에 씀.
+ir_version: 1
+runtime_contract: {min_runtime_version: 0.10.0}
+pack: {id: predict_min, version: V0, title: "predict@1 시험"}
+env: {required: [], optional: []}
+schemas:
+  Event: schemas/event.json
+  Prediction: schemas/prediction.json
+graphs:
+  detect:
+    state:
+      event: Event
+      prediction: Prediction
+    nodes:
+      - {id: predict_failure, kind: predict@1, params: {model: failure_classifier, features: {from: event}, output: Prediction}, reads: [event], writes: [prediction]}
+    edges: [[START, predict_failure], [predict_failure, END]]
+entrypoints:
+  - {graph: detect, input: Event, output: Prediction}
+trace: {contract: 1}

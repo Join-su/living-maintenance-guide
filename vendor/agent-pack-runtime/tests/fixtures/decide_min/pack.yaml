@@ -1,0 +1,36 @@
+# 시험용 Pack(EV-001 D-S-00): decide@1(noul · choice · score) → router → render 두 갈래. 0.9.0 runtime은 decide@1을 거부한다.
+ir_version: 1
+runtime_contract: {min_runtime_version: 0.10.0}
+pack: {id: decide_min, version: V0, title: "decide@1 시험"}
+env: {required: [JEV_API_KEY], optional: []}
+schemas:
+  Ticket: schemas/ticket.json
+  Note: schemas/note.json
+graphs:
+  triage:
+    state:
+      ticket: Ticket
+      triage: dict
+      note: Note
+    nodes:
+      - id: assess
+        kind: decide@1
+        params:
+          provider: jev
+          model: jev-1.13.0
+          state: {text: "{state.ticket.text}", channel: "{state.ticket.channel}"}
+          questions:
+            urgent: {type: noul, instructions: "지금 바로 사람이 봐야 하는가", criteria: {"true": "서비스가 멈췄거나 결제가 실패함", "false": "기다려도 되는 문의"}}
+            category: {type: choice, criteria: {billing: "결제 · 환불", technical: "오류 · 장애", other: null}}
+            severity: {type: score, criteria: ["낮음", "보통", "높음"]}
+          min_confidence: {urgent: 0.7}
+          fallback: {urgent: true}
+        reads: [ticket]
+        writes: [triage]
+      - {id: route, kind: router@1, params: {by: state.triage.urgent.value, cases: {"true": page_now, "false": queue}, default: queue}, reads: [triage], writes: []}
+      - {id: page_now, kind: render@1, params: {template: templates/page.md, format: md, to: note}, reads: [ticket, triage], writes: [note]}
+      - {id: queue, kind: render@1, params: {template: templates/queue.md, format: md, to: note}, reads: [ticket, triage], writes: [note]}
+    edges: [[START, assess], [assess, route], [page_now, END], [queue, END]]
+entrypoints:
+  - {graph: triage, input: Ticket, output: Note}
+trace: {contract: 1}

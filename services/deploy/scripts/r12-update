@@ -1,0 +1,595 @@
+#!/usr/bin/env python3
+"""R12 새 이력 자동 반영 — 맥 flat-local(VFE EV-005 지시 046 · D-283, R12-E1-E3.md R-3 · R-4).
+
+승인 보고서(받은 편지 폴더) → 새 corpus release(packrt.index corpus) → 새 벡터 DB version(packrt.index build, 가짜 임베딩)
+→ 새 drs → 장부 '자료 바꿈' 줄(llmops 몫 — 요청 명령은 설정으로 받고, 장부에서 읽어 확인만) → 운영 설정의 store release 한 칸
+(원자 쓰기) → 이 작업이 띄운 서버만 다시 시작 → 다음 첫 Run부터 새 version. 어디서 실패해도 운영 설정은 옛 것 그대로.
+
+사용(cwd = 이 저장소, scripts/py로 — packrt 0.12.0 이상이 import돼야 함):
+  scripts/py scripts/r12-update serve  --config config/<배포>.yaml [--port 8796]
+  scripts/py scripts/r12-update update --config config/<배포>.yaml --store history --graph run --node <retrieve@2 node>
+                                       [--ledger-cmd '<명령 {deployment_id} {pack_revision} {drs} {evidence}>'] [--port 8796]
+  scripts/py scripts/r12-update stop   --config config/<배포>.yaml
+  scripts/py scripts/r12-update check  --config config/<배포>.yaml   (등록 · 운영 전 packrt 묶기 대조, D-291)
+운영 설정 = config-live/<배포 파일 이름>(처음 부를 때 config/의 것을 그대로 복사 — VPS register의 운영 설정 방식, N4 A).
+받은 편지 = <data_dir>/r12-inbox/<report_id>.json: {"report_id", "approved_at", "document": {doc, record_id, text, metadata}}
+— metadata 칸은 그 Pack 이력 store 정의가 정함(D-287: C1-a15는 evidence_type · source · symptom_group · 센서 7칸 · cause).
+작업 기록 = <data_dir>/r12-state.json. 새 corpus · version = 운영 설정 release_roots_extra 첫 폴더(없으면 <data_dir>/releases)의
+corpus/ · indexes/. DSN · 비밀 값은 출력하지 않는다."""
+import argparse
+import json
+import os
+import re
+import shlex
+import signal
+import subprocess
+import sys
+import tempfile
+import time
+import urllib.error
+import urllib.request
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+
+import yaml  # noqa: E402
+
+from deploy_server.pack_source import materialize  # noqa: E402
+from deploy_server.settings import load_settings  # noqa: E402
+
+REPORT_RE = re.compile(r"^[A-Za-z0-9._-]{1,80}$")
+
+
+class Stop(Exception):
+    """멈춤(운영 설정 그대로). 문구는 사람이 읽을 이유."""
+
+
+def say(*a):
+    print(*a, flush=True)
+
+
+def live_path(config):
+    return ROOT / "config-live" / Path(config).name
+
+
+def ensure_live(config):
+    """운영 설정이 없으면 config/의 것을 그대로 복사(원자). config-live/는 config/와 같은 깊이라 상대 경로가 그대로 맞음."""
+    live = live_path(config)
+    if not live.exists():
+        live.parent.mkdir(parents=True, exist_ok=True)
+        atomic_write(live, Path(config).read_text(encoding="utf-8"))
+        say(f"운영 설정 만듦: {Path(config).name} → config-live/{live.name}")
+    return live
+
+
+def atomic_write(path, text):
+    path = Path(path)
+    fd, tmp = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
+    with os.fdopen(fd, "w", encoding="utf-8") as f:
+        f.write(text)
+    os.replace(tmp, path)
+
+
+def state_of(settings):
+    p = settings.data_dir / "r12-state.json"
+    return p, (json.loads(p.read_text(encoding="utf-8")) if p.exists() else {"done_reports": [], "history": []})
+
+
+def extra_root(settings):
+    return settings.release_roots_extra[0] if settings.release_roots_extra else settings.data_dir / "releases"
+
+
+LOADER_DSN_ENV = "LLMOPSAGENT_INDEX_LOADER_DSN"   # 적재 계정 index_loader(D-298) — load 자식 프로세스에만
+
+
+def packrt_cli(*args, ok=("built", "exists"), extra_env=None, hide=()):
+    """packrt.index CLI(같은 Python): 종료 0 = ok의 status(corpus · build = built · exists, load = checked · loaded · exists), 1 = failed(JSON error),
+    2 = 인자 오류. 자식 env에서는 DB 비밀 이름(…_DSN · …PASSWORD)을 빼고 extra_env만 더함(U-3 — 적재 DSN은 load에만). 글의 비밀 값은 가림."""
+    env = {k: v for k, v in os.environ.items() if not k.endswith("_DSN") and "PASSWORD" not in k}
+    env.update(extra_env or {})
+    r = subprocess.run([sys.executable, "-m", "packrt.index", *args, "--json"], capture_output=True, text=True, env=env)
+    try:
+        out = json.loads(r.stdout.strip().splitlines()[-1]) if r.stdout.strip() else {}
+    except ValueError:
+        out = {}
+    if r.returncode != 0 or out.get("status") not in ok:
+        why = (out.get("error") or {}).get("code") or f"종료 {r.returncode}"
+        raise Stop(masked(f"packrt.index {args[0]} 실패: {why} {(out.get('error') or {}).get('message', '')[:200]}", hide))
+    return out
+
+
+def read_inbox(settings, done):
+    box = settings.data_dir / "r12-inbox"
+    rows = []
+    for f in sorted(box.glob("*.json")) if box.is_dir() else []:
+        rec = json.loads(f.read_text(encoding="utf-8"))
+        rid = rec.get("report_id")
+        doc = rec.get("document")
+        if not (isinstance(rid, str) and REPORT_RE.match(rid)) or not isinstance(doc, dict) or not isinstance(doc.get("text"), str):
+            raise Stop(f"받은 편지 {f.name}의 모양이 다릅니다(report_id · document.text)")
+        if rid not in done:
+            rows.append((rid, rec))
+    return rows
+
+
+def check_documents(copy, store_name, news):
+    """받은 편지 문서가 그 Pack 이력 store 정의에 맞는지(D-287, 쓰기 전 — 하나라도 틀리면 아무것도 만들지 않음):
+    split = record면 record_id 필수 · doc = record_id, metadata에 index.metadata · rerank_norm.fields · metadata_required 칸 전부,
+    rerank_norm.fields(센서 재정렬 칸)는 숫자. 칸 이름은 Pack(c1a15-pack PS-02 이력 store recipe)이 정함."""
+    doc = yaml.safe_load((copy.pack_dir / "pack.yaml").read_text(encoding="utf-8"))
+    store = (doc.get("stores") or {}).get(store_name)
+    if not isinstance(store, dict):
+        raise Stop(f"Pack에 store '{store_name}' 정의가 없습니다")
+    index = store.get("index") or {}
+    rerank = list((index.get("rerank_norm") or {}).get("fields") or [])
+    need = set(index.get("metadata") or []) | set(rerank) | set(store.get("metadata_required") or [])
+    for rid, rec in news:
+        d = rec["document"]
+        if index.get("split") == "record" and not (isinstance(d.get("record_id"), str) and d["record_id"] and d.get("doc") == d["record_id"]):
+            raise Stop(f"받은 편지 {rid}: 이력(split record)은 record_id가 있고 doc = record_id여야 합니다")
+        md = d.get("metadata")
+        if not isinstance(md, dict):
+            raise Stop(f"받은 편지 {rid}: metadata가 mapping이 아닙니다")
+        miss = sorted(need - set(md))
+        if miss:
+            raise Stop(f"받은 편지 {rid}: metadata에 Pack store '{store_name}' 칸이 없습니다: {', '.join(miss)}")
+        bad = [f for f in rerank if isinstance(md.get(f), bool) or not isinstance(md.get(f), (int, float))]
+        if bad:
+            raise Stop(f"받은 편지 {rid}: 센서 재정렬 칸은 숫자여야 합니다: {', '.join(bad)}")
+
+
+def ledger_has(settings, revision, drs):
+    """장부에 (배포 id, revision, drs) 줄이 있는지 — 배포 서버와 같은 함수로 읽기만. 대조 없음(none)이면 None."""
+    if (settings.registration or {}).get("mode") in (None, "none"):
+        return None
+    from deploy_server.registration import ledger_dsn, ledger_rows
+    rows = ledger_rows(settings.registration, settings.deployment_id, ledger_dsn(settings)) or []
+    return any(r.get("pack_revision") == revision and r.get("data_release_id") == drs for r in rows)
+
+
+def release_dirs(roots):
+    """release_id -> {실제 폴더: 폴더} — 기준 **version**(벡터 DB 폴더) 찾기에 씀. D-293과 같은 걷기(안쪽 이름 find_releases는 부르지 않음):
+    찾는 곳마다 1 ~ 2단 아래 manifest.json의 release_id, 읽을 수 없는 manifest는 건너뜀, 같은 실제 폴더는 한 번만.
+    corpus 찾기는 0.12.1 공개 find_corpus(U-1, D-293 (2))."""
+    found = {}
+    for root in roots:
+        for m in sorted(list(Path(root).glob("*/manifest.json")) + list(Path(root).glob("*/*/manifest.json"))):
+            try:
+                data = json.loads(m.read_text(encoding="utf-8"))
+            except (OSError, ValueError):
+                continue
+            rid = data.get("release_id") if isinstance(data, dict) else None
+            if isinstance(rid, str) and rid:
+                found.setdefault(rid, {}).setdefault(os.path.realpath(m.parent), m.parent)
+    return found
+
+
+def locate(found, rid, what):
+    """없으면 멈춤 · 같은 id가 다른 폴더 둘 이상이면 멈춤(번호 겹침 = 오류, D-293 2단계)."""
+    places = (found.get(rid) or {}) if rid else {}
+    if not places:
+        raise Stop(f"{what} '{rid}'를 찾을 수 없습니다")
+    if len(places) > 1:
+        raise Stop(f"{what} release 번호가 겹칩니다: {rid} ({', '.join(sorted(str(v) for v in places.values()))}) — 운영 설정을 바꾸지 않음")
+    return Path(next(iter(places.values())))
+
+
+# ------------------------------------------------------------------ 서버(R-4: 이 작업이 띄운 것만)
+def pid_file(settings):
+    return settings.data_dir / "r12-server.pid"
+
+
+def http(port, path, timeout=5):
+    with urllib.request.urlopen(f"http://127.0.0.1:{port}{path}", timeout=timeout) as r:
+        return json.loads(r.read() or b"{}")
+
+
+def start_server(live, port, settings):
+    env = {k: v for k, v in os.environ.items() if not k.endswith("_DSN") and "PASSWORD" not in k}
+    env.update(DEPLOY_CONFIG=str(live), DEPLOY_PORT=str(port))
+    settings.data_dir.mkdir(parents=True, exist_ok=True)   # 첫 serve: 서버보다 먼저 기록 파일을 엶
+    log = open(settings.data_dir / "r12-server.log", "a")
+    p = subprocess.Popen([str(ROOT / "scripts" / "serve.sh")], cwd=ROOT, env=env, stdout=log, stderr=subprocess.STDOUT,
+                         stdin=subprocess.DEVNULL, start_new_session=True)
+    atomic_write(pid_file(settings), json.dumps({"pid": p.pid, "port": port, "live": str(live)}))
+    for _ in range(120):
+        time.sleep(1)
+        try:
+            return http(port, "/info")
+        except OSError:
+            if p.poll() is not None:
+                raise Stop(f"서버가 뜨지 않음(종료 {p.returncode}) — {settings.data_dir / 'r12-server.log'}")
+    raise Stop("서버 시작 시간 초과")
+
+
+def own_server(settings):
+    """이 작업이 띄운 서버면 {pid, port, live}, 아니면 None(남이 띄운 서버는 건드리지 않음).
+    셋이 다 맞아야 내 서버: pid가 살아 있음 · 그 프로세스 명령 줄에 uvicorn과 기록한 --port · 그 포트 /info의 배포 id = 이 설정의 배포 id
+    (pid가 다른 프로세스로 재사용됐을 때 잘못 내리지 않게 — R12 대조표 R-4 △)."""
+    p = pid_file(settings)
+    if not p.exists():
+        return None
+    rec = json.loads(p.read_text(encoding="utf-8"))
+    try:
+        os.kill(rec["pid"], 0)
+    except (ProcessLookupError, PermissionError):
+        return None
+    cmd = subprocess.run(["ps", "-o", "command=", "-p", str(rec["pid"])], capture_output=True, text=True).stdout
+    if "uvicorn" not in cmd or not re.search(rf"--port\s+{int(rec['port'])}\b", cmd):
+        return None
+    try:
+        if http(rec["port"], "/info").get("deployment_id") != settings.deployment_id:
+            return None
+    except OSError:
+        return None
+    return rec
+
+
+def stop_server(settings, wait_idle=60):
+    rec = own_server(settings)
+    if not rec:
+        return False
+    for _ in range(wait_idle):   # 실행 중인 Run이 있으면 끝날 때까지(최대 wait_idle초) — 실행은 서비스마다 한 번에 하나
+        try:
+            items = http(rec["port"], "/runs?limit=5").get("items") or []
+        except OSError:
+            break
+        if not any(x.get("status") == "running" for x in items):
+            break
+        time.sleep(1)
+    try:
+        os.killpg(rec["pid"], signal.SIGTERM)
+    except ProcessLookupError:
+        pass
+    for _ in range(30):
+        try:
+            os.kill(rec["pid"], 0)
+            time.sleep(0.5)
+        except ProcessLookupError:
+            break
+    pid_file(settings).unlink(missing_ok=True)
+    return True
+
+
+# ------------------------------------------------------------------ R-3 작업
+def update(a):
+    from deploy_server.execution import dsn_secrets, read_env_value
+    from packrt.index import IndexBuildError, find_corpus
+    from packrt.trace import data_release_id, model_release_id
+    live = ensure_live(a.config)
+    s = load_settings(live)
+    sp, st = state_of(s)
+    news = read_inbox(s, set(st["done_reports"]))
+    if not news:
+        say("받은 편지에 새 보고서 없음 — 그대로")
+        return 0
+    store = (s.execution.get("stores") or {}).get(a.store)
+    if not isinstance(store, dict) or not store.get("release"):
+        raise Stop(f"운영 설정에 store '{a.store}'(release)가 없습니다")
+    copy = materialize(s.pack_repo, s.pack_ref, s.packs_dir, s.pack_subdir, s.releases_subdir)
+    check_documents(copy, a.store, news)   # D-287: 그 Pack 이력 store 정의가 요구하는 칸(배포 서버는 칸 이름을 모름 — Pack 일반 방식)
+    out = extra_root(s)
+    out.mkdir(parents=True, exist_ok=True)
+    roots = [copy.releases_dir, *s.release_roots_extra, out]
+    base_id = store["release"]
+    base_dir = locate(release_dirs(roots), base_id, "기준 version")
+    base_m = json.loads((base_dir / "manifest.json").read_text(encoding="utf-8"))
+    corpus_ref = base_m.get("corpus_release") or {}
+    if not (isinstance(corpus_ref, dict) and isinstance(corpus_ref.get("sha256"), str) and corpus_ref["sha256"]):   # D-293 3단계: 기준 index가 가리키는 {id, sha256}
+        raise Stop(f"기준 version '{base_id}'의 manifest에 corpus_release {{id, sha256}}가 없습니다 — 운영 설정을 바꾸지 않음")
+    try:   # D-293 1 · 2 · 4단계 = packrt 공개 find_corpus(0.12.1, U-1): 1 ~ 2단 manifest · id 겹침 = 오류 · 폴더 = manifest = 기준 sha256
+        corpus_dir = find_corpus(roots, corpus_ref)
+    except IndexBuildError as e:
+        raise Stop(f"기준 corpus 찾기 실패({e.code}): {str(e)[:300]} — 운영 설정을 바꾸지 않음")
+    rows = [json.loads(l) for l in (Path(corpus_dir) / "documents.jsonl").read_text(encoding="utf-8").splitlines() if l.strip()]
+    have = {r.get("doc") for r in rows}
+    add = [rec["document"] for _, rec in news if rec["document"].get("doc") not in have]
+    stem = re.sub(r"-r\d+$", "", corpus_ref["id"])
+    # corpus id: 같은 보고서 묶음을 다시 부르면 앞 시도의 id(같은 내용 = exists), 묶음이 다르면(밀린 보고서가 늘어남) 새 번호
+    # — 실패 뒤 보고서가 늘어도 같은 id · 다른 내용(corpus_conflict)으로 막히지 않게. 번호는 기록에 나온 corpus id 수로 셈
+    # (restart_needed처럼 설정만 바뀐 경우도 셈 — 다음 부름의 기준 corpus id와 겹치지 않음)
+    ids = [rid for rid, _ in news]
+    again = next((h["corpus"] for h in reversed(st["history"])
+                  if h.get("corpus") and h.get("previous") == base_id and sorted(h.get("reports") or []) == sorted(ids)), None)
+    new_corpus = again or f"{stem}-r{1 + len({h['corpus'] for h in st['history'] if h.get('corpus')})}"
+    try:   # corpus · build 실패(corpus_conflict · 없는 node 등)도 작업 기록에 남김(E3 R-3 ⑦) — 운영 설정은 아직 그대로
+        with tempfile.TemporaryDirectory() as td:
+            docs = Path(td) / "documents.jsonl"
+            docs.write_text("".join(json.dumps(r, ensure_ascii=False, sort_keys=True) + "\n" for r in rows + add), encoding="utf-8")
+            c = packrt_cli("corpus", "--documents", str(docs), "--id", new_corpus, "--parent", corpus_ref["id"], "--out", str(out / "corpus"))
+        say(f"corpus {c['status']}: {c['release_id']} · 문서 {c['documents']}(더함 {len(add)})")
+        b = packrt_cli("build", "--pack", str(copy.pack_dir), "--graph", a.graph, "--node", a.node, "--corpus", c["location"],
+                       "--out", str(out / "indexes"), "--embedding", "fake", "--parent", base_id)
+        say(f"version {b['status']}: {b['release_id']} · 조각 {b.get('chunks')}")
+        if store.get("backend") == "pgvector":   # U-3: pg store는 적재해야 실행 설정이 고를 수 있음 — check(DB 0) → load(index_loader, INSERT만)
+            if not a.loader_env_file:
+                raise Stop(f"pgvector store는 적재가 필요합니다 — --loader-env-file({LOADER_DSN_ENV})이 없어 build 뒤 멈춤(운영 설정 그대로, D-323 Q-3)")
+            ldsn = read_env_value(a.loader_env_file, LOADER_DSN_ENV)
+            if not ldsn:
+                raise Stop(f"{a.loader_env_file}에 {LOADER_DSN_ENV} 줄이 없습니다 — build 뒤 멈춤(운영 설정 그대로)")
+            packrt_cli("load", "--pack", str(copy.pack_dir), "--release", b["location"], "--check", ok=("checked",))
+            ld = packrt_cli("load", "--pack", str(copy.pack_dir), "--release", b["location"], ok=("loaded", "exists"),
+                            extra_env={LOADER_DSN_ENV: ldsn}, hide=dsn_secrets(ldsn))
+            say(f"적재 {ld['status']}: {ld.get('release_id')} · {ld.get('schema')}.{ld.get('table')} 조각 {ld.get('chunks')}")
+    except Stop as e:
+        st["history"].append({"at": time.strftime("%Y-%m-%dT%H:%M:%S%z"), "reports": [rid for rid, _ in news], "corpus": new_corpus,
+                              "previous": base_id, "status": "failed", "reason": str(e)})
+        atomic_write(sp, json.dumps(st, ensure_ascii=False, indent=1))
+        raise
+    new_id = b["release_id"]
+    stores = {k: (new_id if k == a.store else v["release"]) for k, v in (s.execution.get("stores") or {}).items()}
+    drs = data_release_id(stores)
+    reports = [rid for rid, _ in news]
+    rec = {"at": time.strftime("%Y-%m-%dT%H:%M:%S%z"), "reports": reports, "corpus": c["release_id"], "previous": base_id,
+           "version": new_id, "drs": drs, "status": "built"}
+    try:
+        doc = yaml.safe_load(live.read_text(encoding="utf-8"))
+        doc["execution"]["stores"][a.store]["release"] = new_id
+        doc["execution"]["stores"][a.store].pop("releases", None)   # 후보 목록을 비워 모호함 0(_pick_index)
+        if not doc.get("release_roots_extra"):
+            doc["release_roots_extra"] = [os.path.relpath(out, live.parent)]
+        text = yaml.safe_dump(doc, allow_unicode=True, sort_keys=False)
+        load_settings_text_check(live, text)
+        cfg = check_binding(live, text)   # D-291 · G-1(D-328): 장부 요청 **앞에** 대조 — 묶이지 않는 설정이면 장부에 줄을 쓰지 않음
+        bound = cfg["bindings"]
+        if data_release_id({k: v.get("release_id") for k, v in bound["stores"].items()}) != drs:
+            raise Stop(f"packrt가 묶은 drs가 계산과 다릅니다 — 운영 설정을 바꾸지 않음({drs})")
+        evidence = {"kind": "data_release_auto", "reports": reports, "store": a.store, "previous": base_id, "version": new_id, "corpus": c["release_id"],
+                    "drs": drs,
+                    # Q-C(D-326): llmops admin.registration과 같은 packrt 계산 — 새 version 줄 · 실행 설정 · 지금 도는 모델 묶음
+                    "manifest_sha256": bound["stores"][a.store].get("manifest_sha256"), "config_sha256": cfg["config_sha256"],
+                    "model_release_id": model_release_id({k: v.get("release_id") for k, v in (bound.get("models") or {}).items()})}
+        if a.ledger_cmd and not getattr(a, "until_ledger", False):
+            ev = s.data_dir / f"r12-evidence-{new_id}.json"
+            atomic_write(ev, json.dumps(evidence, ensure_ascii=False))
+            cmd = a.ledger_cmd.format(deployment_id=shlex.quote(s.deployment_id), pack_revision=shlex.quote(s.expect_revision or ""),
+                                      drs=shlex.quote(drs), evidence=shlex.quote(str(ev)))
+            r = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+            if r.returncode != 0:
+                raise Stop(f"장부 요청 명령 실패(종료 {r.returncode}){': ' + last_line(r.stdout + chr(10) + r.stderr) if (r.stdout + r.stderr).strip() else ''}")
+            rec["ledger_drs"] = drs   # G-2: 이 작업이 장부에 쓴 줄 — 되돌리면 '돌지 않는 줄'로 알림(D-328 Q-3 (가))
+    except Stop as e:
+        rec.update(status="failed", reason=str(e))   # built = 운영 설정 그대로
+        st["history"].append(rec)
+        atomic_write(sp, json.dumps(st, ensure_ascii=False, indent=1))
+        raise
+    if getattr(a, "until_ledger", False):   # G-5(D-328 Q-2 (가)): VPS — 장부는 호스트가 llmops 컨테이너에서 씀. 여기서 멈추고 증거를 넘김
+        pend = {"rec": rec, "text": text, "store": a.store, "base_id": base_id, "new_id": new_id, "drs": drs, "reports": reports,
+                "evidence": evidence}
+        atomic_write(pending_path(s), json.dumps(pend, ensure_ascii=False))
+        say(f"장부 요청 대기: drs {drs} — 호스트가 장부를 쓴 뒤 after-ledger(운영 설정은 아직 그대로)")
+        say(PENDING_MARK + json.dumps({"deployment_id": s.deployment_id, "pack_revision": s.expect_revision, "drs": drs, "evidence": evidence},
+                                      ensure_ascii=False))
+        return 0
+    return _finish(a, s, live, sp, st, rec, text, base_id, new_id, drs, reports)
+
+
+def _finish(a, s, live, sp, st, rec, text, base_id, new_id, drs, reports):
+    """장부 확인 → 운영 설정 쓰기(.before-r12) → 다시 시작(맥 R-4) 또는 restart_needed → 작업 기록. update · after-ledger가 같이 씀."""
+    try:
+        ok = ledger_has(s, s.expect_revision, drs)
+        if ok is False:
+            raise Stop("장부에 새 drs 줄이 없습니다 — 운영 설정을 바꾸지 않음(llmops 장부 요청 길 EV-044)")
+        old_text = live.read_text(encoding="utf-8")
+        atomic_write(before_path(live), old_text)   # W-3: VPS는 호스트가 다시 띄움 → 뜨지 않으면 `revert`가 이 옛 글로 되돌림(비밀 0)
+        atomic_write(live, text)
+        say(f"운영 설정 바꿈: store {a.store} release {base_id} → {new_id} · drs {drs}")
+        rec["status"] = "config_changed"
+        if own_server(s):
+            stop_server(s)
+            try:
+                info = start_server(live, a.port, load_settings(live))
+                if info.get("data_release_id") != drs:
+                    raise Stop(f"다시 뜬 서버의 drs가 다릅니다: {info.get('data_release_id')}")
+            except Stop as e:   # E3 R-4 멈춤: 다시 뜨지 않음 → 옛 설정으로 되돌려 띄움(운영 공백을 짧게)
+                stop_server(s)
+                atomic_write(live, old_text)
+                if rec.get("ledger_drs"):
+                    rec["ledger_line_unused"] = rec["ledger_drs"]
+                    say(UNUSED_NOTE.format(drs=rec["ledger_drs"]))
+                try:
+                    start_server(live, a.port, load_settings(live))
+                    raise Stop(f"{e} — 옛 설정으로 되돌려 다시 띄움")
+                except Stop as e2:
+                    raise Stop(str(e2) if "되돌려" in str(e2) else f"{e} — 옛 설정으로 되돌렸으나 다시 뜨지 않음: {e2}")
+            say(f"서버 다시 시작: {info['deployment_id']} · drs {info['data_release_id']} · releases {info.get('releases', {}).get('stores')}")
+            rec["status"] = "switched"
+        else:
+            say("이 작업이 띄운 서버가 아님 — '다시 시작 필요'만 기록(R-4)")
+            rec["status"] = "restart_needed"
+    except Stop as e:
+        rec.update(status="failed" if rec["status"] == "built" else f"failed_after_{rec['status']}", reason=str(e))   # built = 운영 설정 그대로
+        st["history"].append(rec)
+        atomic_write(sp, json.dumps(st, ensure_ascii=False, indent=1))
+        raise
+    st["done_reports"] += reports
+    st["history"].append(rec)
+    atomic_write(sp, json.dumps(st, ensure_ascii=False, indent=1))
+    return 0
+
+
+
+
+def pending_path(settings):
+    return settings.data_dir / "r12-pending.json"
+
+
+PENDING_MARK = "R12 대기: "
+
+
+def after_ledger(a):
+    """G-5: 호스트가 장부(llmops data-release-auto)를 쓴 뒤 — 대기 파일의 새 설정으로 _finish(장부 확인부터)."""
+    live = live_path(a.config)
+    s = load_settings(live)
+    sp, st = state_of(s)
+    p = pending_path(s)
+    if not p.exists():
+        raise Stop("장부 요청 대기가 없습니다(r12-pending.json)")
+    pend = json.loads(p.read_text(encoding="utf-8"))
+    p.unlink()
+    rec = dict(pend["rec"], ledger_drs=pend["drs"])   # 호스트가 쓴 줄(G-2 알림 대상)
+    a.store = pend["store"]
+    return _finish(a, s, live, sp, st, rec, pend["text"], pend["base_id"], pend["new_id"], pend["drs"], pend["reports"])
+
+
+def abort_ledger(a):
+    """G-5: 호스트의 장부 요청이 실패 — 대기를 지우고 실패를 기록(운영 설정 그대로, 보고서는 다음에 다시)."""
+    live = live_path(a.config)
+    s = load_settings(live)
+    sp, st = state_of(s)
+    p = pending_path(s)
+    if not p.exists():
+        raise Stop("장부 요청 대기가 없습니다(r12-pending.json)")
+    pend = json.loads(p.read_text(encoding="utf-8"))
+    p.unlink()
+    st["history"].append(dict(pend["rec"], status="failed", reason=f"장부 요청 실패(호스트): {a.reason}"[:300]))
+    atomic_write(sp, json.dumps(st, ensure_ascii=False, indent=1))
+    say(f"장부 요청 실패로 멈춤 — 운영 설정 그대로 · 보고서 {pend['reports']}는 다음에 다시")
+    return 0
+
+
+UNUSED_NOTE = ("주의: 장부에 쓴 R12 줄(drs {drs})이 돌지 않음 — 다음 배포 승인 전에 확인(오케 · llmops 알림). "
+               "같은 보고서를 다시 처리하면 같은 drs라 그 줄을 다시 씀(D-328 Q-3)")
+
+
+def last_line(text):
+    lines = [l for l in (text or "").strip().splitlines() if l.strip()]
+    return lines[-1][:200] if lines else ""
+
+
+def before_path(live):
+    return live.parent / f".{live.name}.before-r12"
+
+
+def revert(a):
+    """W-3(D-325): 바꾸기 전 운영 설정(.before-r12)으로 되돌림 — 호스트가 compose로 다시 띄운 서버가 맞지 않을 때(VPS) 부름.
+    마지막 바꿈의 보고서는 '한 것'에서 빼서 다음 부름이 다시 처리(같은 묶음 = 같은 corpus id → exists). 작업 기록에 reverted 한 줄."""
+    live = live_path(a.config)
+    b = before_path(live)
+    if not b.exists():
+        raise Stop(f"되돌릴 옛 설정이 없습니다({b.name})")
+    s = load_settings(live)
+    sp, st = state_of(s)
+    atomic_write(live, b.read_text(encoding="utf-8"))
+    last = next((h for h in reversed(st["history"]) if h.get("status") in ("config_changed", "restart_needed", "switched")), None)
+    undone = [r for r in (last or {}).get("reports") or [] if r in st["done_reports"]]
+    st["done_reports"] = [r for r in st["done_reports"] if r not in undone]
+    unused = (last or {}).get("ledger_drs")
+    st["history"].append({"at": time.strftime("%Y-%m-%dT%H:%M:%S%z"), "status": "reverted", "reports": undone,
+                          "version": (last or {}).get("version"), "reason": a.reason, **({"ledger_line_unused": unused} if unused else {})})
+    atomic_write(sp, json.dumps(st, ensure_ascii=False, indent=1))
+    b.unlink()
+    say(f"운영 설정 되돌림: {live.name} ← {b.name} · 다시 처리할 보고서 {undone}")
+    if unused:
+        say(UNUSED_NOTE.format(drs=unused))
+    return 0
+
+
+def check_binding(live, text):
+    """D-291 · E3 R-4: 바꿀 운영 설정을 쓰기 전에 packrt로 실제 묶기를 대조 — store release를 찾고, retrieve@2 node recipe에 맞는 version을
+    고를 수 있는지(index_missing · index_ambiguous · 없는 release면 멈춤). 맞지 않으면 서버가 시작에서 실패해 모든 kind가 안 되므로 쓰기 전에 막음.
+    PostgreSQL store(pgvector · postgres-table)가 있으면 DB로도 대조(U-2 · D-323 Q-1): 서버와 같은 길(runtime_db.env_file)로 읽은 실행용 DSN을
+    packrt에 env 인자로만 넘김(프로세스 환경 · 출력에 0) — runtime_reader SELECT만. 파일 store만이면 DB 접속 없음.
+    돌려줌: packrt load_execution_config 결과(bindings · config_sha256 — 장부 증거 세 칸이 이 값, G-1)."""
+    from deploy_server.execution import RUNTIME_DSN_ENV, ExecutionError, dsn_secrets, runtime_dsn
+    from deploy_server.pack_source import write_execution_config
+    from packrt.ir import load_pack
+    from packrt.ir.releases import ReleaseError, load_execution_config
+    fd, tmp = tempfile.mkstemp(prefix=f".{live.name}.bind.", suffix=".yaml", dir=live.parent)
+    with os.fdopen(fd, "w", encoding="utf-8") as f:
+        f.write(text)
+    try:
+        s = load_settings(tmp)
+        copy = materialize(s.pack_repo, s.pack_ref, s.packs_dir, s.pack_subdir, s.releases_subdir)
+        for root in s.release_roots_extra:
+            root.mkdir(parents=True, exist_ok=True)
+        env, hide = None, []
+        if s.uses_postgres:
+            try:
+                dsn = runtime_dsn(s.runtime_db.get("env_file"))
+            except ExecutionError as e:
+                raise Stop(f"packrt 묶기 대조(DB) 못 함 — 운영 설정을 바꾸지 않음: {e}")
+            env, hide = {RUNTIME_DSN_ENV: dsn}, dsn_secrets(dsn)
+        with tempfile.TemporaryDirectory() as td:
+            cfg = write_execution_config(Path(td) / "execution-config.yaml", copy, s.execution, s.release_roots_extra)
+            try:
+                return load_execution_config(cfg, load_pack(copy.pack_dir).doc, env=env, pg_lookup=s.uses_postgres)
+            except ReleaseError as e:
+                raise Stop(f"packrt 묶기 실패 — 운영 설정을 바꾸지 않음: {masked(str(e), hide)[:300]}")
+            except Exception as e:  # noqa: BLE001 - DB 접속 · 인증 오류 문구에 접속 정보가 섞여도 밖으로 내지 않는다
+                if env is None:
+                    raise
+                raise Stop(f"packrt 묶기 대조(DB) 실패 — 운영 설정을 바꾸지 않음: {type(e).__name__}: {masked(str(e), hide)[:300]}")
+    finally:
+        os.unlink(tmp)
+
+
+def masked(text, secrets):
+    """출력 글에서 비밀 값(DSN 전체 · 비밀번호)을 *** 로 바꿈."""
+    for v in sorted((x for x in secrets if x), key=len, reverse=True):
+        text = text.replace(v, "***")
+    return text
+
+
+def load_settings_text_check(live, text):
+    """바꿀 운영 설정을 쓰기 전에 같은 폴더의 임시 파일로 읽어 봄(설정 검사 그대로)."""
+    fd, tmp = tempfile.mkstemp(prefix=f".{live.name}.check.", suffix=".yaml", dir=live.parent)
+    with os.fdopen(fd, "w", encoding="utf-8") as f:
+        f.write(text)
+    try:
+        load_settings(tmp)
+    finally:
+        os.unlink(tmp)
+
+
+def main(argv=None):
+    p = argparse.ArgumentParser(prog="r12-update", description="R12 새 이력 자동 반영(맥 flat-local)")
+    sub = p.add_subparsers(dest="cmd", required=True)
+    for name in ("serve", "update", "stop", "check", "revert", "after-ledger", "abort-ledger"):
+        q = sub.add_parser(name)
+        q.add_argument("--config", required=True)
+        q.add_argument("--port", type=int, default=8796)
+        if name == "update":
+            q.add_argument("--store", default="history")
+            q.add_argument("--graph", required=True)
+            q.add_argument("--node", required=True)
+            q.add_argument("--ledger-cmd")
+            q.add_argument("--loader-env-file", help=f"pgvector store일 때 적재 DSN({LOADER_DSN_ENV}) 한 줄이 든 파일(값은 load 자식에만, U-3)")
+        if name == "update":
+            q.add_argument("--until-ledger", action="store_true", help="G-5: 장부 요청 앞에서 멈추고 증거를 출력(VPS — 호스트가 장부를 씀)")
+        if name == "revert":
+            q.add_argument("--reason", default="다시 띄운 서버가 맞지 않음(호스트)")
+        if name == "abort-ledger":
+            q.add_argument("--reason", required=True)
+    a = p.parse_args(argv)
+    try:
+        if a.cmd == "serve":
+            live = ensure_live(a.config)
+            s = load_settings(live)
+            if own_server(s):
+                raise Stop("이미 이 작업이 띄운 서버가 있습니다")
+            info = start_server(live, a.port, s)
+            say(f"서버 시작: {info['deployment_id']} · drs {info['data_release_id']} · 127.0.0.1:{a.port}")
+            return 0
+        if a.cmd == "check":   # D-291: 등록 · 운영 전에 이 설정이 packrt로 묶이는지(쓰기 0)
+            check_binding(Path(a.config).resolve(), Path(a.config).read_text(encoding="utf-8"))
+            say("묶기 대조 통과 — 서버가 이 설정으로 시작할 수 있음")
+            return 0
+        if a.cmd == "revert":
+            return revert(a)
+        if a.cmd == "after-ledger":
+            return after_ledger(a)
+        if a.cmd == "abort-ledger":
+            return abort_ledger(a)
+        if a.cmd == "stop":
+            say("서버 내림" if stop_server(load_settings(live_path(a.config))) else "이 작업이 띄운 서버 없음")
+            return 0
+        return update(a)
+    except Stop as e:
+        say(f"멈춤 — {e}")
+        return 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

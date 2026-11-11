@@ -1,0 +1,31 @@
+# Deployment Server 설정 — 태그 배포 task10@v0-local(지시 006). 비밀 값 없음(환경 변수 이름만). 상대 경로는 이 파일 기준.
+# dev-local과 다른 점: Pack을 태그 v0으로 불러옴, 원문 보존 standard, 데이터 폴더 따로.
+deployment_id: task10@v0-local
+retention_class: standard            # 운영 배포(dev 7일 보존은 *@dev-local만)
+pack:
+  repo: ../../task10-pack            # 읽기만(git rev-parse·archive)
+  ref: v0                            # 태그(→ 93ca0a1). 응답 pack.tag = "v0"
+  pack_subdir: pack
+  releases_subdir: releases
+  expect_revision: "sha256:877b0ed5e60724bc0b0b82fc77925be4f8240ba2a9249aef6090c42689ce60fa"
+execution:                           # 명세 v0.5 3.4 실행 설정의 내용(서버가 data_dir/execution-config.yaml로 씀)
+  entrypoint: respond
+  stores:
+    history: {backend: sqlite-file, release: hc-ai4i2020-s7-v2}
+    manuals: {backend: flat-local, release: ir-manuals-v2}
+  models: {}
+data_dir: ../var/v0-local
+packs_dir: ../.packs
+review_policy: auto_approve          # packrt 정책 이름. 동작은 approve → escalate → reject 순 자동 선택(015c)
+provider: fake                       # 실제 provider(http)는 승인 뒤에만
+registration:
+  mode: llmops_db                    # 1주차 등록 대조: llmops.db deployment 표를 읽기 전용(mode=ro)으로. 등록은 llmops deploy-bootstrap
+  path: ../../llmops-lite-v2/.llmops-data/llmops.db
+trace:                               # 공유 기록기 tracewriter → PostgreSQL trace(trace_writer 계정). 비밀 값은 env_file에만(git 밖)
+  dsn_env: LLMOPSAGENT_TRACE_DSN     # 환경 변수가 있으면 그것, 없으면 env_file에서 같은 이름을 찾음
+  env_file: ../.env   # 배포단 자체 .env(git 밖, 600, runtime·trace DSN 두 줄 — scripts/make-env.sh)
+  # payload_root: 원문 파일 폴더(기본 data_dir/trace-payloads)
+outcome_by_node:
+  record_no_issue: no_issue
+grounding_keys: [answer, evidence, review, alarm_resolution]
+secret_env_names: [OPENAI_API_KEY]   # 가림에 쓸 비밀 값의 환경 변수 이름(값은 읽어서 가림에만 씀)

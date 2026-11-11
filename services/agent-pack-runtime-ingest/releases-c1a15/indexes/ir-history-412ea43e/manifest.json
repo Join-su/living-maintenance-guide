@@ -1,0 +1,101 @@
+{
+ "backend": "flat-local",
+ "build_sha256": "412ea43e031429fae78feb9660280aa0ffdb01f8dd6ec7adc4b740a9e793afc4",
+ "builder": {
+  "name": "packrt.index",
+  "version": 1
+ },
+ "chunks": 300,
+ "corpus_release": {
+  "id": "c1a15-history-train-v2",
+  "sha256": "a1d2eb3aed1c3a8585f764420767d6a711cd5985b975c8decf6f1dea8c7c1082"
+ },
+ "documents": 300,
+ "embedding": {
+  "dim": 64,
+  "mode": "fake",
+  "model": "text-embedding-3-small",
+  "provider": "openai"
+ },
+ "files": {
+  "chunks.jsonl": "e533c10a31cea2bf41ca8f6423a267aef2f6043966c9f2872107d1d9af1efa3d",
+  "vectors.json": "8798d3588bf1dd62c18e25afa12c8975fe9ce73a5533074e4ffe65760417f1dc"
+ },
+ "index_recipe": {
+  "chunk_size": null,
+  "chunker": null,
+  "chunker_sha256": null,
+  "metadata": [
+   "air_temperature_k",
+   "cause",
+   "evidence_type",
+   "power_w",
+   "process_temperature_k",
+   "rotational_speed_rpm",
+   "source",
+   "symptom_group",
+   "temp_diff_k",
+   "tool_wear_min",
+   "torque_nm"
+  ],
+  "overlap": 0,
+  "rerank_norm": {
+   "fields": [
+    "air_temperature_k",
+    "process_temperature_k",
+    "rotational_speed_rpm",
+    "torque_nm",
+    "tool_wear_min",
+    "temp_diff_k",
+    "power_w"
+   ],
+   "from": {
+    "source": "generated"
+   }
+  },
+  "split": "record"
+ },
+ "index_recipe_sha256": "3c3e550d8c66ee1f2587c8eb6ab78abb390b730b1f738fbe8bc89e73044b5922",
+ "index_sha256": "d2af426f6f81323be5eb35176d026b58d8df3efed1d9e30729ee5ece08b949a4",
+ "kind": "index",
+ "parent_release": "ir-history-f3ed6c2e",
+ "release_id": "ir-history-412ea43e",
+ "rerank_norm": {
+  "air_temperature_k": {
+   "mean": 300.701667,
+   "n": 300,
+   "std": 1.804669
+  },
+  "power_w": {
+   "mean": 6622.89,
+   "n": 300,
+   "std": 1709.370482
+  },
+  "process_temperature_k": {
+   "mean": 309.859333,
+   "n": 300,
+   "std": 1.031316
+  },
+  "rotational_speed_rpm": {
+   "mean": 1554.096667,
+   "n": 300,
+   "std": 299.200391
+  },
+  "temp_diff_k": {
+   "mean": 9.157667,
+   "n": 300,
+   "std": 1.31569
+  },
+  "tool_wear_min": {
+   "mean": 133.416667,
+   "n": 300,
+   "std": 71.783956
+  },
+  "torque_nm": {
+   "mean": 43.448,
+   "n": 300,
+   "std": 15.912095
+  }
+ },
+ "store": "history"
+}

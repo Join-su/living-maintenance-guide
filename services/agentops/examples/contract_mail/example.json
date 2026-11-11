@@ -1,0 +1,4 @@
+{"name": "긴급 계약 메일 회신", "desc": "계약 관련 메일을 분류하고 회신 초안을 쓰는 Agent",
+ "releases": [{"name": "mail v1", "dir": "mail_v1"}, {"name": "mail v2", "dir": "mail_v2"}],
+ "validation": {"name": "contract-mail.json", "file": "validation.json"},
+ "scoring": {"skip": false, "rule": true, "llm": false}, "rule": {"pass": 0.8, "below": "hold"}}
